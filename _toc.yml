@@ -1,0 +1,8 @@
+format: jb-book
+root: index
+chapters:
+    - file: introduction.md
+    - file: all_atom.md
+    - file: coarse_grained.md
+    - file: enhanced.md
+    - file: bioinformatics.md

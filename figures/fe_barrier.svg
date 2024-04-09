@@ -24,11 +24,11 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="1.622695"
-     inkscape:cx="148.21023"
-     inkscape:cy="165.46548"
+     inkscape:cx="429.84048"
+     inkscape:cy="165.77361"
      inkscape:window-width="1920"
-     inkscape:window-height="1109"
-     inkscape:window-x="0"
+     inkscape:window-height="1051"
+     inkscape:window-x="1920"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
@@ -144,7 +144,7 @@
     <text
        xml:space="preserve"
        style="font-size:4.5861px;line-height:1.25;font-family:'Time Roman';-inkscape-font-specification:'Time Roman, ';stroke-width:0.264583"
-       x="69.108383"
+       x="68.579216"
        y="57.433029"
        id="text3140"
        inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/fe_barrier.png"
@@ -153,8 +153,8 @@
          sodipodi:role="line"
          id="tspan3138"
          style="stroke-width:0.264583"
-         x="69.108383"
-         y="57.433029">Reaction pathway</tspan></text>
+         x="68.579216"
+         y="57.433029">Reaction pathway ξ</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.264584px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 55.687476,18.127013 C 65.570037,71.296838 73.894083,7.4042541 84.67917,7.6394159 96.478793,7.8966978 106.2746,97.100918 120.83821,15.918384"
@@ -332,6 +332,232 @@
        inkscape:export-ydpi="430.94"><tspan
          sodipodi:role="line"
          id="tspan5088"
+         style="font-style:italic;fill:#0000ff;stroke-width:0.264583"
+         x="66.389923"
+         y="40.153332">A</tspan></text>
+    <g
+       id="g6536"
+       transform="translate(4.7558849,-7.0731151)"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/fe_barrier.png"
+       inkscape:export-xdpi="430.94"
+       inkscape:export-ydpi="430.94">
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+         d="m 47.185526,61.971837 0,-50.125149"
+         id="path6532"
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend-3)"
+         d="m 43.57825,58.279086 74.62678,0"
+         id="path6534"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:4.5861px;line-height:1.25;font-family:'Time Roman';-inkscape-font-specification:'Time Roman, ';stroke-width:0.264583"
+       x="-39.644672"
+       y="43.479721"
+       id="text6540"
+       transform="rotate(-90)"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/fe_barrier.png"
+       inkscape:export-xdpi="430.94"
+       inkscape:export-ydpi="430.94"><tspan
+         sodipodi:role="line"
+         id="tspan6538"
+         style="stroke-width:0.264583"
+         x="-39.644672"
+         y="43.479721">Free energy</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.5861px;line-height:1.25;font-family:'Time Roman';-inkscape-font-specification:'Time Roman, ';stroke-width:0.264583"
+       x="68.579216"
+       y="57.433029"
+       id="text6544"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/fe_barrier.png"
+       inkscape:export-xdpi="430.94"
+       inkscape:export-ydpi="430.94"><tspan
+         sodipodi:role="line"
+         id="tspan6542"
+         style="stroke-width:0.264583"
+         x="68.579216"
+         y="57.433029">Reaction pathway ξ</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264584px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 55.687476,18.127013 C 65.570037,71.296838 73.894083,7.4042541 84.67917,7.6394159 96.478793,7.8966978 106.2746,97.100918 120.83821,15.918384"
+       id="path6546"
+       sodipodi:nodetypes="csc"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/fe_barrier.png"
+       inkscape:export-xdpi="430.94"
+       inkscape:export-ydpi="430.94" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.5861px;line-height:1.25;font-family:'Time Roman';-inkscape-font-specification:'Time Roman, ';stroke-width:0.264583"
+       x="112.11562"
+       y="49.976616"
+       id="text6550"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/fe_barrier.png"
+       inkscape:export-xdpi="430.94"
+       inkscape:export-ydpi="430.94"><tspan
+         sodipodi:role="line"
+         id="tspan6548"
+         style="font-style:italic;fill:#0000ff;stroke-width:0.264583"
+         x="112.11562"
+         y="49.976616">B</tspan></text>
+    <path
+       style="fill:#ff0000;stroke:#000000;stroke-width:0.265;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.53, 0.265;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-end:url(#Arrow1Mend)"
+       d="m 63.995144,38.874727 0,-30.54728"
+       id="path6552"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/fe_barrier.png"
+       inkscape:export-xdpi="430.94"
+       inkscape:export-ydpi="430.94" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.265;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.53, 0.265;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#Arrow1Mstart-5);marker-end:url(#Arrow1Mend-5)"
+       d="m 108.32246,49.568802 0,-41.2943037"
+       id="path6554"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/fe_barrier.png"
+       inkscape:export-xdpi="430.94"
+       inkscape:export-ydpi="430.94" />
+    <text
+       xml:space="preserve"
+       style="font-size:3.65752px;line-height:1.25;font-family:'Time Roman';-inkscape-font-specification:'Time Roman, ';stroke-width:0.264583;fill:#ff0000"
+       x="65.002968"
+       y="15.153567"
+       id="text6562"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/fe_barrier.png"
+       inkscape:export-xdpi="430.94"
+       inkscape:export-ydpi="430.94"><tspan
+         sodipodi:role="line"
+         id="tspan6560"
+         style="font-style:italic;stroke-width:0.264583;fill:#ff0000"
+         x="65.002968"
+         y="15.153567">ΔF<tspan
+   style="font-size:2.37739px;baseline-shift:sub;stroke-width:0.264583;fill:#ff0000"
+   id="tspan6556">b</tspan><tspan
+   style="font-size:2.37739px;baseline-shift:super;stroke-width:0.264583;fill:#ff0000"
+   id="tspan6558">A→B</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.65752px;line-height:1.25;font-family:'Time Roman';-inkscape-font-specification:'Time Roman, ';stroke-width:0.264583;fill:#ff0000"
+       x="95.443283"
+       y="14.709243"
+       id="text6570"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/fe_barrier.png"
+       inkscape:export-xdpi="430.94"
+       inkscape:export-ydpi="430.94"><tspan
+         sodipodi:role="line"
+         id="tspan6568"
+         style="font-style:italic;stroke-width:0.264583;fill:#ff0000"
+         x="95.443283"
+         y="14.709243">ΔF<tspan
+   style="font-size:2.37739px;baseline-shift:sub;stroke-width:0.264583;fill:#ff0000"
+   id="tspan6564">b</tspan><tspan
+   style="font-size:2.37739px;baseline-shift:super;stroke-width:0.264583;fill:#ff0000"
+   id="tspan6566">B→A</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.5861px;line-height:1.25;font-family:'Time Roman';-inkscape-font-specification:'Time Roman, ';stroke-width:0.264583"
+       x="89.728195"
+       y="5.3071709"
+       id="text6574"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/fe_barrier.png"
+       inkscape:export-xdpi="430.94"
+       inkscape:export-ydpi="430.94"><tspan
+         sodipodi:role="line"
+         id="tspan6572"
+         style="fill:#0000ff;stroke-width:0.264583"
+         x="89.728195"
+         y="5.3071709">transition point</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458299;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.26458299,0.52916597;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 52.035316,7.6536253 68.786344,0"
+       id="path6576"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/fe_barrier.png"
+       inkscape:export-xdpi="430.94"
+       inkscape:export-ydpi="430.94" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.5861px;line-height:1.25;font-family:'Time Roman';-inkscape-font-specification:'Time Roman, ';stroke-width:0.264583"
+       x="43.395374"
+       y="9.0003033"
+       id="text6582"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/fe_barrier.png"
+       inkscape:export-xdpi="430.94"
+       inkscape:export-ydpi="430.94"><tspan
+         sodipodi:role="line"
+         id="tspan6580"
+         style="font-style:italic;stroke-width:0.264583"
+         x="43.395374"
+         y="9.0003033">F<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan6578">max</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.5861px;line-height:1.25;font-family:'Time Roman';-inkscape-font-specification:'Time Roman, ';stroke-width:0.264583"
+       x="46.785118"
+       y="39.083954"
+       id="text6588"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/fe_barrier.png"
+       inkscape:export-xdpi="430.94"
+       inkscape:export-ydpi="430.94"><tspan
+         sodipodi:role="line"
+         id="tspan6586"
+         style="font-style:italic;stroke-width:0.264583"
+         x="46.785118"
+         y="39.083954">F<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan6584">A</tspan></tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.265;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.265, 0.53;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 64.225264,39.260263 H 51.982927"
+       id="path6590"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/fe_barrier.png"
+       inkscape:export-xdpi="430.94"
+       inkscape:export-ydpi="430.94" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.264583, 0.529166;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 108.35226,50.007069 H 51.919031"
+       id="path6592"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/fe_barrier.png"
+       inkscape:export-xdpi="430.94"
+       inkscape:export-ydpi="430.94" />
+    <path
+       style="fill:none;stroke:#0000ff;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="M 89.075671,4.2742232 C 86.883073,4.7569455 85.871032,5.7894599 85.041584,6.907009"
+       id="path6594"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/fe_barrier.png"
+       inkscape:export-xdpi="430.94"
+       inkscape:export-ydpi="430.94" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.5861px;line-height:1.25;font-family:'Time Roman';-inkscape-font-specification:'Time Roman, ';stroke-width:0.264583"
+       x="46.43132"
+       y="49.645096"
+       id="text6600"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/fe_barrier.png"
+       inkscape:export-xdpi="430.94"
+       inkscape:export-ydpi="430.94"><tspan
+         sodipodi:role="line"
+         id="tspan6598"
+         style="font-style:italic;stroke-width:0.264583"
+         x="46.43132"
+         y="49.645096">F<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan6596">B</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.5861px;line-height:1.25;font-family:'Time Roman';-inkscape-font-specification:'Time Roman, ';stroke-width:0.264583"
+       x="66.389923"
+       y="40.153332"
+       id="text6604"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/fe_barrier.png"
+       inkscape:export-xdpi="430.94"
+       inkscape:export-ydpi="430.94"><tspan
+         sodipodi:role="line"
+         id="tspan6602"
          style="font-style:italic;fill:#0000ff;stroke-width:0.264583"
          x="66.389923"
          y="40.153332">A</tspan></text>

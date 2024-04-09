@@ -8,10 +8,12 @@ project:
       email: lorenzo.rovigatti@uniroma1.it
   keywords: []
   github: https://github.com/lorenzo-rovigatti/comp_bio_notes
+  math:
+    '\dofs': '\lbrace\vec{r}\rbrace'
 site:
   template: book-theme
   options:
-    logo_text: CompBioPhys
+    logo: logo_4jpp.png
   nav: []
   domains: []
   title: Notes for the Computational Biophysics class

@@ -1,5 +1,8 @@
 ---
 title: Enhanced sampling
+exports:
+    - format: pdf
+      template: plain_latex
 ---
 
 ```{note}
@@ -47,7 +50,7 @@ The choice of the RC depends on the specific process being studied and it is not
 In general, a reaction coordinate can be multidimensional, and sometimes it is useful, or even necessary, to define such complex variables. However, for the sake of simplicity here I will use unidimensional reaction coordinates, which will be designated by the symbol $\xi = \xi(\dofs)$.
 ```
 
-Once we have chosen a RC to characterise the reaction of interest, which is in general not an easy task, and an active area of research in itself, we can use it to describe the reaction. We can formally see how if we calculate the *partially integrated partition function* (see *e.g.* [](10.33011/livecoms.4.1.1583)) by integrating the Boltzmann factor over all the degrees of freedom at constant $\xi$, *viz.*:
+Once we have chosen a RC to characterise the reaction of interest, which is in general not an easy task, and an active area of research in itself, we can use it to describe the reaction. We can formally see how if we calculate the *partially-integrated partition function* (see *e.g.* [](10.33011/livecoms.4.1.1583)) by integrating the Boltzmann factor over all the degrees of freedom at constant $\xi$, *viz.*:
 
 $$
 Q(\xi) = \int_V e^{-\beta H(\dofs)} \delta(\xi - \xi(\dofs)) d\dofs,
@@ -73,7 +76,13 @@ $$
 \langle O(\xi) \rangle = \frac{\int_{\xi_{\rm min}}^{\xi_{\rm max}} O(\xi) Q(\xi) d\xi}{\int_{\xi_{\rm min}}^{\xi_{\rm max}} Q(\xi) d\xi} = \int_{\xi_{\rm min}}^{\xi_{\rm max}} O(\xi) P(\xi) d\xi,
 $$
 
-where $\xi_{\rm min}$ and $\xi_{\rm max}$ correspond to the minimum and maximum values of $\xi$, and we have defined the *marginal probability density* $P(\xi) = \frac{Q(\xi)}{\int_{\xi_{\rm min}}^{\xi_{\rm max}} Q(\xi) d\xi}$.
+where $\xi_{\rm min}$ and $\xi_{\rm max}$ correspond to the minimum and maximum values of $\xi$, and we have defined the *marginal probability density*
+
+$$
+P(\xi) = \frac{Q(\xi)}{\int_{\xi_{\rm min}}^{\xi_{\rm max}} Q(\xi) d\xi} = \frac{Q(\xi)}{Q},
+$$ (marginal_P)
+
+where we have used the partition function $Q = \int_{\xi_{\rm min}}^{\xi_{\rm max}} Q(\xi) d\xi$.
 
 
 ```{hint} A simple example
@@ -98,19 +107,21 @@ This is arguably the most important step, since choosing a sub-optimal RC can so
 
 ### 2. Selecting a biasing potential
 
-The role of the biasing potential $V_{\rm bias}(\xi)$ is to confine a system within a (usually rather narrow) region of the reaction coordinate. As such it must be a function of the reaction coordinate(s) only, without any explicit dependence on any of the microscopic $\dofs$. The most common choice is a harmonic potential, whose shape gives the method its name and usually takes the form
+The role of the biasing potential $V^{\rm bias}(\xi)$ is to confine a system within a (usually rather narrow) region of the reaction coordinate. As such it must be a function of the reaction coordinate(s) only, without any explicit dependence on any of the microscopic $\dofs$. The most common choice is a harmonic potential, whose shape gives the method its name and usually takes the form
 
 $$
-V_{\rm bias}(\xi) = \frac{1}{2} K (\xi - \bar\xi)^2,
+V^{\rm bias}(\xi) = \frac{1}{2} K (\xi - \bar\xi)^2,
 $$
 
 where $\bar\xi$ is the position of the minimum of the potential and $K$ is the strength of the resulting spring force. Other choices are possible (see *e.g.* [here](https://doi.org/10.1039/C4SM02218A) or [here](https://doi.org/10.1063/1.1739216) for examples of biases that are not differentiable and therefore can only be used in Monte Carlo simulations).
 
 ### 3. Partitioning the reaction coordinate into windows
 
-Next, we need to split the range of interest, $[\xi_{\rm min}, \xi_{\rm max}]$, into windows. The most common strategy is to divide the reaction coordinate into equispaced windows centred on $\xi_1, \xi_2, \xi_3, \ldots$, with $i \in [1, N]$, where $N$ is the total number of windows (and hence of independent simulations). The distance between two neighbouring windows, $\Delta \xi_i = \xi_{i + 1} - \xi_i$, which is often taken as a constant, should be chosen carefully: on one hand it should be as large as possible to make $N$ as small as possible; on the other hand, $\Delta \xi$ should be chosen so that there is some overlap between adjacent windows to prevent discontinuities in the free energy profile. This is to ensure that the neighboring windows provide sufficient sampling for accurate reweighting. An often good-enough first estimate can be made by assuming that $P(R_i) \approx P(R_{i + 1})$, and then by choosing a $\Delta \xi$-value for which $V_{\rm bias}(\Delta \xi_2)$ is of the order ot $k_B T$, *i.e.* that the value of the biasing potential calculated in the midpoint separating two neighbouring windows is of the order of the thermal energy.
+Next, we need to split the range of interest, $[\xi_{\rm min}, \xi_{\rm max}]$, into windows. The most common strategy is to divide the reaction coordinate into equispaced windows centred on $\xi_1, \xi_2, \xi_3, \ldots$, with $i \in [1, N]$, where $N$ is the total number of windows (and hence of independent simulations). The distance between two neighbouring windows, $\Delta \xi_i = \xi_{i + 1} - \xi_i$, which is often taken as a constant, should be chosen carefully: on one hand it should be as large as possible to make $N$ as small as possible; on the other hand, $\Delta \xi$ should be chosen so that there is some overlap between adjacent windows to prevent discontinuities in the free energy profile. This is to ensure that the neighboring windows provide sufficient sampling for accurate reweighting. An often good-enough first estimate can be made by assuming that $P(R_i) \approx P(R_{i + 1})$, and then by choosing a $\Delta \xi$-value for which $V^{\rm bias}(\Delta \xi_2)$ is of the order ot $k_B T$, *i.e.* that the value of the biasing potential calculated in the midpoint separating two neighbouring windows is of the order of the thermal energy.
 
 In practice, the number, size and spacing of the windows depends on the curvature of the free energy profile along the reaction coordinate, which is not known beforehand. Smaller windows may be needed in regions with steep gradients or large energy barriers, while larger windows may suffice in more gradually changing regions. Fortunately, given the independent nature of the simulations that run in each window, the partitioning can be improved upon *a posteriori*: if one realises that the explored range is not sufficient, it can be extended by adding simulations with biasing potentials centred beyond $\xi_{\rm min}$ and/or $\xi_{\rm max}$. Sampling can also be improved by adding simulations in regions of the RC where the $P(R)$ is steeper.
+
+At the end of this procedure, each window will be assigned a biasing potential $V^{\rm bias}_i(\xi)$.
 
 ```{hint} Adaptive sampling
 There are more advanced methods, where the size and placement of windows are adjusted dynamically based on the evolving free energy landscape observed during the simulation (see *e.g.* [](https://doi.org/b9k6dv) or [](https://doi.org/10.1021/jp972280j)). This can help to focus computational resources on regions of interest and improve sampling efficiency.
@@ -124,11 +135,67 @@ Molecular dynamics or Monte Carlo simulations are performed within each window, 
 
 In the final step we gather the data from each window and combine it together to calculate the unbiased quantities of interest. I will first show how to unbias the data from each window, and then how to join all the results together.
 
+In analogy with Eq. [](#marginal_P) we can defined a *biased* marginal probability density for the $i$-th windows, $P^b_i(\xi)$, as
 
-### The Weighted Histogram Analysis Method (WHAM)
+$$
+P^b_i(\xi) = \frac{Q^b_i(\xi)}{\int_{\xi_{\rm min}}^{\xi_{\rm max}} Q^b_i(\xi) d\xi} = \frac{\int_V e^{-\beta (H(\dofs) + V^{\rm bias}_i(\xi))} \delta(\xi - \xi(\dofs)) d\dofs}{\int_V e^{-\beta (H(\dofs) + V^{\rm bias}_i(\xi(\dofs))} d\dofs},
+$$ (marginal_P_b)
+
+where the biased partially-integrated partition function $Q^b_i(\xi)$ has also been defined. We note that the biasing factor $e^{-\beta V^{\rm bias}_i(\xi)}$ depends only on $\xi$ and therefore, since integration is performed on all degrees of freedom but $\xi$, can be moved outside of the integral. If we do so and then multiply and divide by $Q$ we obtain
+
+$$
+\begin{aligned}
+P^b_i(\xi) & = e^{-\beta V^{\rm bias}_i(\xi)} \frac{\int_V e^{-\beta H(\dofs)} \delta(\xi - \xi(\dofs)) d\dofs}{\int_V e^{-\beta (H(\dofs) + V^{\rm bias}_i(\xi(\dofs))} d\dofs} \frac{Q_i}{Q_i}\\
+& = e^{-\beta V^{\rm bias}_i(\xi)} \frac{\int_V e^{-\beta H(\dofs)} \delta(\xi - \xi(\dofs)) d\dofs}{Q} \frac{Q}{\int_V e^{-\beta (H(\dofs) + V^{\rm bias}_i(\xi(\dofs))} d\dofs}\\
+& = e^{-\beta V^{\rm bias}_i(\xi)} P_i(\xi) \left\langle \frac{1}{e^{-\beta V^{\rm bias}_i(\xi)}} \right\rangle,
+\end{aligned}
+$$
+
+where $\langle \cdot \rangle$ represents an *unbiased* ensemble average and $P_i(\xi)$ is the marginal probability density of the $i$-th window. Note that, being an ensemble average, $\left\langle \frac{1}{e^{-\beta V^{\rm bias}_i(\xi)}} \right\rangle$ does not depend on $\xi$, and therefore it is a (in general unknown) constant[^constant]. As a consequence, we can obtain the unbiased marginal probability density up to a multiplicative constant:
+
+$$
+\mathcal{P}_i(\xi) = P^b_i(\xi) e^{\beta V^{\rm bias}_i(\xi)} \propto P_i(\xi).
+$$ (unbiasing)
+
+where I use the symbol $\mathcal{P}_i(\xi)$ in place of $P_i(\xi)$, since the former is unnormalised and therefore not a proper probability density. This procedure is known as *unbiasing*, and applying it yields $N$ functions $\mathcal{P}_i(\xi)$ that are shifted relative to each other because of the unknown constant. The *total* $\mathcal{P}(\xi)$ can be recoverd by stitching together all the $\mathcal{P}_i(\xi)$, utilising the regions of the $\xi$-space where each pair of windows overlap significantly to find the unknown multiplying constants. There are several methods available to perform this task. Here I will present two such methods: a simple least-squares fit and the (much more powerful) WHAM.
+
+```{attention} On the discrete nature of $P_i(\xi)$
+The derivation above has been carried out by considering continuous functions for the sake of clarify. However, the simulation output is always a *histogram*, *i.e.* $P^b_i(\xi_k)$ (and, equivalently, $\mathcal{P}_i(\xi_k)$), where $\xi_k$ is a equispaced discrete variable. In the following derivations I will use this latter notation.
+```
+
+#### Least-squares method
+
+Consider two windows $i$ and $j$ (with $|j - i| = 1$), whose unnormalised marginal probability densities overlap in a $\xi$-region $\lbrace \xi_o \rbrace$. We want to find the constant $C_{ij}$ that, multiplying $\mathcal{P}_j(\xi_k)$, minimises the mean-squared error between the two overlapping portions of the histograms, which is defined as
+
+$$
+{\rm MSE}_{ij} = \sum_{\zeta \in {\xi_o}} \left(\mathcal{P}_i(\zeta) - C_{ij} \mathcal{P}_j(\zeta) \right)^2.
+$$
+
+Imposing $\frac{d {\rm MSE}_{ij}}{d c_{ij}} = 0$ we find
+
+$$
+C_{ij} = \frac{\sum_{\zeta \in {\xi_o}} \mathcal{P}_i(\zeta) \mathcal{P}_j(\zeta)}{\sum_{\zeta \in {\xi_o}} \mathcal{P}_j^2(\zeta)}.
+$$ (least-squares)
+
+```{tip} Exercise
+From a numerical point of view, it is often better to stitch the free-energy profiles $F_i(\xi) = -k_B T \ln \mathcal{P}_i(\xi)$ rather than the bare $\mathcal{P}_i(\xi)$, since in the former case the unknown constant is additive rather than multiplicative. Try to derive an expression for such an additive constant $A_{ij}$.
+```
+
+In practice, with this method the $0$-th window data are unchanged, while all the subsequent ones are rescaled one after the other by repeatedly applying Eq. [](#least-squares). Once the final $\mathcal{P}(\xi_k)$ is obtained, we can either normalise it (if we need a proper probability density), or used to compute the associated free-energy profile
+
+$$
+F(\xi) = -k_B T \ln \mathcal{P}(\xi) + {\rm const},
+$$
+
+where I made explicit the fact that classical free energies are always specified up to an additive constant, which can be chosen freely. If we are interested in a reaction between states $A$ and $B$, it is common to set $F(\xi_A)$ or $F(\xi_B)$ to 0, while for potentials of mean force (see for instance the [example](#us-example) below) it is customary to set $\lim_{\xi \to \infty} F(\xi) = 0$.
+
+#### The Weighted Histogram Analysis Method (WHAM)
 
 [WHAM](https://doi.org/10.1002/jcc.540130812) is a widely used reweighting technique for combining data from multiple biased simulations to obtain an unbiased estimate of the free energy profile. The basic idea behind WHAM is to reweight the probability distributions obtained from each window simulation such that they are consistent with each other and with the unbiased distribution. The reweighting process involves applying a set of equations that account for the biasing potentials applied in each window and the overlap between adjacent windows. WHAM simultaneously solves a set of self-consistent equations to iteratively refine the estimates of the unbiased probability distribution and the corresponding free energy profile.
 
+[^constant]: This constant will take different values in different windows, since it is an ensemble average of a window-dependent quantity, $V^{\rm bias}_i(\xi)$.
+
+(us-example)=
 ### A real-world example
 
 As discussed in the chapter on [coarse-grained force fields](./coarse_grained.md), the effective interaction between two objects composed of multiple interacting units (atoms, molecules or beads) can be estimated in the dilute limit (*i.e.* at low density) as 
@@ -153,7 +220,7 @@ Using the language introduced in this section, $R$ is the reaction coordinate an
 The results of umbrella sampling simulations: the raw data is unbiased and then combined together to yield the final free-energy profile. Here the reaction coordinate $R$ is the distance between the centres of mass of two polymers.
 ```
 
-[](#umbrella_example) shows the results of umbrella sampling simulations of a system composed of two polymer chains, where the chosen reaction coordinate is the distance between the two centres of mass, $R$, and the final output is the effective chain-chain interaction as a function of $R$. [](#umbrella_example-a) shows a snapshot of the two chains, [](#umbrella_example-b) shows the raw (biased) $g^b_i(R)$ data for all the windows $i$, and [](#umbrella_example-c) contains the $g^u_i(R), unbiased according to XXX. Finally, [](#umbrella_example-d) contains the effective interaction, obtained with the WHAM method.
+[](#umbrella_example) shows the results of umbrella sampling simulations of a system composed of two polymer chains, where the chosen reaction coordinate is the distance between the two centres of mass, $R$, and the final output is the effective chain-chain interaction as a function of $R$. [](#umbrella_example-a) shows a snapshot of the two chains, [](#umbrella_example-b) shows the raw (biased) $g^b_i(R)$ data for all the windows $i$, and [](#umbrella_example-c) contains the $g^u_i(R), unbiased according to Eq. [](#unbiasing). Finally, [](#umbrella_example-d) contains the effective interaction, obtained with the WHAM method and shifted so that it vanishes at large distances.
 
 
 

@@ -3,6 +3,8 @@ title: Enhanced sampling
 exports:
     - format: pdf
       template: plain_latex
+math:
+    '\Pc': '\mathcal{P}'
 ---
 
 ```{note}
@@ -154,46 +156,48 @@ $$
 where $\langle \cdot \rangle$ represents an *unbiased* ensemble average and $P_i(\xi)$ is the marginal probability density of the $i$-th window. Note that, being an ensemble average, $\left\langle \frac{1}{e^{-\beta V^{\rm bias}_i(\xi)}} \right\rangle$ does not depend on $\xi$, and therefore it is a (in general unknown) constant[^constant]. As a consequence, we can obtain the unbiased marginal probability density up to a multiplicative constant:
 
 $$
-\mathcal{P}_i(\xi) = P^b_i(\xi) e^{\beta V^{\rm bias}_i(\xi)} \propto P_i(\xi).
+\Pc_i(\xi) = P^b_i(\xi) e^{\beta V^{\rm bias}_i(\xi)} \propto P_i(\xi).
 $$ (unbiasing)
 
-where I use the symbol $\mathcal{P}_i(\xi)$ in place of $P_i(\xi)$, since the former is unnormalised and therefore not a proper probability density. This procedure is known as *unbiasing*, and applying it yields $N$ functions $\mathcal{P}_i(\xi)$ that are shifted relative to each other because of the unknown constant. The *total* $\mathcal{P}(\xi)$ can be recoverd by stitching together all the $\mathcal{P}_i(\xi)$, utilising the regions of the $\xi$-space where each pair of windows overlap significantly to find the unknown multiplying constants. There are several methods available to perform this task. Here I will present two such methods: a simple least-squares fit and the (much more powerful) WHAM.
+where I use the symbol $\Pc_i(\xi)$ in place of $P_i(\xi)$, since the former is unnormalised and therefore not a proper probability density. This procedure is known as *unbiasing*, and applying it yields $N$ functions $\Pc_i(\xi)$ that are shifted relative to each other because of the unknown constant. The *total* $\Pc(\xi)$ can be recoverd by stitching together all the $\Pc_i(\xi)$, utilising the regions of the $\xi$-space where each pair of windows overlap significantly to find the unknown multiplying constants. There are several methods available to perform this task. Here I will present two such methods: a simple least-squares fit and the (much more powerful) WHAM.
 
 ```{attention} On the discrete nature of $P_i(\xi)$
-The derivation above has been carried out by considering continuous functions for the sake of clarify. However, the simulation output is always a *histogram*, *i.e.* $P^b_i(\xi_k)$ (and, equivalently, $\mathcal{P}_i(\xi_k)$), where $\xi_k$ is a equispaced discrete variable. In the following derivations I will use this latter notation.
+The derivation above has been carried out by considering continuous functions for the sake of clarify. However, the simulation output is always a *histogram*, *i.e.* $P^b_{i,\zeta} = P^b_i(\xi_\zeta)$ (and, equivalently, $\Pc_{i, \zeta}$), where the greek subscript $\zeta$ runs over the histogram bins and corresponds to a value of the RC, $\xi_\zeta$. In the following derivations I will use this latter notation.
 ```
 
 #### Least-squares method
 
-Consider two windows $i$ and $j$ (with $|j - i| = 1$), whose unnormalised marginal probability densities overlap in a $\xi$-region $\lbrace \xi_o \rbrace$. We want to find the constant $C_{ij}$ that, multiplying $\mathcal{P}_j(\xi_k)$, minimises the mean-squared error between the two overlapping portions of the histograms, which is defined as
+Consider two windows $i$ and $j$ (with $|j - i| = 1$), whose unnormalised marginal probability densities overlap in a $\xi$-region $\lbrace \xi_o \rbrace$. We want to find the constant $C_{ij}$ that, multiplying $\Pc_{j,\zeta}$, minimises the mean-squared error between the two overlapping portions of the histograms, which is defined as
 
 $$
-{\rm MSE}_{ij} = \sum_{\zeta \in {\xi_o}} \left(\mathcal{P}_i(\zeta) - C_{ij} \mathcal{P}_j(\zeta) \right)^2.
+{\rm MSE}_{ij} = \sum_{\zeta \in {\xi_o}} \left(\Pc_{i, \zeta} - C_{ij} \Pc_{i, \zeta} \right)^2.
 $$
 
 Imposing $\frac{d {\rm MSE}_{ij}}{d c_{ij}} = 0$ we find
 
 $$
-C_{ij} = \frac{\sum_{\zeta \in {\xi_o}} \mathcal{P}_i(\zeta) \mathcal{P}_j(\zeta)}{\sum_{\zeta \in {\xi_o}} \mathcal{P}_j^2(\zeta)}.
+C_{ij} = \frac{\sum_{\zeta \in {\xi_o}} \Pc_{i, \zeta} \Pc_{i, \zeta}}{\sum_{\zeta \in {\xi_o}} \Pc_{j,\zeta}^2}.
 $$ (least-squares)
 
 ```{tip} Exercise
-From a numerical point of view, it is often better to stitch the free-energy profiles $F_i(\xi) = -k_B T \ln \mathcal{P}_i(\xi)$ rather than the bare $\mathcal{P}_i(\xi)$, since in the former case the unknown constant is additive rather than multiplicative. Try to derive an expression for such an additive constant $A_{ij}$.
+From a numerical point of view, it is often better to stitch the free-energy profiles $F_{i,\zeta} = -k_B T \ln \Pc_{i, \zeta}$ rather than the bare $\Pc_{i, \zeta}$, since in the former case the unknown constant is additive rather than multiplicative. Try to derive an expression for such an additive constant $A_{ij}$.
 ```
 
-In practice, with this method the $0$-th window data are unchanged, while all the subsequent ones are rescaled one after the other by repeatedly applying Eq. [](#least-squares). Once the final $\mathcal{P}(\xi_k)$ is obtained, we can either normalise it (if we need a proper probability density), or used to compute the associated free-energy profile
+In practice, with this method the $0$-th window data are unchanged, while all the subsequent ones are rescaled one after the other by repeatedly applying Eq. [](#least-squares). Once the final histogram $\Pc_\zeta$ is obtained, we can either normalise it (if we need a proper probability density), or use it to compute the associated free-energy profile
 
 $$
-F(\xi) = -k_B T \ln \mathcal{P}(\xi) + {\rm const},
+F_\zeta = -k_B T \ln \Pc_\zeta + {\rm const},
 $$
 
 where I made explicit the fact that classical free energies are always specified up to an additive constant, which can be chosen freely. If we are interested in a reaction between states $A$ and $B$, it is common to set $F(\xi_A)$ or $F(\xi_B)$ to 0, while for potentials of mean force (see for instance the [example](#us-example) below) it is customary to set $\lim_{\xi \to \infty} F(\xi) = 0$.
+
+[^constant]: This constant will take different values in different windows, since it is an ensemble average of a window-dependent quantity, $V^{\rm bias}_i(\xi)$.
 
 #### The Weighted Histogram Analysis Method (WHAM)
 
 [WHAM](https://doi.org/10.1002/jcc.540130812) is a widely used reweighting technique for combining data from multiple biased simulations to obtain an unbiased estimate of the free energy profile. The basic idea behind WHAM is to reweight the probability distributions obtained from each window simulation such that they are consistent with each other and with the unbiased distribution. The reweighting process involves applying a set of equations that account for the biasing potentials applied in each window and the overlap between adjacent windows. WHAM simultaneously solves a set of self-consistent equations to iteratively refine the estimates of the unbiased probability distribution and the corresponding free energy profile.
 
-[^constant]: This constant will take different values in different windows, since it is an ensemble average of a window-dependent quantity, $V^{\rm bias}_i(\xi)$.
+The following derivation follows [Guillaume Bouvier's first derivation](https://bougui505.github.io/assets/wham_derivation.pdf), which in turn is based on the original one by [](https://doi.org/10.1002/jcc.540130812).
 
 (us-example)=
 ### A real-world example

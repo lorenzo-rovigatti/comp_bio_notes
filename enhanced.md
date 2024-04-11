@@ -126,7 +126,7 @@ In practice, the number, size and spacing of the windows depends on the curvatur
 At the end of this procedure, each window will be assigned a biasing potential $V^{\rm bias}_i(\xi)$.
 
 ```{hint} Adaptive sampling
-There are more advanced methods, where the size and placement of windows are adjusted dynamically based on the evolving free energy landscape observed during the simulation (see *e.g.* [](https://doi.org/b9k6dv) or [](https://doi.org/10.1021/jp972280j)). This can help to focus computational resources on regions of interest and improve sampling efficiency.
+There are more advanced methods, where the size and placement of windows are adjusted dynamically based on the evolving free energy landscape observed during the simulation (see *e.g.* [](https://doi.org/10.1002/(SICI)1096-987X(199709)18:12%3C1450::AID-JCC3%3E3.0.CO;2-I) or [](https://doi.org/10.1021/jp972280j)). This can help to focus computational resources on regions of interest and improve sampling efficiency.
 ```
 
 ### 4. Sampling
@@ -195,7 +195,7 @@ where I made explicit the fact that classical free energies are always specified
 
 #### The Weighted Histogram Analysis Method (WHAM)
 
-[WHAM](https://doi.org/10.1002/jcc.540130812) is a widely used reweighting technique for combining data from multiple biased simulations to obtain an unbiased estimate of the free energy profile. The basic idea behind WHAM is to reweight the probability distributions obtained from each window simulation such that they are consistent with each other and with the unbiased distribution. The reweighting process involves applying a set of equations that account for the biasing potentials applied in each window and the overlap between adjacent windows. WHAM simultaneously solves a set of self-consistent equations to iteratively refine the estimates of the unbiased probability distribution and the corresponding free energy profile.
+[WHAM](https://doi.org/10.1002/jcc.540130812) is a widely used reweighting technique for combining data from multiple biased simulations to obtain an unbiased estimate of the free energy profile. The basic idea behind WHAM is to reweight the probability distributions obtained from each window simulation such that they are consistent with each other and with the unbiased distribution. The reweighting process involves applying a set of equations that account for the biasing potentials applied in each window and the overlap between adjacent windows.
 
 The following derivation follows [Guillaume Bouvier's first derivation](https://bougui505.github.io/assets/wham_derivation.pdf), which in turn is based on the original one by [](https://doi.org/10.1002/jcc.540130812).
 
@@ -235,4 +235,3 @@ The results of umbrella sampling simulations: the raw data is unbiased and then 
 ## Metadynamics
 
 ## Forward-flux sampling
-

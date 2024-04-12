@@ -5,6 +5,7 @@ exports:
       template: plain_latex
 math:
     '\Pc': '\mathcal{P}'
+    '\Var': '\operatorname{Var}'
 ---
 
 ```{note}
@@ -105,7 +106,7 @@ A typical umbrella sampling simulation thus comprises several steps, which I wil
 
 ### 1. Choosing the reaction coordinate
 
-This is arguably the most important step, since choosing a sub-optimal RC can sometimes massively increase the required simulation time. Fortunately, most of the times the choice is either obvious (*e.g.* the concentration of the product in a chemical reaction), or dictated by the observable(s) of interest (see below for an [example](#a-real-world-example)).
+This is arguably the most important step, since choosing a sub-optimal RC can sometimes massively increase the required simulation time. Fortunately, most of the times the choice is either obvious (*e.g.* the concentration of the product in a chemical reaction), or dictated by the observable(s) of interest (see below for an [example](#us-example)).
 
 ### 2. Selecting a biasing potential
 
@@ -147,8 +148,8 @@ where the biased partially-integrated partition function $Q^b_i(\xi)$ has also b
 
 $$
 \begin{aligned}
-P^b_i(\xi) & = e^{-\beta V^{\rm bias}_i(\xi)} \frac{\int_V e^{-\beta H(\dofs)} \delta(\xi - \xi(\dofs)) d\dofs}{\int_V e^{-\beta (H(\dofs) + V^{\rm bias}_i(\xi(\dofs))} d\dofs} \frac{Q_i}{Q_i}\\
-& = e^{-\beta V^{\rm bias}_i(\xi)} \frac{\int_V e^{-\beta H(\dofs)} \delta(\xi - \xi(\dofs)) d\dofs}{Q} \frac{Q}{\int_V e^{-\beta (H(\dofs) + V^{\rm bias}_i(\xi(\dofs))} d\dofs}\\
+P^b_i(\xi) & = e^{-\beta V^{\rm bias}_i(\xi)} \frac{\int_V e^{-\beta H(\dofs)} \delta(\xi - \xi(\dofs)) d\dofs}{\int_V e^{-\beta (H(\dofs) + V^{\rm bias}_i(\xi(\dofs))} d\dofs} \frac{Q_i}{Q_i} = \\
+& = e^{-\beta V^{\rm bias}_i(\xi)} \frac{\int_V e^{-\beta H(\dofs)} \delta(\xi - \xi(\dofs)) d\dofs}{Q} \frac{Q}{\int_V e^{-\beta (H(\dofs) + V^{\rm bias}_i(\xi(\dofs))} d\dofs} = \\
 & = e^{-\beta V^{\rm bias}_i(\xi)} P_i(\xi) \left\langle \frac{1}{e^{-\beta V^{\rm bias}_i(\xi)}} \right\rangle,
 \end{aligned}
 $$
@@ -159,11 +160,13 @@ $$
 \Pc_i(\xi) = P^b_i(\xi) e^{\beta V^{\rm bias}_i(\xi)} \propto P_i(\xi).
 $$ (unbiasing)
 
-where I use the symbol $\Pc_i(\xi)$ in place of $P_i(\xi)$, since the former is unnormalised and therefore not a proper probability density. This procedure is known as *unbiasing*, and applying it yields $N$ functions $\Pc_i(\xi)$ that are shifted relative to each other because of the unknown constant. The *total* $\Pc(\xi)$ can be recoverd by stitching together all the $\Pc_i(\xi)$, utilising the regions of the $\xi$-space where each pair of windows overlap significantly to find the unknown multiplying constants. There are several methods available to perform this task. Here I will present two such methods: a simple least-squares fit and the (much more powerful) WHAM.
+where I use the symbol $\Pc_i(\xi)$ in place of $P_i(\xi)$, since the former is unnormalised and therefore not a proper probability density. This procedure is known as *unbiasing*, and it is a special case of *histogram reweighting*[^reweighting]. Applying Eq. [](#unbiasing) yields $N$ functions $\Pc_i(\xi)$ that are shifted relative to each other because of the unknown constant. The *total* $\Pc(\xi)$ can be recoverd by stitching together all the $\Pc_i(\xi)$, utilising the regions of the $\xi$-space where each pair of windows overlap significantly to find the unknown multiplying constants. There are several methods available to perform this task. Here I will present two such methods: a simple least-squares fit and the (much more powerful) WHAM.
 
 ```{attention} On the discrete nature of $P_i(\xi)$
 The derivation above has been carried out by considering continuous functions for the sake of clarify. However, the simulation output is always a *histogram*, *i.e.* $P^b_{i,\zeta} = P^b_i(\xi_\zeta)$ (and, equivalently, $\Pc_{i, \zeta}$), where the greek subscript $\zeta$ runs over the histogram bins and corresponds to a value of the RC, $\xi_\zeta$. In the following derivations I will use this latter notation.
 ```
+
+[^reweighting]: Under certain conditions, histograms computed with some parameters (*e.g.* temperature or chemical potential) can be reweighted to obtain the same quantity for some other (usually nearby) values of the same parameters, without having to run additional simulations.
 
 #### Least-squares method
 
@@ -197,7 +200,141 @@ where I made explicit the fact that classical free energies are always specified
 
 [WHAM](https://doi.org/10.1002/jcc.540130812) is a widely used reweighting technique for combining data from multiple biased simulations to obtain an unbiased estimate of the free energy profile. The basic idea behind WHAM is to reweight the probability distributions obtained from each window simulation such that they are consistent with each other and with the unbiased distribution. The reweighting process involves applying a set of equations that account for the biasing potentials applied in each window and the overlap between adjacent windows.
 
-The following derivation follows [Guillaume Bouvier's first derivation](https://bougui505.github.io/assets/wham_derivation.pdf), which in turn is based on the original one by [](https://doi.org/10.1002/jcc.540130812).
+The following derivation has been inspired by [Guillaume Bouvier's "traditional" derivation](https://bougui505.github.io/assets/wham_derivation.pdf), which in turn is based on the [original one](https://doi.org/10.1002/jcc.540130812).
+
+We start by defining some accessory quantities that make it possible to generalise the method beyond a specific Umbrella Sampling to any case where one wants to join multiple overlapping histograms:
+
+* Latin letters $i$, $j$ and $k$ will be used to index different *simulations* rather than windows, since one may want to run multiple simulations for the same window to improve statistics. The total number of simulations is $\#_{\rm sims}$.
+* The reaction coordinate is split into $\#_{\rm bins}$ bins, and $\zeta$ is the $\zeta$-th bin, *i.e.* $\xi_\zeta$.
+* $u_{i,\zeta}$ is the biasing factor applied to the $\zeta$-th bin of the $i$-th simulation. For the type of Umbrella Sampling described above, $u_{i,\zeta} = e^{-\beta V^{\rm bias}_i(\xi_\zeta)}$.
+* The output of simulation $i$ is the best estimate for the *biased* probability $q^b_{i,\zeta}$, which we define as $P^b_{i,\zeta} \equiv \frac{m_{i,\zeta}}{M_i}$, where $m_{i,\zeta}$ is the number of counts in bin $\zeta$ and $M_i$ is the number of generated samples, with both quantities referring to the $i$-th simulation.
+* $p^\circ_\zeta$ is the (unbiased) probability of bin $\zeta$, that is, the quantity we wish to calculate.
+* The biased probability of bin $\zeta$ of simulation $i$ is then:
+$$
+q^b_{i,\zeta} = u_{i,\zeta} p^\circ_\zeta f_i
+$$
+where $f_i$ is a normalising constant that ensures that $\sum_\zeta q^b_{i,\zeta} = 1$, *viz.*
+$$
+\label{f_i_definition}
+f_i^{-1} = \sum_\zeta u_{i,\zeta} p^\circ_\zeta.
+$$
+
+Using the above definitions, the best estimate for the *unbiased* probability of the $\zeta$-th bin of simulation $i$ is
+
+$$
+P_{i,\zeta} = \frac{P^b_{i,\zeta}}{u_{i,\zeta}f_i} = \frac{m_{i,\zeta}}{M_i u_{i,\zeta} f_i}.
+$$ (unbiased_prob)
+
+We assume that $p^\circ_\zeta$ can be written as a weighted sum of all the reweighted histograms, $P_{i,\zeta}$, as follows:
+
+$$
+p^\circ_\zeta = \sum_i \omega_{i,\zeta} P_{i,\zeta},
+$$ (weighted_sum)
+
+where the set of weights $\lbrace \omega_{i,\zeta} \rbrace$ are normalised, *e.g.* $\sum_i \omega_{i,\zeta} = 1$. The WHAM method boils down to ensuring that the weights are chosen so as to minimise the expected variance of $p^\circ_\zeta$, which is defined as 
+
+$$
+\Var{p^\circ_\zeta} = \left\langle \left( p^\circ_\zeta - \langle p^\circ_\zeta \rangle \right)^2 \right\rangle = \left\langle \left( \sum_i \omega_{i,\zeta} (P_{i,\zeta} - \langle P_{i,\zeta} \rangle) \right)^2 \right\rangle.
+$$
+
+Defining $\delta P_{i,\zeta} \equiv P_{i,\zeta} - \langle P_{i,\zeta} \rangle$ we obtain
+
+$$
+\begin{aligned}
+\Var{p^\circ_\zeta} & = \left\langle \left( \sum_i \omega_{i,\zeta} \delta P_{i,\zeta} \right)^2 \right\rangle =\\
+                    & = \left\langle \sum_i \omega^2_{i,\zeta} \delta P^2_{i,\zeta} \right\rangle + 2 \left\langle \sum_{j \neq k} \omega_{j,\zeta} \omega_{k,\zeta} \delta P_{j,\zeta} \delta P_{k,\zeta} \right\rangle = \\
+                    & = \sum_i \omega^2_{i,\zeta} \left\langle \delta P^2_{i,\zeta} \right\rangle + 2 \sum_{j \neq k} \omega_{j,\zeta} \omega_{k,\zeta} \left\langle \delta P_{j,\zeta} \delta P_{k,\zeta} \right\rangle
+\end{aligned}
+$$
+
+We note that $\left\langle \delta P^2_{i,\zeta} \right\rangle = \Var(P_{i,\zeta})$. Assuming that simulations $j$ and $k$ are uncorrelated[^uncorrelated], $\left\langle \delta P_{j,\zeta} \delta P_{k,\zeta} \right\rangle = 0$ and therefore
+
+$$
+\Var{p^\circ_\zeta} = \sum_i \omega^2_{i,\zeta} \Var(P_{i,\zeta}).
+$$
+
+We can minimise the variance with respect to the set of weights $\lbrace \omega_{i,\zeta} \rbrace$ subjects to the constraints $\sum_i \omega_{i,\zeta} = 1$ by using a Lagrange multiplier $\lambda_\zeta$. The quantity to minimise is therefore
+
+$$
+L \equiv \sum_i \omega^2_{i,\zeta} \Var(P_{i,\zeta}) + \lambda_\zeta \sum_i \omega_{i,\zeta},
+$$
+
+whose derivative reads
+
+$$
+\frac{\partial L}{\partial \omega_{j,\zeta}} = 2 \omega_{j,\zeta} \Var(P_{j,\zeta}) + \lambda_\zeta
+$$
+
+whence we obtain
+
+$$
+\omega_{j,\zeta} = -\frac{\lambda_\zeta}{2 \Var(P_{j,\zeta})}.
+$$ (omega_lambda)
+
+Applying the normalisation constraint we find
+
+$$
+\sum_j \omega_{j,\zeta} = - \sum_j \frac{\lambda_\zeta}{2 \Var(P_{j,\zeta})} = 1,
+$$
+
+which can be solved for $\lambda_\zeta$, yielding
+
+$$
+\lambda_\zeta = -2 \sum_j \Var(P_{j,\zeta}).
+$$
+
+Using this latter relation in Eq. [](#omega_lambda) gives the optimal value for weight $\omega_{j,\zeta}$:
+
+$$
+\omega_{j,\zeta} = \frac{\sum_k \Var(P_{k,\zeta})}{\Var(P_{j,\zeta})}.
+$$
+
+We now need to write $\Var(P_{k,\zeta})$ in terms of the simulation output. Recalling that $\Var(aX) = a^2 \Var(x)$ and using Eq. [](#unbiased_prob) we can write
+
+$$
+\Var(P_{k,\zeta}) = \frac{\Var(m_{k,\zeta})}{M^2_k u^2_{k,\zeta} f^2_k}.
+$$ (var_P)
+
+The variance of the original histograms $m_{k,\zeta}$ can be approximated by first considering that the probability of having $m$ counts in a specific histogram bin is given by the binomial distribution,
+
+$$
+P(m) = \binom{M}{m} p^m (1 - p)^{M - m},
+$$
+
+where $q$ is the probability of the event associated with the bin and $M$ is the total number of counts stored in the histogram. According to the [Poisson limit theorem](https://en.wikipedia.org/wiki/Poisson_limit_theorem), in the limit of large $M$ and small $p$[^poisson] the binomial distribution can be approximated by the Poisson distribution
+
+$$
+P(m) = e^{-Mp} \frac{(Mp)^m}{m!},
+$$
+
+whose mean and variance are both equal to $mp$. We connect this result with our derivation by noting that the probability $p$ for bin $\zeta$ and simulation $i$ is the *biased* probability $q^b_{i,\zeta} = u_{i,\zeta} p^\circ_\zeta f_i$, and therefore
+
+$$
+\Var(m_{k,\zeta}) = M_i u_{i,\zeta} p^\circ_\zeta f_i.
+$$
+
+Using this relation in Eq. [](#var_P) yields
+
+$$
+\Var(P_{k,\zeta}) = \frac{p^\circ_\zeta}{M_k u_{k,\zeta} f_k},
+$$
+
+which gives for the weights
+
+$$
+\omega_{j,\zeta} = \frac{p^\circ_\zeta M_j u_{j,\zeta}f_j}{\sum_k p^\circ_\zeta M_k u_{k,\zeta} f_k} = \frac{M_j u_{j,\zeta}f_j}{\sum_k M_k u_{k,\zeta} f_k}.
+$$
+
+Substituting these weights in Eq. [](#weighted_sum) and using the fact that $M_j u_{j,\zeta}f_j P_{j,\zeta} = m_{j,\zeta}$ (see Eq. [](#unbiased_prob)) we obtain the WHAM set of equations
+
+$$
+p^\circ_\zeta = \frac{\sum_j M_j u_{j,\zeta}f_j P_{j,\zeta}}{\sum_k M_k u_{k,\zeta} f_k} = \frac{\sum_j m_{j,\zeta}}{\sum_k M_k u_{k,\zeta} f_k}.
+$$ (wham_eqs)
+
+Note that this is a system of $\#_{\rm bins}$ *non-linear* equations, which are complemented by the $\#_{\rm sims}$ equations [](#f_i_definition) that define the $f_i$. This sytem of equations can be solved either with non-linear solvers (such as [scipy's fsolve](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fsolve.html)) or iteratively, setting the $\lbrace f_i \rbrace$ to some initial values (*e.g.* all equal to 1), using them to evaluate the $\lbrace p^\circ_\zeta \rbrace$ through Eq. [](#wham_eqs), which in turn are used to update $\lbrace f_i \rbrace$, and so on, repeating the process until convergence is achieved.
+
+[^uncorrelated]: This uncorrelation seems obvious, but there are computational techniques such as [parallel tempering](https://en.wikipedia.org/wiki/Parallel_tempering) where this assumption may not hold.
+[^poisson]: Both assumptions are reasonable for most real-world examples, since $M$ should be large to have a good statistics, and $p$ should be small in a well-sampled, biased simulation, where many bins should have non-zero counts.
 
 (us-example)=
 ### A real-world example
@@ -225,8 +362,6 @@ The results of umbrella sampling simulations: the raw data is unbiased and then 
 ```
 
 [](#umbrella_example) shows the results of umbrella sampling simulations of a system composed of two polymer chains, where the chosen reaction coordinate is the distance between the two centres of mass, $R$, and the final output is the effective chain-chain interaction as a function of $R$. [](#umbrella_example-a) shows a snapshot of the two chains, [](#umbrella_example-b) shows the raw (biased) $g^b_i(R)$ data for all the windows $i$, and [](#umbrella_example-c) contains the $g^u_i(R), unbiased according to Eq. [](#unbiasing). Finally, [](#umbrella_example-d) contains the effective interaction, obtained with the WHAM method and shifted so that it vanishes at large distances.
-
-
 
 [^umbrella]: The bias often takes the form of a harmonic potential whose shape, resembling an umbrella, gives the method its name.
 

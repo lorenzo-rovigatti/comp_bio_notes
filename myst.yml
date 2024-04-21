@@ -13,6 +13,7 @@ project:
 site:
   template: book-theme
   options:
+    favicon: favicon.png
     logo: logo_4jpp.png
   nav: []
   domains: []

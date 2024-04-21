@@ -12,42 +12,28 @@ math:
 In this chapter I will use *reaction* as a general term for a microscopic process that transforms the system of interest (be it a macromolecule, an extended many-body system, a collection of atoms, *etc.*) between two well-defined states, $A$ and $B$.
 ```
 
-## Reactions and rare events
+In biophysics, *reactions* (in the sense given above) are extremely important, and are often the focus of any enhanced sampling technique discussed in the context of biomolecules. However, these same techniques have been very often introduced in, or can be easily adapted to, other contexts[^cg].
 
-Consider a system that can switch, possibly reversibly, between two macrostates, $A$ and $B$. Here the term macrostate is used loosely to indicate ensembles of microstates where the system resides for times that are much larger than the microscopic characteristic time; in thermodynamic parlance, $A$ and $B$, which are sometimes called *basins*, should be either metastable or equilibrium states, and therefore separated by a free-energy barrier $\Delta F_b$ larger than the thermal energy.
+[^cg]: To provide an example that you can already appreciate, the bottom-up effective interactions discussed in the [coarse graining chapter](./coarse_grained.md) can be computed with any of the techniques discussed in this chapter.
 
-```{hint} Some examples
-Examples relevant to computational biophysics are processes involving protein folding and unfolding, nucleic acid hybridisation, or switching between different conformations of the same (macro)molecule.
-```
 
-In this context the free-energy barrier[^activation_energy] between $A$ from $B$, $\Delta F_b^{A \to B} = F_{\rm max} - F_A$, is defined as the difference between the free energy of $A$, $F_A$ and that of the transition state, $F_{\rm max}$, which is the highest free-energy point along the reaction pathway connecting $A$ to $B$[^delta_F]. Note that $\Delta F_b^{A \to B}$ controls not only the probability of jumping from $A$ to $B$, but also the the rate of the reaction, which is proportional to $e^{-\beta \Delta f_b}$ (see *e.g.* [](https://doi.org/10.1063/1.1749604
-) and [](https://doi.org/10.1039/TF9353100875)). See [](#fe_barrier) for a graphical definition of these quantities. 
+(reaction-coordinates)=
+## Collective variables and reaction coordinates
 
-But what is a "reaction pathway"? While a more precise answer will be given in [](#reaction-coordinates), here I just mention that it is possible to construct a *reaction coordinate* that can be used to gauge the progress (extent) of a reaction. Such a reaction coordinate, for which I will use the symbol $\xi$, is in general a function of the microscopic degrees of freedom of the system, $\dofs$, and its definition is not unique.
+The phase space of a many-body system is a highly-dimensional manifold where each point corresponds to a microstate. As the system evolves in time, the collection of points in phase space it visits form a trajectory that fully describes its evolution. In many cases it is useful to project the trajectory on a space with a lower dimensionality: the resulting quantities can be used to obtain *coarse-grained* models, but also to describe the essential features of a system in a way that is easier to analyse and visualise.
+
+In the context of molecular simulations, any quantity that is used to describe a system in a coarse-grained fashion is a *collective variable* (CV), and can be written as a function of (all or a subset of) the microscopic degrees of freedom $\dofs$. In condensed-matter physics, collective variables are often called *order parameters*. By contrast, in the biophysics and biochemistry worlds the most used term is *reaction coordinate* (RC), defined as a parameter or set of parameters that describe the progress of the reaction of interest, serving as a way to quantify and track the changes occurring within a system as it evolves through the reaction pathway. Since we will be focussing on reactions, in the following I will tend to refer to the coarse-grained variable(s) of interest as RC or reaction coordinate(s), but most of what I will say translates naturally to any other CV.
+
+The primary purpose of a reaction coordinate is to provide a simplified description of the system's thermodynamics, making it possible to monitor and analyze the progress of a reaction in terms of a single or a few variables: by using a reaction coordinate we are reducing the complexity of a many-body system with many degrees of freedom to obtain a simplified description that can be used to investigate the reaction itself, effectively applying a *dimensionality reduction* procedure. This simplification is essential for understanding the microscopic underpinnings of the reaction of interest. Defining a reaction coordinate makes it possible to draw a diagram such as the one shown in [](#fe_barrier), which are often called free-energy profiles or landscapes, where the variation of the free energy along a particular reaction coordinate or collective variable is plotted.
 
 ```{figure} figures/fe_barrier.png
-:name: fe_barrier 
+:name: fe_barrier
 :align: center
 
 An example of the free energy landscape of a system displaying two basins separated by a transition state.
 ```
 
-It is often the case that what interests us is the *reaction* itself rather than the $A$ and $B$ states, which are often known (and possibly have been characterised) beforehand. In this case, simulations starting from one of the two states, say $A$, would remain in $A$ for sometime, then quickly jump to state $B$, where it would again reside for some time before switching basin once again, and so on. Moreover, if the free-energy barrier between the two basins is large ($\delta F_b \gt 10 k_BT$), the number of transitions from $A$ to $B$ and back will be very small. Therefore, using unbiased simulations[^unbiased] to sample the transition itself, for instance to evaluate the free-energy landscape as in [](#fe_barrier), requires a large computational effort which is mostly wasted in sampling uninteresting parts of the phase space. 
-
-In this part we will understand how the sampling of the transition from $A$ to $B$ can be enhanced by using advanced computational techniques (collectively known as [rare event sampling techniques](https://en.wikipedia.org/wiki/Rare_event_sampling)).
-
-[^activation_energy]: Sometimes also called *activation (free) energy*.
-[^delta_F]: Note that, per this definition, $\Delta F_b^{A \to B} \neq \Delta F_b^{B \to A} = F_{\rm max} - F_B$.
-[^unbiased]: In unbiased simulations the system evolves according to the fundamental laws of physics (Newton's laws of motion in this context), without any artificial bias or constraints imposed.
-
-(reaction-coordinates)=
-## Reaction coordinates
-
-Before we delve into the methods themselves, we need to introduce a framework that makes it possible to describe the reaction we are interested in. We do so by defining one or more *reaction coordinates* (also known as *order parameters* in physics lingo), which are *collective variable* that are function of (all or a subset of) the microscopic degrees of freedom $\dofs$. 
-
-In the context of molecular simulations, a reaction coordinate (RC) is a parameter or set of parameters that describe the progress of a given reaction. It serves as a way to quantify and track the changes occurring within a system as it evolves through the reaction pathway. The primary purpose of a reaction coordinate is to provide a simplified description of the system's thermodynamics, making it possible to monitor and analyze the progress of a reaction in terms of a single or a few variables: by using a reaction coordinate we are reducing the complexity of a many-body system with many degrees of freedom to obtain a simplified description that can be used to investigate the reaction itself, effectively applying a *dimensionality reduction* procedure. This simplification is essential for understanding the microscopic underpinnings of the reaction of interest. Defining a reaction coordinate makes it possible to draw a diagram such as the one shown in [](#fe_barrier), which are often called free-energy profiles or landscapes, where the variation of the free energy along a particular reaction coordinate or collective variable is plotted.
-
-The choice of the RC depends on the specific process being studied and it is not, in general, unique. It could be a simple geometric parameter such as bond length, bond angle, or dihedral angle, or it could be a more complex collective variable that captures the overall structural changes in the system, such as the distance between two key functional groups, the position or coordination number of a particular atom, or the solvent-accessible surface area of a biomolecule.
+The choice of the RC depends on the specific process being studied and it is not, in general, unique. It can be a simple geometric parameter such as bond length, bond angle, or dihedral angle, or a more complex collective variable that captures the overall structural changes in the system, such as the distance between two key functional groups, the position or coordination number of a particular atom, or the solvent-accessible surface area of a biomolecule.
 
 ```{note}
 In general, a reaction coordinate can be multidimensional, and sometimes it is useful, or even necessary, to define such complex variables. However, for the sake of simplicity here I will use unidimensional reaction coordinates, which will be designated by the symbol $\xi = \xi(\dofs)$.
@@ -87,7 +73,6 @@ $$ (marginal_P)
 
 where we have used the partition function $Q = \int_{\xi_{\rm min}}^{\xi_{\rm max}} Q(\xi) d\xi$.
 
-
 ```{hint} A simple example
 Consider a system formed by two DNA strands made of $N_1$ and $N_2$ units (atoms or coarse-grained beads), respectively, that can hybridise: a possible (although not exactly ideal) reaction coordinate could be the distance between the centres of mass of the two strands, *viz.*:
 
@@ -95,6 +80,27 @@ $$
 \xi = \left| \vec{R}^{\rm cm}_1 - \vec{R}^{\rm cm}_2 \right| = \left| \frac{1}{N_1} \sum_{i \in N_1} \vec{r}_i - \frac{1}{N_2} \sum_{i \in N_2} \vec{r}_i \right|.
 $$
 ```
+
+## Reactions and rare events
+
+Consider a system that can switch, possibly reversibly, between two macrostates, $A$ and $B$. Here the term macrostate is used loosely to indicate ensembles of microstates where the system resides for times that are much larger than the microscopic characteristic time; in thermodynamic parlance, $A$ and $B$, which are sometimes called *basins*, should be either metastable or equilibrium states, and therefore separated by a free-energy barrier $\Delta F_b$ larger than the thermal energy.
+
+```{hint} Some examples
+Examples relevant to computational biophysics are processes involving protein folding and unfolding, nucleic acid hybridisation, or switching between different conformations of the same (macro)molecule.
+```
+
+In this context the free-energy barrier[^activation_energy] between $A$ from $B$, $\Delta F_b^{A \to B} = F_{\rm max} - F_A$, is defined as the difference between the free energy of $A$, $F_A$ and that of the transition state, $F_{\rm max}$, which is the highest free-energy point along the reaction pathway connecting $A$ to $B$[^delta_F]. Note that $\Delta F_b^{A \to B}$ controls not only the probability of jumping from $A$ to $B$, but also the the rate of the reaction, which is proportional to $e^{-\beta \Delta f_b}$ (see *e.g.* [](https://doi.org/10.1063/1.1749604
+) and [](https://doi.org/10.1039/TF9353100875)). See [](#fe_barrier) for a graphical definition of these quantities. 
+
+<!--But what is a "reaction pathway"? While a more precise answer will be given in [](#reaction-coordinates), here I just mention that it is possible to construct a *reaction coordinate* that can be used to gauge the progress (extent) of a reaction. Such a quantity, for which I will use the symbol $\xi$, is in general a function of the microscopic degrees of freedom of the system, $\dofs$, and its definition is not unique.-->
+
+It is often the case that what interests us is the *reaction* itself rather than the $A$ and $B$ states, which are often known (and possibly have been characterised) beforehand. In this case, simulations starting from one of the two states, say $A$, would remain in $A$ for sometime, then quickly jump to state $B$, where it would again reside for some time before switching basin once again, and so on. Moreover, if the free-energy barrier between the two basins is large ($\delta F_b \gt 10 k_BT$), the number of transitions from $A$ to $B$ and back will be very small. Therefore, using unbiased simulations[^unbiased] to sample the transition itself, for instance to evaluate the free-energy landscape as in [](#fe_barrier), requires a large computational effort which is mostly wasted in sampling uninteresting parts of the phase space. 
+
+In this part we will understand how the sampling of the transition from $A$ to $B$ can be enhanced by using advanced computational techniques (collectively known as [rare event sampling techniques](https://en.wikipedia.org/wiki/Rare_event_sampling)).
+
+[^activation_energy]: Sometimes also called *activation (free) energy*.
+[^delta_F]: Note that, per this definition, $\Delta F_b^{A \to B} \neq \Delta F_b^{B \to A} = F_{\rm max} - F_B$.
+[^unbiased]: In unbiased simulations the system evolves according to the fundamental laws of physics (Newton's laws of motion in this context), without any artificial bias or constraints imposed.
 
 ## Umbrella Sampling
 
@@ -361,7 +367,7 @@ Using the language introduced in this section, $R$ is the reaction coordinate an
 The results of umbrella sampling simulations: the raw data is unbiased and then combined together to yield the final free-energy profile. Here the reaction coordinate $R$ is the distance between the centres of mass of two polymers.
 ```
 
-[](#umbrella_example) shows the results of umbrella sampling simulations of a system composed of two polymer chains, where the chosen reaction coordinate is the distance between the two centres of mass, $R$, and the final output is the effective chain-chain interaction as a function of $R$. [](#umbrella_example-a) shows a snapshot of the two chains, [](#umbrella_example-b) shows the raw (biased) $g^b_i(R)$ data for all the windows $i$, and [](#umbrella_example-c) contains the $g^u_i(R), unbiased according to Eq. [](#unbiasing). Finally, [](#umbrella_example-d) contains the effective interaction, obtained with the WHAM method and shifted so that it vanishes at large distances.
+[](#umbrella_example) shows the results of umbrella sampling simulations of a system composed of two polymer chains, where the chosen reaction coordinate is the distance between the two centres of mass, $R$, and the final output is the effective chain-chain interaction as a function of $R$. [](#umbrella_example-a) shows a snapshot of the two chains, [](#umbrella_example-b) shows the raw (biased) $g^b_i(R)$ data for all the windows $i$, and [](#umbrella_example-c) contains the $g^u_i(R)$, unbiased according to Eq. [](#unbiasing). Finally, [](#umbrella_example-d) contains the effective interaction, obtained with the WHAM method and shifted so that it vanishes at large distances.
 
 [^umbrella]: The bias often takes the form of a harmonic potential whose shape, resembling an umbrella, gives the method its name.
 

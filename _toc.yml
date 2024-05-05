@@ -2,6 +2,7 @@ format: jb-book
 root: index
 chapters:
     - file: introduction.md
+    - file: quantum.md
     - file: all_atom.md
     - file: coarse_grained.md
     - file: enhanced.md

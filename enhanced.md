@@ -6,6 +6,9 @@ exports:
 math:
     '\Pc': '\mathcal{P}'
     '\Var': '\operatorname{Var}'
+abbreviations:
+    CV: Collective Variable
+    RC: Reaction Coordinate
 ---
 
 ```{note}
@@ -18,7 +21,7 @@ In biophysics, *reactions* (in the sense given above) are extremely important, a
 
 
 (reaction-coordinates)=
-## Collective variables and reaction coordinates
+# Collective variables and reaction coordinates
 
 The phase space of a many-body system is a highly-dimensional manifold where each point corresponds to a microstate. As the system evolves in time, the collection of points in phase space it visits form a trajectory that fully describes its evolution. In many cases it is useful to project the trajectory on a space with a lower dimensionality: the resulting quantities can be used to obtain *coarse-grained* models, but also to describe the essential features of a system in a way that is easier to analyse and visualise.
 
@@ -81,7 +84,7 @@ $$
 $$
 ```
 
-## Reactions and rare events
+# Reactions and rare events
 
 Consider a system that can switch, possibly reversibly, between two macrostates, $A$ and $B$. Here the term macrostate is used loosely to indicate ensembles of microstates where the system resides for times that are much larger than the microscopic characteristic time; in thermodynamic parlance, $A$ and $B$, which are sometimes called *basins*, should be either metastable or equilibrium states, and therefore separated by a free-energy barrier $\Delta F_b$ larger than the thermal energy.
 
@@ -102,7 +105,7 @@ In this part we will understand how the sampling of the transition from $A$ to $
 [^delta_F]: Note that, per this definition, $\Delta F_b^{A \to B} \neq \Delta F_b^{B \to A} = F_{\rm max} - F_B$.
 [^unbiased]: In unbiased simulations the system evolves according to the fundamental laws of physics (Newton's laws of motion in this context), without any artificial bias or constraints imposed.
 
-## Umbrella Sampling
+# Umbrella Sampling
 
 The first technique I will present is the venerable *umbrella sampling* (US), which was introduced in the Seventies by [Torrie and Valleau](https://doi.org/10.1016/0021-9991(77)90121-8).
 
@@ -110,11 +113,11 @@ The basic idea behind umbrella sampling is to bias the system along a chosen rea
 
 A typical umbrella sampling simulation thus comprises several steps, which I will discuss separately.
 
-### 1. Choosing the reaction coordinate
+## 1. Choosing the reaction coordinate
 
 This is arguably the most important step, since choosing a sub-optimal RC can sometimes massively increase the required simulation time. Fortunately, most of the times the choice is either obvious (*e.g.* the concentration of the product in a chemical reaction), or dictated by the observable(s) of interest (see below for an [example](#us-example)).
 
-### 2. Selecting a biasing potential
+## 2. Selecting a biasing potential
 
 The role of the biasing potential $V^{\rm bias}(\xi)$ is to confine a system within a (usually rather narrow) region of the reaction coordinate. As such it must be a function of the reaction coordinate(s) only, without any explicit dependence on any of the microscopic $\dofs$. The most common choice is a harmonic potential, whose shape gives the method its name and usually takes the form
 
@@ -124,7 +127,7 @@ $$
 
 where $\bar\xi$ is the position of the minimum of the potential and $K$ is the strength of the resulting spring force. Other choices are possible (see *e.g.* [here](https://doi.org/10.1039/C4SM02218A) or [here](https://doi.org/10.1063/1.1739216) for examples of biases that are not differentiable and therefore can only be used in Monte Carlo simulations).
 
-### 3. Partitioning the reaction coordinate into windows
+## 3. Partitioning the reaction coordinate into windows
 
 Next, we need to split the range of interest, $[\xi_{\rm min}, \xi_{\rm max}]$, into windows. The most common strategy is to divide the reaction coordinate into equispaced windows centred on $\xi_1, \xi_2, \xi_3, \ldots$, with $i \in [1, N]$, where $N$ is the total number of windows (and hence of independent simulations). The distance between two neighbouring windows, $\Delta \xi_i = \xi_{i + 1} - \xi_i$, which is often taken as a constant, should be chosen carefully: on one hand it should be as large as possible to make $N$ as small as possible; on the other hand, $\Delta \xi$ should be chosen so that there is some overlap between adjacent windows to prevent discontinuities in the free energy profile. This is to ensure that the neighboring windows provide sufficient sampling for accurate reweighting. An often good-enough first estimate can be made by assuming that $P(R_i) \approx P(R_{i + 1})$, and then by choosing a $\Delta \xi$-value for which $V^{\rm bias}(\Delta \xi_2)$ is of the order ot $k_B T$, *i.e.* that the value of the biasing potential calculated in the midpoint separating two neighbouring windows is of the order of the thermal energy.
 
@@ -136,11 +139,11 @@ At the end of this procedure, each window will be assigned a biasing potential $
 There are more advanced methods, where the size and placement of windows are adjusted dynamically based on the evolving free energy landscape observed during the simulation (see *e.g.* [](https://doi.org/10.1002/(SICI)1096-987X(199709)18:12%3C1450::AID-JCC3%3E3.0.CO;2-I) or [](https://doi.org/10.1021/jp972280j)). This can help to focus computational resources on regions of interest and improve sampling efficiency.
 ```
 
-### 4. Sampling
+## 4. Sampling
 
 Molecular dynamics or Monte Carlo simulations are performed within each window, allowing the system to equilibrate and sample configurations consistent with the biasing potential. In general ensuring that a given window has converged is not necessarily straightforward, but can be done by techniques such as [block averaging](https://sachinashanbhag.blogspot.com/2013/08/block-averaging-estimating-uncertainty.html).
 
-### 5. Reweighting and combining the data
+## 5. Reweighting and combining the data
 
 In the final step we gather the data from each window and combine it together to calculate the unbiased quantities of interest. I will first show how to unbias the data from each window, and then how to join all the results together.
 
@@ -174,7 +177,7 @@ The derivation above has been carried out by considering continuous functions fo
 
 [^reweighting]: Under certain conditions, histograms computed with some parameters (*e.g.* temperature or chemical potential) can be reweighted to obtain the same quantity for some other (usually nearby) values of the same parameters, without having to run additional simulations.
 
-#### Least-squares method
+### Least-squares method
 
 Consider two windows $i$ and $j$ (with $|j - i| = 1$), whose unnormalised marginal probability densities overlap in a $\xi$-region $\lbrace \xi_o \rbrace$. We want to find the constant $C_{ij}$ that, multiplying $\Pc_{j,\zeta}$, minimises the mean-squared error between the two overlapping portions of the histograms, which is defined as
 
@@ -202,7 +205,7 @@ where I made explicit the fact that classical free energies are always specified
 
 [^constant]: This constant will take different values in different windows, since it is an ensemble average of a window-dependent quantity, $V^{\rm bias}_i(\xi)$.
 
-#### The Weighted Histogram Analysis Method (WHAM)
+### The Weighted Histogram Analysis Method (WHAM)
 
 [WHAM](https://doi.org/10.1002/jcc.540130812) is a widely used reweighting technique for combining data from multiple biased simulations to obtain an unbiased estimate of the free energy profile. The basic idea behind WHAM is to reweight the probability distributions obtained from each window simulation such that they are consistent with each other and with the unbiased distribution. The reweighting process involves applying a set of equations that account for the biasing potentials applied in each window and the overlap between adjacent windows.
 
@@ -343,7 +346,7 @@ Note that this is a system of $\#_{\rm bins}$ *non-linear* equations, which are 
 [^poisson]: Both assumptions are reasonable for most real-world examples, since $M$ should be large to have a good statistics, and $p$ should be small in a well-sampled, biased simulation, where many bins should have non-zero counts.
 
 (us-example)=
-### A real-world example
+## A real-world example
 
 As discussed in the chapter on [coarse-grained force fields](./coarse_grained.md), the effective interaction between two objects composed of multiple interacting units (atoms, molecules or beads) can be estimated in the dilute limit (*i.e.* at low density) as 
 
@@ -371,8 +374,8 @@ The results of umbrella sampling simulations: the raw data is unbiased and then 
 
 [^umbrella]: The bias often takes the form of a harmonic potential whose shape, resembling an umbrella, gives the method its name.
 
-## Thermodynamic & Hamiltonian integration
+# Thermodynamic & Hamiltonian integration
 
-## Metadynamics
+# Metadynamics
 
-## Forward-flux sampling
+# Forward-flux sampling

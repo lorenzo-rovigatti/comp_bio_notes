@@ -12,9 +12,15 @@ project:
     github: https://github.com/lorenzo-rovigatti/comp_bio_notes
     math:
         '\dofs': '\lbrace\vec{r}\rbrace'
-    abbrevations:
+    abbreviations:
         MD: Molecular Dynamics
         MC: Monte Carlo
+        FF: Force Field
+        HPC: High-Performance Computing
+        1D: one-dimensional
+        2D: two-dimensional
+        3D: three-dimensional
+        AA: Amino Acid
 site:
     template: book-theme
     options:

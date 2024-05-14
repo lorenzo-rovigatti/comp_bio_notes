@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="polymer_sequence.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.1474186"
+     inkscape:cx="265.3783"
+     inkscape:cy="307.21134"
+     inkscape:window-width="1920"
+     inkscape:window-height="1109"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.665;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 95.533737,94.628837 13.338053,-3.58461 12.93412,3.07811 1.00125,-14.019405 -12.94475,-1.916205 -0.38179,-13.848408 0.54475,-13.40286 -13.058708,5.782164 -0.470736,13.653963"
+       id="path1204"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.665;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 33.572234,108.51893 41.654312,97.348599 55.178919,91.792637 62.841041,80.211921 60.885257,66.705803 47.097433,63.515374 38.845644,52.157403 49.232787,43.629914 63.175665,39.115978"
+       id="path5758"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <circle
+       style="fill:#eb2222;fill-opacity:1;stroke:none;stroke-width:4.0252"
+       id="path846"
+       cx="33.447437"
+       cy="108.12872"
+       r="6.3985224"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <circle
+       style="fill:#a5e97d;fill-opacity:1;stroke:none;stroke-width:4.0252"
+       id="path846-1"
+       cx="41.653519"
+       cy="97.264801"
+       r="6.3985224"
+       inkscape:transform-center-x="-5.6536408"
+       inkscape:transform-center-y="1.0053101"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <circle
+       style="fill:#e6a32c;fill-opacity:1;stroke:none;stroke-width:4.0252"
+       id="path846-9"
+       cx="54.740177"
+       cy="91.693275"
+       r="6.3985224"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <circle
+       style="fill:#eb2222;fill-opacity:1;stroke:none;stroke-width:4.0252"
+       id="path846-6"
+       cx="62.739876"
+       cy="80.076477"
+       r="6.3985224"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <circle
+       style="fill:#5232cc;fill-opacity:1;stroke:none;stroke-width:4.0252"
+       id="path846-2"
+       cx="60.835548"
+       cy="66.6717"
+       r="6.3985224"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <circle
+       style="fill:#a5e97d;fill-opacity:1;stroke:none;stroke-width:4.0252"
+       id="path846-5"
+       cx="47.040287"
+       cy="63.314697"
+       r="6.3985224"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <circle
+       style="fill:#c84fbe;fill-opacity:1;stroke:none;stroke-width:4.0252"
+       id="path846-4"
+       cx="38.84441"
+       cy="51.975063"
+       r="6.3985224"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <circle
+       style="fill:#c84fbe;fill-opacity:1;stroke:none;stroke-width:4.0252"
+       id="path846-49"
+       cx="49.402927"
+       cy="42.566807"
+       r="6.3985224"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <circle
+       style="fill:#5232cc;fill-opacity:1;stroke:none;stroke-width:4.0252"
+       id="path846-93"
+       cx="62.920971"
+       cy="38.957397"
+       r="6.3985224"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <circle
+       style="fill:#eb2222;fill-opacity:1;stroke:none;stroke-width:4.0252"
+       id="path846-26"
+       cx="95.435928"
+       cy="93.733963"
+       r="6.3985224"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <circle
+       style="fill:#a5e97d;fill-opacity:1;stroke:none;stroke-width:4.0252"
+       id="path846-1-0"
+       cx="108.67751"
+       cy="91.103767"
+       r="6.3985224"
+       inkscape:transform-center-x="-5.6536408"
+       inkscape:transform-center-y="1.0053101"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <circle
+       style="fill:#e6a32c;fill-opacity:1;stroke:none;stroke-width:4.0252"
+       id="path846-9-6"
+       cx="121.69074"
+       cy="93.583542"
+       r="6.3985224"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <circle
+       style="fill:#eb2222;fill-opacity:1;stroke:none;stroke-width:4.0252"
+       id="path846-6-6"
+       cx="122.69366"
+       cy="80.162086"
+       r="6.3985224"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <circle
+       style="fill:#5232cc;fill-opacity:1;stroke:none;stroke-width:4.0252"
+       id="path846-2-4"
+       cx="109.42294"
+       cy="77.576065"
+       r="6.3985224"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <circle
+       style="fill:#a5e97d;fill-opacity:1;stroke:none;stroke-width:4.0252"
+       id="path846-5-6"
+       cx="109.50987"
+       cy="64.218742"
+       r="6.3985224"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <circle
+       style="fill:#c84fbe;fill-opacity:1;stroke:none;stroke-width:4.0252"
+       id="path846-4-2"
+       cx="109.48288"
+       cy="51.177479"
+       r="6.3985224"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <circle
+       style="fill:#c84fbe;fill-opacity:1;stroke:none;stroke-width:4.0252"
+       id="path846-49-8"
+       cx="96.900833"
+       cy="56.264904"
+       r="6.3985224"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <circle
+       style="fill:#5232cc;fill-opacity:1;stroke:none;stroke-width:4.0252"
+       id="path846-93-9"
+       cx="96.608528"
+       cy="69.98983"
+       r="6.3985224"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <g
+       id="g5937"
+       transform="matrix(0.53054391,0,0,0.53054391,77.96458,16.606873)"
+       style="stroke-width:1.88486"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279">
+      <circle
+         style="fill:#eb2222;fill-opacity:1;stroke:none;stroke-width:7.58693"
+         id="path846-94"
+         cx="155.226"
+         cy="174.82942"
+         r="8.8058548" />
+      <circle
+         style="fill:#a5e97d;fill-opacity:1;stroke:none;stroke-width:7.58693"
+         id="path846-1-3"
+         cx="155.226"
+         cy="157.34491"
+         r="8.8058548"
+         inkscape:transform-center-x="-7.7807257"
+         inkscape:transform-center-y="1.3835404" />
+      <circle
+         style="fill:#e6a32c;fill-opacity:1;stroke:none;stroke-width:7.58693"
+         id="path846-9-5"
+         cx="155.226"
+         cy="139.86041"
+         r="8.8058548" />
+      <circle
+         style="fill:#eb2222;fill-opacity:1;stroke:none;stroke-width:7.58693"
+         id="path846-6-1"
+         cx="155.226"
+         cy="122.37589"
+         r="8.8058548" />
+      <circle
+         style="fill:#5232cc;fill-opacity:1;stroke:none;stroke-width:7.58693"
+         id="path846-2-7"
+         cx="155.226"
+         cy="104.89138"
+         r="8.8058548" />
+      <circle
+         style="fill:#a5e97d;fill-opacity:1;stroke:none;stroke-width:7.58693"
+         id="path846-5-4"
+         cx="155.226"
+         cy="87.406868"
+         r="8.8058548" />
+      <circle
+         style="fill:#c84fbe;fill-opacity:1;stroke:none;stroke-width:7.58693"
+         id="path846-4-3"
+         cx="155.226"
+         cy="69.922356"
+         r="8.8058548" />
+      <circle
+         style="fill:#c84fbe;fill-opacity:1;stroke:none;stroke-width:7.58693"
+         id="path846-49-1"
+         cx="155.226"
+         cy="52.437843"
+         r="8.8058548" />
+      <circle
+         style="fill:#5232cc;fill-opacity:1;stroke:none;stroke-width:7.58693"
+         id="path846-93-4"
+         cx="155.226"
+         cy="34.953327"
+         r="8.8058548" />
+    </g>
+    <g
+       id="g5937-9"
+       transform="matrix(0.53054391,0,0,-0.53054391,98.88166,127.90583)"
+       style="stroke-width:1.88486"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279">
+      <circle
+         style="fill:#eb2222;fill-opacity:1;stroke:none;stroke-width:7.58693"
+         id="path846-94-2"
+         cx="155.226"
+         cy="174.82942"
+         r="8.8058548" />
+      <circle
+         style="fill:#a5e97d;fill-opacity:1;stroke:none;stroke-width:7.58693"
+         id="path846-1-3-8"
+         cx="155.226"
+         cy="157.34491"
+         r="8.8058548"
+         inkscape:transform-center-x="-7.7807257"
+         inkscape:transform-center-y="1.3835404" />
+      <circle
+         style="fill:#e6a32c;fill-opacity:1;stroke:none;stroke-width:7.58693"
+         id="path846-9-5-8"
+         cx="155.226"
+         cy="139.86041"
+         r="8.8058548" />
+      <circle
+         style="fill:#eb2222;fill-opacity:1;stroke:none;stroke-width:7.58693"
+         id="path846-6-1-8"
+         cx="155.226"
+         cy="122.37589"
+         r="8.8058548" />
+      <circle
+         style="fill:#5232cc;fill-opacity:1;stroke:none;stroke-width:7.58693"
+         id="path846-2-7-6"
+         cx="155.226"
+         cy="104.89138"
+         r="8.8058548" />
+      <circle
+         style="fill:#a5e97d;fill-opacity:1;stroke:none;stroke-width:7.58693"
+         id="path846-5-4-8"
+         cx="155.226"
+         cy="87.406868"
+         r="8.8058548" />
+      <circle
+         style="fill:#c84fbe;fill-opacity:1;stroke:none;stroke-width:7.58693"
+         id="path846-4-3-3"
+         cx="155.226"
+         cy="69.922356"
+         r="8.8058548" />
+      <circle
+         style="fill:#c84fbe;fill-opacity:1;stroke:none;stroke-width:7.58693"
+         id="path846-49-1-8"
+         cx="155.226"
+         cy="52.437843"
+         r="8.8058548" />
+      <circle
+         style="fill:#5232cc;fill-opacity:1;stroke:none;stroke-width:7.58693"
+         id="path846-93-4-3"
+         cx="155.226"
+         cy="34.953327"
+         r="8.8058548" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:8.23421px;line-height:1.25;font-family:'Time Roman';-inkscape-font-specification:'Time Roman, ';stroke-width:0.264583"
+       x="13.552231"
+       y="38.393593"
+       id="text7289"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279"><tspan
+         sodipodi:role="line"
+         id="tspan7287"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.23421px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';stroke-width:0.264583"
+         x="13.552231"
+         y="38.393593">(a)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:8.23421px;line-height:1.25;font-family:'Time Roman';-inkscape-font-specification:'Time Roman, ';stroke-width:0.264583"
+       x="140.99487"
+       y="38.582981"
+       id="text7289-5"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/polymer_sequence.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279"><tspan
+         sodipodi:role="line"
+         id="tspan7287-9"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.23421px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';stroke-width:0.264583"
+         x="140.99487"
+         y="38.582981">(b)</tspan></text>
+  </g>
+</svg>

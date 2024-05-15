@@ -21,6 +21,8 @@ project:
         2D: two-dimensional
         3D: three-dimensional
         AA: Amino Acid
+        mRNA: Messenger RNA
+        tRNA: Transfer RNA
 site:
     template: book-theme
     options:

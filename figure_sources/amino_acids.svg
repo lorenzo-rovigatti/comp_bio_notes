@@ -24,8 +24,8 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="0.81134749"
-     inkscape:cx="465.89162"
-     inkscape:cy="128.79808"
+     inkscape:cx="421.52099"
+     inkscape:cy="290.25788"
      inkscape:window-width="1920"
      inkscape:window-height="1109"
      inkscape:window-x="0"
@@ -33,7 +33,36 @@
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
   <defs
-     id="defs2" />
+     id="defs2">
+    <marker
+       style="overflow:visible;"
+       id="marker124740"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.4) rotate(180) translate(10,0)"
+         style="fill-rule:evenodd;fill:context-stroke;stroke:context-stroke;stroke-width:1.0pt;"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path124738" />
+    </marker>
+    <marker
+       style="overflow:visible;"
+       id="Arrow1Mend"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.4) rotate(180) translate(10,0)"
+         style="fill-rule:evenodd;fill:context-stroke;stroke:context-stroke;stroke-width:1.0pt;"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path66241" />
+    </marker>
+  </defs>
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
@@ -125,6 +154,451 @@
          style="fill:none;stroke:#000000;stroke-width:0.526969;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          d="M 36.111902,33.490053 V 23.792196"
          id="path48029" />
+    </g>
+    <g
+       id="g35320"
+       transform="translate(-9.5250003)"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/peptide_bond.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279">
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#4d4d4d;stroke-width:0.264583"
+         x="29.456583"
+         y="131.92461"
+         id="text5020-8"><tspan
+           sodipodi:role="line"
+           id="tspan5018-8"
+           style="font-size:3.7859px;fill:#4d4d4d;stroke-width:0.264583"
+           x="29.456583"
+           y="131.92461">C<tspan
+   style="font-size:3.7859px;baseline-shift:super;fill:#4d4d4d;stroke-width:0.264583"
+   id="tspan15782-8">α</tspan></tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.264583"
+         x="30.121887"
+         y="120.51424"
+         id="text22070-6"><tspan
+           sodipodi:role="line"
+           id="tspan22068-83"
+           style="fill:#d40000;fill-opacity:1;stroke-width:0.264583"
+           x="30.121887"
+           y="120.51424">H</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#008000;stroke-width:0.264583"
+         x="30.170877"
+         y="143.36406"
+         id="text24318-83"><tspan
+           sodipodi:role="line"
+           id="tspan24316-3"
+           style="fill:#008000;stroke-width:0.264583"
+           x="30.170877"
+           y="143.36406">R<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan81696">1</tspan></tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#0000ff;stroke-width:0.264583"
+         x="42.251854"
+         y="131.57782"
+         id="text26986-3"><tspan
+           sodipodi:role="line"
+           id="tspan26984-8"
+           style="fill:#0000ff;stroke-width:0.264583"
+           x="42.251854"
+           y="131.57782"><tspan
+   style="fill:#4d4d4d;stroke-width:0.264583"
+   id="tspan33029">C</tspan>OO<tspan
+   style="font-size:2.46083px;baseline-shift:super;fill:#0000ff;stroke-width:0.264583"
+   id="tspan30404-04">-</tspan></tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#ffcc00;stroke-width:0.264583"
+         x="14.19391"
+         y="131.42101"
+         id="text33708-7"><tspan
+           sodipodi:role="line"
+           id="tspan33706-6"
+           style="fill:#ffcc00;stroke-width:0.264583"
+           x="14.19391"
+           y="131.42101">N<tspan
+   style="fill:#d40000;stroke-width:0.264583"
+   id="tspan22949">H</tspan><tspan
+   style="font-size:2.46083px;baseline-shift:super;fill:#d40000;stroke-width:0.264583"
+   id="tspan34150-8">+</tspan><tspan
+   style="font-size:2.46083px;word-spacing:0px;baseline-shift:sub;fill:#d40000;stroke-width:0.264583"
+   id="tspan34148-9"
+   dx="-1.1965824">3</tspan></tspan></text>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 35.216843,130.32447 h 6.155968"
+         id="path48023-0" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 31.482446,133.3142 v 5.72334"
+         id="path48025-6" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 28.183654,130.32447 H 22.085667"
+         id="path48027-8" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 31.482446,128.06435 v -6.09463"
+         id="path48029-7" />
+    </g>
+    <g
+       id="g35320-9"
+       transform="translate(35.981009,0.03513897)"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/peptide_bond.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279">
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#4d4d4d;stroke-width:0.264583"
+         x="29.456583"
+         y="131.92461"
+         id="text5020-8-7"><tspan
+           sodipodi:role="line"
+           id="tspan5018-8-5"
+           style="font-size:3.7859px;fill:#4d4d4d;stroke-width:0.264583"
+           x="29.456583"
+           y="131.92461">C<tspan
+   style="font-size:3.7859px;baseline-shift:super;fill:#4d4d4d;stroke-width:0.264583"
+   id="tspan15782-8-9">α</tspan></tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.264583"
+         x="30.121887"
+         y="120.51424"
+         id="text22070-6-7"><tspan
+           sodipodi:role="line"
+           id="tspan22068-83-8"
+           style="fill:#d40000;fill-opacity:1;stroke-width:0.264583"
+           x="30.121887"
+           y="120.51424">H</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#008000;stroke-width:0.264583"
+         x="30.170877"
+         y="143.36406"
+         id="text24318-83-5"><tspan
+           sodipodi:role="line"
+           id="tspan24316-3-3"
+           style="fill:#008000;stroke-width:0.264583"
+           x="30.170877"
+           y="143.36406">R<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan86930">2</tspan></tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#0000ff;stroke-width:0.264583"
+         x="42.251854"
+         y="131.57782"
+         id="text26986-3-3"><tspan
+           sodipodi:role="line"
+           id="tspan26984-8-8"
+           style="fill:#0000ff;stroke-width:0.264583"
+           x="42.251854"
+           y="131.57782"><tspan
+   style="fill:#4d4d4d;stroke-width:0.264583"
+   id="tspan33029-3">C</tspan>OO<tspan
+   style="font-size:2.46083px;baseline-shift:super;fill:#0000ff;stroke-width:0.264583"
+   id="tspan30404-04-7">-</tspan></tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#ffcc00;stroke-width:0.264583"
+         x="14.19391"
+         y="131.42101"
+         id="text33708-7-9"><tspan
+           sodipodi:role="line"
+           id="tspan33706-6-3"
+           style="fill:#ffcc00;stroke-width:0.264583"
+           x="14.19391"
+           y="131.42101">N<tspan
+   style="fill:#d40000;stroke-width:0.264583"
+   id="tspan22949-7">H</tspan><tspan
+   style="font-size:2.46083px;baseline-shift:super;fill:#d40000;stroke-width:0.264583"
+   id="tspan34150-8-8">+</tspan><tspan
+   style="font-size:2.46083px;word-spacing:0px;baseline-shift:sub;fill:#d40000;stroke-width:0.264583"
+   id="tspan34148-9-7"
+   dx="-1.1965824">3</tspan></tspan></text>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 35.216843,130.32447 h 6.155968"
+         id="path48023-0-4" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 31.482446,133.3142 v 5.72334"
+         id="path48025-6-1" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 28.183654,130.32447 H 22.085667"
+         id="path48027-8-9" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 31.482446,128.06435 v -6.09463"
+         id="path48029-7-0" />
+    </g>
+    <g
+       id="g78408"
+       transform="translate(70.679376,0.14967174)"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/peptide_bond.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279">
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 120.89633,137.31748 -3.80394,-4.76179"
+         id="path48029-7-2-1" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 120.89633,124.15353 -3.80394,4.76179"
+         id="path48029-7-2-1-5" />
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.264583"
+         x="121.5015"
+         y="124.40572"
+         id="text22070-6-4-2-4"><tspan
+           sodipodi:role="line"
+           id="tspan22068-83-1-9-1"
+           style="fill:#d40000;fill-opacity:1;stroke-width:0.264583"
+           x="121.5015"
+           y="124.40572">H</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.264583"
+         x="121.5015"
+         y="139.5777"
+         id="text22070-6-4-2-5"><tspan
+           sodipodi:role="line"
+           id="tspan22068-83-1-9-4"
+           style="fill:#d40000;fill-opacity:1;stroke-width:0.264583"
+           x="121.5015"
+           y="139.5777">H</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#0000ff;stroke-width:0.264583"
+         x="114.09256"
+         y="131.93246"
+         id="text26986-3-1-6-5"><tspan
+           sodipodi:role="line"
+           id="tspan26984-8-1-4-3"
+           style="fill:#0000ff;stroke-width:0.264583"
+           x="114.09256"
+           y="131.93246">O<tspan
+   style="font-size:2.46083px;baseline-shift:super;fill:#0000ff;stroke-width:0.264583"
+   id="tspan30404-04-4-3-9" /></tspan></text>
+    </g>
+    <g
+       id="g121688"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/peptide_bond.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279">
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#4d4d4d;stroke-width:0.264583"
+         x="117.81409"
+         y="132.20673"
+         id="text5020-8-8"><tspan
+           sodipodi:role="line"
+           id="tspan5018-8-58"
+           style="font-size:3.7859px;fill:#4d4d4d;stroke-width:0.264583"
+           x="117.81409"
+           y="132.20673">C<tspan
+   style="font-size:3.7859px;baseline-shift:super;fill:#4d4d4d;stroke-width:0.264583"
+   id="tspan15782-8-4">α</tspan></tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.264583"
+         x="118.47939"
+         y="120.79636"
+         id="text22070-6-3"><tspan
+           sodipodi:role="line"
+           id="tspan22068-83-7"
+           style="fill:#d40000;fill-opacity:1;stroke-width:0.264583"
+           x="118.47939"
+           y="120.79636">H</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#008000;stroke-width:0.264583"
+         x="118.52838"
+         y="143.64618"
+         id="text24318-83-1"><tspan
+           sodipodi:role="line"
+           id="tspan24316-3-38"
+           style="fill:#008000;stroke-width:0.264583"
+           x="118.52838"
+           y="143.64618">R<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan89632">1</tspan></tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#0000ff;stroke-width:0.264583"
+         x="130.60936"
+         y="131.85994"
+         id="text26986-3-0"><tspan
+           sodipodi:role="line"
+           id="tspan26984-8-9"
+           style="fill:#0000ff;stroke-width:0.264583"
+           x="130.60936"
+           y="131.85994"><tspan
+             style="fill:#4d4d4d;stroke-width:0.264583"
+             id="tspan33029-7">C</tspan></tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#ffcc00;stroke-width:0.264583"
+         x="102.55142"
+         y="131.70312"
+         id="text33708-7-93"><tspan
+           sodipodi:role="line"
+           id="tspan33706-6-2"
+           style="fill:#ffcc00;stroke-width:0.264583"
+           x="102.55142"
+           y="131.70312">N<tspan
+   style="fill:#d40000;stroke-width:0.264583"
+   id="tspan22949-4">H</tspan><tspan
+   style="font-size:2.46083px;baseline-shift:super;fill:#d40000;stroke-width:0.264583"
+   id="tspan34150-8-3">+</tspan><tspan
+   style="font-size:2.46083px;word-spacing:0px;baseline-shift:sub;fill:#d40000;stroke-width:0.264583"
+   id="tspan34148-9-71"
+   dx="-1.1965824">3</tspan></tspan></text>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 123.57435,130.60659 h 6.15597"
+         id="path48023-0-2" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 119.83996,133.59632 v 5.72334"
+         id="path48025-6-2" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 116.54116,130.60659 h -6.09798"
+         id="path48027-8-0" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 119.83996,128.34647 v -6.09463"
+         id="path48029-7-2" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 131.47782,128.333 v -6.09463"
+         id="path48029-7-2-0" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 132.53616,128.333 v -6.09463"
+         id="path48029-7-2-8" />
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#4d4d4d;stroke-width:0.264583"
+         x="152.42197"
+         y="132.20673"
+         id="text5020-8-75"><tspan
+           sodipodi:role="line"
+           id="tspan5018-8-1"
+           style="font-size:3.7859px;fill:#4d4d4d;stroke-width:0.264583"
+           x="152.42197"
+           y="132.20673">C<tspan
+   style="font-size:3.7859px;baseline-shift:super;fill:#4d4d4d;stroke-width:0.264583"
+   id="tspan15782-8-7">α</tspan></tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.264583"
+         x="153.08727"
+         y="120.79636"
+         id="text22070-6-4"><tspan
+           sodipodi:role="line"
+           id="tspan22068-83-1"
+           style="fill:#d40000;fill-opacity:1;stroke-width:0.264583"
+           x="153.08727"
+           y="120.79636">H</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.264583"
+         x="141.62015"
+         y="143.64618"
+         id="text22070-6-4-2"><tspan
+           sodipodi:role="line"
+           id="tspan22068-83-1-9"
+           style="fill:#d40000;fill-opacity:1;stroke-width:0.264583"
+           x="141.62015"
+           y="143.64618">H</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#008000;stroke-width:0.264583"
+         x="153.13626"
+         y="143.64618"
+         id="text24318-83-7"><tspan
+           sodipodi:role="line"
+           id="tspan24316-3-1"
+           style="fill:#008000;stroke-width:0.264583"
+           x="153.13626"
+           y="143.64618">R<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan93966">2</tspan></tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#0000ff;stroke-width:0.264583"
+         x="165.21724"
+         y="131.85994"
+         id="text26986-3-1"><tspan
+           sodipodi:role="line"
+           id="tspan26984-8-1"
+           style="fill:#0000ff;stroke-width:0.264583"
+           x="165.21724"
+           y="131.85994"><tspan
+   style="fill:#4d4d4d;stroke-width:0.264583"
+   id="tspan33029-70">C</tspan>OO<tspan
+   style="font-size:2.46083px;baseline-shift:super;fill:#0000ff;stroke-width:0.264583"
+   id="tspan30404-04-4">-</tspan></tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#0000ff;stroke-width:0.264583"
+         x="130.59381"
+         y="120.69389"
+         id="text26986-3-1-6"><tspan
+           sodipodi:role="line"
+           id="tspan26984-8-1-4"
+           style="fill:#0000ff;stroke-width:0.264583"
+           x="130.59381"
+           y="120.69389">O<tspan
+   style="font-size:2.46083px;baseline-shift:super;fill:#0000ff;stroke-width:0.264583"
+   id="tspan30404-04-4-3" /></tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.7859px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#ffcc00;stroke-width:0.264583"
+         x="141.39256"
+         y="131.70312"
+         id="text33708-7-0"><tspan
+           sodipodi:role="line"
+           id="tspan33706-6-8"
+           style="fill:#ffcc00;stroke-width:0.264583"
+           x="141.39256"
+           y="131.70312">N</tspan></text>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 158.18214,130.60659 h 6.15597"
+         id="path48023-0-6" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 154.44775,133.59632 v 5.72334"
+         id="path48025-6-21" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 151.14895,130.60659 h -6.09798"
+         id="path48027-8-96" />
+      <path
+         style="fill:#ff00ff;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 140.56983,130.60659 h -6.09798"
+         id="path48027-8-96-8" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 142.98071,132.89354 v 6.09798"
+         id="path48027-8-96-8-2" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 154.44775,128.34647 v -6.09463"
+         id="path48029-7-4" />
     </g>
     <circle
        style="fill:#ffcc00;stroke-width:0.665001;stroke-miterlimit:4;stroke-dasharray:none"
@@ -750,6 +1224,127 @@
        r="2.3812733"
        transform="scale(-1,1)"
        inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/amino_acids.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;line-height:1.25;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';stroke-width:0.264583"
+       x="148.54829"
+       y="117.37424"
+       id="text48867"><tspan
+         sodipodi:role="line"
+         id="tspan48865"
+         style="stroke-width:0.264583"></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:10.5833px;line-height:1.25;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';stroke-width:0.264583"
+       x="43.044056"
+       y="134.05698"
+       id="text61518"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/peptide_bond.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279"><tspan
+         sodipodi:role="line"
+         id="tspan61516"
+         style="font-size:10.5833px;stroke-width:0.264583"
+         x="43.044056"
+         y="134.05698">+</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:10.5833px;line-height:1.25;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';stroke-width:0.264583"
+       x="176.01085"
+       y="134.62395"
+       id="text61518-0"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/peptide_bond.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279"><tspan
+         sodipodi:role="line"
+         id="tspan61516-8"
+         style="font-size:10.5833px;stroke-width:0.264583"
+         x="176.01085"
+         y="134.62395">+</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.565;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="m 88.467302,130.50296 h 9.502566"
+       id="path66150"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/peptide_bond.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279" />
+    <text
+       xml:space="preserve"
+       style="font-size:5.29167px;line-height:1.25;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';stroke-width:0.264583"
+       x="18.021477"
+       y="112.72854"
+       id="text98251"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/peptide_bond.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279"><tspan
+         sodipodi:role="line"
+         id="tspan98249"
+         style="font-size:5.29167px;stroke-width:0.264583"
+         x="18.021477"
+         y="112.72854">AA 1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:5.29167px;line-height:1.25;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';stroke-width:0.264583"
+       x="63.090923"
+       y="112.74706"
+       id="text104363"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/peptide_bond.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279"><tspan
+         sodipodi:role="line"
+         style="font-size:5.29167px;stroke-width:0.264583"
+         x="63.090923"
+         y="112.74706"
+         id="tspan106345">AA 2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:5.29167px;line-height:1.25;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';stroke-width:0.264583"
+       x="125.97687"
+       y="112.20731"
+       id="text109543"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/peptide_bond.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279"><tspan
+         sodipodi:role="line"
+         id="tspan109541"
+         style="font-size:5.29167px;stroke-width:0.264583"
+         x="125.97687"
+         y="112.20731">Dipeptide</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:5.29167px;line-height:1.25;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';stroke-width:0.264583"
+       x="181.30977"
+       y="112.69415"
+       id="text113075"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/peptide_bond.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279"><tspan
+         sodipodi:role="line"
+         id="tspan113073"
+         style="font-size:5.29167px;stroke-width:0.264583"
+         x="181.30977"
+         y="112.69415">Water</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:5.29167px;line-height:1.25;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';stroke-width:0.264583"
+       x="118.65041"
+       y="156.88284"
+       id="text122895"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/peptide_bond.png"
+       inkscape:export-xdpi="279"
+       inkscape:export-ydpi="279"><tspan
+         sodipodi:role="line"
+         id="tspan122893"
+         style="font-size:5.29167px;stroke-width:0.264583"
+         x="118.65041"
+         y="156.88284">peptide bond</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.93, 0.465;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker124740)"
+       d="m 134.96343,151.39611 2.60893,-17.24617"
+       id="path124656"
+       inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/peptide_bond.png"
        inkscape:export-xdpi="279"
        inkscape:export-ydpi="279" />
   </g>

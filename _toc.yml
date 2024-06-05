@@ -1,11 +1,16 @@
 format: jb-book
 root: index
-chapters:
-    - file: introduction.md
-    - file: proteins.md
-    - file: nucleic_acids.md
-    - file: quantum.md
-    - file: all_atom.md
-    - file: coarse_grained.md
-    - file: enhanced.md
-    - file: bioinformatics.md
+parts:
+    - caption: Lectures
+      chapters:
+        - file: introduction.md
+        - file: proteins.md
+        - file: nucleic_acids.md
+        - file: quantum.md
+        - file: all_atom.md
+        - file: coarse_grained.md
+        - file: enhanced.md
+        - file: bioinformatics.md
+    - caption: Hands-on notebooks
+      chapters:
+        - file: notebooks/ramachandran.ipynb

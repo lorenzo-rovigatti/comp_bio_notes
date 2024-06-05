@@ -23,6 +23,7 @@ project:
         AA: Amino Acid
         mRNA: Messenger RNA
         tRNA: Transfer RNA
+        IR: Infrared
 site:
     template: book-theme
     options:

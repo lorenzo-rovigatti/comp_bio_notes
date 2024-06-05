@@ -9,7 +9,9 @@ exports:
 This is the part that is the farthest from my own expertise, which is about classical simulations. Use this chapter with caution!
 ```
 
+```{tip}
 The main references for this part are @leach2001molecular and @schlick2010molecular.
+```
 
 ## The Schrödinger equation
 

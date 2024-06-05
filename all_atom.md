@@ -74,7 +74,17 @@ When three atoms are connected by two consecutive covalent bonds, the angle betw
 
 ### Dihedral rotation
 
-Dihedral interactions arise when four atoms are connected by three consecutive covalent bonds, forming a torsion angle or dihedral angle. Rotating one group of atoms around the axis defined by the central bond changes the conformation of the molecule, leading to different energy minima corresponding to different dihedral angles. Dihedral interactions are typically described using periodic potentials that capture the periodicity of the energy as a function of the dihedral angle.
+Dihedral or torsional interactions arise when four atoms are connected by three consecutive covalent bonds, forming a torsion angle or dihedral angle. Rotating one group of atoms around the axis defined by the central bond changes the conformation of the molecule, leading to different energy minima corresponding to different dihedral angles.
+
+As noted [before](./proteins.md#sec:molecular_vibrations), in proteins the most important dihedral (torsional) angles are those associated to rotations around the $N - C^\alpha$ and $C^\alpha - C$ bonds, $\phi$ and $\psi$, which feature free-energy barriers of the order of the thermal energy. However, rotations around the peptide bond (dihedral $\omega) and around sp$^3$-sp$^3$ bonds such as those found in aliphatic said chains (dihedral $\chi$) can also play a role in dictating the flexibility of proteins.
+
+Dihedral interactions are typically described using periodic potentials that capture the periodicity of the energy as a function of the dihedral angle. A generic torsional interaction associated to a dihedral angle $\varphi$ takes the form
+
+$$
+E_t(\varphi) = \sum_{n} \frac{V_n}{2}[1 + \cos(n\varphi - \varphi_0)],
+$$
+
+where $n$ is an integer that determines the periodicity of the barrier of height $V_n$, and $\varphi_0$ is a reference angle, which is often set to $0$ or $\pi$.
 
 ### Improper rotation
 

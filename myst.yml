@@ -24,6 +24,8 @@ project:
         mRNA: Messenger RNA
         tRNA: Transfer RNA
         IR: Infrared
+        LJ: Lennard-Jones
+        HB: hydrogen bond
 site:
     template: book-theme
     options:

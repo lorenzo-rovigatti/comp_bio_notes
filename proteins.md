@@ -191,7 +191,7 @@ By contrast, rotations around bonds that connect sp$^2$- and sp$^3$-hybridized a
 :align: center
 :width: 250px
 
-A polypeptide backbone showing the definition of the dihedral angles $\phi$, $\psi$ and $\omega$. Credits to [Dcrjsr, Adam Rędzikowski and Wikimedia](https://commons.wikimedia.org/w/index.php?curid=24585750).
+A polypeptide backbone showing the definition of the dihedral angles $\phi$, $\psi$ and $\omega$. Credits to [Dcrjsr and Adam Rędzikowski via Wikimedia Commons](https://commons.wikimedia.org/w/index.php?curid=24585750).
 ```
 
 A graphical representation of a part of a polypeptide backbone with its associated dihedral angles is shown in [](#fig:phi-psi).
@@ -311,6 +311,7 @@ Of course, even if we look at the contributions due to van der Waals forces only
 
 [^LJ_parameters]: In writing this part I was heavily inspired by @finkelstein2002protein, but I'm swapping the names of the two characteristic distances, $r_0$ and $r_{\rm min}$, which I found misleading in the original discussion.
 
+(hydrogen-bonds)=
 ### Hydrogen bonds
 
 Certain combinations of $\phi$ and $\psi$ angles can prevent the formation of hydrogen bonds, which are particular bonds that can link amino acids between them and with water molecules (or other solutes): if the backbone dihedral angles do not permit optimal hydrogen bonding, the conformation is unlikely to be stable or favorable. But what is a hydrogen bond?
@@ -359,7 +360,7 @@ The famous property of liquid water being denser than ice, which is one of the v
 In hexagonal ice, which is the most stable form of ice at ambient pressure, each water molecule forms four linear hydrogen bonds with neighboring water molecules, creating an almost perfect tetrahedral arrangement that leads to an open, hexagonal lattice structure with a lot of empty space within. By contrast, in liquid water each molecule still participates in nearly four hydrogen bonds. However, these bonds are not fixed and can fluctuate, allowing the molecules to pack closer together, which leads to a higher density, $1.00$ g/cm$^3$ at $4^\circ$ C, compared to that of ice, $0.917$ g/cm$^3$.
 :::
 
-We now go back to proteins, with the working hypothesis that, under ambient conditions, all hydrogen bonds are formed[^all_hbs]. If we look at peptide backbones, we see that it contains nitrogen and oxygen, making it a polar molecule. In addition, as [discussed before](#sec:AA_list), many side chains are polar, or even charged under physiological conditions. As a result, a polypeptide has many chemical groups that can be involved in hydrogen bonds. What partners do these chemical groups bond to: other polar groups or water molecules?
+We now go back to proteins, with the working hypothesis that, under ambient conditions, all hydrogen bonds are formed[^all_hbs]. If we look at peptide backbones, we see that it contains nitrogen and oxygen, which are polar groups and can be involved in hydrogen bonds. In addition, as [discussed before](#sec:AA_list), many side chains are polar, or even charged under physiological conditions. As a result, a polypeptide has many chemical groups that can be involved in hydrogen bonds. What partners do these chemical groups bond to: other polar groups or water molecules?
 
 To answer this question let us consider two chemical groups on the same polypeptide, an acceptor $A$ and a donor $D$, that can form a hydrogen bond. Assuming that all hydrogen bonds are formed, there are two possible states: $A$ is bonded to $D$, or they are both bonded to water molecules. The equilibrium between these two states can be described by
 
@@ -394,10 +395,126 @@ The distinct conformations of an amino acid at fixed values of $(\phi, \psi)$ ar
 
 Each amino acid side chain can adopt multiple rotameric states, influenced by steric interactions, hydrogen bonding, and other intramolecular forces. The different rotamers contribute to the overall flexibility and diversity of protein structures, allowing proteins to achieve their functional conformations and interact effectively with other molecules.
 
+(sec:primary_structure)
+# Primary structure
+
+The order in which amino acids are linked together by peptide bonds is known as the *primary structure* of a protein. The convention to list the sequence of a protein is to use the one-letter or three-letter codes for amino acids in the sequence, which has a well-defined directionality. The sequence starts at the end of the amino acid chain that has a free amine group ($-NH2$), which is called N-terminus and, by convention, marks the beginning of a protein. The other end has a free carboxyl group (-COOH) and is known as the C-terminus, which is considered the end of the protein.
+
+:::{tip} An example
+:class: dropdown
+
+The sequence of [bovine (cow) rhodopsin](https://www.uniprot.org/uniprotkb/P02699/entry#sequences) expressed with the one-letter code is
+
+> MNGTEGPNFYVPFSNKTGVVRSPFEAPQYYLAEPWQFSMLAAYMFLLIMLGFPINFLTLYVTVQHKKLRTPLNYILLNLAVADLFMVFGGFTTTLYTSLHGYFVFGPTGCNLEGFFATLGGEIALWSLVVLAIERYVVVCKPMSNFRFGENHAIMGVAFTWVMALACAAPPLVGWSRYIPEGMQCSCGIDYYTPHEETNNESFVIYMFVVHFIIPLIVIFFCYGQLVFTVKEAAAQQQESATTQKAEKEVTRMVIIMVIAFLICWLPYAGVAFYIFTHQGSDFGPIFMTIPAFFAKTSAVYNPVIYIMMNKQFRNCMVTTLCCGKNPLGDDEASTTVSKTETSQVAPA
+
+:::
+
 (sec:secondary_structure)=
 # Secondary structure
 
+The secondary structure of proteins refers to the local, repetitive folding patterns of the polypeptide chain. These structures are stabilized primarily by hydrogen bonds between the backbone atoms in the polypeptide chain, specifically between the carbonyl oxygen ($C=O$) of one amino acid and the amide hydrogen ($N-H$) of another.
+
+The most common secondary structures found in proteins are helices (and $\alpha$-helices in particular) and $\beta$-sheets.
+
+## Helices
+
+A helix of length $n_0$ is a repetitive structure whereby the $C=O$ group of the $i$-th AA in thee chain is hydrogen-bonded to the $H-N$ group of a $(i + k)$-th residue, for $n_0$ consecutive values of $i$. In protein systems, a helix is identified by a name $k_N^{H}$, where:
+
+* $k$ is the number of residues per helical turn;
+* $N$ is the number of atoms in the ring closed by a hydrogen bond. For instance, the rings formed in a regular $k = 2$ helix are 7: $O :: H - N - C - C^\alpha - N - C$ (where the latter $C$ belongs to the $i$-th AA).
+* $H$ is the handedness of the helix: if we look down a helix (*i.e.* if AAs with higher index come towards us) and the $(i + 1)$-th AA is staggered in the counterclockwise direction with respect to the $i$-th the the helix is *right-handed* (R), otherwise is left-handed (L).
+
+The helices that appear in proteins are $3_{10}^R$, $3.6_{13}^R$ (also known as $\alpha$-helix) and $4.4_{16}^R$ (also known as $\pi$ helix). Note that they are all right-handed[^R-helix]. The $\pi$-helix is uncommon since its open structure disfavours some stabilising van der Waals interactions, and it is rarely (if ever) present in canonical (*i.e.* regular) form[^pi-helix]. Therefore, we will not consider it any further.
+
+Given the periodicity of a helix, there are optimal values of $\phi$ and $\psi$ that maximize efficient atomic packing and precisely align the peptide bonds, thereby stabilizing the helical structure. These values, together with other properties of the two most common helices, are reported in the table below:
+
+|Helix|HB pattern|Residues per turn|Pitch ($\AA$)|$\phi$|$\psi$|
+|:---|:---:|:---:|:---:|:---:|:---:|
+|$3_{10}^R$|$i \to i + 3$|3|6.0|$-50^\circ$|$-25^\circ$|
+|$\alpha_R$-helix ($3.6_{13}^R$)|$i \to i + 4$|3.6|5.4|$-60^\circ$|$-45^\circ$|
+
+Since these helices are usually right handed, I will drop the $R$ sub- and superscript.
+
+In helices, the side chains (R groups) of the amino acids are oriented outward from the helical axis: If you imagine looking down the helical axis, the side chains would appear as spokes radiating out from the central helical core. Due to the helical twist, the side chains are staggered along the length of the helix, so that they are not directly above or below each other, and they are tilted back towards the N-terminus, giving them a slightly downward orientation relative to the helical axis.
+
+```{figure} figures/alpha_helix.png
+:name: fig:alpha_helix
+:align: center
+:width: 400
+
+An $\alpha$-helix made by a polypeptide made of consecutive Ala. (a) Licorice representation, where the atoms and the bonds have the same diameter, superimposed with a ribbon that follows the backbone and shows the helical turns. The hydrogen bonds that stabilise the structure are shown with green dashed lines. (b) The same helix with the atoms represented as van der Waals spheres.
+```
+
+Figure [](#fig:alpha_helix) shows an optimal $\alpha$-helix made with a [Python library](https://github.com/clauswilke/peptidebuilder) that makes it possible to build polypeptides specifying the sequence and the geometry (in terms of $\phi$ and $\psi$). The polypeptide is composed of consecutive Alanine residues with $\phi = -60^\circ$ and $\psi = -45^\circ$, and it is shown with different representations:
+
+* The licorice representation, where atoms are small spheres and bonds are cylinders, and everything has the same diameter, is very useful to look at molecular connections.
+* Ribbon-like and/or wireframe representations are very useful to understand the organisation in terms of secondary structures.
+* Drawing atoms as van der Waals spheres makes it possible to appreciate the efficient packing of folded structures, but it is otherwise rather limited in its utility since it leaves only the protein surface visibile.
+
+:::{tip} Visualising molecules
+:class: dropdown
+
+There are many software tools that make it possible to visualise and interact with molecular models. Here is a (very non-comprehensive) list:
+
+* [VMD](https://www.ks.uiuc.edu/Research/vmd/) is open source. It supports many formats, handles large systems efficiently, and has numerous plugins available and powerful scripting capabilities. However, its interface is rather ugly (especially compared to the other visualisation tools), and many functionalities can be complex for beginners.
+* [PyMol](https://pymol.org/) is open source. It can be used to (more or less) easily producing high-quality, publication-ready images and animations, it has an extensive user community and good documentation and powerful scripting capabilities with Python. However, it can be get slow with very large molecular systems, and it can be complex for beginners to master all features and functionalities.
+* [Chimera](https://www.cgl.ucsf.edu/chimera/download.html)[^chimera] is not open source, although its source code is available. It is the most intuitive and easy to use software presented here, especially for beginners, and it has excellent visual quality for creating publication-quality images, supports a wide range of file formats and integrates well with other bioinformatics tools. It has somewhat less powerful scripting capabilities compared to VMD and PyMOL, and ChimeraX has some features behind a paywall.
+
+I urge you to install and try at least one of these programs. Use [this file](files/alpha_helix_H.gro), which I used to generate [](#fig:alpha_helix), or [this real protein file](files/1ecl.pdb) to test the software. In Chimera and PyMol you can directly open the file, while with VMD you'll have to create a new molecule (File $\to$ New molecule... $\to$ Browse $\to$ Load) and choose a sensible representation (Graphics $\to$ Representations... and then pick *e.g.* "NewCartoon" from the "Drawing method" menu).
+:::
+
+[^R-helix]: Short segments of left-handed $\alpha$-helices can occur in glycine-rich segments, since Gly is the only achiral amino acid.
+[^pi-helix]: Short $\pi$-helices are often found flanked by $\alpha$-helices and near functional sites of proteins, but their identification has sparked some debate (see *e.g.* [](doi:10.1110/ps.9.1.201 ), [](doi:10.1093/protein/15.5.353), [](doi:10.1016/j.sbi.2019.06.011)).
+[^chimera]: There is also a new software, called [ChimeraX](https://www.cgl.ucsf.edu/chimerax/), that is advertised for having "higher performance and many new features".
+
+## $\beta$-structures
+
+$\beta$-structures (or $\beta$-sheets) comprise the other class of common secondary structures. $\beta$-structures are formed by $\beta$-strands, which are stretchs of polypeptide chain, typically 5-10 amino acids long, in an extended conformation. Unlike the helical structure presented above, $\beta$-strands are not stable *per se*, but they are stabilised by hydrogen bonds formed with other strands. In fact, two or more $\beta$-strands can connect laterally by backbone hydrogen bonds to form a sheet-like array termed $\beta$-sheet. Since the backbone has a directionality ($N \to C$), the lateral connection joins strands that either run in the same direction or not:
+
+* In an antiparallel $\beta$-sheet, which is the most common $\beta$ motif in proteins, adjacent strands have alternating N-terminus and C-terminus orientations.
+* In a parallel $\beta$-sheet, the N-termini of adjacent strands are oriented in the same direction.
+
+```{figure} figures/beta_sheets.png
+:name: fig:beta_sheets
+:align: center
+:width: 500
+
+Two segments of a chain form a $\beta$-sheet by connecting through hydrogen bonds (green dashed lines). The arrows at the beginning and at the end of the segments show the chain directionality. The two segments run anti-parallel and parallel to each other in (a) and (b), respectively (adapted from [here](https://commons.wikimedia.org/wiki/File:Sheets.svg)). In (c) the X-ray structure of the first 18 residues of [Fumarase C](https://www.rcsb.org/structure/1fuo) where the ribbon representation ("Cartoon" in VMD) is superimposed to the atomic structure and clearly shows the presence of a $\beta$-hairpin: two anti-parallel $\beta$-strands connected by a short turn. Panel (d) shows two anti-parallel $\beta$-strands fragments taken from the crystal structure of the [Micrococcus Lysodeikticus catalase](https://www.rcsb.org/structure/1gwe), where the hydrogens are omitted for clarity, and only the first carbons of the side-chain carbon are shown (in green). Credits to [Dcrjsr via Wikimedia commons](https://commons.wikimedia.org/wiki/File:1gwe_antipar_betaSheet_both.png).
+```
+
+The hydrogen bonds form between the carbonyl oxygen of one amino acid in a strand and the amide hydrogen of an amino acid in the adjacent strand. As shown in [](#fig:beta_sheets), in antiparallel sheets, these hydrogen bonds are more linear and stronger, contributing to greater stability compared to the less linear hydrogen bonds in parallel sheets. Parallel $\beta$-sheets containing 4 or fewer strands are not common, which may be due to the lower stability provided by the sub-optimal geometry of their hydrogen bonds. [](#fig:beta_sheets)(c) shows a 3D conformation of a short protein fragment that adopts a rather common $\beta$-sheet conformation called "$\beta$-hairpin", where two anti-parallel $\beta$-strands are connected by a short turn.
+
+The last panel of [](#fig:beta_sheets) shows two other important properties of $\beta$-sheet:
+
+1. In a fully extended $\beta$-strand, the side chains of amino acids point straight up and straight down in an alternating fashion. When $\beta$-strands align to form a sheet, their $C^\alpha$ atoms are positioned next to each other, with the side chains from each strand pointing in the same general direction. As a result, if a side chain points straight up, the bond to the carbonyl carbon must angle slightly downward due to the tetrahedral bond angle, endowing the strands with a "pleated" appearance[^pleated].
+2. $\beta$-strands usually have a right-handed twist arising from a combination of the chiral nature of L-amino acids, geometric constraints of peptide bond angles, and the need to optimize hydrogen bonding and minimize steric hindrance (see *e.g.* [](doi:10.1016/0022-2836(73)90022-3)). The hydrogen bonds that stabilize a sheet do not eliminate the twist of individual strands but rather accommodate it, leading to a twisted sheet. Parallel strands tend to be more twisted.
+
+The preferred dihedral angles of parallel and anti-parallel $\beta$-sheets are reported in the table below:
+
+|Type|$\phi$|$\psi$|
+|:---|:---:|:---:|
+|Parallel, $\uparrow\uparrow$|$-120^\circ$|$115^\circ$|
+|Anti-parallel, $\uparrow\downarrow$|$-140^\circ$|$135^\circ$|
+
+[^pleated]: The pleating is so marked that sometimes $\beta$-structures are called $\beta$-pleated sheets.
+
+## Irregular secondary structures
+
+Irregular secondary structures in proteins are regions that do not conform to the regular patterns of $\alpha$-helices or $\beta$-sheets. These structures include loops, turns, and coils, and they play important roles in the overall shape and function of proteins. First of all, these structures can serve as linkers or hinge regions that facilitate the movement of domains within a protein, and make it possible to adopt multiple conformations necessary for function.
+
+Moreover, they are often exposed to the solvent, where they can form hydrogen bonds that compensate for the lack of regular secondary structure, mitigating the high energy cost associated with broken hydrogen bonds. This, in turn, makes them accessible for interactions with other molecules, such as substrates, inhibitors, and other proteins.
+
+Here is a breakdown of the most common irregular secondary structures:
+
+* Loops are flexible regions that connect $\alpha$-helices and $\beta$-sheets. They do not have a regular, repeating structure, and often occur on the surface of proteins and are involved in interactions with other molecules or proteins. They can also contribute to the active sites of enzymes.
+* Turns are short sequences of amino acids that cause a sharp change in direction of the polypeptide chain. They typically involve 4-5 amino acids and are critical for the compact folding of proteins. They often occur at the ends of $\beta$-strands, facilitating the formation of antiparallel $\beta$-sheets through the formation of $\beta$-hairpins (see [](#fig:beta_sheets)(c) for an example).
+* Coils are non-repetitive, flexible regions without a defined secondary structure. They are sometimes referred to as random coils, though they are not truly random. Coils provide flexibility and enable conformational changes in proteins. They often link regular secondary structures and can be involved in binding and recognition processes.
+
 # Tertiary structure
+
+Following @finkelstein2002protein, we classify folded proteins[^folded_proteins] into three macrocategories: fibrous, membrane and globular proteins.
+
+[^folded_proteins]: For the moment we leave out proteins that are intrinsically disordered or have intrinsically disordered domanis, see [^intrinsically_disordered].
 
 (sec:quaternary_structure)=
 # Quaternary structure

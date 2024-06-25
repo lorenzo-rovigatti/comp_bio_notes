@@ -3,7 +3,7 @@ title: Proteins
 ---
 
 ```{tip}
-The main references for this part are @finkelstein2002protein and @schlick2010molecular.
+The main references for this part are @finkelstein2002protein, @lehninger2005lehninger, and @schlick2010molecular.
 ```
 
 Proteins are macromolecules composed by amino acids linked by peptide bonds. Let's analyse what these words mean.
@@ -90,6 +90,20 @@ Here are some examples:
 
 [^glycine]: To convince yourself that glycine is not chiral substitute R with H in the rightmost subpanel of [](#fig:amino-acids)(C) and look down the $R-C^\alpha$ bond towards $C^\alpha$: you will see that the resulting view is the same as that of the leftmost panel, which makes the two "enantiomers" identical.
 [^D-proteins]: Incorporation of D-amino acids in proteins has been observed to occur only outside of ribosomes. [](doi:10.1007/s00018-010-0571-8) reports some examples.
+
+## Post-translational modifications
+
+Post-translational modifications (PTMs) are chemical changes that occur to amino acids in proteins after they have been synthesized by ribosomes during the translation process. These modifications are essential for the proper functioning, regulation, and localization of proteins within the cell. PTMs can influence a protein's activity, stability, interactions with other molecules, and overall role in cellular processes. They are critical in the fine-tuning of protein functions and can affect the protein's behavior in various physiological contexts.
+
+One of the most common types of PTMs is [phosphorylation](https://en.wikipedia.org/wiki/Protein_phosphorylation), which involves the addition of a phosphate group ($-PO_4$) to specific amino acids within the protein, typically serine, threonine, or tyrosine. Phosphorylation is a key regulatory mechanism that can activate or deactivate enzymes, receptors, and other proteins, thereby modulating signaling pathways and cellular responses. This modification is reversible and can be dynamically regulated by kinases (which add phosphate groups) and phosphatases (which remove them), allowing for precise control of protein function.
+
+Another important PTM is [glycosylation](https://en.wikipedia.org/wiki/Glycosylation), where carbohydrate groups are attached to specific amino acid, often asparagine (N-linked glycosylation) or serine/threonine (O-linked glycosylation). Glycosylation plays a critical role in protein folding, stability, and cell-cell communication. It can also affect the protein's immunogenicity and its recognition by other molecules, influencing processes such as immune responses and cellular adhesion.
+
+Additional types of PTMs include ubiquitination, where ubiquitin proteins are attached to lysine of a target protein, marking it for degradation by the proteasome[^proteasome]. [Acetylation](https://en.wikipedia.org/wiki/Protein_acetylation), the addition of an acetyl group ($−COCH_3$) to lysine, can impact protein stability and gene expression by modifying histones and other nuclear proteins. [Methylation](https://en.wikipedia.org/wiki/Protein_methylation), the addition of methyl groups ($-CH_3$), typically occurs on lysine and arginine and can regulate gene expression and protein-protein interactions.
+
+Finally, a very common PTM is the hydroxylation of proline, whereby a prolinee's pyrrolidine ring gains a hydroxyl ($-OH$) group. It is one of the main components of [collagen](#sec:collagen) which, as we will see in a few lessons, is a structural protein that provides strength, support, and elasticity to connective tissues throughout the body.
+
+[^proteasome]: Proteasomes are large, multi-protein complexes responsible for degrading and recycling damaged, misfolded, or unneeded proteins within the cell. It recognizes proteins tagged with the small protein [ubiquitin](https://en.wikipedia.org/wiki/Ubiquitin) and breaks them down into small peptides.
 
 (peptide-bond)=
 # The peptide bond
@@ -196,6 +210,7 @@ A polypeptide backbone showing the definition of the dihedral angles $\phi$, $\p
 
 A graphical representation of a part of a polypeptide backbone with its associated dihedral angles is shown in [](#fig:phi-psi).
 
+(sec:ramachandran)=
 ## Ramachandran Plots
 
 The small energy barriers associated to rotations around $\phi$ and $\psi$ only take into account the atom themselves, not the rest of the molecule to which they are attached. Steric hindrances, resulting from the repulsive interactions between atoms and groups attached to the $C$, $C^\alpha$ and $N$ atoms, disfavor or even prohibit certain combinations of $(\phi, \psi)$ values.
@@ -225,7 +240,7 @@ Given a protein structure, it is possible to extract and plot the $\phi$ and $\p
 ![The Ramachandran plot of all amino acids that are not part of any of the above classes (also known as "general plot").](figures/1a3n_General.png)
 ![The Ramachandran plot of all amino acids.](figures/1a3n_All.png)
 
-Ramachandran plots of amino acids that compose the human hemoglobin protein [1A3N](https://www.rcsb.org/structure/1A3N) (points), plotted on background  contour lines generated by analysing the Top8000 PDB data set. I have used [this software](https://github.com/Joseph-Ellaway/Ramachandran_Plotter) to make the plots.
+Ramachandran plots of amino acids that compose the human hemoglobin protein [1A3N](https://www.rcsb.org/structure/1A3N) (points), plotted on background  85th and 75th centiles contour lines, white and blue lines, respectively, generated by analysing the Top8000 PDB data set. I have used a modified version of [this software](https://github.com/Joseph-Ellaway/Ramachandran_Plotter) to make the plots.
 ```
 
 [](#fig:ramachandran_plot) shows examples of the plot types described above, with the empty (non-coloured) "space" being associated to angle combinations that are sterically forbidden. The points in the panels refer to the $(\phi, \psi)$ combinations of the residues of the human hemoglobin protein, while the background contour plots have been calculated by extracting the values of $\phi$ and $\psi$ from 8000 reference protein structures listed in a database[^ramachandran_plot_reference].
@@ -395,7 +410,7 @@ The distinct conformations of an amino acid at fixed values of $(\phi, \psi)$ ar
 
 Each amino acid side chain can adopt multiple rotameric states, influenced by steric interactions, hydrogen bonding, and other intramolecular forces. The different rotamers contribute to the overall flexibility and diversity of protein structures, allowing proteins to achieve their functional conformations and interact effectively with other molecules.
 
-(sec:primary_structure)
+(sec:primary_structure)=
 # Primary structure
 
 The order in which amino acids are linked together by peptide bonds is known as the *primary structure* of a protein. The convention to list the sequence of a protein is to use the one-letter or three-letter codes for amino acids in the sequence, which has a well-defined directionality. The sequence starts at the end of the amino acid chain that has a free amine group ($-NH2$), which is called N-terminus and, by convention, marks the beginning of a protein. The other end has a free carboxyl group (-COOH) and is known as the C-terminus, which is considered the end of the protein.
@@ -507,14 +522,176 @@ Moreover, they are often exposed to the solvent, where they can form hydrogen bo
 Here is a breakdown of the most common irregular secondary structures:
 
 * Loops are flexible regions that connect $\alpha$-helices and $\beta$-sheets. They do not have a regular, repeating structure, and often occur on the surface of proteins and are involved in interactions with other molecules or proteins. They can also contribute to the active sites of enzymes.
-* Turns are short sequences of amino acids that cause a sharp change in direction of the polypeptide chain. They typically involve 4-5 amino acids and are critical for the compact folding of proteins. They often occur at the ends of $\beta$-strands, facilitating the formation of antiparallel $\beta$-sheets through the formation of $\beta$-hairpins (see [](#fig:beta_sheets)(c) for an example).
+* Turns are short sequences of amino acids that cause a sharp change in direction of the polypeptide chain. They typically involve 4-5 amino acids and are critical for the compact folding of proteins. They often occur at the ends of $\beta$-strands, facilitating the formation of antiparallel $\beta$-sheets through the formation of $\beta$-hairpins (see [](#fig:beta_sheets)(c) for an example). Some very short turns (4 AAs) are known as [$\beta$-turns](https://en.wikipedia.org/wiki/Beta_turn) and are stabilised by a hydrogen bond.
 * Coils are non-repetitive, flexible regions without a defined secondary structure. They are sometimes referred to as random coils, though they are not truly random. Coils provide flexibility and enable conformational changes in proteins. They often link regular secondary structures and can be involved in binding and recognition processes.
+
+# Hydrophobic interactions
+
+TODO
 
 # Tertiary structure
 
-Following @finkelstein2002protein, we classify folded proteins[^folded_proteins] into three macrocategories: fibrous, membrane and globular proteins.
+```{figure} figures/ramachandran_secondary.png
+:name: fig:ramachandran_secondary
+:align: center
+:width: 600
+
+The Ramachandran general plot of the Top8000 PDB data set, with contour lines highlighting the 80th and 95th centile in blue and white, respectively. The yellow circles are the optimal dihedral angles of the regular secondary structures introduced in the previous section, where those of the left-handed $\alpha$-helix are the same as the $\alpha$-helix, taken with the opposite signs.
+```
+
+The tertiary structure of proteins refers to the overall three-dimensional shape of a single polypeptide chain, resulting from the folding and interactions of its [secondary structural elements]((sec:secondary_structure)). Let's start by considering what is the geometry of the single residues that are part of well-folded proteins[^folded_proteins], which, as discussed [before](#sec:ramachandran), at first order we can assume to be fully described by the $\phi$ and $\psi$ dihedrals. 
+
+[](#fig:ramachandran_secondary) shows the general[^general_Ramachandran] Ramachandran plot of 8000 well-characterised proteins, as well as the $(\phi, \psi)$ positions of the optimal secondary structure elements (perfect helices and $\beta$-sheets). It is evident that the majority of residues have dihedrals that are compatible with regular secondary structures. However, the probability distribution is not perfectly peaked at the optimal values (particularly for $\beta$-sheets), and it also exhibits considerable width. One obvious reason for this is that while there is a single "optimal" conformation for a given secondary structure, it is entropically favorable to adopt conformations that are close to this optimal state without incurring significant energetic penalties. 
+
+Additionally, and more interestingly, secondary structures interact with each other and pack together to fold into the native state of the protein. To achieve this, residues must accommodate various constraints and interactions imposed by neighboring structures. These interactions include steric hindrances, electrostatic forces, and hydrogen bonding, which can cause deviations from the optimal dihedral angles. As a result, the conformations observed in Ramachandran plots reflect a balance between maintaining the overall stability of the secondary structures and allowing the flexibility required for proper folding and function, leading to broader, less sharply peaked $(\phi, \psi)$ distributions.
+
+The regions in the Ramachandran plot that are far from those associated to regular secondary structures are usually populated by residues that are in an irregular (or even disordered) structure such as a coil or a loop.
+
+Now I will (very!) briefly discuss how secondary structures pack and layer to form the native structures of proteins. Following @finkelstein2002protein, we classify folded proteins into three macrocategories: fibrous, membrane and globular proteins[^folded_proteins].
 
 [^folded_proteins]: For the moment we leave out proteins that are intrinsically disordered or have intrinsically disordered domanis, see [^intrinsically_disordered].
+[^general_Ramachandran]: I remind you that a "general" Ramachandran plot shows the $\phi$ and $\psi$ angles of residues that are not Gly, Leu, Val, Pro, or come before a Pro.
+
+(sec:fibrous_proteins)=
+## Fibrous proteins
+
+Fibrous proteins are a class of proteins characterized by their elongated, fiber-like shapes. Their primary role is to provide mechanical support, strength, and elasticity to cells and tissues. Fibrous proteins are typically very large and form huge aggregates, making them insoluble in water. Their primary structure often contains repetitive sequences that facilitate the formation of regular secondary structures and the interactions between adjacent chains which lead to the formation of higher-order aggregates ([quaternary structures](sec:quaternary_structure) in protein lingo). These proteins are essential for maintaining structural integrity, protecting tissues, allowing flexibility, and playing a crucial role in tissue repair and wound healing.
+
+### $\beta$-structural proteins
+
+```{figure} figures/fibroin.png
+:name: fig:fibroin
+:align: center
+:width: 600
+
+Silk fibroin: its primary structure (a) (credits to [Sponk via Wikipedia Commons](https://commons.wikimedia.org/wiki/File:Silk_fibroin_primary_structure.svg)), and a fragment of [model silk fibroin](https://www.modelarchive.org/doi/10.5452/ma-cjmb5)[^silk] as seen from the top (b) and from the side (c).
+```
+
+[](#fig:fibroin) shows the primary and tertiary structure[^silk] of a representative of $\beta$-structural proteins: silk fibroin. Silk fibroin is a fibrous protein produced by spiders and silkworms. Silk fibroin consists of repetitive sequences rich in glycine, alanine, and serine: a six-residue block like the one shown in the figure, where Gly alternates with larger residues, is repeated 8 times. These octads are repeated tens of times, interspersed by less regular sequences. The mostly small amino acids of the sequence facilitate tight packing and formation of $\beta$-sheets, forming extensive hydrogen-bonded networks that contribute to the material’s strength and stability. In turn, as shown in the figure, the $\beta$-sheets are stacked together, leading to highly ordered, quasi-crystalline regions that are interspersed with less ordered amorphous regions. Those are formed by irregular parts of the fibroin itself, as well as by the disordered matrix protein [sericin](https://en.wikipedia.org/wiki/Sericin).
+
+(sec:alpha-structural_proteins)=
+### $\alpha$-structural proteins
+
+```{figure}
+:name: fig:keratin
+:align: center
+
+(fig:keratin_structure)=
+![The crystal structure of interacting regions from the central coiled-coil domains of keratins [5](https://en.wikipedia.org/wiki/Keratin_5) and [14](https://en.wikipedia.org/wiki/Keratin_14). Side chains are shown with the licorice representation, while sulfur atoms are shown as yellow van der Waals spheres.](figures/keratin_structure.png)
+
+(fig:keratin_schematics)=
+![Schematics showing the left-handedness of the coiled coil, the "knobs into holes" packing, and the interactions between residues belonging to the two helices.](figures/keratin_schematics.png)
+
+Coiled coils. [](#fig:keratin_structure) has been generated by using the structure solved in ([](doi:10.1038/nsmb.2330)), while [](#fig:keratin_schematics) has been adapted from [](doi:10.1039/C7CS00822H).
+```
+
+A typical example of $\alpha$-structural fibrous proteins is keratin, a protein crucial for the structural integrity and protection of vertebrate tissues, including hair, nails, feathers, horns, and skin. Composed primarily of amino acids with a high cysteine content, keratin forms $\alpha$-helices that assemble into left-handed supercoiled helices called "coiled coils".
+
+[](#fig:keratin_structure) shows a part of the coiled coil generated by interacting regions of two proteins that compose keratin. As illustrated in [](#fig:keratin_schematics), the primary structure of proteins forming coiled coils is characterized by a specific repeating pattern of amino acids, known as a heptad repeat. This repeating sequence consists of seven amino acids, denoted as (a-b-c-d-e-f-g), where positions a and d are typically occupied by hydrophobic residues (such as leucine, isoleucine, valine, or methionine) that interact with each other in the core of the coiled coil, stabilizing the structure through hydrophobic interactions. Indeed, when one of the helix is rotated by $20^\circ$, the side chains of amino acids at the a and d positions in one $\alpha$-helix (the "knobs") project outward from the helix and fit into the spaces ("holes") formed by the side chains of the neighboring helices.
+ 
+```{note}
+In coiled coils, the $\alpha$-helix has 3.5 residues per turn instead of 3.6 as in normal helices. This distortion, proposed for the first time by [](doi:10.1107/S0365110X53001952), is what enables the "knobs into holes" packing.
+```
+
+In some cases coiled coils further assemble into durable fibrils reinforced by disulfide bonds provided by cysteine residues (identified by the sulfur atoms shown as yellow van der Waals spheres in [](#fig:keratin_structure)). This structure gives keratin its strength, rigidity, and insolubility, making it resistant to environmental stress.
+
+:::{important} Disulfide bonds
+Disulfide bonds are covalent linkages formed between the sulfur atoms of two cysteine residues within a polypeptide chain or between different polypeptide chains. In the formation of disulfide bonds, the thiol groups $-SH$ of two cysteine residues undergo an oxidation reaction, resulting in a disulfide linkage ($-S-S-$).
+
+In the cellular environment, the formation of disulfide bonds is often catalyzed by enzymes, particularly in the endoplasmic reticulum (ER) of eukaryotic cells. For instance, the enzyme protein disulfide isomerase (PDI) facilitates the formation and rearrangement of disulfide bonds, catalyzing the oxidation of thiol groups and rearranging incorrect disulfide bonds to ensure proper protein folding.
+:::
+
+[^silk]: I did not find any proper PDB structure for silk fibroin, but only a file containing the "theoretical model coordinates" of a fragment of silk fibroin.
+
+### Collagen
+
+Collagen is a major component of the extracellular matrix in various connective tissues of animals. It is one of the most abundant proteins in vertebrates, making up about a quarter of their total protein mass. Collagen provides structural support, strength, and elasticity to tissues such as skin, tendons, ligaments, cartilage, bones, and blood vessels.
+
+```{figure} figures/collagen.png
+:name: fig:collagen
+:align: center
+
+The collagen triple helix or tropocollagen, taken from [here](https://www.rcsb.org/structure/1cgd). In (a) the backbones of the three chains are shown with ribbons of different colours, while prolines and hydroxyprolines are shown in black and silver, respectively. (b) shows the same configuration with atoms as van der Waals spheres.
+```
+
+The primary structure of collagen consists of a repeating tripeptide sequence Gly-X-Y, where X is often proline, and Y is often hydroxyproline, which is a post-translational modification of proline. 
+
+Each polypeptide chain containing the repeating sequence forms a left-handed helix with 3 residues per turn, which is stabilized by the kinks induced by the pyrrolidine rings of proline and hydroxyproline residues. However, the single helix does not form any hydrogen bonds and therefore it is not stable in isolation. In turn, as shown in [](#fig:collagen), three helices can wind around each other in a right-handed fashion to form a superhelix (the *tropocollagen* molecule), stabilised by HBs formed by the Gly residues[^hyp_effect]. Moreover, the three chains are closely packed together, and the interior of the triple helix is very small and hydrophobic, requiring every third residue of the helix to interact with this central region. As a result, only the small hydrogen atom of glycine's side chain can fit and make contact with the center: any substitution of Gly with a larger amino acid can lead to distortions or disruptions in the triple helix, potentially leading to diseases such as [osteogenesis imperfecta](https://en.wikipedia.org/wiki/Osteogenesis_imperfecta).
+
+:::{note} Eat your vegetables!
+The hydroxylation of proline and lysine residues in collagen synthesis, a process catalyzed by the enzymes prolyl hydroxylase and lysyl hydroxylase, requires the presence of ascorbic acid, commonly known as vitamin C. In the absence of adequate ascorbic acid, these enzymes cannot function properly, leading to the production of collagen with reduced stability. This deficiency results in weakened connective tissues, clinically manifesting as [scurvy](https://en.wikipedia.org/wiki/Scurvy), a disease historically common among sailors who lacked access to vitamin C-rich foods, characterized by symptoms such as weakness, bleeding gums, joint pain, delayed wound healing, and petechiae.
+:::
+
+Triple helices, in turn, associate into higher order structures (collagen fibrils) that are held together by covalent cross-links catalysed by an enzyme that join together modified residues. Note that the process of collagen formation is not spontaneous but comprises many steps that require the cell machinery (see @finkelstein2002protein and references therein).
+
+[^hyp_effect]: Although hydroxyproline has a $-OH$ group that can form a hydrogen bond, there is strong evidence that its contribution to the stability of the triple helix comes from [stereoelectronic effects](https://en.wikipedia.org/wiki/Stereoelectronic_effect) rather than hydration ([](doi:10.1021/ja800225k)).
+
+## Membrane proteins
+
+Biological membranes are thin, flexible structures that form the boundaries of cells and organelles (which are cell compartments), regulating the movement of substances in and out. They play crucial roles in cellular communication, energy transduction, and maintaining homeostasis. Membranes are composed of 
+
+1. lipid bilayers, which consist of two layers of phospholipids with hydrophilic heads facing outward and hydrophobic tails facing inward, creating an insulating barrier;
+2. membrane proteins, which are embedded within or associated with the lipid bilayer, acting as conductors, facilitating the selective transport of molecules across the membrane and transmitting signals between the cell's internal and external environments.
+
+Membrane proteins are further classified in integral and peripheral proteins: integral membrane proteins are embedded within the lipid bilayer, often spanning it multiple times, while peripheral membrane proteins are attached to the membrane surface.
+
+The transmembrane parts of the membrane proteins have structures that are moderately more complex than those of fibrous proteins. Since the interior of a membrane is a fatty (hydrophobic) environment, proteins need to adopt a structure where all hydrogen bonds are formed, and no polar groups are exposed. Therefore, these proteins are poorly water-soluble, and basically all their residues are packed into regular secondary structures ($\alpha$-helices or $\beta$-sheets) that are, in turn, organised into higher order structures, with the most common being helix bundles and $\beta$-barrels.
+
+### Helix bundles
+
+Helix bundles are structural motifs composed of several $\alpha$-helices that are arranged in a specific, often tightly packed, formation. These bundles are a common feature in the architecture of membrane proteins, particularly those that span the lipid bilayer multiple times. The helices in these bundles are typically amphipathic, meaning they have both hydrophobic and hydrophilic regions. This property allows them to interact favorably with both the hydrophobic core of the lipid bilayer and the aqueous environments on either side of the membrane.
+
+The formation of helix bundles in membrane proteins is driven by several factors. Firstly, the hydrophobic effect plays a critical role; the hydrophobic side chains of the $\alpha$-helices tend to aggregate together to minimize their exposure to water. This aggregation helps to stabilize the protein structure within the lipid bilayer. Additionally, other interactions such as hydrogen bonds, salt bridges, and van der Waals forces between the helices further stabilize the bundle.
+
+The presence of protein with helix bundles influence the properties of the membrane itself, since they can affect the fluidity and curvature of the membrane, which in turn impacts the behavior of other membrane-associated molecules and the overall dynamics of the lipid bilayer. The integration of helix bundles into the membrane can create microdomains or rafts that serve as organizing centers for cellular signaling pathways.
+
+Structurally, the tight packing of helices provides stability to the protein, ensuring that it maintains its correct shape and function within the dynamic environment of the cell membrane. Functionally, the arrangement of helices can create specific sites for binding ligands, ions, or other molecules, which is essential for the protein's role in processes such as signal transduction, transport, and enzymatic activity. For example, in G-protein-coupled receptors (GPCRs), which are integral membran proteins, the helical bundle forms a pocket that can bind other molecules, triggering conformational changes that transmit signals across the membrane, initiating a multitude of cellular responses and signaling cascades within the cytoplasm. Thus, it should come as no surprise that this class of proteins is the target of many drugs[^GPCR].
+
+```{figure} figures/GPCR.png
+:name: fig:GPCR
+:align: center
+:width: 600px
+
+A GPCR protein embedded in a membrane composed of a double layer of cholesterol (in black) and phosphatidylcholine (POPC, in cyan) in a 7:3 ratio. In (a) the lipids and the water (in red and white) sorrounding them are shown explicitly, while in (b) only the helical bundle is shown, to highlight the angles between the helices (or part thereof).
+```
+
+[](#fig:GPCR) shows the [$\beta$(2) adrenergic receptor](https://www.rcsb.org/structure/4GBR), a GPCR protein, embedded in a lipid membrane sandwiched between two water layers. A GPCR is formed by seven transmembrane $\alpha$-helices connected by alternating intracellular and extracellular loops. The helices are tilted with respect to each other, so that their side chains form the "knobs into holes" packing introduced [before](sec:alpha-structural_proteins) ([](doi:10.1098/rsta.2012.0369)).
+
+[^GPCR]: "Many druggable targets for treatment of common diseases involve G-protein-coupled receptors (GPCRs) that mediate therapeutic effects of $\approx 34%%$ of the marketed drugs. The sales of GPCR targeting drugs represent a global market share of over 27% [more than 180 billion US dollars]" [](doi:10.1016/j.cell.2017.11.033)).
+
+### $\beta$-barrels
+
+$\beta$-barrels are cylindrical structures that are a common feature in the outer membranes of gram-negative bacteria, mitochondria, and chloroplasts. Each $\beta$-barrel is formed by $\beta$-strands that are hydrogen-bonded to each other in a sheet and then wrapped around to form a closed barrel. The edges of the $\beta$-sheet are connected by short loops that create a continuous surface.
+
+The formation of $\beta$-barrels is driven by the hydrophobic effect, which causes the non-polar side chains to interact with the lipid bilayer, stabilizing the structure within the membrane. Additionally, the hydrogen bonds between $\beta$-strands provide structural integrity, making $\beta$-barrels very stable. Structurally, they provide a rigid and stable scaffold that can maintain its shape even under varying conditions. This rigidity is essential for their role as transporters, ensuring that the passage of molecules is controlled and efficient. Functionally, $\beta$- barrels can form pores or channels that are highly selective, allowing only specific substances to pass through. This selectivity is achieved through the size and charge of the residues lining the inside of the barrel, which can create a filter for specific molecules.
+
+```{figure} figures/porin.png
+:name: fig:porin
+:align: center
+:width: 500px
+
+The [crystal structure](https://www.rcsb.org/structure/2x9k) of an E. coli porin seen from the top (a) and from the side (b) ([](doi:10.1016/j.jmb.2010.06.015). Hydrophobic residues are coloured in red, the rest in cyan. In (a), the water is at the top and the cytoplasm is at the bottom.
+```
+
+[](#fig:porin) shows a E. coli porin, a class of membrane proteins that form large, water-filled channels through the outer membrane of gram-negative bacteria, mitochondria, and chloroplasts and facilitate the passive diffusion of small molecules, such as ions, nutrients, and metabolic waste products, across the membrane. The figure shows only the protein, with the top view highlighting the large pore in the middle, and the side view demonstrating the regular pattern formed by the anti-parallel $\beta$-strands. In the figure residues are coloured according to their hydrophobic character[^hydrophobic_residues], which determines an alternating pattern that is typical for $\beta$-barrels, where the hydrophobic residues face outward to interact with the lipid bilayer, and the hydrophilic residues face inward to create a water-filled channel.
+
+:::{attention} Possible project
+Choose a protein membrane, embed it in a lipid bilayer and study its conformation?
+:::
+
+[^hydrophobic_residues]: The binary classification into hydrophobic/non-hydrophobic is somewhat ambiguous, but it will serve its purpose here.
+
+## Globular proteins
+
+Globular proteins are a diverse group of proteins characterized by their compact, roughly spherical shapes and high solubility in water. Unlike fibrous proteins, globular proteins have a more intricate three-dimensional structure, with hydrophobic amino acid residues typically buried in the protein's interior and hydrophilic residues exposed to the solvent, making them soluble and functional in the cell's aqueous environment. Globular proteins perform a wide range of functions, including enzymatic catalysis (*e.g.*, lysozyme and DNA polymerase), transport and storage of molecules (*e.g.*, hemoglobin and myoglobin), immune responses (*e.g.*, antibodies), and regulatory roles (*e.g.*, hormones like insulin).
+
+Water-soluble globular proteins are the most studied because they are the most amenable to experimental research, and they are by far the most known in terms of structure. Depending on their size, they either pack in a single, compact globule with a radius of a few nanometers, or into multiple globules (called *domains*) connected together by loops and coils.
 
 (sec:quaternary_structure)=
 # Quaternary structure
+
+The quaternary structure of a protein refers to the higher-level organization and assembly of multiple polypeptide chains, or subunits, into a single functional complex: unlike the primary, secondary, and tertiary structures, which involve the folding of a single polypeptide chain, the quaternary structure pertains to how these chains interact and fit together. This level of protein structure is crucial for the functionality of many proteins, particularly those that operate as multi-subunit complexes. We have already seen some examples when we discussed [fibrous proteins](sec:fibrous_proteins).
+
+Subunits in a protein's quaternary structure can be identical, known as homomeric, or different, referred to as heteromeric. The interactions between these subunits are stabilized by a variety of non-covalent forces, including hydrogen bonds, ionic bonds, hydrophobic interactions, and van der Waals forces. In some cases, covalent bonds, such as disulfide bridges, also play a significant role in maintaining the integrity of the quaternary structure.
+
+The spatial arrangement of subunits within the quaternary structure is vital for the protein’s functionality. This arrangement allows the protein to interact correctly with other molecules and perform its biological activities efficiently. For example, the quaternary structure of hemoglobin, which consists of four subunits, enables it to bind and release oxygen molecules effectively. Similarly, enzymes that function as multi-subunit complexes often rely on their quaternary structure to bring catalytic sites into proximity, enhancing their catalytic efficiency.

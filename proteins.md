@@ -295,15 +295,15 @@ where $\sigma = r_0$ is also known as the "diameter" of the atom.
 :label: tbl:vdW
 :align: center
 
-| Atom | $\epsilon$ (kcal / mol) | $r_{\rm min}$ ($\AA$) | $r_0$ ($\AA$) |
-| :--- | :---: | :---: | :---: |
-| $H$ | 0.12 | 2.4 | 2.0 |
-| $C$ | 0.12 | 3.4 | 3.0 |
-| $O$ | 0.23 | 3.0 | 2.7 |
-| $N$ | 0.20 | 3.1 | 2.7 |
+| Atom | $\epsilon$ (kcal / mol) | $\beta \epsilon = \epsilon / k_BT$ at 298 K|$r_{\rm min}$ ($\AA$) | $r_0$ ($\AA$) |
+| :--- | :---: | :---: | :---: | :---: |
+| $H$ | 0.12 | 0.20 | 2.4 | 2.0 |
+| $C$ | 0.12 | 0.20 | 3.4 | 3.0 |
+| $O$ | 0.23 | 0.39 | 3.0 | 2.7 |
+| $N$ | 0.20 | 0.34 | 3.1 | 2.7 |
 :::
 
-Typical values for $\epsilon$, $r_0$ and $r_{\rm min}$ for the main self interactions, *i.e.* interactions between atoms of the same type, are listed in [](#tbl:vdW). In the case of mixed interactions between atoms of type $i$ and $j$, there exist several [combining rules](https://en.wikipedia.org/wiki/Combining_rules) to estimate the values of the van der Waals parameters (see leach2001molecular for a discussion). The most common are the Lorentz-Berthelot rules, which amount to taking the arithmetic mean for the radii and the geometric mean for the energy strengths:
+Typical values for $\epsilon$, $r_0$ and $r_{\rm min}$ for the main self interactions, *i.e.* interactions between atoms of the same type, are listed in [](#tbl:vdW). Note that the interaction strengths are always smaller than $k_BT$ at ambient temperature. In the case of mixed interactions between atoms of type $i$ and $j$, there exist several [combining rules](https://en.wikipedia.org/wiki/Combining_rules) to estimate the values of the van der Waals parameters (see leach2001molecular for a discussion). The most common are the Lorentz-Berthelot rules, which amount to taking the arithmetic mean for the radii and the geometric mean for the energy strengths:
 
 $$
 \begin{align}
@@ -326,7 +326,7 @@ Of course, even if we look at the contributions due to van der Waals forces only
 
 [^LJ_parameters]: In writing this part I was heavily inspired by @finkelstein2002protein, but I'm swapping the names of the two characteristic distances, $r_0$ and $r_{\rm min}$, which I found misleading in the original discussion.
 
-(hydrogen-bonds)=
+(sec:hydrogen-bonds)=
 ### Hydrogen bonds
 
 Certain combinations of $\phi$ and $\psi$ angles can prevent the formation of hydrogen bonds, which are particular bonds that can link amino acids between them and with water molecules (or other solutes): if the backbone dihedral angles do not permit optimal hydrogen bonding, the conformation is unlikely to be stable or favorable. But what is a hydrogen bond?
@@ -361,7 +361,7 @@ The importance of HBs on the association of molecules can be appreciated by look
 
 Since carbon is very weakly electronegative, it does not form any hydrogen bond. As a result, association in methane, as embodied by the values of $T_m$ and $T_b$, happens at very low temperature, where the attraction is provided by [van der Waals interactions](#sec:van-der-waals) only. However, as electronegativity (and the number of lone pairs) increases from $C$ to $N$ and then $O$, HBs become more and more relevant, substantially increasing the melting and boiling temperatures.
 
-Following @finkelstein2002protein, the strength of hydrogen bonds can be estimated by comparing the (latent) heat of vaporization[^latent_heat] of molecules that are composed by the same atoms, *e.g.* dimethyl ether $H_3C-O-CH_3$, 5 kcal / mol, and ethanol, $CH_3-CH_2-OH$, 10 kcal/mol. Since the latter has an $OH$ group that the former lacks, there is an additional contribution of the latent heat due to one HB per molecule which amounts to $\approx 10 - 5 = 5$ kcal/mol. A similar estimate can be made by using the heat of vaporization of ice (we will see why in a moment), which is $\approx 12$ kcal/mol. Of this value, $\approx 2$ kcal/mol are due to van der Waals interactions, as estimated by looking at the evaporation of analogous, but non-HB-forming, molecules (*e.g.* $CH_4$ or $O_2$). The rest is provided by the two hydrogen bonds that each water molecule can form, yielding again an energy gain of $\approx 5$ kcal/mol per HB. Recalling that, at room temperature, $k_B T \approx 0.6$ kcal / mol, we can estimate that one HB provides $\approx 8\,k_B T$, suggesting that the formation of hydrogen bonds is highly favoured under ambient conditions.
+Following @finkelstein2002protein, the strength of hydrogen bonds can be estimated by comparing the (latent) heat of vaporization[^latent_heat] of molecules that are composed by the same atoms, *e.g.* dimethyl ether $H_3C-O-CH_3$, 5 kcal / mol, and ethanol, $CH_3-CH_2-OH$, 10 kcal/mol. Since the latter has an $OH$ group that the former lacks, there is an additional contribution of the latent heat due to one HB per molecule which amounts to $\approx 10 - 5 = 5$ kcal/mol. A similar estimate can be made by using the heat of vaporization of ice (we will see why in a moment), which is $\approx 12$ kcal/mol. Of this value, $\approx 2$ kcal/mol are due to van der Waals interactions, as estimated by looking at the evaporation of analogous, but non-HB-forming, molecules (*e.g.* $CH_4$ or $O_2$). The rest is provided by the two hydrogen bonds that each water molecule can form, yielding again an energy gain of $\approx 5$ kcal/mol per HB. Recalling that, at room temperature, $k_B T \approx 0.6$ kcal / mol, we can estimate that one HB provides $\approx 8\,k_B T$, suggesting that the formation of hydrogen bonds is highly favoured under ambient conditions. The order of magnitude of this value is intermediate between the van der Waals interaction strength, which is a fraction of $k_B T$ (see the table reported in the [previous section](#sec:van-der-waals)), and the strength of covalent bonds, which amounts to hundreds of kJ / mol ($> 100 \, k_B T$).
 
 In water, hydrogen bonds are the main driving force for condensation and ice formation. Since each oxygen can accept two bonds, and each hydrogen can mediate one donor-acceptor interaction, each water molecule can be involved in four bonds that are arranged on a (nearly perfect) tetrahedron. This geometry can be rationalised as follows. In general, electron pairs (both bonding and lone pairs) around a central atom will arrange themselves to minimize repulsion, but the repulsion between lone pairs is greater than the repulsion between bonding pairs. Consequently, the two lone pairs will occupy positions that are as far apart as possible, pushing the bonding pairs closer together. As a result, the four pairs of electrons (two lone pairs and two bonding pairs) around the oxygen atom in water adopt a tetrahedral arrangement to minimize repulsion, with the bond angle between the hydrogen atoms in a water molecule being $\approx 104.5^\circ$, slightly less than the ideal tetrahedral angle of 109.5$^\circ$ due to the greater repulsion exerted by the lone pairs.
 
@@ -396,7 +396,30 @@ Interestingly, it turns out that, on average, the entropic contributions of thes
 
 ### Electrostatic interactions
 
-In some conformations, the backbone or side chains may bring similarly charged groups into close proximity, leading to an electrostatic repulsion. For example, two negatively charged carboxyl groups or two positively charged amino groups positioned close together would repel each other, making such conformations highly unfavorable.
+According to classical electrostatic, the interaction energy between two charges $q_1$ and $q_2$ at distance $r$ in a homogeneous medium is
+
+$$
+U(r) = \frac{q_1 q_2}{4 \pi \epsilon r},
+$$ (eq:electrostatic_energy)
+
+where $\epsilon = \epsilon_r \epsilon_0$, $\epsilon_r$ is the relative dielectric permittivity of the medium and $\epsilon_0$ is the absolute permittivity of vacuum. Common values of $\epsilon_r$ are $\approx 80$ for water, $\approx 3$ for a folded protein and $1$ for vacuum (or air). However, we are not dealing with homogenous media, as the distances we consider are very much comparable with inter-molecular separations. In [all-atom](./all_atom.md) simulations, solvent and solute atoms and molecules are handled explicitly and therefore there is no "medium" and Eq. [](#eq:electrostatic_energy) is applied with $\epsilon_r = 1$. By contrast, when one is interested in [coarse-grained](./coarse_grained.md) models, where the solvent's effect is described implicitly, or in theoretical considerations, when the description should be as simple as possible, one has to address the question of how to describe the effect of macromolecular charged groups and their interactions.
+
+Let's start by considering what happens inside a protein. If we consider two positive charges separated by a distance of $3 \, \AA$, their interaction energy is $\approx 1.5$ kcal/mol ($\approx 2.5 k_BT$) in water, while a whopping $\approx 40$ kcal/mol ($\approx 70 k_B T$) in a non-polarisable medium such as plastics or dry proteins ($\epsilon_r \approx 3$). Such a large repulsion would be enough to destroy a protein, which is usually stabilised by a "reserve" free energy of $\approx 10$ kcal/mol (@finkelstein2002protein). This tells us that charged side chains will not be found close to each other in a protein core. However, we can go further and consider the electrostatic self-energy of a single atom of charge $q$ and radius $R$[^self_energy]:
+
+$$
+U_{\rm self} = \frac{q^2}{4 \pi \epsilon R}.
+$$
+
+Setting $q = e$ and $R = 1.5\, \AA$ yield the same values we obtained for interacting pairs (*i.e.* $\approx 1.5$ kcal/mol in water, $\approx 40$ kcal/mol in the protein), meaning that the cost of having a single charged group inside a protein core exceeds the stability of the protein itself. As a consequence, ionisable side chains are nearly always uncharged when embedded in a core, since the free-energy cost of donating or accepting a $H^+$ (to or from water) is much smaller than the energetic contribution due to the electrostatic self-energy of a charge.
+
+Now we can consider what happens outside of the protein. Following @finkelstein2002protein we can leverage basic[^basic_electrostatics] electrostatics in the presence of dielectric materials to find that even close to the protein surface the dielectric constant is much larger than that inside the core ($\approx 40 \gg 3$). Thus, the charge-charge interaction strength is always severely reduced compared to the vacuum.
+
+Everything said above rests on the assumption that the medium can be regarded as continous and homogeneous. However, when dealing with atomic distances ($\approx \AA$), the granularity of the solvent cannot, in principle, be neglected. For instance, if two charges are $3-4 \, \AA$ apart, no atoms or molecules can get in between them and affect the resulting electrostatic interaction. However, it turns out that the water molecules that are attracted by the pair of charges and come from the sides are enough to screen the electrostatic interactions almost as if the solvent were homogeneous and had the "macroscopic" dielectric permittivity $\epsilon_r$.
+
+This should not come as a surprise if we think about kitchen salt, $NaCl$: the binding energy between the $Na^+$ and $Cl^-$ ions, if we again take $R = 3 \, \AA$, is $-1.5$ kcal/mol and $-120 kcal/mol$ in bulk water ($\epsilon_r = 80$) and vacuum ($\epsilon_r = 1$), respectively. Even if we assume that the breakdown of the assumption of the continouous and homogeneous nature of the solvent brings the relative dielectric constant down to "only" $\epsilon_r = 20$, we would still have an interaction energy of $-6.0$ kcal/mol, which is about the same strength of a single water-water [hydrogen bond](#sec:hydrogen-bonds). In this case we would expect the concentration of a saturated salt solution to be close to that of saturated water vapour, which is $\approx 10^{-4}$ mol / l (or $10^{-4}$ M). However, this is many times smaller than the $NaCl$ concentration in salty sea water ($\sim 1$ M), which confirms that $\epsilon_r$ should be much larger than $20$, and therefore rather close to the bulk value of $80$, even when $R \approx 3 \, \AA$.
+
+[^self_energy]: This quantity is just the work required to charge up a spherical body of radius $R$, $\int_0^q \frac{q'dq'}{4 \pi \epsilon R}$.
+[^basic_electrostatics]: basic but by no means obvious or straightforward.
 
 ## Rotamers
 
@@ -525,10 +548,45 @@ Here is a breakdown of the most common irregular secondary structures:
 * Turns are short sequences of amino acids that cause a sharp change in direction of the polypeptide chain. They typically involve 4-5 amino acids and are critical for the compact folding of proteins. They often occur at the ends of $\beta$-strands, facilitating the formation of antiparallel $\beta$-sheets through the formation of $\beta$-hairpins (see [](#fig:beta_sheets)(c) for an example). Some very short turns (4 AAs) are known as [$\beta$-turns](https://en.wikipedia.org/wiki/Beta_turn) and are stabilised by a hydrogen bond.
 * Coils are non-repetitive, flexible regions without a defined secondary structure. They are sometimes referred to as random coils, though they are not truly random. Coils provide flexibility and enable conformational changes in proteins. They often link regular secondary structures and can be involved in binding and recognition processes.
 
+(sec:hydrophobic_interactions)=
 # Hydrophobic interactions
 
-TODO
+In general, a molecule's solubility in water is a crucial property that can be determined experimentally. By comparing the concentrations of various substances dissolved in water, we can ascertain which molecule is more soluble. This comparison reveals water's affinity for different solutes, essentially indicating which substances are more favorably integrated into the aqueous environment. Comparing the outcome of such experiments on, say, sugar and oil would make it clear that the former is much more "hydrophilic" (water-lover) than the other, which has a strong hydrophobic ("afraid of water") character. Systematic experiments show that uncharged molecules or chemical groups that cannot form hydrogen bonds are hydrophobic and, when put in water, tend to shy away from the water molecules, clustering together. 
 
+In order to explore this effect, we consider hydrocarbons as model systems, since many non-polar amino acids feature hydrocarbon side chains (see [the classification of amino acids sketched above](#sec:AA_list)), and refer to the free-energy difference of transferring a substance from a nonpolar or slightly polar solvent to water, $\Delta G$. The nonpolar solvent containing the solute molecules, which in the simplest case can be the bulk liquid of the substance of interest, is put in contact with water through a semipermeable membrane that allows the transfer of the solute only. When the equilibrium is reached, the chemical potential of the solute is the same in the bulk and in water, *viz.*
+
+$$
+\log c_w + \beta \mu_{{\rm ex},w} = \log c_b + \beta \mu_{{\rm ex},b},
+$$
+
+where $\beta = 1 / k_BT$, the $w$ and $b$ subscripts refer to the water and bulk systems, respectively, $c_i$ is the concentration of the substance of interest in the system $i$, and $\mu_{{\rm ex}, i}$ is its excess (with respect to the ideal gas) chemical potential. The difference between the excess chemical potentials of the two systems can be evaluated from the (experimentally measurable) values of $c_w$ and $c_b$ through
+
+$$
+\mu_{{\rm ex},w} - \mu_{{\rm ex},b} \equiv \Delta \mu = k_B T \log \left( \frac{c_b}{c_w} \right).
+$$
+
+This quantity is the free-energy cost of moving one molecule from the bulk to the water, also known as the solvation free energy, $\Delta G$[^delta_mu_delta_G]. In turns out that this cost is approximately proportional to the molecule's accessible nonpolar surface area $A$, as described by the relationship $\gamma = \Delta G / A \sim 0.02$ kcal/mol, where $\gamma$ is the surface (or interfacial) free energy. This relationship implies that larger nonpolar surface areas result in greater free-energy costs for solvation. Interestingly, the free-energy cost increases with temperature, highlighting that the entropic contribution, $-T \Delta S$, plays a major role in the process.
+
+But what causes entropy to decrease when a hydrophobic molecule is inserted into an aqueous solvent? The effect arises from the high cost of breaking hydrogen bonds in liquid water. Indeed, when a nonpolar solute is introduced, water molecules reorient around the solute to maintain as many hydrogen bonds as possible in order to avoid breaking existing hydrogen bonds, which would be energetically very expensive. This reorientation, while preserving hydrogen bonds, restricts the movement of water molecules and effectively "freezes" their orientations, leading to a decrease in entropy. It is these ice-like water molecules that causes the anomalously high heat capacity of hydrocarbons such as cyclohexane, $C_6H_{12}$, which can increase by up to an order of magnitude in an aqueous solvent ("iceberg effect").
+
+:::{warning} Ice-like does not mean ordered
+Water molecules take "frozen" orientations close to a hydrophobic surface to avoid breaking hydrogen bonds, but they do so without becoming crystalline: there is no long-range translational order, but few layers of molecules that adopt orientations that are compatible with HBs close to the underlying surface.
+:::
+
+The hydrophobic effect, which is the observation that non-polar substances are immiscible with water because of entropic effects, is very important in determining the stability of proteins. In fact, proteins that live in aqueous environments[^proteins_in_water] have a core composed by non-polar AAs whose formation is, by and large, driven by hydrophobic forces. The origin of these forces can be understood by considering two hydrophobic objects with accessible surface area $A_1$ and $A_2$, respectively. The cost of solvating the two objects when they are far from each other is $\Delta G_{\rm sep} \approx \gamma (A_1 + A_2)$, where $(A_1 + A_2)$ is the extent of the hydrophobic surface. However, if the two objects approach each other, the nonpolar surface area exposed to water decreases, leading to fewer water molecules with 'frozen' orientations, which in turn reduces the entropic cost associated with solvating the objects. As a result, the solvation free energy, so that $\Delta G_{\rm bonded} = \gamma A_{12} < \Delta G_{\rm sep}$. Therefore, a state where hydrophobic surfaces are close enough that no water molecule can slip in is thermodynamically favoured with respect to a state where the same surfaces are far from each other. 
+
+## Structured water
+
+Around hydrophilic regions of the protein, water molecules form hydration shells through hydrogen bonds and electrostatic interactions while, as we have just seen, near hydrophobic regions, water molecules cannot form hydrogen bonds with the protein surface, but they reorient to maximize hydrogen bonding among themselves while minimizing disruption. In both cases there is the appearance of *structured water*, which is an organized arrangement of water molecules in the immediate vicinity of the protein surface. 
+
+The hydration layers around the protein have a restricted mobility and orientation that reduce their ability to respond to an applied electric field, in turn affecting the dielectric constant, which takes values that, depending on the distance from and type and geometry of the protein's surface, can be much lower than in the bulk (where $\epsilon_r \approx 80$). The reduced dielectric environment enhances electrostatic interactions between charged groups, possibly influencing protein folding, stability, and interactions with other molecules, such as substrates, inhibitors, or other proteins. 
+
+Moreover, structured water around proteins exhibits slower dynamics compared to bulk water, which significantly impacts protein behavior and function. For instance, it can also influence the rates of enzymatic reactions by modulating the flexibility and movement of active site residues.
+
+[^delta_mu_delta_G]: Note that in SI units $\Delta G = N \Delta \mu$, while the two coincide if expressed in kcal / mol (or kJ / mol).
+[^proteins_in_water]: As we will briefly discuss below, not all proteins are in direct contact with the cytoplasm or with another aqueous environments: [fibrous](#sec:fibrous_proteins) and [membrane](#sec:membrane_proteins) proteins often perform their biological function in hydrophobic (or not-so-hydrophilic) environments.
+
+(sec:tertiary_structure)=
 # Tertiary structure
 
 ```{figure} figures/ramachandran_secondary.png
@@ -547,6 +605,8 @@ Additionally, and more interestingly, secondary structures interact with each ot
 
 The regions in the Ramachandran plot that are far from those associated to regular secondary structures are usually populated by residues that are in an irregular (or even disordered) structure such as a coil or a loop.
 
+Most proteins are generally either densely packed structures or composed of densely packed domains. The primary driving force behind the formation of these packed domains is the [hydrophobic effect](#sec:hydrophobic_interactions), which tends to compact the hydrophobic side chains into a central core that excludes water molecules. In terms of purely hydrophobic interactions, the resulting "molten globule" would be liquid, resembling an oil droplet.  However the presence of additional interactions - such as van der Waals interactions, hydrogen bonds, ionic bonds, and disulfide bridges (which we will discuss shortly) - further solidifies the protein, endowing it with the stability and shape-retaining properties essential for its biological function (@finkelstein2002protein).
+
 Now I will (very!) briefly discuss how secondary structures pack and layer to form the native structures of proteins. Following @finkelstein2002protein, we classify folded proteins into three macrocategories: fibrous, membrane and globular proteins[^folded_proteins].
 
 [^folded_proteins]: For the moment we leave out proteins that are intrinsically disordered or have intrinsically disordered domanis, see [^intrinsically_disordered].
@@ -555,7 +615,7 @@ Now I will (very!) briefly discuss how secondary structures pack and layer to fo
 (sec:fibrous_proteins)=
 ## Fibrous proteins
 
-Fibrous proteins are a class of proteins characterized by their elongated, fiber-like shapes. Their primary role is to provide mechanical support, strength, and elasticity to cells and tissues. Fibrous proteins are typically very large and form huge aggregates, making them insoluble in water. Their primary structure often contains repetitive sequences that facilitate the formation of regular secondary structures and the interactions between adjacent chains which lead to the formation of higher-order aggregates ([quaternary structures](sec:quaternary_structure) in protein lingo). These proteins are essential for maintaining structural integrity, protecting tissues, allowing flexibility, and playing a crucial role in tissue repair and wound healing.
+Fibrous proteins are a class of proteins characterized by their elongated, fiber-like shapes. Their primary role is to provide mechanical support, strength, and elasticity to cells and tissues. Fibrous proteins are typically very large and form huge aggregates, making them insoluble in water. Their primary structure often contains repetitive sequences that facilitate the formation of regular secondary structures and the interactions between adjacent chains which lead to the formation of higher-order aggregates ([quaternary structures](#sec:quaternary_structure) in protein lingo). These proteins are essential for maintaining structural integrity, protecting tissues, allowing flexibility, and playing a crucial role in tissue repair and wound healing.
 
 ### $\beta$-structural proteins
 
@@ -596,13 +656,12 @@ In coiled coils, the $\alpha$-helix has 3.5 residues per turn instead of 3.6 as 
 In some cases coiled coils further assemble into durable fibrils reinforced by disulfide bonds provided by cysteine residues (identified by the sulfur atoms shown as yellow van der Waals spheres in [](#fig:keratin_structure)). This structure gives keratin its strength, rigidity, and insolubility, making it resistant to environmental stress.
 
 :::{important} Disulfide bonds
-Disulfide bonds are covalent linkages formed between the sulfur atoms of two cysteine residues within a polypeptide chain or between different polypeptide chains. In the formation of disulfide bonds, the thiol groups $-SH$ of two cysteine residues undergo an oxidation reaction, resulting in a disulfide linkage ($-S-S-$).
-
-In the cellular environment, the formation of disulfide bonds is often catalyzed by enzymes, particularly in the endoplasmic reticulum (ER) of eukaryotic cells. For instance, the enzyme protein disulfide isomerase (PDI) facilitates the formation and rearrangement of disulfide bonds, catalyzing the oxidation of thiol groups and rearranging incorrect disulfide bonds to ensure proper protein folding.
+Disulfide bonds are covalent linkages formed between the sulfur atoms of two cysteine residues ($-C^\beta H_2 - SH$ side chain) within a polypeptide chain or between different polypeptide chains. In the formation of disulfide bonds, the thiol groups $-SH$ of two cysteine residues undergo an oxidation reaction, resulting in a disulfide linkage ($-S-S-$). At room temperature this process does not occur on reasonable timescales, which is why, in the cellular environment, the formation of disulfide bonds is catalyzed by enzymes, particularly in the endoplasmic reticulum (ER) of eukaryotic cells. For instance, the enzyme protein disulfide isomerase (PDI) facilitates the formation and rearrangement of disulfide bonds, catalyzing the oxidation of thiol groups and rearranging incorrect disulfide bonds to ensure that only the correct Cys residues are connected.
 :::
 
 [^silk]: I did not find any proper PDB structure for silk fibroin, but only a file containing the "theoretical model coordinates" of a fragment of silk fibroin.
 
+(sec:collagen)=
 ### Collagen
 
 Collagen is a major component of the extracellular matrix in various connective tissues of animals. It is one of the most abundant proteins in vertebrates, making up about a quarter of their total protein mass. Collagen provides structural support, strength, and elasticity to tissues such as skin, tendons, ligaments, cartilage, bones, and blood vessels.
@@ -626,6 +685,7 @@ Triple helices, in turn, associate into higher order structures (collagen fibril
 
 [^hyp_effect]: Although hydroxyproline has a $-OH$ group that can form a hydrogen bond, there is strong evidence that its contribution to the stability of the triple helix comes from [stereoelectronic effects](https://en.wikipedia.org/wiki/Stereoelectronic_effect) rather than hydration ([](doi:10.1021/ja800225k)).
 
+(sec:membrane_proteins)=
 ## Membrane proteins
 
 Biological membranes are thin, flexible structures that form the boundaries of cells and organelles (which are cell compartments), regulating the movement of substances in and out. They play crucial roles in cellular communication, energy transduction, and maintaining homeostasis. Membranes are composed of 
@@ -652,12 +712,12 @@ Structurally, the tight packing of helices provides stability to the protein, en
 :align: center
 :width: 600px
 
-A GPCR protein embedded in a membrane composed of a double layer of cholesterol (in black) and phosphatidylcholine (POPC, in cyan) in a 7:3 ratio. In (a) the lipids and the water (in red and white) sorrounding them are shown explicitly, while in (b) only the helical bundle is shown, to highlight the angles between the helices (or part thereof).
+A GPCR protein (taken from [here](https://www.rcsb.org/structure/4GBR)) embedded in a membrane composed of a double layer of cholesterol (in black) and phosphatidylcholine (POPC, in cyan) in a 7:3 ratio. Here both surfaces of the membrane are put in contact with water. In (a) the lipids and the water (in red and white) are shown explicitly, while in (b) only the helical bundle is shown, to highlight the angles between the helices (or part thereof).
 ```
 
-[](#fig:GPCR) shows the [$\beta$(2) adrenergic receptor](https://www.rcsb.org/structure/4GBR), a GPCR protein, embedded in a lipid membrane sandwiched between two water layers. A GPCR is formed by seven transmembrane $\alpha$-helices connected by alternating intracellular and extracellular loops. The helices are tilted with respect to each other, so that their side chains form the "knobs into holes" packing introduced [before](sec:alpha-structural_proteins) ([](doi:10.1098/rsta.2012.0369)).
+[](#fig:GPCR) shows the [$\beta$(2) adrenergic receptor](https://www.rcsb.org/structure/4GBR), a GPCR protein, embedded in a lipid membrane sandwiched between two water layers. A GPCR is formed by seven transmembrane $\alpha$-helices connected by alternating intracellular and extracellular loops. The helices are tilted with respect to each other, so that their side chains form the "knobs into holes" packing introduced [before](#sec:alpha-structural_proteins) ([](doi:10.1098/rsta.2012.0369)).
 
-[^GPCR]: "Many druggable targets for treatment of common diseases involve G-protein-coupled receptors (GPCRs) that mediate therapeutic effects of $\approx 34%%$ of the marketed drugs. The sales of GPCR targeting drugs represent a global market share of over 27% [more than 180 billion US dollars]" [](doi:10.1016/j.cell.2017.11.033)).
+[^GPCR]: "Many druggable targets for treatment of common diseases involve G-protein-coupled receptors (GPCRs) that mediate therapeutic effects of $\approx 34\%$ of the marketed drugs. The sales of GPCR targeting drugs represent a global market share of over 27% [more than 180 billion US dollars]" [](doi:10.1016/j.cell.2017.11.033)).
 
 ### $\beta$-barrels
 
@@ -683,15 +743,60 @@ Choose a protein membrane, embed it in a lipid bilayer and study its conformatio
 
 ## Globular proteins
 
-Globular proteins are a diverse group of proteins characterized by their compact, roughly spherical shapes and high solubility in water. Unlike fibrous proteins, globular proteins have a more intricate three-dimensional structure, with hydrophobic amino acid residues typically buried in the protein's interior and hydrophilic residues exposed to the solvent, making them soluble and functional in the cell's aqueous environment. Globular proteins perform a wide range of functions, including enzymatic catalysis (*e.g.*, lysozyme and DNA polymerase), transport and storage of molecules (*e.g.*, hemoglobin and myoglobin), immune responses (*e.g.*, antibodies), and regulatory roles (*e.g.*, hormones like insulin).
+Globular proteins are a diverse group of proteins characterized by their compact, roughly spherical shapes and high solubility in water. Unlike in fibrous proteins, in globular proteins the three-dimensional arrangements of the secondary structure motifs are more complex, with hydrophobic amino acid residues typically buried in the protein's interior and hydrophilic residues exposed to the solvent, making them soluble and functional in the cell's aqueous environment. Globular proteins perform a wide range of functions, including enzymatic catalysis (*e.g.*, lysozyme and DNA polymerase), transport and storage of molecules (*e.g.*, hemoglobin and myoglobin), immune responses (*e.g.*, antibodies), and regulatory roles (*e.g.*, hormones like insulin).
 
-Water-soluble globular proteins are the most studied because they are the most amenable to experimental research, and they are by far the most known in terms of structure. Depending on their size, they either pack in a single, compact globule with a radius of a few nanometers, or into multiple globules (called *domains*) connected together by loops and coils.
+Water-soluble globular proteins are the most studied because they are the most amenable to experimental research, and they are by far the most known in terms of structure. Depending on their size, they either pack in a single, compact globule with a radius of a few nanometers, or into multiple globules (called *domains*) connected together by loops and coils. Taken all together, the majority ($\approx 90\%$) of the residues are organised in secondary structural motifs: $\approx 30\%$ in helices, $\approx 30\%$ in $\beta$-strands, and $\approx 30\%$ in helices in loops and turns. Therefore, a hierarchical classification of proteins (which goes further than the fibrous/membrane/globular split) can be made in terms of what types of secondary structures they contain, and how those are packed together. There are several databases where proteins are classified into classes and subclasses according to their structure, packing and homology (similarity) with respect to other proteins, with the classification criteria differing from database to database. Here I will follow @schlick2010molecular and describe the top levels of the [SCOP database](https://www.ebi.ac.uk/pdbe/scop)[^SCOP]. For reference, other well-known databases are [CATH](https://www.cathdb.info/) and [ECOD](http://prodata.swmed.edu/ecod/).
+
+The main levels of classification in SCOP are as follows:
+
+* **Class**: The highest level of classification, based on the overall secondary structure content of the proteins. Classes include all-$\alpha$ proteins, all-$\beta$ proteins, $\alpha/\beta$ proteins (where $\alpha$-helices and $\beta$-strands are interspersed), and $\alpha + \beta$ proteins (where $\alpha$-helices and $\beta$-strands are segregated).
+* **Fold**: Groups proteins with the same major secondary structures in the same arrangement and with the same topological connections. Proteins within a fold share major structural features even if they do not have sequence similarity.
+* **Superfamily**: Includes proteins that share a common fold and are believed to have a common evolutionary origin. Members of a superfamily may have low sequence similarity but have functional and structural features indicating a common ancestry.
+* **Family**: Proteins within a superfamily that have clear sequence similarity, indicating a closer evolutionary relationship. Families are groups of proteins that share high sequence identity and often similar functions.
+
+While I will not delve[^delve] too much on the classification, which would be outside of the scope of these lectures, I want to provide some examples of folds (also known as "supersecondary structures"). I will provide one example for each class of proteins, starting with two examples we have already encountered: even though they are not globular (nor water-soluble), they contain some common motifs that are also rather easy to identify:
+
+* [GPCRs](#fig:GPCR) are transmembrane $\alpha$-proteins characterised by an up-and-down bundle of seven transmembrane helices. Helical bundles are very common folds in proteins, and this particular one is [a fold on its own](https://www.ebi.ac.uk/pdbe/scop/term/2000339) according to SCOP.
+* The [E. coli porin](#fig:porin) is a transmembrane $\beta$-protein of the [Porins superfamily](https://www.ebi.ac.uk/pdbe/scop/term/3000224). The main structural motif is a [$\beta$-barrel](#beta-barrels), which on SCOP is [not a proper fold](https://www.ebi.ac.uk/pdbe/scop/term/2000193), since $\beta$-barrels can be very different with each other, and are classified according to two numbers:
+  * the number of $\beta$-strands in the barrel;
+  * the ["shear number"](https://en.wikipedia.org/wiki/Beta_barrel#Shear_number), which is a measure of the staggering of nearby strands.
+
+```{figure}
+:name: fig:alpha_beta
+:align: center
+
+(fig:alpha_slash_beta)=
+![The structure of chicken triose phosphate isomerase.](figures/1tim.png)
+
+(fig:alpha_plus_beta)=
+![The structure of human lysozyme.](figures/2nwd_lysozyme.png)
+
+Examples of $\alpha / \beta$ and $\alpha + \beta$ proteins. The left panels show the protein with a ribbon-like representation, while the right panels show the accessible surface of the same protein from the same proint of view. The two structures have been taken from [here]((https://www.rcsb.org/structure/1TIM)) and [here](https://www.rcsb.org/structure/2NWD).
+```
+
+The other two classes, $\alpha / \beta$ and $\alpha + \beta$, comprise proteins that contain both $\alpha$-helices and $\beta$-sheets. However, they differ in the order with which the secondary structures are arranged:
+
+* in $\alpha / \beta$ proteins $\alpha$-helices and $\beta$-strands alternate to form layered or barrel structures. [](#fig:alpha_slash_beta) shows a classic $\alpha / \beta$ barrel, which has [its own](https://www.ebi.ac.uk/pdbe/scop/term/2000031) SCOP fold. Note that the $\beta$-sheet is formed by parallel $\beta$-strands.
+* $\alpha + \beta$ proteins contain $\alpha$-helical and $\beta$ regions that are well-separated (*i.e.* non-alternating). The SCOP [lysozyme-like fold](https://www.ebi.ac.uk/pdbe/scop/term/2001149) is a common example, and a protein of this type is shown in [](#fig:alpha_plus_beta).
+
+Folds can be very complex from the topological point of view (especially $\beta$-structures), but a more thorough classification is out of scope here.
+  
+[^SCOP]: Structural Classification of Proteins database.
+[^delve]: [Apparently](https://www.scientificamerican.com/article/chatbots-have-thoroughly-infiltrated-scientific-publishing/) using "delve" is a big indicator that a piece of text has been written by ChatGPT. Although I have used ChatGPT to polish my writing here and there, I ensure you that this "delve" is my own!
 
 (sec:quaternary_structure)=
 # Quaternary structure
 
-The quaternary structure of a protein refers to the higher-level organization and assembly of multiple polypeptide chains, or subunits, into a single functional complex: unlike the primary, secondary, and tertiary structures, which involve the folding of a single polypeptide chain, the quaternary structure pertains to how these chains interact and fit together. This level of protein structure is crucial for the functionality of many proteins, particularly those that operate as multi-subunit complexes. We have already seen some examples when we discussed [fibrous proteins](sec:fibrous_proteins).
+The quaternary structure of a protein refers to the higher-level organization and assembly of multiple polypeptide chains, or subunits, into a single functional complex: unlike the primary, secondary, and tertiary structures, which involve the folding of a single polypeptide chain, the quaternary structure pertains to how these chains interact and fit together. This level of protein structure is crucial for the functionality of many proteins, particularly those that operate as multi-subunit complexes. We have already seen some examples when we discussed [fibrous proteins](#sec:fibrous_proteins).
 
-Subunits in a protein's quaternary structure can be identical, known as homomeric, or different, referred to as heteromeric. The interactions between these subunits are stabilized by a variety of non-covalent forces, including hydrogen bonds, ionic bonds, hydrophobic interactions, and van der Waals forces. In some cases, covalent bonds, such as disulfide bridges, also play a significant role in maintaining the integrity of the quaternary structure.
+Subunits in a protein's quaternary structure can be identical, known as homomeric, or different, referred to as heteromeric. The interactions between these subunits are stabilized by the same interactions that drive the formation of [secondary](#sec:secondary_structure) and [tertiary](#sec:tertiary_structure) structures, including hydrogen bonds, van der Waals forces, electrostatic and hydrophobic interactions, disulfide bridges.
 
-The spatial arrangement of subunits within the quaternary structure is vital for the protein’s functionality. This arrangement allows the protein to interact correctly with other molecules and perform its biological activities efficiently. For example, the quaternary structure of hemoglobin, which consists of four subunits, enables it to bind and release oxygen molecules effectively. Similarly, enzymes that function as multi-subunit complexes often rely on their quaternary structure to bring catalytic sites into proximity, enhancing their catalytic efficiency.
+```{figure} figures/hemoglobin.png
+:name: fig:hemoglobin
+:align: center
+:width: 400px
+
+The [structure](https://www.rcsb.org/structure/1a3n) of human hemoglobin. The four subunits are shown with different colours, while their bound heme groups are depicted with the licorice representation.
+```
+
+The spatial arrangement of subunits within the quaternary structure is vital for the protein’s functionality, allowing the protein to interact correctly with other molecules and perform its biological activities efficiently. For example, the quaternary structure of hemoglobin, which is shown in [](#fig:hemoglobin) and consists of four subunits in a nearly-tetrahedral arrangement, enables it to bind and release oxygen molecules effectively. Similarly, enzymes that function as multi-subunit complexes often rely on their quaternary structure to bring catalytic sites into proximity, enhancing their catalytic efficiency.

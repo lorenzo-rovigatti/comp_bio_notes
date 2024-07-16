@@ -15,12 +15,24 @@ Most of the acronyms that are scattered throughout the text show tooltips when h
 1. This is a computational course, and as such it requires some proficiency with (or at least having the right attitude towards) computers. The most important skill you should have is using aterminal, since most of the computations (running simulations, analysing results, *etc.*) will be launched from there. Linux and macOS come with pre-installed terminals, while Windows does not[^windows_terminal]. However, it is possible to install a very handy ["Windows Subsystem for Linux"](https://learn.microsoft.com/en-us/windows/wsl/) that makes it possible to have a good Linux-like experience within Windows. Install instructions can be found [here](https://learn.microsoft.com/en-us/windows/wsl/install).
 2. Knowing to code is important, for several reasons. First of all, implementing algorithms and techniques introduced in class is the best way of understanding how they work and what are their advantages and disadvantages, even though most of research-grade results during one's career will be obtained with production-ready HPC codes written by others. Secondly, reading other people's code can come in very handy (i) to understand what it does and (ii) to extend it to suit your needs. Finally, in computational physics it is common to need to perform custom analyses for which no libraries or codes are available, leaving no other option than writing your own script or program. For the sake of the course, the programming language you are more familiar with is not important, although Python is the *de facto* standard language used to write analysis scripts, while C and C++ (and more rarely FORTRAN) are used to write performance-critical software (or part thereof).
 3. By definition, life is an out-of-equilibrium process, since it continuously uses up energy. However, many biophysical processes are in (or close to) equilibrium. Therefore, they can be analysed and understood using the language of thermodynamics and statistical mechanics. You should be familiar with concepts such as free energy, entropy, ensembles, partition function, Boltzmann distribution, as well as with the mathematical tools used to work with these quantities.
-4. *Any* knowledge of biology is welcome (and will be useful to its holder). However, I will introduce most of what we need at the beginning, and then some more as the need arises.
+4. *Any* knowledge of biology and biochemistry is welcome (and will be useful to its holder). However, I will introduce most of what we need at the beginning, and then some more as the need arises.
 
 [^windows_terminal]: Or at least it does not come with a Unix-like (POSIX) terminal, which is what we will be using.
 
+# About these notes
+
+* Internal links are styled [like this](#sec:intro_comp_phys). Hover a link to see a preview.
+* Wikipedia links are styled [like this](https://en.wikipedia.org/wiki/Biophysics). Hover a wikipedia link to see a preview.
+* External links are styled [like this](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
+* Hover over a footnote reference to show the associated text[^footnote].
+* Hover over a reference to show the associated citation and a clickable DOI (see *e.g.* [](doi:10.1126/science.177.4047.393)).
+
+[^footnote]: like this.
+
+(sec:intro_comp_phys)=
 # Introduction to computational physics
 
+(sec:intro_biophys)=
 # Introduction to biophysics
 
 ## Some important numbers and quantities
@@ -31,6 +43,8 @@ Most of the acronyms that are scattered throughout the text show tooltips when h
 | " | $4.11 \, {\rm pn \cdot nm}$|
 | RT at 298 K | $0.59 \, {\rm kcal / mol}$|
 | " | $2.48 \, {\rm kJ / mol}$|
+| Average nucleotide mass|$\approx 330 \to 300$ Da|
+| Average amino acid mass|$\approx 110 \to 100$ Da|
 
 ## The central dogma of biology
 
@@ -72,3 +86,29 @@ The meaning of each sequence made of three nucleotides (also known as a *codon* 
 ```
 
 [](#fig:codon-flower) shows the meaning of each codon (a sequence of three nucleotides). Since each nucleotide in a codon can have one out of 4 possible values (A, C, G or T), there exist $4^3 = 64$ possible codons. Out of these 64 combinations, three are recognised as "stop signals", while the rest encode amino acids, with the exception of the AUG codon which, in addition to represent methionine, is also typically used to initiate protein syntesis. Most amino acids (excluding methionine and tryptophan) are encoded by more than a single codon. The outer circle of [](#fig:codon-flower) contains the list of standard amino acids, together with their three- and one-letter abbreviations, which are shown in bold and after each AA name, respectively.
+
+## The experimental characterisation of the structure of biomolecules
+
+### Three-dimensional structure
+
+The 3D structure of biomacromolecules such as proteins and nucleic acids can be experimentally determined using several techniques. The most commonly used methods are:
+
+1. **X-ray Crystallography**:
+   - **Procedure**: The biomolecule is crystallized, and then X-rays are directed at the crystal. The X-rays diffract as they pass through the crystal, creating a diffraction pattern that can be recorded. The diffraction pattern is analyzed to determine the electron density map, which is used to model the atomic structure of the biomolecule.
+   - **Advantages**: High resolution, can be used for large biomolecules.
+   - **Limitations**: Requires high-quality crystals, which can be difficult to obtain for some biomolecules (*e.g.* molecules that are not soluble in water).
+
+2. **Nuclear Magnetic Resonance (NMR) Spectroscopy**:
+   - **Procedure**: The biomolecule is dissolved in solution, and NMR spectra are obtained by applying a magnetic field and measuring the resulting interactions between nuclear spins. The spectra provide information about the distances and angles between atoms, which are used to calculate the 3D structure.
+   - **Advantages**: Provides information about the dynamics and flexibility of biomolecules in solution.
+   - **Limitations**: Generally limited to smaller biomolecules (up to about 50 kDa), although recent advances are pushing these limits.
+
+3. **Cryo-Electron Microscopy (cryo-EM)**:
+   - **Procedure**: The biomolecule is rapidly frozen in a thin layer of ice, and then imaged using an electron microscope. Thousands of 2D images are collected and computationally combined to reconstruct a 3D model of the biomolecule.
+   - **Advantages**: Does not require crystallization, suitable for large and complex biomolecules, including those that are difficult to crystallize.
+   - **Limitations**: Typically lower resolution than X-ray crystallography, although recent advances have significantly improved the resolution.
+
+4. **Small-Angle X-ray Scattering (SAXS)**:
+   - **Procedure**: The biomolecule is dissolved in solution, and X-rays are scattered at small angles by the sample. The scattering pattern provides low-resolution information about the overall shape and size of the biomolecule.
+   - **Advantages**: Can study biomolecules in near-physiological conditions, provides information about conformational changes and flexibility.
+   - **Limitations**: Lower resolution compared to X-ray crystallography and cryo-EM, providing only general shape information.

@@ -6,11 +6,17 @@ parts:
         - file: introduction.md
         - file: proteins.md
         - file: nucleic_acids.md
+        - file: structure_prediction.md
         - file: quantum.md
         - file: all_atom.md
         - file: coarse_grained.md
         - file: enhanced.md
         - file: bioinformatics.md
+    - caption: Exercises
+      chapters:
+        - file: exercises/HP_model.md
+        - file: exercises/SantaLucia.md
+        - file: exercises/molecular_dynamics.md
     - caption: Hands-on notebooks
       chapters:
         - file: notebooks/ramachandran.ipynb

@@ -26,6 +26,7 @@ project:
         IR: Infrared
         LJ: Lennard-Jones
         HB: hydrogen bond
+        BP: base pair
 site:
     template: book-theme
     options:

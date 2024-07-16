@@ -789,7 +789,7 @@ Folds can be very complex from the topological point of view (especially $\beta$
 
 The quaternary structure of a protein refers to the higher-level organization and assembly of multiple polypeptide chains, or subunits, into a single functional complex: unlike the primary, secondary, and tertiary structures, which involve the folding of a single polypeptide chain, the quaternary structure pertains to how these chains interact and fit together. This level of protein structure is crucial for the functionality of many proteins, particularly those that operate as multi-subunit complexes. We have already seen some examples when we discussed [fibrous proteins](#sec:fibrous_proteins).
 
-Subunits in a protein's quaternary structure can be identical, known as homomeric, or different, referred to as heteromeric. The interactions between these subunits are stabilized by the same interactions that drive the formation of [secondary](#sec:secondary_structure) and [tertiary](#sec:tertiary_structure) structures, including hydrogen bonds, van der Waals forces, electrostatic and hydrophobic interactions, disulfide bridges.
+Subunits in a protein's quaternary structure can be identical, known as homomeric, or different, referred to as heteromeric. The interactions between these subunits are stabilized by the same interactions that drive the formation of [secondary](#sec:secondary_structure) and [tertiary](#sec:tertiary_structure) structures, including hydrogen bonds, van der Waals forces, electrostatic and hydrophobic interactions, and disulfide bridges.
 
 ```{figure} figures/hemoglobin.png
 :name: fig:hemoglobin

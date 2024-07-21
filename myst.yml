@@ -27,6 +27,7 @@ project:
         LJ: Lennard-Jones
         HB: hydrogen bond
         BP: base pair
+        NN: nearest-neighbour
 site:
     template: book-theme
     options:

@@ -6,6 +6,8 @@ title: Nucleic acids
 The main references for this part are @lehninger2005lehninger, and @schlick2010molecular.
 ```
 
+Here I take for granted that you are familiar with the general concepts introduced in the previous chapter regarding the interactions between atoms and molecules.
+
 # The basic structure of DNA and RNA
 
 Deoxyribonucleic acid (DNA) and ribonucleic acid (RNA) are the fundamental molecules that carry and execute the genetic instructions essential for all forms of life. Like proteins, they are [macromolecules](./proteins#macromolecules). However, the repeating monomer is not an amino acid, but a nucleotide, which is a molecule consisting of a a cyclic sugar (a [pentose](https://en.wikipedia.org/wiki/Pentose)), a phosphate group, and a nitrogenous base. A nucleotide without the phosphate group is called a nucleoside.
@@ -71,6 +73,15 @@ In the classic pairing scheme unveiled by Watson and Crick, the geometry of the 
 
 As mentioned earlier, the phosphodiester bond links the C5' atom of a nucleotide with the C3' atom of the one the follows it. As a result, DNA and RNA strands have a polarity, *i.e.* they are inherently directional. By convention, a strand starts at the $C5'-OH$ group (termed 5' end or terminal) and ends at the $C3'-OH$ group (the 3' end or terminal), and its sequence is also specified in this way. This is important since, as we will discuss in a moment, only anti-parallel strands (or anti-parallel sections of the same strand) can pair and form secondary structures.
 
+## Hydrophobicity and hydrophilicity
+
+The nitrogenous bases have both hydrophobic and hydrophilic regions: the aromatic ring structures have hydrophobic properties, but they also contain functional groups that can form hydrogen bonds, contributing to some degree of hydrophilicity. However, the partial hydrophobic character of the bases is more than counterbalanced by the backbone, which is highly hydrophilic due to the negatively charged phosphate groups and to the hydroxyl groups ($-OH$) of the sugar that can form hydrogen bonds with water. As a result, nucleotides readily dissolve in water.
+
+The strong hydrophilic character of DNA and RNA strands makes their tertiary structure somewhat simpler compared to proteins, since once the [secondary structure elements](#sec:NA_secondary_structure) are formed, there is no strong interaction driving the formation of tightly packed super-secondary or tertiary structures[^NA_tertiary].
+
+[^NA_tertiary]: Of course, this argument applies to solutions of nucleic acids only. In the cell, RNA, DNA, and proteins can and do interact together to form higher order structures.
+
+(sec:hybridisation)=
 ## Hybridisation and denaturation
 
 Two nucleotides coming together and binding to each other for a base pair (BP). Since hydrogen bonds are [highly directional](#sec:hydrogen-bonds), HB formation requires that the two nucleotides approach each other with the right mutual orientation. However, note that bases on their own (*i.e.* not part of a strand) can pair with any other base, as well as with themselves, often with more than one arrangement ([](doi:10.1016/S0079-6603(08)60565-6)). It is only in an extended paired region that the correct orientation is obtained only if the two nucleotides are compatible (*i.e.* if they can form a canonical or a non-canonical base pair, as mentioned above), and the strands run anti-parallel to each other. In this geometry, which is adopted by the most common DNA and RNA helical conformations,
@@ -81,7 +92,7 @@ Two nucleotides coming together and binding to each other for a base pair (BP). 
 
 Interestingly the spontaneous process through which single strands pair and form a duplex, which is called *hybridisation*, is now taken for granted, but was initially met with skepticism[^without_enzyme], since researchers at the time believed that duplex formation required enzymes to overcome electrostatic and entropic penalties ([](doi:10.1017/S0033583509004776)).
 
-In addition to hydrogen bonding, duplexes are stabilised by interactions acting between the aromatic rings of consecutive nitrogenous bases. These so-called base stacking interactions have a hydrophobic nature that is complemented by van der Waals and dipole-dipole termsthat contribute significantly to the stability and structural integrity of the DNA molecule. Rather counterintuitively, there is now ample evidence that base stacking is at least as important for duplex stability as base pairing, if not more (see *e.g.* [](doi:10.1093/nar/gkj454) and [](doi:10.1038/s41565-023-01485-1)).
+In addition to hydrogen bonding, duplexes are stabilised by interactions acting between the aromatic rings of consecutive nitrogenous bases. These so-called base stacking interactions have a hydrophobic nature that is complemented by van der Waals and dipole-dipole termsthat contribute significantly to the stability and structural integrity of the DNA molecule. Rather counterintuitively, there is now ample evidence that base stacking is at least as important for duplex stability as base pairing, if not more (see *e.g.* [](doi:10.1093/nar/gkj454), [](doi:10.1016/j.plrev.2017.11.012), and [](doi:10.1038/s41565-023-01485-1)).
 
 :::{hint} Measuring the stacking strength
 
@@ -133,17 +144,398 @@ The last two decades has seen the steady rise of DNA nanotechnology, which uses 
 
 Assuming that each base can either be unbound or involved in a single base pair[^no_triplex], the secondary structure of nucleic acids is defined by the pairing information of the nucleotides. By assigning a unique index to each nucleotide, this information can be represented as a list of index pairs, where each entry represents a single base pair. While, as I mentioned already, there are key differences between DNA and RNA, the surge of DNA nanotechnology have blurred the boundaries between the two, and many of the secondary structures that were unique to RNA can also be found in synthetic DNA systems. As a result, in this part I will refer to generic "nucleic acids", if not explicitly stated otherwise.
 
+```{figure} figures/secondary_structure.png
+:name: fig:secondary_structure
+:align: center
+:width: 500
+
+The secondary structure of an RNA molecule. Dashed rectangles and labels have been added to the different elements. The double-stranded parts are coloured in green, while the other colours are used to highlight the other main secondary structures: 5' and 3' unpaired regions in orange, internal loops and bulges in yellow, internal loops of size one (also known as *mismatches*) in violet, hairpin loops in blue, multibranched loops in red. The graph representation has been generated with [forna](http://rna.tbi.univie.ac.at/forna/).
+```
+
+[](#fig:secondary_structure) shows the secondary structure of an RNA molecule drawn as a graph, which is a common representation. The backbone runs from the 5' to the 3' end and it is drawn with grey sticks representing the graph's edges, while the single nucleotides are the vertices, drawn as circles. Base pairs are depicted with red connections. The RNA molecule has been designed to feature the main secondary structure motifs, which are highlighted by coloured dashed rectangles. These are:
+
+* **Double-stranded part**: Sections made of consecutive base pairs.
+* **Hairpin** (also known as a *stem-loop* structure): A single strand that folds back on itself to form a stem-loop structure. The stem is a double-stranded region where bases pair with complementary bases, and the loop is a single-stranded region at the tip.
+* **Bulge**: Occurs when one or more unpaired nucleotides bulge out from one side of a double-stranded stem.
+* **Internal loop**: Formed when there are unpaired nucleotides on both sides of the double-stranded stem, creating a loop in the middle of the stem. An internal loop made of one nucleotide on each strand is often called a **mismatch**.
+* **Multibranched loop**: A loop where three or more double-stranded stems converge.
+* **Pseudoknot**: Formed when bases in a loop pair with complementary bases that are separated by at least one double-stranded section. This results in a crossover of strands, forming a knot-like structure. A common way a pseudoknot forms is when a single-stranded loop of a hairpin pairs with a complementary sequence outside the hairpin.
+
+:::{hint} The structure of a biological RNA molecule
+
+Transfer RNA (tRNA) is a type of short (76 to 90 nucleotides) RNA molecule that plays a crucial role in the process of translating genetic information from messenger RNA (mRNA) into proteins. tRNA molecules function as adaptors that match specific amino acids to corresponding codons in the mRNA sequence during protein synthesis.
+
+In particular, the primary function of tRNA is to translate the genetic code from mRNA into a sequence of amino acids, ultimately forming a protein. Each tRNA molecule is "loaded" with its corresponding amino acid by an enzyme called aminoacyl-tRNA synthetase[^aaRS], forming an aminoacyl-tRNA complex. The anticodon of the tRNA pairs with the complementary codon on the mRNA strand in the ribosome, whose machinery catalyses the formation of the peptide bond through which the amino acid carried by the tRNA is added to the growing polypeptide chain.
+
+```{figure} figures/tRNA.png
+:name: fig:tRNA
+:align: center
+:width: 600
+
+The (a) secondary and (b) threedimensional structure of a tRNA ([yeast phenylalanine tRNA, 1EHZ](https://www.rcsb.org/structure/1EHZ)). The specific secondary motifs are coloured differently in (b), and highlighted by coloured dashed rectangles in (a). The nucleotides that bear chemical modifications are shown in blue[^modified_nucleotides].
+
+[^modified_nucleotides]: **m$_2^G$**: 2-methyl-guanosine, **D**: 5,6-Dihydrouridine, **m$_2^2$G**: N2-dimethylguanosine, **C$_m$**: O2'-methyl-cytdine, **G$_m$**: O2'-methyl-guanosine, **T**: 5-Methyluridine (Ribothymidine), **Y**: wybutosine (Y-base), $\psi$: pseudouridine, **m$^5_C$**: 5-methyl-cytidine, **m$^7_G$**: 7-methyl-guanosine, **m$^1_A$**: 1-methyl-adenosine.
+```
+
+[](#fig:tRNA) presents the secondary and threedimensional structure of a tRNA molecule, highlighting its [cloverleaf](https://en.wikipedia.org/wiki/Four-leaf_clover) structure. It is worth mentioning that, as shown in the figure, many of the nucleotides of a tRNA molecule are chemically modified in order to tune their interaction with the ribosome or with the mRNA codons. The four main parts of a tRNA molecule are:
+
+1. **The Acceptor Stem:** This is the site where a specific amino acid is attached. The 3' end of the tRNA has a conserved sequence (CCA) where the amino acid binds.
+2. **The Anticodon loop:** This contains a sequence of three nucleotides (the anticodon) that is complementary to a specific mRNA codon, ensuring the correct amino acid is added to the growing polypeptide chain.
+3. **The D loop:** Named for the presence of [dihydrouridine](https://en.wikipedia.org/wiki/Dihydrouridine), this arm is involved in tRNA folding.
+4. **The T$\psi$C loop:** Named for the conserved sequence of thymine, [pseudouridine](https://en.wikipedia.org/wiki/Pseudouridine), and cytosine, this arm is important for tRNA recognition by the ribosome.
+
+[^aaRS]: There is one aminoacyl-tRNA synthetase for each amino acid of the genetic code: in humans, there are 20.
+:::
+
+## Dot-paren notation
+
+Dot-paren notation provides a clear and concise way to represent the secondary structure of nucleic acids, showing which nucleotides are paired or unpaired, regardless of their identity. It is a useful tool for storing information about complex secondary structures, and for exchanging this information to and from computational tools.
+
+:::{warning}
+Dot-paren notation is primarily designed for representing the secondary structure of single-stranded nucleic acids, where it is very effective in illustrating the pattern of base pairing. However, for multi-strand systems, the dot-paren notation can become limited and cumbersome.
+:::
+
+The dot-paren notation uses dots and parentheses to indicate unpaired and paired nucleotides, respectively.
+
+1. **Unpaired Nucleotides:**
+   - Dots (.) represent nucleotides that are not involved in base pairing.
+   - Example: `....` represents four unpaired nucleotides.
+2. **Paired Nucleotides:**
+   - Parentheses indicate base pairs, with matching opening and closing parentheses representing the paired nucleotides.
+   - An opening parenthesis `(` signifies the 5' end of a base pair, while a closing parenthesis `)` signifies the 3' end.
+   - A well-formed dot-paren representation should have the same number of opening and closing parentheses.
+3. **Hairpins:**
+   - Hairpin loops are represented with a series of dots inside parentheses.
+   - Example: `(((....)))` indicates a stem of three base pairs with a loop of four unpaired nucleotides.
+4. **Bulges and Internal Loops:**
+   - Bulges are unpaired nucleotides on one side of a stem.
+   - Internal loops have unpaired nucleotides on both sides.
+   - Example: `((..((...))..))` represents a structure where there is a small internal loop of size 2 within a larger stem, while `((.(...)))` represents a stem-loop with a single bulge.
+5. **Multibranch Loops and Pseudoknots:**
+   - Multibranch loops involve multiple stems and are, in general, complex to represent.
+   - Pseudoknots, which involve base pairs crossing one another, are not well-represented by simple dot-paren notation but can be indicated with additional notation if necessary (see the complex example in the box below).
+
+:::{hint} Two simple examples
+Consider the following RNA sequence, which forms a hairpin with stem and loop of size 4:
+
+```
+5'- GGCAUCGUUGCC -3'
+```
+
+The dot-paren notation for this structure is:
+```
+((((....))))
+```
+
+If a nucleotide is added in third position the sequence will also feature a bulge. An example of such a sequence and its secondary structure expressed with dot-paren notation would be
+
+```
+5'- GGCCAUCGUUGCC -3'
+    ((.((....))))
+```
+:::
+
+:::{hint} A complex example: the input used to generate [](#fig:secondary_structure)
+
+[](#fig:secondary_structure) has been generated using the following prompt, where the first line is the sequence and the second line is the dot-paren representation of the associated secondary structure:
+
+```
+CGCUUCAUAAUGCACAUCCUCAAGCUGAUAGUGUGCUUGGGAAUGUCUGCACCAAGAGCCUUAAACUCUUGUGAUUAUGAAGUG
+...((((((.(((...((((.((((.....[[[.)))))))).]]]..))).((((((.......))))))....))))))...
+```
+
+Note the square brackets: this is a (non-standard but common) way of representing pseudoknots.
+:::
+
+There are other formats to store nucleic acid secondary structures that overcome some of the problems with the dot-paren notation (pseudoknot representation, lack of multi-strand support, poor readability, *etc.*), but none has become a standard yet. You can look at some examples [here](https://www.tbi.univie.ac.at/RNA/ViennaRNA/doc/html/io/rna_structures.html) or [here](https://it.mathworks.com/help/bioinfo/ug/predicting-and-visualizing-the-secondary-structure-of-rna-sequences.html).
+
 [^no_triplex]: This is already an approximation, since some non-canonical (*e.g.* Hoogsteen) base pairings can connect a nucleotide to another which is already involved in a base pair.
 
 ## Nearest-neighbour models
 
+Nearest-neighbour (NN) models for nucleic acids are computational frameworks used to predict the thermodynamic stability and secondary structure of DNA and RNA molecules. These models operate on the principle that the stability of a base pair is influenced primarily by its immediate neighbors rather than by more distant sequences. As we [already know](#sec:hybridisation), base stacking and hydrogen bonding are the main drivers for the formation of helical structures. Therefore, assuming that the stability of nucleic acid structures is determined primarily by the local sequence context (the identity and orientation of adjacent base pairs), the complex interactions within nucleic acids can be simplified by considering only the contributions of dinucleotide pairs, hence the "nearest-neighbour" name.
+
+The most used NN models are:
+
+* The SantaLucia model for DNA ([](doi:10.1146/annurev.biophys.32.110601.141800))
+* The Turner model for RNA ([](doi:10.1093/nar/gkl472))
+
+In addition, [here](https://rna.urmc.rochester.edu/NNDB/) is a useful website where several NN models are briefly described, and their parameters can be downloaded.
+
+In general, a NN model is defined by a list of contributions that make it possible to assign a free-energy cost to the secondary structure of a specific strand (or system of strands) in an additive way: the total free-energy cost of the structure is given by a sum of terms that refer to the sequence and type of each local secondary structure. The specific values that enter into the calculations are being constantly improved upon by means of careful experiments on many different sequences (similar in spirit to  those performed to obtain the sequence-dependent stacking strength, see box above). A recent example is [](doi:10.1093/nar/gkac261)). By contrast, the functional forms and the nature of the different free-energy terms are rather stable and did not change much in the last 20+ years.
+
+The contributions are given in terms of $\Delta H^\circ$ and $\Delta S^\circ$ or $\Delta G^\circ$ and $\Delta H^\circ$, which are linked by the relation
+
+$$
+\Delta G^\circ = \Delta H^\circ - T \Delta S^\circ.
+$$
+
+where the $^\circ$ superscript signals that these values refer to the free-energy differences estimated at the "standard" strand concentration of 1 molar (*i.e.* one mole per liter), $C^\circ$. If the strand concentration $C$ is different from $C^\circ$[^standard_conc], the final free-energy difference contains the additional entropic term
+
+$$
+\Delta S_C = - R \log C,
+$$
+
+where $R \approx 2$ cal / mol K is the gas constant.
+
+We now analyse the main free-energy contributions to the formation of secondary structures used in NN models.
+
+[^standard_conc]: In DNA nanotechnology the strand concentration is often of the order of $10^{-9}$ M.
+
+### Nearest-Neighbor Interactions
+
+Double-strand formation is driven by the combined effects of base stacking and hydrogen bonding between adjacent base pairs. In NN models, these are accounted by summing up the enthalpy and entropy contributions of each dinucleotide base steps. Therefore, for a sequence of length $N$ there are $N - 1$ terms. As an example, consider the two fully-complementary strands
+
+```
+5'- TACCTG -3'
+3'- ATGGAC -5'
+```
+
+In order to estimate the free-energy, we split the sequence into dinucleotide steps:
+
+```
+5'- TA AC CC CT TG -3'
+3'- AT TG GG GA AC -5'
+```
+
+so that the total contributions due to this term are given by
+
+$$
+\begin{aligned}
+\Delta H & = \Delta H_{\rm TA/AT} + \Delta H_{\rm AC/TG} + \Delta H_{\rm CC/GG} + \Delta H_{\rm CT/GA} + \Delta H_{\rm TG/AC}\\
+\Delta S & = \Delta S_{\rm TA/AT} + \Delta S_{\rm AC/TG} + \Delta S_{\rm CC/GG} + \Delta S_{\rm CT/GA} + \Delta S_{\rm TG/AC}
+\end{aligned}
+$$
+
+:::{warning}
+Remember that DNA and RNA strands have a **polarity**: the contributions due to CT/GA and TC/AC base steps differ! Always arrange the strands so that the top strand is listed in the 5' $\to$ 3' direction and the bottom strand in the 3' $\to$ 5' direction before splitting the sequence.
+:::
+
+### Terminal penalty
+
+Most NN models requires adding a correction term to the free energy that depends on the base pair at each end of the helix. In most cases the penalty is present only if the terminal base pair is AT (or TA) and it tends to be rather small. Therefore, it is important only for short sequences.
+
+### Initiation and Symmetry Terms
+
+The formation of a double helix requires an initial free-energy input to overcome entropy and start the pairing process. The term has to be added once per contiguous double-stranded region or helix.
+
+In the presence of self-complementary duplexes (*i.e.* if the sequence of the two strands composing a duplex is palindromic), there is an additional purely entropic term that takes into account the fact that a strand can pair with a copy of itself. Here is an example:
+
+```
+5'- AGCGCT -3'
+3'- TCGCGT -5'
+```
+
+### Loop Free Energies
+
+Forming a hairpins, bulges, external, internal or multibranched loops costs both entropy (since we constrain the strand backbone) and enthalpy (since the backbone has to be bent or twisted to some extent). These free-energy penalties are, in general, sequence-dependent, but the number of possible combinations grows exponentially with the loop size. Therefore, the free-energy cost of these motifs is usually approximated to depend only on the loop size (with some exceptions such as hairpins with loops of length three and four, see *e.g.* [](doi:10.1146/annurev.biophys.32.110601.141800)).
+
+(sec:mismatches)=
+### Penalties for Mismatches and Terminal Mismatches
+
+Non-complementary paired bases have a destabilising effect on secondary structure. The specific energetic penalty that applies depend on the sequence of the mismatch, but also whether it occurs at the ends of helices (terminal mismatch), or within the helix (internal mismatches, sometimes referred to as "1x1 internal loops". Both reduce the overall stability of the structure, but to different extents. The following example contains both types of mismatches (look at the first and fifth base pairs):
+
+```
+5'- CTACACTG -3'
+3'- TATGCGAC -5'
+```
+
+### Dangling Ends
+
+Dangling ends refer to unpaired nucleotides at the 5' or 3' ends of a helix that can stabilise specific secondary structures such as multibranched and exterior loops through additional stacking interactions. For instance, in this example the top strand has both a 5' and a 3' dangling end:
+
+```
+5'- ATACCTGC -3'
+3'-  ATGGAC  -5'
+```
+
+These terms tend to be sequence-dependent: in the example above, the contribution of the 5' dangling end would be different the sequence was TT/A or AC/A instead of AT/A. Note that a helix end extended on both strands has a [terminal mismatch](#sec:mismatches) rather than two dangling ends.
+
+### Coaxial Stacking Parameters
+
+Coaxial stacking refers to the stacking interactions between adjacent helices in branched or complex secondary structures, such as those found in multibranched loops or multi-strand systems. These interactions can significantly stabilize the overall structure by allowing helices to stack on top of each other in a manner similar to base stacking within a single helix.
+
+In most NN models, two types of coaxial stacking are handled: when two helices are directly adjacent and no intervening unpaired nucleotides are present ("flush coaxial stacking"), or when a single mistmatch occurs between the stacked helices ("mismatch-mediated coaxial stacking"). The following examples (taken from [here](https://rna.urmc.rochester.edu/NNDB/rna_2004/rna_2004_coaxial_stacking.html)) show the two cases, where the backbone is explicitly drawn using dashes:
+
+:::{card} Flush coaxial stacking
+```
+5'- C-A-G-A -3'
+3'- G-U C-U -5'
+      | |
+      G A
+      | |
+      5'3'
+```
+:::
+
+:::{card} Mismatch-mediated coaxial stacking
+```
+5'- C-A-G-A -3'
+3'- G-U A-U -5'
+      | |
+      G A
+      | |
+      5'3'
+```
+:::
+
+### Salt-Dependent Terms
+
+The stability of nucleic acid structures is influenced by the ionic environment, since cations like Na$^+$ and Mg$^{2+}$ shield the negative charges on the phosphate backbone and reduce electrostatic repulsion between strands. Note that, as far as I know, only the SantaLucia NN model for DNA, presented in [](doi:10.1146/annurev.biophys.32.110601.141800), takes into account this contribution through the following entropic term:
+
+$$
+\Delta S_{\rm salt} = 0.368 \frac{N_f}{2} \log C_S,
+$$
+
+where $N_f$ is the number of phosphates in the duplex, so that $N_f / 2 = N$ is, under usual conditions, the duplex length, $C_S$ is the molar concentration of monovalent cations[^magnesium], and the resulting contribution is in units of cal / mol K.
+
+[^magnesium]: Magnesium and other multivalent cations are not supported.
+
+## The two-state model
+
+### Duplex formation
+
+One of the most straightforward applications of any NN model is to model the thermodynamics of duplex formation in a system composed of just two (perfectly or partially) complementary strands, A and B. If the sequences are such that the possibility of stable intermediates can be neglected (that is, if the strands spend most of the time either free in solution or bound to each other), hybridisation can be described as a two-state process. The latter, in turn, is formally equivalent to the chemical equilibrium between two reactants and a product, *viz.*
+
+$$
+A + B \rightleftharpoons AB.
+$$
+
+The two-state model works particularly well for short strands (*i.e.* oligonucleotides) since, if they do not contain repeating patterns or similar "pathological" sequences, are more unlikely to exhibit metastable intermediates, *i.e.*, states with secondary structures whose stability can almost match that of the product.
+
+Under the two-state assumption, equilibrium is described by the law of mass action equation
+
+$$
+K_{AB} = \frac{C_A C_B}{C_{AB}},
+$$
+
+where $C_X$ is the (molar) concentration of $X$ and K is the dissociation constant associated to the reaction, which is in turn connected to the free-energy difference between the two states, $\Delta G_{AB}^\circ$, through
+
+$$
+K_{AB} = C^\circ \exp\left( \beta \Delta G_{AB}^\circ \right),
+$$
+
+hence
+
+$$
+\frac{C_A C_B}{C_{AB}} = C^\circ )\exp\left( \beta \Delta G_{AB}^\circ \right.
+$$ (eq:equilibrium)
+
+:::{hint} The dissociation constant
+The dissociation constant, often denoted as $K_d$​, is a measure of the affinity between two molecules in a binding interaction, such as between between DNA strands in a duplex or a protein and its ligand. It is expressed in units of concentration (typically molarity, M), representing the concentration at which half of the strands are bound in duplexes, or half of the binding sites are occupied by the ligand. A lower $K_d$​ value indicates higher affinity, meaning the molecules are more likely to remain bound together at lower concentrations. Conversely, a higher $K_d$ suggests weaker binding, indicating that higher concentrations are needed for significant binding to occur.
+:::
+
+We define the concentrations of the two isolated strands (*i.e.* when $C_{AB} = 0$) as $C_{A,0}$ and $C_{B,0}$, so that the total strand concentration is $C_0 \equiv C_{A,0} + C_{B,0}$. Without loss of generality we assume that $C_{A,0} \leq C_{B,0}$.
+
+Every time a duplex forms, the number of A and B strands decreases by one each, so that the total strand concentration can be written as $C_0 = C_A + C_B + 2 C_{AB}$. We first compute the *melting temperature* $T_m$, which is the temperature at which half of duplexes are formed. Under this condition $C_{AB} = C_A$, since the number of duplexes that can form is controlled by the number of strands in the minority species. Under this condition, Eq. [](#eq:equilibrium) becomes
+
+$$
+\frac{C_B}{C^\circ} = \exp\left( \frac{\Delta G_{AB}^\circ}{R T_m} \right),
+$$
+
+which, recalling that $\Delta G_{AB}^\circ = \Delta H_{AB}^\circ - T \Delta S_{AB}^\circ$, can be used to obtain the following expression for $T_m$:
+
+$$
+T_m = \frac{\Delta H_{AB}^\circ}{\Delta S_{AB}^\circ + R \log\left( \frac{C_B}{C^\circ} \right)}.
+$$
+
+However, since $C_B = C_0 - C_A - 2 C_{AB} = C_0 - 3 C_A = C_{A,0} + C_{B,0}$, and, by definition of melting temperature, $C_A = C_{A,0} / 2$, so that $C_B = C_{B,0} - C_{A,0} / 2$, we find
+
+$$
+T_m = \frac{\Delta H_{AB}^\circ}{\Delta S_{AB}^\circ + R \log\left( \frac{2C_{B,0} - C_{A,0}}{2 C^\circ} \right)}.
+$$ (eq:T_m_general)
+
+In the common case of equimolarity, *i.e.* when $C_{B,0} = C_{A,0} = C_0 / 2$, Eq. [](#eq:T_m_general) simplifies to
+
+$$
+T_m = \frac{\Delta H_{AB}^\circ}{\Delta S_{AB}^\circ + R \log\left( \frac{C_0}{4 C^\circ} \right)}.
+$$ (eq:T_m_equi)
+
+:::{warning} The $C^\circ$ factor
+In most of the cases, the $C^\circ$ factor in Eq. [](#eq:T_m_equi) is omitted, since $C^\circ = 1$ M. However, as a physicist, you should always distrust equations where the arguments of mathematical functions such as $\log$, $\exp$, $\cos$, *etc.* have physical dimensions. As a rule, you can disregard dimension issues only if you understand where they come from.
+:::
+
+The denominator of Eq. [](#eq:T_m_equi) can be rewritten as $\Delta S_{AB}^\circ + R \log\left( \frac{C_0}{4 C^\circ} \right) = \Delta S_{AB}^\circ + R \log\left( \frac{C_{0,A}}{2 C^\circ} \right) = \Delta S_{AB} - R \log 2$, where
+
+$$
+\Delta S_{AB} \equiv \Delta S_{AB}^\circ + R \log \left( \frac{C_{0,A}}{C^\circ} \right)
+$$ (eq:renormalised_entropy)
+
+is a renormalised entropy difference that takes into account the concentration at which the reaction takes place. Using Eq. [](#eq:renormalised_entropy) makes it possible to directly drive the free-energy difference $\Delta G_{AB} = \Delta H_{AB}^\circ - T \Delta S_{AB}$ between the $A + B$ and $AB$ states at any strand concentration. In the general case $C_{A,0} \leq C_{B,0}$, the additional entropic factor is $R\log \left( \frac{2C_{B,0} - C_{A,0}}{C^\circ} \right)$.
+
+```{figure} figures/SantaLucia.png
+:name: fig:SantaLucia
+:align: center
+:width: 600px
+
+Experimental versus predicted melting temperatures of DNA oligonucleotides. (a) Data for 264 duplexes of length 4 to 16 bp in solution with 1 M of NaCl. (b) Data for 81 duplexes of length 6 to 24 bp in solution with variable NaCl concentration ranging from 0.01 to 0.5 M. Adapted from [](doi:10.1146/annurev.biophys.32.110601.141800).
+```
+
+[](#fig:SantaLucia) shows a comparison between the experimental and theoretical melting temperatures of hundreds of DNA oligonucleotides predicted with the [SantaLucia model](doi:10.1146/annurev.biophys.32.110601.141800). The average absolute deviation is smaller than $2.3$ K.
+
+### Hairpin formation
+
+Hairpin formation can also be modelled as a two-state process, where the equilibrium is between the open (random coil) and closed (stem-loop or hairpin) states:
+
+$$
+{\rm Coil} \rightleftharpoons {\rm Hairpin}.
+$$
+
+In this case the overall strand concentration does not play any role[^hairpin_conc], and the dissociation equilibrium is given by
+
+$$
+\frac{C_c}{C_h} = e^{\beta \Delta G_{ch}^\circ},
+$$
+
+where $C_c$ and $C_h$ are the concentrations of strands in the coil and hairpin conformations, respectively, and $\Delta G_{h}^\circ$ is the free-energy difference between the two states. The condition for the melting temperature $C_c = C_h$, which yields
+
+$$
+T_m = \frac{\Delta H^\circ}{\Delta S^\circ}.
+$$
+
+[^hairpin_conc]: If we can neglect the interaction between different strands, *i.e.* if the overall concentration is low enough that we can assume ideal gas behaviour.
+
+### Melting curves
+
+We now consider a generic nucleic acid system where one or more strands can pair and/or fold into a product P. We define the melting curve as the yield of P, in terms of concentration or fraction of formed product, as a function of temperature or another thermodynamic parameter that is changed experimentally, such as pH or salt concentration.
+
+I will know show how the same two-state formalism introduced ealier can be used to predict the melting curve of a system. For the sake of simplicity I will use the $A + B \rightleftharpoons AB$ system with $C_{A,0} = C_{B,0}$. Defining $X$ as the probability that a strand is *not* part of a duplex, the equilibrium concentrations can be written as $C_A = C_B = X C_{A,0}$ and $C_{AB} = (1 - X) C_{A,0}$. Substituting these relations in Eq. [](#eq:equilibrium) and simplifying common factors we find
+
+$$
+\frac{X^2}{1 - X} = \frac{C^\circ}{C_{A,0}} e^{\beta \Delta G_{AB}^\circ} = e^{\beta \Delta G_{AB}},
+$$
+
+where we have used the renormalised entropy to obtain the latter relation. Resolving for $X$ and taking the positive root we find
+
+$$
+X = \frac{-e^{\beta \Delta G_{AB}} + \sqrt{e^{2\beta \Delta G_{AB}} + 4e^{\beta \Delta G_{AB}}}}{2} = \frac{-1 + \sqrt{1 + 4 e^{-\beta \Delta G_{AB}}}}{2 e^{-\beta \Delta G_{AB}}}.
+$$
+
+From $X$ the duplex yield can be computed as $p_b = 1 - X$ (which is the probability that a strand is in a duplex), and the duplex concentration as $C_{AB} = p_b C_{A,0}$.
+
+```{figure} figures/DNA_melting_comparison.png
+:name: fig:DNA_melting_comparison
+:align: center
+:width: 250px
+
+
+The yield of a 10-bp duplex as predicted by SantaLucia (red line), and two coarse-grained simulation models, oxDNA and oxDNA2. Adapted from [](doi:10.1063/1.4921957).
+```
+
+[](#fig:DNA_melting_comparison) shows the yield of a oligonucleotide of 10 bp as predicted by the SantaLucia NN model and by simulations of two coarse-grained models.
+
+# Tertiary structure
+
+The tertiary structure of nucleic acids is, in general, much simpler than that of proteins. This is due to the more limited variety of building blocks involved (4 *vs* 20), and to the charged (and, in general, hydrophilic) nature of the DNA and RNA backbones, which tend to destabilise the type of "super-secondary structures" that are so common in proteins. Moreover, the lack of tightly-packed structures blurs the difference between secondary and tertiary structures, since most of the times, especially in simple systems, the tertiary structure is straightforwardly implied by the secondary structure.
+
+In general, the most dominant tertiary structure of RNA and DNA is the double helix, and is the main one we will consider going forward. Many different helical structures have been discovered in biological contexts or synthesised artificially under specific conditions. However, here I will present only the three main ("canonical") ones.
 
 (sec:canonical_helices)=
-# Canonical helices
+## Canonical helices
 
 When two complementary strands pair together, they wrap around each other and form a periodic helical structure. The type of the resulting helix depends, in general, on the strand type (DNA or RNA), external conditions (ionic strength, pH, water concentration, *etc.*), and sequence.
 
-## B-DNA
+### B-DNA
 
 ```{figure} figures/bdna.png
 :name: fig:bdna
@@ -160,7 +552,7 @@ The single most important conformation of DNA is B-DNA, which is the famous doub
 1. The strands run in an anti-parallel fashion: look at the orientation of facing pentagons, or at the way bases are connected to the sugars.
 2. Base pairs have essentially zero inclination with respect to the helical axis.
 
-## A-DNA and A-RNA
+### A-DNA and A-RNA
 
 ```{figure} figures/adna.png
 :name: fig:adna
@@ -174,7 +566,7 @@ DNA turns into its A form when dyhdrated, which can happen as a result of human 
 
 [](#fig:adna) shows a perfect A-DNA helix made of the same number of base pairs as the one shown in [](#fig:bdna). Compared to B-DNA, it is evident that A-DNA is shorter and thicker, and the base pairs are inclined by $\approx 20^\circ$ with respect to the helical axis.
 
-## Z-DNA
+### Z-DNA
 
 ```{figure} figures/zdna.png
 :name: fig:zdna
@@ -202,5 +594,13 @@ Another important DNA conformation is Z-DNA, which is a less common and structur
 :::
 
 A comparison between the average properties of the three main helical conformations is shown in [](#tbl:helices).
+
+## Other tertiary motifs
+
+Other important tertiary motifs are those that can connect more than two strands together, or two sections of the same strand that are far apart from each other. For instances, in triplexes (*i.e.*  triple-stranded DNA or RNA) a third strand can bind in the major groove of a duplex through Hoogsteen base pairings, or in RNA in the minor groove by leveraging the presence of the additional hydroxyl group in the sugar.
+
+Hoogsteen base pairings can also lead to the formation of quadruplexes, which can occur in a variety of patterns, including intramolecular (within a single strand), intermolecular (between different strands), and hybrid types. A strand (or multiple strands) with a high number of consecutive guanine bases folds back on itself (or aligns with other strands) to bring the G bases into proximity. Four guanine bases form a planar structure known as a G-tetrad through Hoogsteen hydrogen bonding, and multiple G-tetrads stack on top of each other, stabilized by the $\pi-\pi$interactions between the aromatic rings of the guanine bases.
+
+Finally, as mentioned earlier, pseudoknots and coaxial stacking interactions can also seen as mechanisms the can lead to the formation of particular tertiary structures, since they can stabilise multi-strand (or multi-loop) structures.
 
 [^Z-DNA_pucker]: The alternating pyrimidines and purines take the C2'-endo and C3'-endo conformations, respectively.

@@ -46,6 +46,10 @@ Most of the acronyms that are scattered throughout the text show tooltips when h
 | Average nucleotide mass|$\approx 330 \to 300$ Da|
 | Average amino acid mass|$\approx 110 \to 100$ Da|
 
+:::{warning} Abuse of notation
+When dealing with free energies and Boltzmann factors, it is practical to use the quantity $\beta \equiv 1 / k_B T$, which is expressed in units of measure of $J^{-1}$. However, in chemical physics and biophysics it is more common to use calories. As a result, I will frequently use $\beta$ to mean $1 / RT$.
+:::
+
 ## The central dogma of biology
 
 The single most important fact about biology is the so-called "central dogma of biology", which is a framework that describes the flow of genetic information in biological systems. It was formulated by Francis Crick[^dogma] and presented to the public in a famous lecture given on September 19th in 1957 [](doi:10.1371/journal.pbio.2003243). The first formulation of the central dogma is shown in [](#central-dogma), where arrows indicate the *flow of information*: what is used to build what. Note that DNA $\to$ protein and RNA $\to$ DNA information transfers were highly speculative at that time (and in fact DNA $\to$ protein transfers have not been observed *in vivo*).

@@ -719,6 +719,7 @@ A GPCR protein (taken from [here](https://www.rcsb.org/structure/4GBR)) embedded
 
 [^GPCR]: "Many druggable targets for treatment of common diseases involve G-protein-coupled receptors (GPCRs) that mediate therapeutic effects of $\approx 34\%$ of the marketed drugs. The sales of GPCR targeting drugs represent a global market share of over 27% [more than 180 billion US dollars]" [](doi:10.1016/j.cell.2017.11.033)).
 
+(sec:beta-barrels)=
 ### $\beta$-barrels
 
 $\beta$-barrels are cylindrical structures that are a common feature in the outer membranes of gram-negative bacteria, mitochondria, and chloroplasts. Each $\beta$-barrel is formed by $\beta$-strands that are hydrogen-bonded to each other in a sheet and then wrapped around to form a closed barrel. The edges of the $\beta$-sheet are connected by short loops that create a continuous surface.
@@ -757,7 +758,7 @@ The main levels of classification in SCOP are as follows:
 While I will not delve[^delve] too much on the classification, which would be outside of the scope of these lectures, I want to provide some examples of folds (also known as "supersecondary structures"). I will provide one example for each class of proteins, starting with two examples we have already encountered: even though they are not globular (nor water-soluble), they contain some common motifs that are also rather easy to identify:
 
 * [GPCRs](#fig:GPCR) are transmembrane $\alpha$-proteins characterised by an up-and-down bundle of seven transmembrane helices. Helical bundles are very common folds in proteins, and this particular one is [a fold on its own](https://www.ebi.ac.uk/pdbe/scop/term/2000339) according to SCOP.
-* The [E. coli porin](#fig:porin) is a transmembrane $\beta$-protein of the [Porins superfamily](https://www.ebi.ac.uk/pdbe/scop/term/3000224). The main structural motif is a [$\beta$-barrel](#beta-barrels), which on SCOP is [not a proper fold](https://www.ebi.ac.uk/pdbe/scop/term/2000193), since $\beta$-barrels can be very different with each other, and are classified according to two numbers:
+* The [E. coli porin](#fig:porin) is a transmembrane $\beta$-protein of the [Porins superfamily](https://www.ebi.ac.uk/pdbe/scop/term/3000224). The main structural motif is a [$\beta$-barrel](#sec:beta-barrels), which on SCOP is [not a proper fold](https://www.ebi.ac.uk/pdbe/scop/term/2000193), since $\beta$-barrels can be very different with each other, and are classified according to two numbers:
   * the number of $\beta$-strands in the barrel;
   * the ["shear number"](https://en.wikipedia.org/wiki/Beta_barrel#Shear_number), which is a measure of the staggering of nearby strands.
 

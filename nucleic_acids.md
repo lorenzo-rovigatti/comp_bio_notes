@@ -94,6 +94,7 @@ Interestingly the spontaneous process through which single strands pair and form
 
 In addition to hydrogen bonding, duplexes are stabilised by interactions acting between the aromatic rings of consecutive nitrogenous bases. These so-called base stacking interactions have a hydrophobic nature that is complemented by van der Waals and dipole-dipole termsthat contribute significantly to the stability and structural integrity of the DNA molecule. Rather counterintuitively, there is now ample evidence that base stacking is at least as important for duplex stability as base pairing, if not more (see *e.g.* [](doi:10.1093/nar/gkj454), [](doi:10.1016/j.plrev.2017.11.012), and [](doi:10.1038/s41565-023-01485-1)).
 
+(box:stacking)=
 :::{hint} Measuring the stacking strength
 
 The classic study of [](doi:10.1016/j.jmb.2004.07.075) used a clever experimental setup based on the observation that a duplex where one of the composing strands is broken in two (*i.e.* it is *nicked*) has a mobility that is lower compared to an intact one. The reason is that a nicked strand can take two conformations: one straight, where all the stacking interactions are present that resembles that of an intact duplex, and one kinked, where all base pairs are formed but the stacking interaction at the nicked site is broken.
@@ -187,6 +188,7 @@ The (a) secondary and (b) threedimensional structure of a tRNA ([yeast phenylala
 [^aaRS]: There is one aminoacyl-tRNA synthetase for each amino acid of the genetic code: in humans, there are 20.
 :::
 
+(sec:dot-paren)=
 ## Dot-paren notation
 
 Dot-paren notation provides a clear and concise way to represent the secondary structure of nucleic acids, showing which nucleotides are paired or unpaired, regardless of their identity. It is a useful tool for storing information about complex secondary structures, and for exchanging this information to and from computational tools.
@@ -213,7 +215,7 @@ The dot-paren notation uses dots and parentheses to indicate unpaired and paired
    - Example: `((..((...))..))` represents a structure where there is a small internal loop of size 2 within a larger stem, while `((.(...)))` represents a stem-loop with a single bulge.
 5. **Multibranch Loops and Pseudoknots:**
    - Multibranch loops involve multiple stems and are, in general, complex to represent.
-   - Pseudoknots, which involve base pairs crossing one another, are not well-represented by simple dot-paren notation but can be indicated with additional notation if necessary (see the complex example in the box below).
+   - Pseudoknots, which involve base pairs crossing one another, are not well-represented by simple dot-paren notation but can be indicated with additional notation if necessary (see the complex example in the [box below](#box:dot_paren_complex)).
 
 :::{hint} Two simple examples
 Consider the following RNA sequence, which forms a hairpin with stem and loop of size 4:
@@ -235,6 +237,7 @@ If a nucleotide is added in third position the sequence will also feature a bulg
 ```
 :::
 
+(box:dot_paren_complex)=
 :::{hint} A complex example: the input used to generate [](#fig:secondary_structure)
 
 [](#fig:secondary_structure) has been generated using the following prompt, where the first line is the sequence and the second line is the dot-paren representation of the associated secondary structure:
@@ -251,6 +254,7 @@ There are other formats to store nucleic acid secondary structures that overcome
 
 [^no_triplex]: This is already an approximation, since some non-canonical (*e.g.* Hoogsteen) base pairings can connect a nucleotide to another which is already involved in a base pair.
 
+(sec:NN_models)=
 ## Nearest-neighbour models
 
 Nearest-neighbour (NN) models for nucleic acids are computational frameworks used to predict the thermodynamic stability and secondary structure of DNA and RNA molecules. These models operate on the principle that the stability of a base pair is influenced primarily by its immediate neighbors rather than by more distant sequences. As we [already know](#sec:hybridisation), base stacking and hydrogen bonding are the main drivers for the formation of helical structures. Therefore, assuming that the stability of nucleic acid structures is determined primarily by the local sequence context (the identity and orientation of adjacent base pairs), the complex interactions within nucleic acids can be simplified by considering only the contributions of dinucleotide pairs, hence the "nearest-neighbour" name.
@@ -262,7 +266,7 @@ The most used NN models are:
 
 In addition, [here](https://rna.urmc.rochester.edu/NNDB/) is a useful website where several NN models are briefly described, and their parameters can be downloaded.
 
-In general, a NN model is defined by a list of contributions that make it possible to assign a free-energy cost to the secondary structure of a specific strand (or system of strands) in an additive way: the total free-energy cost of the structure is given by a sum of terms that refer to the sequence and type of each local secondary structure. The specific values that enter into the calculations are being constantly improved upon by means of careful experiments on many different sequences (similar in spirit to  those performed to obtain the sequence-dependent stacking strength, see box above). A recent example is [](doi:10.1093/nar/gkac261)). By contrast, the functional forms and the nature of the different free-energy terms are rather stable and did not change much in the last 20+ years.
+In general, a NN model is defined by a list of contributions that make it possible to assign a free-energy cost to the secondary structure of a specific strand (or system of strands) in an additive way: the total free-energy cost of the structure is given by a sum of terms that refer to the sequence and type of each local secondary structure. The specific values that enter into the calculations are being constantly improved upon by means of careful experiments on many different sequences (similar in spirit to  those performed to obtain the sequence-dependent stacking strength, see [the box above](#box:stacking)). A recent example is [](doi:10.1093/nar/gkac261)). By contrast, the functional forms and the nature of the different free-energy terms are rather stable and did not change much in the last 20+ years.
 
 The contributions are given in terms of $\Delta H^\circ$ and $\Delta S^\circ$ or $\Delta G^\circ$ and $\Delta H^\circ$, which are linked by the relation
 
@@ -384,10 +388,10 @@ In most NN models, two types of coaxial stacking are handled: when two helices a
 The stability of nucleic acid structures is influenced by the ionic environment, since cations like Na$^+$ and Mg$^{2+}$ shield the negative charges on the phosphate backbone and reduce electrostatic repulsion between strands. Note that, as far as I know, only the SantaLucia NN model for DNA, presented in [](doi:10.1146/annurev.biophys.32.110601.141800), takes into account this contribution through the following entropic term:
 
 $$
-\Delta S_{\rm salt} = 0.368 \frac{N_f}{2} \log C_S,
+\Delta S_{\rm salt} = 0.368 \frac{N_p}{2} \log C_S,
 $$
 
-where $N_f$ is the number of phosphates in the duplex, so that $N_f / 2 = N$ is, under usual conditions, the duplex length, $C_S$ is the molar concentration of monovalent cations[^magnesium], and the resulting contribution is in units of cal / mol K.
+where $N_p$ is the number of phosphates in the duplex, so that $N_f / 2 = N$ is, under usual conditions, the duplex length, $C_S$ is the molar concentration of monovalent cations[^magnesium], and the resulting contribution is in units of cal / mol K.
 
 [^magnesium]: Magnesium and other multivalent cations are not supported.
 

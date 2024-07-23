@@ -28,6 +28,7 @@ project:
         HB: hydrogen bond
         BP: base pair
         NN: nearest-neighbour
+    numbering: true
 site:
     template: book-theme
     options:

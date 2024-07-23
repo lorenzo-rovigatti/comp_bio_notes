@@ -1,0 +1,2666 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.0"
+   width="720.65997"
+   height="600"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="transcription.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <metadata
+     id="metadata152">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:window-height="1109"
+     inkscape:window-width="1920"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:zoom="0.91999004"
+     inkscape:cx="265.22026"
+     inkscape:cy="283.15524"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:current-layer="svg2"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     height="600px"
+     inkscape:window-maximized="1" />
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient5499">
+      <stop
+         style="stop-color:#84057a;stop-opacity:1"
+         offset="0"
+         id="stop5501" />
+      <stop
+         style="stop-color:#f5f2f4;stop-opacity:1"
+         offset="1"
+         id="stop5503" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5491">
+      <stop
+         style="stop-color:#05846f;stop-opacity:1"
+         offset="0"
+         id="stop5493" />
+      <stop
+         style="stop-color:#fcfcfc;stop-opacity:1"
+         offset="1"
+         id="stop5495" />
+    </linearGradient>
+    <marker
+       refX="0"
+       refY="0"
+       orient="auto"
+       style="overflow:visible"
+       id="Arrow1Mend">
+      <path
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         id="path5303" />
+    </marker>
+    <marker
+       refX="0"
+       refY="0"
+       orient="auto"
+       style="overflow:visible"
+       id="Arrow1Lend">
+      <path
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         id="path5297" />
+    </marker>
+    <linearGradient
+       id="linearGradient5233">
+      <stop
+         style="stop-color:#004d77;stop-opacity:1"
+         offset="0"
+         id="stop5241" />
+      <stop
+         style="stop-color:#7fa6bb;stop-opacity:1"
+         offset="0.53571427"
+         id="stop5247" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1"
+         offset="1"
+         id="stop5237" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3201">
+      <stop
+         style="stop-color:#770000;stop-opacity:1"
+         offset="0"
+         id="stop3203" />
+      <stop
+         style="stop-color:#a1432b;stop-opacity:1"
+         offset="0.2331792"
+         id="stop3205" />
+      <stop
+         style="stop-color:#cc9c8f;stop-opacity:1"
+         offset="0.7254464"
+         id="stop3207" />
+      <stop
+         style="stop-color:#f8f5f4;stop-opacity:1"
+         offset="1"
+         id="stop3209" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3191">
+      <stop
+         style="stop-color:#460077;stop-opacity:1"
+         offset="0"
+         id="stop3193" />
+      <stop
+         style="stop-color:#682ba1;stop-opacity:1"
+         offset="0.2331792"
+         id="stop3195" />
+      <stop
+         style="stop-color:#af8fcc;stop-opacity:1"
+         offset="0.7254464"
+         id="stop3197" />
+      <stop
+         style="stop-color:#f7f4f8;stop-opacity:1"
+         offset="1"
+         id="stop3199" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3146">
+      <stop
+         style="stop-color:#770000;stop-opacity:1"
+         offset="0"
+         id="stop3148" />
+      <stop
+         style="stop-color:#a1432b;stop-opacity:1"
+         offset="0.2331792"
+         id="stop3171" />
+      <stop
+         style="stop-color:#cc9c8f;stop-opacity:1"
+         offset="0.7254464"
+         id="stop3177" />
+      <stop
+         style="stop-color:#f8f5f4;stop-opacity:1"
+         offset="1"
+         id="stop3173" />
+    </linearGradient>
+    <radialGradient
+       cx="282.80945"
+       cy="418.1691"
+       r="39.566284"
+       fx="282.80945"
+       fy="418.1691"
+       id="radialGradient5208"
+       xlink:href="#linearGradient3191"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.4019415,0.04806513,-0.06135845,2.8979794,-88.014652,-789.07394)" />
+    <radialGradient
+       cx="282.80945"
+       cy="418.1691"
+       r="39.566284"
+       fx="282.80945"
+       fy="418.1691"
+       id="radialGradient5212"
+       xlink:href="#linearGradient3191"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.4019415,0.04806513,-0.06135845,2.8979794,-88.014652,-789.07394)" />
+    <radialGradient
+       cx="282.80945"
+       cy="418.1691"
+       r="39.566284"
+       fx="282.80945"
+       fy="418.1691"
+       id="radialGradient5222"
+       xlink:href="#linearGradient3191"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.4019415,0.04806513,-0.06135845,2.8979794,-88.014652,-789.07394)" />
+    <radialGradient
+       cx="290.42505"
+       cy="419.34753"
+       r="48.330776"
+       fx="290.42505"
+       fy="419.34753"
+       id="radialGradient5231"
+       xlink:href="#linearGradient3146"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.0803929,-3.8882591e-7,1.7120026e-7,0.9159981,-322.81221,33.523529)" />
+    <radialGradient
+       cx="285.86276"
+       cy="417.98758"
+       r="39.566284"
+       fx="285.86276"
+       fy="417.98758"
+       id="radialGradient5239"
+       xlink:href="#linearGradient5233"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.4307388,-0.08750647,0.05037958,3.1767015,-144.19021,-866.79672)" />
+    <radialGradient
+       cx="282.56873"
+       cy="418.71005"
+       r="39.566284"
+       fx="282.56873"
+       fy="418.71005"
+       id="radialGradient5497"
+       xlink:href="#linearGradient5491"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.1986635,-0.01512333,0.04144778,3.7399174,-356.05944,-1124.2463)" />
+    <radialGradient
+       cx="287.36298"
+       cy="414.7489"
+       r="39.566284"
+       fx="287.36298"
+       fy="414.7489"
+       id="radialGradient5505"
+       xlink:href="#linearGradient5499"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.4927451,-0.07032026,0.00754873,2.7446784,-144.72754,-688.46032)" />
+    <radialGradient
+       cx="282.80945"
+       cy="418.1691"
+       r="39.566284"
+       fx="282.80945"
+       fy="418.1691"
+       id="radialGradient5208-7"
+       xlink:href="#linearGradient3191"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.52713484,0.01420239,-0.02307099,0.85630118,-59.805277,-239.05957)" />
+    <radialGradient
+       cx="282.80945"
+       cy="418.1691"
+       r="39.566284"
+       fx="282.80945"
+       fy="418.1691"
+       id="radialGradient5212-8"
+       xlink:href="#linearGradient3191"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.52713484,0.01420239,-0.02307099,0.85630118,-30.596472,-232.68392)" />
+    <radialGradient
+       cx="282.80945"
+       cy="418.1691"
+       r="39.566284"
+       fx="282.80945"
+       fy="418.1691"
+       id="radialGradient5222-8"
+       xlink:href="#linearGradient3191"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.52713484,0.01420239,-0.02307099,0.85630118,-12.570822,-243.11106)" />
+    <radialGradient
+       cx="290.42505"
+       cy="419.34753"
+       r="48.330776"
+       fx="290.42505"
+       fy="419.34753"
+       id="radialGradient5231-6"
+       xlink:href="#linearGradient3201"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.7956917,-3.3561519e-7,1.4777155e-7,0.79064401,-341.25685,-287.80336)" />
+    <radialGradient
+       cx="285.86276"
+       cy="417.98758"
+       r="39.566284"
+       fx="285.86276"
+       fy="417.98758"
+       id="radialGradient5239-0"
+       xlink:href="#linearGradient5233"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.92396713,-0.02877633,0.03253499,1.0446522,-140.56736,-287.89382)" />
+    <radialGradient
+       cx="282.56873"
+       cy="418.71005"
+       r="39.566284"
+       fx="282.56873"
+       fy="418.71005"
+       id="radialGradient5497-4"
+       xlink:href="#linearGradient5491"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.82322379,-0.00718757,0.01551888,1.7774465,-150.00981,-589.26202)" />
+    <radialGradient
+       cx="287.36298"
+       cy="414.7489"
+       r="39.566284"
+       fx="287.36298"
+       fy="414.7489"
+       id="radialGradient5505-6"
+       xlink:href="#linearGradient5499"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0374864,-0.01180922,0.00524651,0.46092696,-196.65538,-51.118061)" />
+    <marker
+       refX="0"
+       refY="0"
+       orient="auto"
+       style="overflow:visible"
+       id="Arrow1Mend-5">
+      <path
+         d="M 0,0 L 5,-5 L -12.5,0 L 5,5 L 0,0 z "
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         id="path5303-6" />
+    </marker>
+    <marker
+       refX="0"
+       refY="0"
+       orient="auto"
+       style="overflow:visible"
+       id="Arrow1Lend-4">
+      <path
+         d="M 0,0 L 5,-5 L -12.5,0 L 5,5 L 0,0 z "
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         id="path5297-6" />
+    </marker>
+    <radialGradient
+       cx="282.80945"
+       cy="418.1691"
+       r="39.566284"
+       fx="282.80945"
+       fy="418.1691"
+       id="radialGradient5208-4"
+       xlink:href="#linearGradient3191"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.52713484,0.01420239,-0.02307099,0.85630118,-59.805276,-64.840694)" />
+    <radialGradient
+       cx="282.80945"
+       cy="418.1691"
+       r="39.566284"
+       fx="282.80945"
+       fy="418.1691"
+       id="radialGradient5212-1"
+       xlink:href="#linearGradient3191"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.52713484,0.01420239,-0.02307099,0.85630118,-30.596471,-58.465044)" />
+    <radialGradient
+       cx="282.80945"
+       cy="418.1691"
+       r="39.566284"
+       fx="282.80945"
+       fy="418.1691"
+       id="radialGradient5222-5"
+       xlink:href="#linearGradient3191"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.52713484,0.01420239,-0.02307099,0.85630118,-12.570821,-68.892184)" />
+    <radialGradient
+       cx="290.42505"
+       cy="419.34753"
+       r="48.330776"
+       fx="290.42505"
+       fy="419.34753"
+       id="radialGradient5231-4"
+       xlink:href="#linearGradient3201"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.7956917,-3.3561519e-7,1.4777155e-7,0.79064401,-152.51928,-11.487222)" />
+    <radialGradient
+       cx="285.86276"
+       cy="417.98758"
+       r="39.566284"
+       fx="285.86276"
+       fy="417.98758"
+       id="radialGradient5239-1"
+       xlink:href="#linearGradient5233"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.92396713,-0.02877633,0.03253499,1.0446522,-140.56735,-113.67495)" />
+    <radialGradient
+       cx="282.56873"
+       cy="418.71005"
+       r="39.566284"
+       fx="282.56873"
+       fy="418.71005"
+       id="radialGradient5497-5"
+       xlink:href="#linearGradient5491"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.82322379,-0.00718757,0.01551888,1.7774465,-150.00981,-415.04315)" />
+    <radialGradient
+       cx="287.36298"
+       cy="414.7489"
+       r="39.566284"
+       fx="287.36298"
+       fy="414.7489"
+       id="radialGradient5505-5"
+       xlink:href="#linearGradient5499"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0374864,-0.01180922,0.00524651,0.46092696,-196.65538,123.10082)" />
+    <marker
+       refX="0"
+       refY="0"
+       orient="auto"
+       style="overflow:visible"
+       id="Arrow1Mend-50">
+      <path
+         d="M 0,0 L 5,-5 L -12.5,0 L 5,5 L 0,0 z "
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         id="path5303-60" />
+    </marker>
+    <marker
+       refX="0"
+       refY="0"
+       orient="auto"
+       style="overflow:visible"
+       id="Arrow1Lend-8">
+      <path
+         d="M 0,0 L 5,-5 L -12.5,0 L 5,5 L 0,0 z "
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         id="path5297-3" />
+    </marker>
+    <radialGradient
+       cx="282.80945"
+       cy="418.1691"
+       r="39.566284"
+       fx="282.80945"
+       fy="418.1691"
+       id="radialGradient5208-0"
+       xlink:href="#linearGradient3191"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.52713484,0.01420239,-0.02307099,0.85630118,-59.805278,148.8479)" />
+    <radialGradient
+       cx="282.80945"
+       cy="418.1691"
+       r="39.566284"
+       fx="282.80945"
+       fy="418.1691"
+       id="radialGradient5212-7"
+       xlink:href="#linearGradient3191"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.52713484,0.01420239,-0.02307099,0.85630118,-30.596473,155.22355)" />
+    <radialGradient
+       cx="282.80945"
+       cy="418.1691"
+       r="39.566284"
+       fx="282.80945"
+       fy="418.1691"
+       id="radialGradient5222-7"
+       xlink:href="#linearGradient3191"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.52713484,0.01420239,-0.02307099,0.85630118,-12.570823,144.79641)" />
+    <radialGradient
+       cx="290.42505"
+       cy="419.34753"
+       r="48.330776"
+       fx="290.42505"
+       fy="419.34753"
+       id="radialGradient5231-7"
+       xlink:href="#linearGradient3201"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.7956917,-3.3561519e-7,1.4777155e-7,0.79064401,-9.5543062,131.22494)" />
+    <radialGradient
+       cx="285.86276"
+       cy="417.98758"
+       r="39.566284"
+       fx="285.86276"
+       fy="417.98758"
+       id="radialGradient5239-6"
+       xlink:href="#linearGradient5233"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.92396713,-0.02877633,0.03253499,1.0446522,-140.56736,100.01364)" />
+    <radialGradient
+       cx="282.56873"
+       cy="418.71005"
+       r="39.566284"
+       fx="282.56873"
+       fy="418.71005"
+       id="radialGradient5497-9"
+       xlink:href="#linearGradient5491"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.82322379,-0.00718757,0.01551888,1.7774465,-150.00981,-201.35456)" />
+    <radialGradient
+       cx="287.36298"
+       cy="414.7489"
+       r="39.566284"
+       fx="287.36298"
+       fy="414.7489"
+       id="radialGradient5505-1"
+       xlink:href="#linearGradient5499"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0374864,-0.01180922,0.00524651,0.46092696,-196.65539,336.7894)" />
+  </defs>
+  <text
+     x="590.79761"
+     y="96.789772"
+     style="font-style:normal;font-weight:normal;font-size:15.5367px;font-family:Arial;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text5271-4"
+     xml:space="preserve"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <text
+     x="587.15497"
+     y="255.00865"
+     style="font-style:normal;font-weight:normal;font-size:15.5367px;font-family:Arial;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text5271-2"
+     xml:space="preserve"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <flowRoot
+     xml:space="preserve"
+     id="flowRoot2312-9"
+     style="line-height:0.01%;stroke-width:1.15855"
+     transform="matrix(0.86315027,0,0,0.86315027,19.4198,-229.28945)"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><flowRegion
+       id="flowRegion2314-2"
+       style="stroke-width:1.15855"><rect
+         id="rect2316-2"
+         width="44.565701"
+         height="16.304523"
+         x="222.82849"
+         y="92.143082"
+         style="stroke-width:1.15855" /></flowRegion><flowPara
+       id="flowPara2318-3"
+       style="font-size:12px;line-height:1.25;stroke-width:1.15855"> </flowPara></flowRoot>
+  <path
+     d="M 62.360409,125.06654 H 199.57488"
+     style="fill:none;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3215-6"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="M 62.360409,138.43409 H 199.57488"
+     style="fill:none;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3217-0"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 547.0758,138.43409 h 93.65255"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3219-9"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 547.0758,125.06654 h 93.65255"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3221-7"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 70.160437,125.13761 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3225-5"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 82.15099,125.13761 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3227-9"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 94.141541,125.13761 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3229-7"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 106.13209,125.13761 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3231-8"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 118.12264,125.13761 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3233-5"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 130.11319,125.13761 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3235-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 142.10374,125.13761 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3237-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 154.0943,125.13761 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3239-8"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 166.08486,125.13761 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3241-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 178.07539,125.13761 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3243-7"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="M 199.57488,125.06654 H 547.11812"
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3245-9"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="M 199.57488,138.43409 H 547.11812"
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3247-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 190.06596,125.1376 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3249-7"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 549.78252,125.13761 v 12.61567"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3251-8"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 202.05651,125.1376 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3253-7"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 214.04705,125.1376 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3255-4"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 226.03761,125.13761 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3257-1"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 238.02816,125.1376 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3259-9"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 250.01871,125.13761 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3261-0"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 262.00927,125.1376 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3263-9"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 273.99981,125.1376 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5144-8"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 285.99038,125.13761 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5146-8"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 297.98093,125.1376 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5148-5"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 309.97146,125.13761 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5150-8"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 321.96201,125.13761 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5152-4"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 333.95257,125.13761 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5154-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 345.94312,125.1376 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5156-7"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 357.93368,125.13761 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5158-1"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 369.92422,125.13761 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5160-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 381.91479,125.13761 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5162-8"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 393.90534,125.13761 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5164-0"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 405.89589,125.13761 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5166-9"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 417.88644,125.13761 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5168-7"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 429.87699,125.13761 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5170-9"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 441.86755,125.13761 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5172-9"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 453.85811,125.1376 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5174-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 465.84867,125.1376 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5176-2"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 477.83921,125.13761 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5178-4"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 489.82973,125.13761 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5180-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 501.8203,125.1376 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5182-7"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 513.81085,125.13761 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5184-1"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 525.80144,125.1376 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5186-2"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 537.79197,125.1376 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5188-2"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 561.77305,125.13761 v 12.61567"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5190-0"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 573.76362,125.13761 v 12.61567"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5192-2"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 585.75414,125.1376 v 12.61567"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5194-1"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 597.7447,125.1376 v 12.61567"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5196-7"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 609.7353,125.1376 v 12.61567"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5198-5"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 621.72581,125.13761 v 12.61567"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5200-1"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 633.71637,125.1376 v 12.61567"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5202-7"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 100.25088,112.26002 a 14.616034,22.629146 0 1 1 -10e-5,-0.49744"
+     style="fill:url(#radialGradient5208-7);fill-opacity:1;fill-rule:nonzero;stroke:#62098a;stroke-width:0.536999;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path3163-4"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 147.48533,108.20853 a 14.616034,22.629146 0 1 1 -0.002,-0.70082"
+     style="fill:url(#radialGradient5222-8);fill-opacity:1;fill-rule:nonzero;stroke:#62098a;stroke-width:0.536999;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path3211-1"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 109.7337,135.1076 a 14.554485,36.397491 0 1 1 -1e-4,-0.8001"
+     style="fill:url(#radialGradient5497-4);fill-opacity:1;fill-rule:nonzero;stroke:#05846f;stroke-width:0.679608;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path5204-7"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 129.45968,118.63567 a 14.616034,22.629146 0 1 1 -1e-4,-0.49744"
+     style="fill:url(#radialGradient5212-8);fill-opacity:1;fill-rule:nonzero;stroke:#62098a;stroke-width:0.536999;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path5210-1"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 170.61191,128.65586 a 25.103477,25.184436 0 1 1 -1.7e-4,-0.55361"
+     style="fill:url(#radialGradient5239-0);fill-opacity:1;fill-rule:nonzero;stroke:#055784;stroke-width:0.742433;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path5214-1"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 138.61507,131.65493 a 27.016835,12.861084 0 1 1 -1.9e-4,-0.28272"
+     style="fill:url(#radialGradient5505-6);fill-opacity:1;fill-rule:nonzero;stroke:#84057a;stroke-width:0.550403;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path5218-1"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 236.84432,27.982691 a 41.564964,24.037575 0 1 1 -0.006,-0.744433"
+     style="fill:url(#radialGradient5231-6);fill-opacity:1;fill-rule:nonzero;stroke:#841e05;stroke-width:0.554;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path2172-0"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <text
+     x="162.05922"
+     y="33.702602"
+     style="font-style:normal;font-weight:normal;font-size:18.0766px;line-height:0%;font-family:Arial;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text3154-4"
+     xml:space="preserve"
+     transform="scale(1.0471293,0.9549919)"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       x="162.05922"
+       y="33.702602"
+       id="tspan3156-0"
+       style="stroke-width:1px">RNAp</tspan></text>
+  <text
+     x="48.766991"
+     y="127.39357"
+     style="font-style:normal;font-weight:normal;font-size:15.5367px;line-height:0%;font-family:Arial;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text5249-8"
+     xml:space="preserve"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       x="48.766991"
+       y="127.39357"
+       id="tspan5251-5"
+       style="stroke-width:1px">5'</tspan></text>
+  <text
+     x="48.299744"
+     y="145.18819"
+     style="font-style:normal;font-weight:normal;font-size:15.5367px;line-height:0%;font-family:Arial;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text5253-1"
+     xml:space="preserve"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       x="48.299744"
+       y="145.18819"
+       id="tspan5255-6"
+       style="stroke-width:1px">3'</tspan></text>
+  <text
+     x="642.84497"
+     y="145.87628"
+     style="font-style:normal;font-weight:normal;font-size:15.5367px;line-height:0%;font-family:Arial;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text5257-6"
+     xml:space="preserve"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       x="642.84497"
+       y="145.87628"
+       id="tspan5259-2"
+       style="stroke-width:1px">5'</tspan></text>
+  <text
+     x="642.84497"
+     y="127.25291"
+     style="font-style:normal;font-weight:normal;font-size:15.5367px;line-height:0%;font-family:Arial;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text5261-1"
+     xml:space="preserve"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       x="642.84497"
+       y="127.25291"
+       id="tspan5263-9"
+       style="stroke-width:1px">3'</tspan></text>
+  <path
+     d="m 199.89938,148.44535 c 0,0 21.31382,15.04956 64.57347,15.15187 20.41888,0.0482 52.52314,-0.96605 74.24042,-4.50615 21.71728,-3.5401 31.82277,3.79433 31.82277,3.79433 0,0 10.19478,-8.35808 26.63656,-5.45951 16.83612,2.9681 54.94464,6.34931 76.5793,6.37473 43.2693,0.0508 72.30194,-14.94851 72.30194,-14.94851"
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="path5283"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <text
+     x="348.25494"
+     y="178.13225"
+     style="font-style:normal;font-weight:normal;font-size:17.263px;line-height:0%;font-family:Arial;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text5285"
+     xml:space="preserve"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       x="348.25494"
+       y="178.13225"
+       id="tspan5287"
+       style="stroke-width:1px">Gene</tspan></text>
+  <g
+     transform="matrix(0,0.65059555,-0.86315027,0,680.31662,-238.82469)"
+     id="g3467"
+     style="stroke-width:1.15855"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8">
+    <path
+       d="m 463.64866,563.09056 h 63.1784"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:5.33778;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:none"
+       id="path3887-8" />
+    <path
+       d="m 521.42855,17.668726 -11.78571,6.804485 v -13.60897 z"
+       transform="translate(19.048517,545.375)"
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:5.33778;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path3465" />
+  </g>
+  <text
+     xml:space="preserve"
+     style="font-size:16px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, '"
+     x="564.31384"
+     y="106.94566"
+     id="text29714"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       sodipodi:role="line"
+       x="564.31384"
+       y="106.94566"
+       id="tspan29720">Coding strand</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:16px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, '"
+     x="564.40759"
+     y="165.30537"
+     id="text47326"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       sodipodi:role="line"
+       id="tspan47324"
+       x="564.40759"
+       y="165.30537">Template strand</tspan></text>
+  <path
+     d="m 410.60595,280.16284 -2.22564,6.11487"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6953-9"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 421.58625,288.33966 -2.22564,6.11488"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6955-8"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 240.14135,310.01438 0.16714,0.24502 3.55462,5.21089"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6917-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 250.49898,304.34867 0.16714,0.24502 3.55462,5.21089"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6915-8"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 213.20568,329.8311 c 6.69474,-4.71596 30.10162,-31.73544 68.84604,-31.51552 l 62.3836,0.35411"
+     style="fill:none;fill-rule:evenodd;stroke:#2d37d9;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5927-5"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="M 62.36041,299.28542 H 199.57488"
+     style="fill:none;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3215-2"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="M 62.36041,312.65296 H 199.57488"
+     style="fill:none;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3217-2"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 547.07581,312.65296 h 93.65254"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3219-2"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 547.07581,299.28542 h 93.65254"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3221-70"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 70.160438,299.35649 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3225-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 82.150991,299.35649 v 12.61565"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3227-4"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 94.141542,299.35649 v 12.61565"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3229-6"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 106.1321,299.35649 v 12.61565"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3231-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 118.12265,299.35649 v 12.61565"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3233-6"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 130.11319,299.35649 v 12.61565"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3235-33"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 142.10375,299.35649 v 12.61565"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3237-4"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 154.0943,299.35649 v 12.61565"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3239-4"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 166.08486,299.35649 v 12.61565"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3241-39"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 178.0754,299.35649 v 12.61565"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3243-72"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 199.57488,299.28542 h 43.44291 c 14.48097,0 67.19756,-43.52354 106.89778,-40.6762 44.17459,-1.22029 80.54008,40.6762 95.02105,40.6762 h 102.18151"
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3245-5"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="M 199.57488,312.65296 H 547.11813"
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3247-8"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 190.06596,299.35648 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3249-9"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 549.78252,299.35649 v 12.61566"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3251-0"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 202.05651,299.35648 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3253-2"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 214.04706,299.35648 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3255-47"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 226.03761,299.35649 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3257-6"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 238.02817,299.35648 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3259-5"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 250.01871,297.56802 v 14.18886"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.24208;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3261-7"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 262.00927,299.35648 v 0.2966 6.30784"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3263-1"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 274.15395,305.96132 -0.15413,6.01082"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5144-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 286.0789,305.81894 -0.0885,6.15321"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5146-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 297.98094,305.55335 v 6.41879"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5148-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 310.14851,305.55335 -0.17704,6.4188"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5150-85"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 322.05054,305.81894 -0.0885,6.1532"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5152-1"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 333.95258,305.46483 v 6.50731"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5154-0"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 345.94312,299.35648 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5156-8"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 357.93369,299.35649 v 12.61565"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5158-7"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 369.92423,299.35649 v 12.61565"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5160-6"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 381.91479,299.35649 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5162-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 393.90535,299.35649 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5164-5"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 405.89589,299.35649 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5166-0"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 417.88645,299.35649 v 12.61565"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5168-8"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 430.8018,294.11593 -0.92481,17.85621"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5170-0"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 441.86755,299.35649 v 12.61565"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5172-4"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 453.85811,299.35648 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5174-1"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 465.84867,299.35648 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5176-1"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 477.83921,299.35649 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5178-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 489.82974,299.35649 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5180-5"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 501.8203,299.35648 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5182-9"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 513.81085,299.35649 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5184-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 525.80144,299.35648 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5186-4"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 537.79197,299.35648 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5188-1"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 561.77305,299.35649 v 12.61566"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5190-5"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 573.76362,299.35649 v 12.61566"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5192-0"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 585.75415,299.35648 v 12.61566"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5194-8"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 597.7447,299.35648 v 12.61566"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5196-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 609.7353,299.35648 v 12.61566"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5198-56"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 621.72581,299.35649 v 12.61566"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5200-5"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 633.71637,299.35648 v 12.61566"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5202-9"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 100.25088,286.47889 a 14.616034,22.629146 0 1 1 -10e-5,-0.49744"
+     style="fill:url(#radialGradient5208-4);fill-opacity:1;fill-rule:nonzero;stroke:#62098a;stroke-width:0.536999;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path3163-9"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 147.48534,282.4274 a 14.616034,22.629146 0 1 1 -0.002,-0.70081"
+     style="fill:url(#radialGradient5222-5);fill-opacity:1;fill-rule:nonzero;stroke:#62098a;stroke-width:0.536999;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path3211-0"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 109.7337,309.32647 a 14.554485,36.397491 0 1 1 -1e-4,-0.8001"
+     style="fill:url(#radialGradient5497-5);fill-opacity:1;fill-rule:nonzero;stroke:#05846f;stroke-width:0.679608;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path5204-76"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 129.45969,292.85454 a 14.616034,22.629146 0 1 1 -1e-4,-0.49744"
+     style="fill:url(#radialGradient5212-1);fill-opacity:1;fill-rule:nonzero;stroke:#62098a;stroke-width:0.536999;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path5210-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 170.61192,302.87474 a 25.103477,25.184436 0 1 1 -1.8e-4,-0.55362"
+     style="fill:url(#radialGradient5239-1);fill-opacity:1;fill-rule:nonzero;stroke:#055784;stroke-width:0.742433;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path5214-7"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 138.61507,305.87381 a 27.016835,12.861084 0 1 1 -1.9e-4,-0.28272"
+     style="fill:url(#radialGradient5505-5);fill-opacity:1;fill-rule:nonzero;stroke:#84057a;stroke-width:0.550403;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path5218-6"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 425.58189,304.29883 a 41.564964,24.037575 0 1 1 -0.006,-0.74444"
+     style="fill:url(#radialGradient5231-4);fill-opacity:1;fill-rule:nonzero;stroke:#841e05;stroke-width:0.554;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path2172-5"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <text
+     x="360.68805"
+     y="308.50186"
+     style="font-style:normal;font-weight:normal;font-size:17.263px;line-height:0%;font-family:Arial;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text3154-0"
+     xml:space="preserve"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       x="360.68805"
+       y="308.50186"
+       id="tspan3156-6"
+       style="stroke-width:1px">RNAp</tspan></text>
+  <text
+     x="48.766991"
+     y="301.61246"
+     style="font-style:normal;font-weight:normal;font-size:15.5367px;line-height:0%;font-family:Arial;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text5249-5"
+     xml:space="preserve"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       x="48.766991"
+       y="301.61246"
+       id="tspan5251-0"
+       style="stroke-width:1px">5'</tspan></text>
+  <text
+     x="48.299744"
+     y="319.40707"
+     style="font-style:normal;font-weight:normal;font-size:15.5367px;line-height:0%;font-family:Arial;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text5253-8"
+     xml:space="preserve"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       x="48.299744"
+       y="319.40707"
+       id="tspan5255-1"
+       style="stroke-width:1px">3'</tspan></text>
+  <text
+     x="642.84503"
+     y="320.09515"
+     style="font-style:normal;font-weight:normal;font-size:15.5367px;line-height:0%;font-family:Arial;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text5257-2"
+     xml:space="preserve"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       x="642.84503"
+       y="320.09515"
+       id="tspan5259-26"
+       style="stroke-width:1px">5'</tspan></text>
+  <text
+     x="642.84503"
+     y="301.4718"
+     style="font-style:normal;font-weight:normal;font-size:15.5367px;line-height:0%;font-family:Arial;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text5261-9"
+     xml:space="preserve"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       x="642.84503"
+       y="301.4718"
+       id="tspan5263-1"
+       style="stroke-width:1px">3'</tspan></text>
+  <path
+     d="m 261.97737,305.98424 v 5.21723"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6899-7"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 274.13743,299.57864 v 0.29661 6.30783"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6903-4"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 286.08854,299.22454 v 0.2966 6.30783"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6905-0"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 297.95112,298.95895 v 0.29661 6.30783"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6907-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 310.07928,298.95895 v 0.29661 6.30783"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6909-2"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 322.03039,299.22454 v 0.2966 6.30783"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6911-8"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 333.9815,298.95895 v 0.29661 6.30783"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6913-0"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 231.11162,316.74241 0.16714,0.24503 3.55463,5.21089"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6919-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 222.87864,323.55897 0.16714,0.24502 3.55462,5.21089"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6921-7"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 216.23913,329.40174 0.16714,0.24502 3.55462,5.21089"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6923-0"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <text
+     x="201.08945"
+     y="341.79568"
+     style="font-style:normal;font-weight:normal;font-size:15.5367px;line-height:0%;font-family:Arial;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text6925-0"
+     xml:space="preserve"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       x="201.08945"
+       y="341.79568"
+       id="tspan6927-3"
+       style="stroke-width:1px">5'</tspan></text>
+  <path
+     d="m 333.1696,261.26466 1.12999,6.40845"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6929-4"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 347.68521,259.90735 v 6.50732"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6931-9"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 362.63678,260.84434 -1.12999,6.40846"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6933-2"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 376.2633,263.8092 -2.22563,6.11487"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6935-7"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 317.96805,265.44456 2.22563,6.11488"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6937-4"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 305.11877,270.58428 2.22563,6.11488"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6939-2"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 292.5031,276.42486 2.22563,6.11488"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6941-5"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 281.5228,282.49908 2.22563,6.11487"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6943-2"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 271.24337,287.17154 2.22563,6.11488"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6945-4"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 259.79582,291.37677 2.22564,6.11487"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6947-4"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 388.1781,268.01442 -2.22563,6.11488"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6949-3"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 399.62565,273.85501 -2.22563,6.11487"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6951-8"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <g
+     transform="matrix(0.65059555,0,0,0.86315027,139.26879,-203.13596)"
+     id="g3890-6"
+     style="stroke-width:1.15855"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8">
+    <path
+       d="m 463.64866,563.09056 h 63.1784"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:5.33778;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:none"
+       id="path3887-0" />
+    <path
+       d="m 521.42855,17.668726 -11.78571,6.804485 v -13.60897 z"
+       transform="translate(19.048517,545.375)"
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:5.33778;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path3893-8" />
+  </g>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:10.3578px;line-height:0%;font-family:'Bitstream Vera Sans';fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     x="235.7885"
+     y="339.61157"
+     id="text2332-1"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       sodipodi:role="line"
+       id="tspan2334-8"
+       x="235.7885"
+       y="339.61157"
+       style="font-size:20.7156px;line-height:1.25;fill:#0000ff;stroke-width:1px">mRNA</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:16px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, '"
+     x="570.84991"
+     y="280.82828"
+     id="text29714-1"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       sodipodi:role="line"
+       x="570.84991"
+       y="280.82828"
+       id="tspan29720-7">Coding strand</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:16px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, '"
+     x="570.94366"
+     y="339.18799"
+     id="text47326-7"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       sodipodi:role="line"
+       id="tspan47324-9"
+       x="570.94366"
+       y="339.18799">Template strand</tspan></text>
+  <path
+     d="M 62.360408,512.974 H 199.57488"
+     style="fill:none;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3215"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="M 62.360408,526.34155 H 199.57488"
+     style="fill:none;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3217"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 547.0758,526.34155 h 93.65255"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3219"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 547.0758,512.974 h 93.65255"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3221"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 70.160436,513.04507 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3225"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 82.150989,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3227"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 94.14154,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3229"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 106.13209,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3231"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 118.12264,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3233"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 130.11319,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3235"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 142.10374,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3237"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 154.0943,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3239"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 166.08485,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3241"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 178.07539,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3243"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="M 199.57488,512.974 H 547.11812"
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3245"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="M 199.57488,526.34155 H 547.11812"
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3247"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 190.06595,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3249"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 549.78252,513.04507 v 12.61567"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3251"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 202.0565,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3253"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 214.04705,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3255"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 226.0376,513.04507 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3257"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 238.02816,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3259"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 250.01871,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3261"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 262.00926,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3263"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 273.99981,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5144"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 285.99037,513.04507 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5146"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 297.98093,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5148"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 309.97146,513.04507 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5150"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 321.962,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5152"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 333.95257,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5154"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 345.94312,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5156"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 357.93368,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5158"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 369.92422,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5160"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 381.91478,513.04507 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5162"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 393.90534,513.04507 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5164"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 405.89589,513.04507 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5166"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 417.88644,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5168"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 429.87699,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5170"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 441.86754,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5172"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 453.85811,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5174"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 465.84866,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5176"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 477.8392,513.04507 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5178"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 489.82973,513.04507 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5180"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 501.8203,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5182"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 513.81084,513.04507 v 12.61567"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5184"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 525.80143,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5186"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 537.79196,513.04507 v 12.61566"
+     style="fill:#6e6a6a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5188"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 561.77305,513.04507 v 12.61567"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5190"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 573.76361,513.04507 v 12.61567"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5192"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 585.75414,513.04507 v 12.61566"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5194"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 597.7447,513.04507 v 12.61566"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5196"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 609.7353,513.04507 v 12.61566"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5198"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 621.72581,513.04507 v 12.61567"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5200"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 633.71636,513.04507 v 12.61566"
+     style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#6e6a6a;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path5202"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 100.25088,500.16748 a 14.616034,22.629146 0 1 1 -10e-5,-0.49744"
+     style="fill:url(#radialGradient5208-0);fill-opacity:1;fill-rule:nonzero;stroke:#62098a;stroke-width:0.536999;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path3163"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 147.48533,496.11599 a 14.616034,22.629146 0 1 1 -0.002,-0.70081"
+     style="fill:url(#radialGradient5222-7);fill-opacity:1;fill-rule:nonzero;stroke:#62098a;stroke-width:0.536999;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path3211"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 109.7337,523.01506 a 14.554485,36.397491 0 1 1 -1e-4,-0.8001"
+     style="fill:url(#radialGradient5497-9);fill-opacity:1;fill-rule:nonzero;stroke:#05846f;stroke-width:0.679608;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path5204"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 129.45968,506.54313 a 14.616034,22.629146 0 1 1 -1e-4,-0.49744"
+     style="fill:url(#radialGradient5212-7);fill-opacity:1;fill-rule:nonzero;stroke:#62098a;stroke-width:0.536999;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path5210"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 170.61191,516.56333 a 25.103477,25.184436 0 1 1 -1.7e-4,-0.55362"
+     style="fill:url(#radialGradient5239-6);fill-opacity:1;fill-rule:nonzero;stroke:#055784;stroke-width:0.742433;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path5214"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 138.61506,519.56239 a 27.016835,12.861084 0 1 1 -1.8e-4,-0.28272"
+     style="fill:url(#radialGradient5505-1);fill-opacity:1;fill-rule:nonzero;stroke:#84057a;stroke-width:0.550403;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path5218"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 568.54686,447.01099 a 41.564964,24.037575 0 1 1 -0.006,-0.74443"
+     style="fill:url(#radialGradient5231-7);fill-opacity:1;fill-rule:nonzero;stroke:#841e05;stroke-width:0.554;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path2172"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <text
+     x="503.65302"
+     y="451.21402"
+     style="font-style:normal;font-weight:normal;font-size:17.263px;line-height:0%;font-family:Arial;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text3154"
+     xml:space="preserve"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       x="503.65302"
+       y="451.21402"
+       id="tspan3156"
+       style="stroke-width:1px">RNAp</tspan></text>
+  <text
+     x="48.766991"
+     y="515.30103"
+     style="font-style:normal;font-weight:normal;font-size:15.5367px;line-height:0%;font-family:Arial;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text5249"
+     xml:space="preserve"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       x="48.766991"
+       y="515.30103"
+       id="tspan5251"
+       style="stroke-width:1px">5'</tspan></text>
+  <text
+     x="48.299744"
+     y="533.09564"
+     style="font-style:normal;font-weight:normal;font-size:15.5367px;line-height:0%;font-family:Arial;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text5253"
+     xml:space="preserve"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       x="48.299744"
+       y="533.09564"
+       id="tspan5255"
+       style="stroke-width:1px">3'</tspan></text>
+  <text
+     x="642.84497"
+     y="533.78375"
+     style="font-style:normal;font-weight:normal;font-size:15.5367px;line-height:0%;font-family:Arial;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text5257"
+     xml:space="preserve"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       x="642.84497"
+       y="533.78375"
+       id="tspan5259"
+       style="stroke-width:1px">5'</tspan></text>
+  <text
+     x="642.84497"
+     y="515.1604"
+     style="font-style:normal;font-weight:normal;font-size:15.5367px;line-height:0%;font-family:Arial;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text5261"
+     xml:space="preserve"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       x="642.84497"
+       y="515.1604"
+       id="tspan5263"
+       style="stroke-width:1px">3'</tspan></text>
+  <path
+     d="m 228.01075,416.91122 v 0.2966 6.30784"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6903"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 215.06141,418.44377 0.0842,0.28439 1.79152,6.04807"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6905"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 338.6835,427.095 0.10823,0.27616 2.30159,5.87295"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6907"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 374.1851,412.22391 v 0.2966 6.30784"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6909"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 317.02832,433.48684 v 0.2966 6.30784"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6911"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 432.96856,430.18508 v 0.29661 6.30783"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6913"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 155.90109,448.23155 c 29.65972,0.10169 40.6084,-33.1511 70.26813,-33.04941 29.65973,0.10169 59.31946,16.47386 88.97919,16.57555 29.65972,0.10169 32.0664,-21.355 61.72613,-21.25331 29.65973,0.10168 49.96393,41.69311 88.97919,0.30507"
+     style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path7110"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 327.73449,431.86691 0.0842,0.28439 1.79152,6.04807"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8081"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 241.43346,424.49551 0.0382,-0.29414 0.81242,-6.25529"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8083"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 252.475,427.01929 0.0877,-0.28336 1.86528,-6.02573"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8085"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 263.86434,430.07001 0.0877,-0.28336 1.86528,-6.02573"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8087"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 274.03339,432.91734 0.0877,-0.28335 1.86528,-6.02573"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8089"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 285.49236,435.63317 0.0632,-0.28981 1.34376,-6.16304"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8091"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 297.15986,437.91866 0.0382,-0.29415 0.81242,-6.25529"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8093"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 307.20342,439.36668 0.0129,-0.29633 0.27514,-6.30182"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8095"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 203.30608,424.27668 0.15365,0.25371 3.26762,5.3955"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8097"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 193.71554,431.34807 0.17477,0.23967 3.71654,5.09666"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8099"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 184.36002,439.07655 0.17476,0.23966 3.71655,5.09667"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8101"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 174.43092,445.22194 0.15321,0.25398 3.2582,5.4012"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8103"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 165.2552,448.74105 0.0823,0.28498 1.74926,6.06045"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8105"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 347.57227,421.51705 0.13189,0.26567 2.80468,5.65001"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8107"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 359.22499,415.29891 0.10823,0.27615 2.30158,5.87296"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8109"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 389.47983,414.57362 -0.0767,0.2865 -1.63258,6.0929"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8111"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 401.46222,419.78465 -0.14831,0.25687 -3.15391,5.46275"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8113"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 412.24141,425.47932 -0.1483,0.25687 -3.15392,5.46275"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8115"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 422.42755,429.21705 -0.0767,0.2865 -1.63259,6.0929"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8117"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 444.24538,428.35042 0.10143,0.27872 2.15741,5.92743"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8119"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 454.09612,422.89901 0.14831,0.25688 3.15391,5.46275"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8121"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <path
+     d="m 463.18351,415.29732 0.19067,0.22722 4.05459,4.83207"
+     style="fill:#6a6a6e;fill-opacity:1;fill-rule:evenodd;stroke:#1424db;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path8123"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8" />
+  <text
+     x="141.93793"
+     y="453.8479"
+     style="font-style:normal;font-weight:normal;font-size:15.5367px;line-height:0%;font-family:Arial;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text8125"
+     xml:space="preserve"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       x="141.93793"
+       y="453.8479"
+       id="tspan8127"
+       style="stroke-width:1px">5'</tspan></text>
+  <text
+     x="470.37964"
+     y="411.41678"
+     style="font-style:normal;font-weight:normal;font-size:15.5367px;line-height:0%;font-family:Arial;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="text8129"
+     xml:space="preserve"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       x="470.37964"
+       y="411.41678"
+       id="tspan8131"
+       style="stroke-width:1px">3'</tspan></text>
+  <g
+     transform="matrix(0.59480954,-0.26358331,0.34969808,0.78913859,100.09007,112.0169)"
+     id="g3890"
+     style="stroke-width:1.15855"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8">
+    <path
+       d="m 463.64866,563.09056 h 63.1784"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:5.33778;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:none"
+       id="path3887" />
+    <path
+       d="m 521.42855,17.668726 -11.78571,6.804485 v -13.60897 z"
+       transform="translate(19.048517,545.375)"
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:5.33778;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path3893" />
+  </g>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:10.3578px;line-height:0%;font-family:'Bitstream Vera Sans';fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     x="204.82735"
+     y="445.40012"
+     id="text2308"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       sodipodi:role="line"
+       id="tspan2310"
+       x="204.82735"
+       y="445.40012"
+       style="font-size:18.9893px;line-height:1.25;fill:#0000ff;stroke-width:1px">mRNA</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:16px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, '"
+     x="571.63739"
+     y="493.81116"
+     id="text29714-1-1"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       sodipodi:role="line"
+       x="571.63739"
+       y="493.81116"
+       id="tspan29720-7-5">Coding strand</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:16px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, '"
+     x="571.73114"
+     y="552.17084"
+     id="text47326-7-8"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       sodipodi:role="line"
+       id="tspan47324-9-8"
+       x="571.73114"
+       y="552.17084">Template strand</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:40px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, '"
+     x="36.178551"
+     y="48.43465"
+     id="text52068"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       sodipodi:role="line"
+       id="tspan52066"
+       x="36.178551"
+       y="48.43465"
+       style="font-size:40px">1.</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:40px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, '"
+     x="38.092613"
+     y="242.58531"
+     id="text54580"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       sodipodi:role="line"
+       id="tspan54578"
+       x="38.092613"
+       y="242.58531"
+       style="font-size:40px">2.</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:40px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, '"
+     x="31.711754"
+     y="423.51053"
+     id="text61790"
+     inkscape:export-filename="/home/lorenzo/Dropbox/ROMA/INSEGNAMENTO/COMPUTATIONAL_BIOPHYSICS/LEZIONI/comp_bio_notes/figures/transcription.png"
+     inkscape:export-xdpi="149.8"
+     inkscape:export-ydpi="149.8"><tspan
+       sodipodi:role="line"
+       id="tspan61788"
+       x="31.711754"
+       y="423.51053"
+       style="font-size:40px">3.</tspan></text>
+</svg>

@@ -1,8 +1,5 @@
 ---
 title: Enhanced sampling
-exports:
-    - format: pdf
-      template: plain_latex
 math:
     '\Pc': '\mathcal{P}'
     '\Var': '\operatorname{Var}'

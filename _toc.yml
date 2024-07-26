@@ -18,4 +18,4 @@ parts:
         - file: exercises/molecular_dynamics.md
     - caption: Hands-on notebooks
       chapters:
-        - file: notebooks/ramachandran.ipynb
+        - file: notebooks/coin_change.ipynb

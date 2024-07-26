@@ -2,6 +2,10 @@
 title: A simple molecular dynamics code
 ---
 
+:::{attention}
+Remember to read the [homeworks](#sec:homeworks) section to understand what you need to submit for this assignment.
+:::
+
 # The main assignment
 
 Molecular dynamics code integrate Newton's equations to follow the dynamics of a systems made of components interacting with each other through a well-defined set of potentials. The mandatory part of this assignment is to write a molecular dynamics code that can be used to simulate a 3D Lennard-Jones system at a given temperature $T$ and density $\rho = N / V$, where $N$ is the number of particles and $V = L^3$ is the volume of the simulation box. The code should 

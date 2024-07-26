@@ -356,18 +356,22 @@ where $R$ is the distance between the two objects (defined *e.g.* as the distanc
 Using the language introduced in this section, $R$ is the reaction coordinate and $g(R) = P(R) / 4 \pi R^2$ the observable of interest, where $P(R)$ is the marginal probability density.
 
 ```{figure}
-:name: umbrella_example
+:name: fig:umbrella_example
 :align: center
 
+(fig:umbrella_example-a)=
 ![A simulation snapshot showing the two chains (coloured differently).](figures/U_eff_conf.png)
+(fig:umbrella_example-b)=
 ![The biased radial distribution functions, with each colour corresponding to a different simulation.](figures/gr_biased.png)
+(fig:umbrella_example-c)=
 ![The unbiased radial distribution functions, with each colour corresponding to a different simulation.](figures/gr_unbiased.png)
+(fig:umbrella_example-d)=
 ![The reconstructed effective interaction](figures/U_eff.png)
 
 The results of umbrella sampling simulations: the raw data is unbiased and then combined together to yield the final free-energy profile. Here the reaction coordinate $R$ is the distance between the centres of mass of two polymers.
 ```
 
-[](#umbrella_example) shows the results of umbrella sampling simulations of a system composed of two polymer chains, where the chosen reaction coordinate is the distance between the two centres of mass, $R$, and the final output is the effective chain-chain interaction as a function of $R$. [](#umbrella_example-a) shows a snapshot of the two chains, [](#umbrella_example-b) shows the raw (biased) $g^b_i(R)$ data for all the windows $i$, and [](#umbrella_example-c) contains the $g^u_i(R)$, unbiased according to Eq. [](#unbiasing). Finally, [](#umbrella_example-d) contains the effective interaction, obtained with the WHAM method and shifted so that it vanishes at large distances.
+[](#fig:umbrella_example) shows the results of umbrella sampling simulations of a system composed of two polymer chains, where the chosen reaction coordinate is the distance between the two centres of mass, $R$, and the final output is the effective chain-chain interaction as a function of $R$. [](#fig:umbrella_example-a) shows a snapshot of the two chains, [](#fig:umbrella_example-b) shows the raw (biased) $g^b_i(R)$ data for all the windows $i$, and [](#fig:umbrella_example-c) contains the $g^u_i(R)$, unbiased according to Eq. [](#unbiasing). Finally, [](#fig:umbrella_example-d) contains the effective interaction, obtained with the WHAM method and shifted so that it vanishes at large distances.
 
 [^umbrella]: The bias often takes the form of a harmonic potential whose shape, resembling an umbrella, gives the method its name.
 

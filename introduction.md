@@ -21,6 +21,7 @@ There are some boxes scattered throughout the text. Their colour weakly correlat
 
 [^footnote]: like this.
 
+(sec:prerequisites)=
 ## Prerequisites
 
 1. This is a computational course, and as such it requires some proficiency with (or at least having the right attitude towards) computers. The most important skill you will need is to use a terminal, since most of the computations (running simulations, analysing results, *etc.*) will be launched from there. Linux and macOS come with pre-installed terminals, while Windows does not[^windows_terminal]. However, it is possible to install a very handy ["Windows Subsystem for Linux"](https://learn.microsoft.com/en-us/windows/wsl/) that makes it possible to have a good Linux-like experience within Windows. Install instructions can be found [here](https://learn.microsoft.com/en-us/windows/wsl/install).
@@ -40,6 +41,7 @@ Your final grade will be based on:
 
 About the last bullet point, during the course you will be asked to complete three homework assignments. Those are not mandatory, but carrying them out satisfactorily will allow you to skip the questions about the course program during the oral exam.
 
+(sec:homeworks)=
 ### Homework assignments
 
 More or less every couple of weeks I will ask you to do a homework assignment in which you will have to write a code that does something "useful", connected to what explained in the classroom. These assignments are not mandatory, but if you carry out enough of them in a satisfactorily manner, you will be able to "skip" part of the oral exam where you would be asked questions about the frontal lessons.
@@ -47,12 +49,23 @@ More or less every couple of weeks I will ask you to do a homework assignment in
 The output of each assignment should be:
 
 1. Your code, written in any (sensible) language (*e.g.* C, C++, Python, Fortran, Java, but other languages may be also fine, just let me know beforehand).
-2. A short (but not too short!) document containing your code documentation, and some results obtained with the code.
+2. A short (but not too short!) document containing the documentation of your code, and a presentation of the results asked in the assignment.
+3. Each assignment has a mandatory part and a few "possible extensions". The "possible extensions" are only suggestions: feel free to extend your code or your analysis in any way you like it, provided it makes sense from the computational and biophysical points of view. Extending your code or what you did with it can (and most likely will) improve the grade of the assignment. 
 
 The code documentation should be clear and concise, but also list features, limitations, and known bugs of your code. In addition, it should present a comprehensive guide about how to you use the code (*e.g.* how to call it, how to specify the input, how to read the output, *etc.*). I will provide examples of "good" documentation during the course.
 
+:::{warning} Using ChatGPT
+You are welcome to use ChatGPT or similar tools during the course. However, harsh penalties will be handed out to students who use AI-assisted tools without actually understanding their answers[^AI_penalty]. This applies to both code and text submitted for the homework assignments and for the final project.
+:::
+
+[^AI_penalty]: Penalties will be given if I realise a student does not understand what he did, or why.
+
 (sec:intro_biophys)=
 # Introduction to biophysics
+
+Biophysics is an interdisciplinary science that applies the principles and methods of physics to understand biological systems. It bridges the gap between biology and physics by using quantitative approaches to study the structure, dynamics, function, and interactions of biological systems, from single molecules, to cells, whole organisms and even ecosystems.
+
+Biophysics involves the investigation of the physical principles governing biological processes. This includes understanding how forces and energy transfer within and between cells, the mechanics of biomolecular interactions, and the dynamics of complex biological networks. At larger length-scales, biophysics also encompasses the study of extended biological systems, such as the mechanics of muscle contraction, neural signal transmission, and the properties of biological membranes. By integrating concepts from (equilibrium and non-equilibrium) thermodynamics, statistical mechanics, and fluid dynamics, biophysics provides a comprehensive framework for understanding life at all levels of organization.
 
 :::{tip} Source
 Some parts of this section have been adapted from [here](https://bio.libretexts.org/Bookshelves/Computational_Biology/Book:_Computational_Biology_-_Genomes_Networks_and_Evolution_(Kellis_et_al.)/01:_Introduction_to_the_Course/1.04:_Crash_Course_in_Molecular_Biology).
@@ -177,11 +190,11 @@ I will refer to this part when talking about the secondary and tertiary structur
 
 Several experimental methods can be used to understand the secondary structure of a particular biomolecule, such as proteins or nucleic acids. Here are some common techniques:
 
-1. **Circular Dichroism (CD) Spectroscopy:**: CD spectroscopy is widely used to study the secondary structure of proteins. It measures the difference in the absorption of left-handed versus right-handed circularly polarized light, providing information about the overall content of $\alpha$-helices, $\beta$-sheets, nucleic acid helices, and random coils.
+1. **Circular Dichroism (CD) Spectroscopy:** CD spectroscopy is widely used to study the secondary structure of proteins. It measures the difference in the absorption of left-handed versus right-handed circularly polarized light, providing information about the overall content of $\alpha$-helices, $\beta$-sheets, nucleic acid helices, and random coils.
 
-2. **Fourier Transform Infrared (FTIR) Spectroscopy:**: FTIR spectroscopy measures the absorption of infrared light by the biomolecule, which provides information about the types of chemical bonds and functional groups present. The amide I and II bands are particularly informative for analyzing protein secondary structures.
+2. **Fourier Transform Infrared (FTIR) Spectroscopy:** FTIR spectroscopy measures the absorption of infrared light by the biomolecule, which provides information about the types of chemical bonds and functional groups present. The amide I and II bands are particularly informative for analyzing protein secondary structures.
    
-3. **Ultraviolet (UV) Absorption Spectroscopy:**: UV absorption spectroscopy can provide some information about the secondary structure, especially in nucleic acids. It is less informative for proteins compared to CD spectroscopy but can still be useful when combined with other techniques.
+3. **Ultraviolet (UV) Absorption Spectroscopy:** UV absorption spectroscopy can provide some information about the secondary structure, especially in nucleic acids. It is less informative for proteins compared to CD spectroscopy but can still be useful when combined with other techniques.
 
 ### Three-dimensional structure
 
@@ -225,12 +238,161 @@ When dealing with free energies and Boltzmann factors, it is practical to use th
 (sec:intro_comp_phys)=
 # Introduction to computational physics
 
-:::{warning} Using ChatGPT
-You are welcome to use ChatGPT or similar tools during the course. However, harsh penalties will be handed out to students who use AI-assisted tools without actually understanding their answers. This applies to both code and text submitted for the homework assignments and for the final project.
-:::
+Computational physics is a branch of physics that utilizes computational methods and numerical analysis to solve physical problems that are difficult or impossible to solve analytically. It involves the development and application of algorithms, numerical techniques, and computer software to simulate physical systems, analyze experimental data, and predict the behavior of natural phenomena.
+
+At its core, computational physics merges principles from theoretical physics, applied mathematics, and computer science. It covers a wide range of topics, including classical mechanics, quantum mechanics, statistical mechanics, electrodynamics, condensed matter physics, biophysics, and more. In these days, high-performance computing is often required to perform large-scale simulations and calculations, which are essential for understanding physical processes where many length- and time-scales are involved, which happens often in various domains such as astrophysics, material science, biophysics, and climate modeling.
+
+The methods employed in computational physics vary greatly, and include solving (partial) differential equations, performing molecular simulations, and employing finite element analysis. These techniques allow physicists to model systems at different scales, from subatomic particles to cosmological structures. Interestingly, many of the methods can be applied in multiple fields.
+
+Another important field of application of computational physics is the interpretation of experimental data. By simulating experiments and comparing the results with actual measurements, computational physicists can refine theoretical models and improve the accuracy of predictions. This iterative process enhances our understanding of the underlying physical principles, and can help to uncover new phenomena.
+
+Despite the enormous variety of methods and applications, there are some common concepts that are essential for anyone venturing in the subject, regardless of the specific subfield they choose. Some of these are technical, and are listed in the [prerequisite section](#sec:prerequisites). Here, I will highlight two additional skill sets that every aspiring computational physicist should develop:
+
+* **Bridging Theory and Experiment:** Historically known as "computer experiments", computer simulations sit in the middle between theory and experiment. As such, a good computational physicist is able to act as a bridge between these two worlds. A proficient computational physicist can effectively bridge these two realms, provided he develops a familiarity with the specific jargon, techniques, and methodologies of both fields. This dual expertise is a significant advantage. However, it is sometimes hard to find a fit in a dichotomic world, where "theory or experiment" is all there is. Fortunately, that world is dying (but has not died yet).
+* **Algorithmic Problem Solving:** Problem-solving is a critical skill for any physicist, often involving the application of algorithmic reasoning to find solutions. For computational physicists, the ability to think in terms of algorithms is even more crucial. Developing this skill enables them to tackle complex problems systematically and effectively. During the course I will present many algorithms used to tackle some specific (bio)physical problem. Most of the time there will be an accompanying pseudo-code or real code, but in [some cases](#sec:homeworks) you will be asked to do it yourself.
+
+Just to brush up your programming skill, I will start with presenting a programming technique that will be applied later to some biophysical problems.
 
 ## Dynamic programming
 
-:::{warning}
-TODO
+```{tip}
+This part was heavily inspired by István Miklós's [Introduction to algorithms in bioinformatics](https://users.renyi.hu/~miklosi/AlgorithmsOfBioinformatics.pdf).
+```
+
+At the most simple level, the three groups of biomolecules introduced above (DNA, RNA, and proteins) can be described in terms of a primary structure, which is just a sequence of characters. These characters are taken from a set called alphabet. DNA and RNA have alphabets of four characters (A, C, G, and T or U), while the protein alphabet is composed of 20 elements (the 20 amino acids). While the properties of any of these molecules are determined by their 3D structure, the latter depends, often in a very complicated manner, on their sequence. Therefore, it is most useful to develop tools and methods that can work efficiently with (possibly very long) 1D sequences.
+
+For this reason, I will introduce dynamic programming, which is an algorithmic technique that shines at solving optimisation problems on sequences and trees. The main idea is to write the solution of a given complex problem in terms of simpler subproblems that can be solved. The solution to the original problem can then be "traced back" from the solutions of the simpler problems. A typical dynamic programming algorithm has two phases:
+
+1. **The fill-in phase**, in which a so-called dynamic programming matrix (or table) is filled in. The dynamic programming matrix contains the scores of the subproblems, and once it has been filled, only the score of the solution is known, and not the solution itself. 
+2. **The trace-back phase**, in which the matrix is traversed back from the optimal score to the beginning to obtain the optimal solution (or solutions).
+
+I will apply dynamical programming to the "coin change" toy problem. We will see later on how to apply it to more biologically relevant contexts.
+
+### The coin change problem
+
+There are several variations to this problem. We start with the following: given an amount of money $N$ and a set $C$ of $n$ types of coins, what is the minimum number of coins that can change $N$? Here is an example: for $N = 8$ and $C = \{1, 2, 5\}$, the minimum number of coins is 3, since $8 = 1 + 2 + 5$.
+
+The simplest way of solving the problem is by enumerating all possible ways $N$ can be changed with the coins in $C$, and then picking the one containing the fewest amount of coins. However, this algorithm performs worse and worse as $N$ and $C$ increases. Can we estimate by how much?
+
+:::{important} Algorithm complexity and Big O notation
+Algorithm complexity is a crucial concept in computer science that describes how the runtime (or other important assets such as memory consumption) of an algorithm scales with the size of the input. It provides a high-level understanding of the algorithm's efficiency and performance. The standard way to express time complexity is through the so-called big O notation, which focuses on the worst-case scenario, giving an upper bound on the time an algorithm can take as the input size grows.
+
+Big O notation abstracts away constants and less significant terms to highlight the primary factor affecting runtime. For instance, an algorithm with a time complexity of $\mathcal{O}(n)$ will have its execution time increase linearly with the input size $n$. In contrast, an algorithm with $\mathcal{O}(n^2)$ time complexity will have its execution time grow quadratically. Other common time complexities include $\mathcal{O}(1)$ for constant time, $\mathcal{O}(\log n)$ for logarithmic time, $\mathcal{O}(n \log n)$ for "linearithmic" time, and $\mathcal{O}(2^n)$ for exponential time.
+
+Algorithmic complexity also applies to memory footprint, known as space complexity, which describes the amount of memory an algorithm requires relative to the input size. Often, there is a tradeoff between time and memory, where optimizing for faster execution might increase memory usage and vice versa. Understanding these tradeoffs helps in selecting the most appropriate algorithm for a given problem, ensuring efficient use of computational resources.
 :::
+
+Using the notation introduced in the box, we can estimate the cost of the "brute-force" algorithm as follows. Given an amount N, a solution can contain $N / c$ times a coin $c$, and one way of not containing it. As a result, we have $(N / c) + 1$ ways of using each coin $c$, and we have $n$ such coins. Disregarding multiplying constants and lower-order terms, the overal complexity is then $\mathcal{O}(N^n)$. It is hard to understate how bad is an exponential scaling. We have to do better!
+
+Let's try with a "greedy" algorithm: we find a solution by taking the largest coin $c$ that is smaller than $N$ and applying the same operation to $N - c$, until the remaining amount becomes zero. Applying this algorithm to the example above would immediately yield the correct $S = \{1, 2, 5\}$ solution. The algorithmic complexity is also much better: the worst-case scenario is the one where we use coins of the same size, which would yield $\mathcal{O}(N)$. However, note the algorithm requires that at each iteration we find the largest coin that is smaller than the residual amount. This can be done by either looping over $C$ at each iteration, which would make the complexity $\mathcal{O}(Nn)$, or, which is much better, by sorting $C$ beforehand, so that the total algorithmic complexity would be $\mathcal{O}(N) + \mathcal{O}(n \log n)$. This is **much** better than an exponential complexity. Unfortunately, greedy algorithms are known to be heavily attracted to local minima. For instance, if $N = 8$ and $C = \{1, 4, 5\}$, the greedy algorithm would yield a solution with 4 coins, since $8 = 5 + 1 + 1 + 1$. However it is clear that the best solution in this case is $8 = 4 + 4$.
+
+We need an algorithm that is fast but does reliably find the correct solution. In order to do so, we need to find a way of casting the solution to the problem in terms of solutions of subproblems. To do so we define the accessory function $w(x)$:
+
+$$
+w(x) = 
+\begin{cases}
+m & \text{if } x \text{ is changeable}, \\
+\infty & \text{if } x \text{ is not changeable}, \\
+\infty & \text{if } x < 0,
+\end{cases}
+$$
+
+where $m$ is the minimum number of coins necessary to change $x$. We now make the crucial observation that
+
+$$
+w(x) = \min_{c \in C} \{ w(x - c) + 1 \}.
+$$ (eq:coin_change_weights)
+
+:::{prf:proof}
+We prove Eq. [](#eq:coin_change_weights) by mathematical induction. For the smallest value of $x$, such that $x \in C$ (*i.e.*, $x$ is the value of a coin in the set $C$), the minimum number of coins required is 1, because $x$ itself is a coin. Thus,
+
+$$
+w(x) = 1 = \min_{c \in C} \{ w(x - c) + 1 \}.
+$$
+
+Assume that the equation holds for all values smaller than $x$. We need to show that it holds for $x$.
+
+1. **Case 1:** If $x$ is not changeable (*i.e.* $x$ cannot be represented by any combination of coins from $C$), then for all $c \in C$, either $x - c$ is not changeable, or $x - c < 0$. In either case both sides of the equation are infinite, and the equality holds trivially.
+
+2. **Case 2:** if $x$ can be represented by some combination of coins, consider the optimal way to make change for $x$ using the minimum number of coins. Suppose $c' \in C$ is one of the coins in the optimal change for $x$, and we consider the remaining amount to be changed $x - c'$. By the inductive hypothesis, the minimum number of coins required to change $x - c'$ is $w(x - c')$. Therefore, the total number of coins needed to change $x$ is:
+
+   $$
+   w(x) = w(x - c') + 1
+   $$
+
+   Since $c'$ is chosen to minimize the total number of coins, we have in general
+
+   $$
+   w(x) = \min_{c \in C} \{ w(x - c) + 1 \}
+   $$
+
+Thus, by induction, the theorem is proved.
+:::
+
+We can now leverage [](#eq:coin_change_weights) to calculate the minimum number of coins necessary to change any amount $x$ with a time that is linear in $x$ and in the number of coin types, $n$, *i.e.* with an algorithmic (time) complexity $\mathcal{O}(xn)$. First, we apply [](#eq:coin_change_weights) to progressively build a table containing the $w(y)$ values, with $y \leq x$, starting from $y = 0$:
+
+:::{code}
+:label: code:coin-fillin
+:caption: Pseudocode for the fill-in phase.
+
+DEFINE C as the set of possible coins
+DEFINE N as the amount we want to change
+DEFINE function w(x)
+DEFINE table as an array with N + 1 entries
+
+table[0] = 0
+FOR each value y between 1 and N
+   SET table[y] to the mininum value of {w(y - c)}, where c is any coin in C
+:::
+
+Once the table is ready, the answer to our question about the minimum number of coins can be read off its last entry, $w(x)$. However, if we want to know the details of the solution, *e.g.* which coins add up to $x$, we have to trace back Eq. [](#eq:coin_change_weights):
+
+:::{code}
+:label: code:coin-traceback
+:caption: Pseudocode for the trace-back phase.
+
+ASSUME the definitions of the fill-in block
+SET y = N
+DEFINE S as an empty list
+
+WHILE y is larger than 0
+   FIND a coin c in C for which w(y) = (y - c) + 1
+   ADD c to S
+   SET y to y - c
+:::
+
+:::{warning}
+In some cases, there is more than one way of changing an amount with the minimum number of coins. The algorithm reported above will find one such solution, but can be extended to find all the solutions. In this case we have to keep track of all the branches happening every time there is more than one coin for which $w(y) = (y - c) + 1$.
+:::
+
+:::{hint} A simple example
+Let $C = \{1, 4, 5\}$ and $N = 8$. By applying the fill-in algorithm detailed above we obtain the following table
+
+```{figure} figures/coin_change_1.png
+:name: coin-change-1
+:align: center
+:width: 400
+```
+
+from which we see that if $N = 8$ the optimal solution has two coins. To find out what are the coins in the optimal solutions, we apply the trace back algorithm, which in this case is made of two steps:
+
+1. We start from $y = 8$, and the equation $w(y) = w(y - c) + 1 = 2$ has a single solution, $c = 4$. We set $y = 8 - c = 4$.
+2. Now $y = 4$, and the equation $w(y) = w(y - c) + 1 = 1$ has, again a single solution, $c = 4$. We see that $y = 4 - c = 0$, which means that we are done.
+
+Graphically, the steps above can be expressed as follows:
+
+```{figure} figures/coin_change_2.png
+:name: coin-change-2
+:align: center
+:width: 400
+```
+:::
+
+You can find a Python implementation of the brute-force and dynamic-programming algorithms [here](./notebooks/coin_change.ipynb). Note that two brute-force version returns only the optimal number of coins and not the solution itself. Here is a list of things you can do with this code to brush up your coding and plotting skills:
+
+1. **Easy**: Port the code to another programming language you know (*e.g.* C).
+2. **Medium**: Use this code or yours to "experimentally" find out the algorithmic complexity of the two codes, in terms of $N$ and $n$. In order to do so, solve the coin change problem for a bunch of $N, n$ combinations[^coin_combinations], measure the time $t$ it takes the code to find the optimal solution, and plot the two sets of results ($t(N)$ and $t(n)$).
+3. **Hard**: Extend the brute-force solution so that it also returns an optimal solution.
+3. **Hard**: Extend the dynamic-programming solution so that it returns all optimal solutions.
+
+[^coin_combinations]: in some cases it may be worth to average over different $C$ at fixed $n$.

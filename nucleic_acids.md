@@ -590,7 +590,7 @@ Another important DNA conformation is Z-DNA, which is a less common and structur
 :label: tbl:helices
 :align: center
 
-| Form | Handedness | BPs per turn | Diameter ($\AA$) | Pitch ($\AA$) | BP inclination | Sugar pucker
+| Form | Handedness | BPs per turn | Diameter ($\angstrom$) | Pitch ($\angstrom$) | BP inclination | Sugar pucker
 | :--- | :--- | :---: | :---: | :---: | :---: | :--- |
 | B-DNA | Right | 10 | 20 | 34 | 0$^\circ$ | C2'-endo |
 | A-DNA/A-RNA | Right | 11 | 26 | 28 | 20$^\circ$ | C3'-endo

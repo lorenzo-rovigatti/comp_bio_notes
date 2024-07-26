@@ -2,6 +2,16 @@
 title: The hydrophobic-polar protein lattice model
 ---
 
+:::{attention}
+Remember to read the [homeworks](#sec:homeworks) section to understand what you need to submit for this assignment.
+:::
+
+# The main assignment
+
+# Possible extensions
+
+# Additional details
+
 The Hydrophobic-Polar (HP) protein lattice model is a simplified computational approach used to investigate the principles of protein folding and structure. In this model, proteins are abstracted as sequences composed solely of hydrophobic (H) and polar (P) amino acids. This binary representation simplifies the complex nature of real proteins, allowing researchers to focus on the primary forces driving the folding process.
 
 In the HP model, the protein sequence is mapped onto a grid, or lattice, which can be two-dimensional (2D) or three-dimensional (3D). Each amino acid in the sequence occupies a point on this grid, and consecutive amino acids are connected by edges representing peptide bonds. Common lattice types used include square lattices for 2D models and cubic lattices for 3D models, but other choices are possible. This lattice representation constrains the possible configurations of the protein, mimicking the spatial restrictions that occur in real proteins.

@@ -2,6 +2,10 @@
 title: The SantaLucia model
 ---
 
+:::{attention}
+Remember to read the [homeworks](#sec:homeworks) section to understand what you need to submit for this assignment.
+:::
+
 # The main assignment
 
 The SantaLucia (SL) model is the most famous (and widely-used) [nearest-neighbour model](#sec:NN_models) for DNA. The mandatory part of this assignment is to write a code that takes as input the sequence of a single DNA strand and a secondary structure, specified with the [dot-paren notation](#sec:dot-paren).

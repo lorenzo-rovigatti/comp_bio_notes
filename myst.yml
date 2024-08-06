@@ -13,6 +13,7 @@ project:
     math:
         '\dofs': '\lbrace\vec{r}\rbrace'
         '\angstrom': '\textup{\AA}'
+        '\matr': '\mathbf{#1}'
     abbreviations:
         MD: Molecular Dynamics
         MC: Monte Carlo
@@ -29,6 +30,7 @@ project:
         HB: hydrogen bond
         BP: base pair
         NN: nearest-neighbour
+        MG: molten globule
     numbering: true
 site:
     template: book-theme

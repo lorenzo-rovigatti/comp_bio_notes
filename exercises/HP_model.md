@@ -1,5 +1,5 @@
 ---
-title: The hydrophobic-polar protein lattice model
+title: The Hydrophobic-Polar protein lattice model
 ---
 
 :::{attention}
@@ -8,16 +8,34 @@ Remember to read the [homeworks](#sec:homeworks) section to understand what you 
 
 # The main assignment
 
+The [Hydrophobic-Polar (HP) model](#sec:HP_model) is a toy model that has been used to show that hydrophobic interactions greatly reduces the number of low-free-energy compact configurations, and therefore greatly contribute to selecting the native conformation. The mandatory part of this assignment is to reproduce (some of) the results reported in [](doi:10.1021/ma00202a031) and [](doi:10.1021/ma00200a030). The most important data to reproduce are the numbers reported in Table I of [](doi:10.1021/ma00202a031) and the distributions of the number of sequences that have $s$ native states (the panels with the $g(s)$ label on the x axis of figures 8, 12, and 13 of [](doi:10.1021/ma00200a030)).
+
+:::{note} $N$ or $N - 1$?
+[](doi:10.1021/ma00202a031) and [](doi:10.1021/ma00202a030) use slightly different notations for the length of the chain (number of residues $N$ *vs* number of links $N-1$).
+:::
+
+For this assignment you can use the [code](../notebooks/HP_model.ipynb) introduced in the lectures, or write your own code (perhaps derived from mine). Remember: in either case you will have to document your code.
+
+:::{warning}
+Exhaustive enumeration of the conformations of chains larger than $\approx 15$ starts to be rather time (and RAM) consuming on consumer hardware. Be careful.
+:::
+
 # Possible extensions
+
+* Modify the code so that it also computes the compactness $\rho$. You will then be able to reproduce more interesting figures (figure 2 of [](doi:10.1021/ma00202a031) and more panels from the figures of [](doi:10.1021/ma00200a030)).
+* Extend the code so that it supports also the 3D HP model.
+* Extend the code so that it can simulate other versions of the HP model (*e.g.* the one used in [](10.1126/science.273.5275.666), where $\epsilon = -2.3$, $\epsilon_{HP} = -1$ and $\epsilon_{PP} = 0$).
+* When $N$ is too large, enumerating all the conformations become impossible. Extend the code so that, if $N$ is too big, the code confines the generation of the conformations on the lattice with the algorithm described in [](doi:10.1021/ma00200a030) (pag. 3988, equations (1) and (2)).
+* Likewise, for large $N$ it also becomes impossible to take averages over all the sequences. Modify the code so that it averages the interesting properties over $M$ randomly generated sequences instead of all the full sequence space.
 
 # Additional details
 
-The Hydrophobic-Polar (HP) protein lattice model is a simplified computational approach used to investigate the principles of protein folding and structure. In this model, proteins are abstracted as sequences composed solely of hydrophobic (H) and polar (P) amino acids. This binary representation simplifies the complex nature of real proteins, allowing researchers to focus on the primary forces driving the folding process.
+The compactness is defined for a given chain length as the ratio of the number of topological contacts for a conformation relative to the maximum number of contacts attainable:
 
-In the HP model, the protein sequence is mapped onto a grid, or lattice, which can be two-dimensional (2D) or three-dimensional (3D). Each amino acid in the sequence occupies a point on this grid, and consecutive amino acids are connected by edges representing peptide bonds. Common lattice types used include square lattices for 2D models and cubic lattices for 3D models, but other choices are possible. This lattice representation constrains the possible configurations of the protein, mimicking the spatial restrictions that occur in real proteins.
+$$
+\rho \equiv \frac{t}{t_{\rm max}}.
+$$
 
-The HP model is widely used in computational biology for studying protein folding mechanisms, developing algorithms for protein structure prediction, and understanding the impact of mutations on protein stability and function. Despite its simplicity, the HP model effectively captures essential features of protein folding, providing valuable insights into the roles of hydrophobic and polar interactions in determining protein structure and stability. By reducing the complexity of protein structures to fundamental interactions, the HP model serves as a powerful tool for exploring the basic principles underlying protein behavior.
+See the lecture notes for a way of computing the average compactness of all conformations, or of the conformations with lowest-energy.
 
-The folding of the protein is simulated by arranging the sequence on the lattice to achieve a conformation that minimizes the system's energy, which quantifies the thermodynamic stability of the specific conformation. Typically, the energy is proportional to the number of contacts between non-adjacent (*i.e.* non-consecutive) hydrophobic monomers, capturing the essence of the hydrophobic collapse, which is a key driving force in protein folding. Indeed, hydrophobic amino acids tend to cluster together to avoid exposure to the solvent, reflecting the natural behavior of real hydrophobic residues in aqueous environments. In contrast, polar residues are generally indifferent to being near other residues, and their interactions do not significantly affect the energy calculation.
-
-The primary objective is to find the conformation with the lowest possible energy, representing the protein's native folded state. This involves a computational search through possible conformations to identify the optimal arrangement of hydrophobic and polar residues.
+Note that figure 8 of [](doi:10.1021/ma00200a030) was generated by considering *all* conformations, while figures 12, 13, 14 and 15 were generated by analysing only the most compact conformations. Moreover, figures 13, 14 and 15 used a subset of random sequences rather than the full sequence space.

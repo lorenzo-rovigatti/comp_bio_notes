@@ -6,7 +6,7 @@ parts:
         - file: introduction.md
         - file: proteins.md
         - file: nucleic_acids.md
-        - file: structure_prediction.md
+        - file: folding.md
         - file: quantum.md
         - file: all_atom.md
         - file: coarse_grained.md
@@ -15,7 +15,11 @@ parts:
       chapters:
         - file: exercises/HP_model.md
         - file: exercises/SantaLucia.md
+        - file: exercises/zimm_bragg.md
         - file: exercises/molecular_dynamics.md
     - caption: Hands-on notebooks
       chapters:
         - file: notebooks/coin_change.ipynb
+        - file: notebooks/zimm_bragg.ipynb
+        - file: notebooks/HP_model.ipynb
+        - file: notebooks/sequence_alignment.ipynb

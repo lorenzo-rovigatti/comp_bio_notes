@@ -10,7 +10,7 @@ Here I take for granted that you are familiar with the general concepts introduc
 
 # The basic structure of DNA and RNA
 
-Deoxyribonucleic acid (DNA) and ribonucleic acid (RNA) are the fundamental molecules that carry and execute the genetic instructions essential for all forms of life. Like proteins, they are [macromolecules](./proteins#macromolecules). However, the repeating monomer is not an amino acid, but a nucleotide, which is a molecule consisting of a a cyclic sugar (a [pentose](https://en.wikipedia.org/wiki/Pentose)), a phosphate group, and a nitrogenous base. A nucleotide without the phosphate group is called a nucleoside.
+Deoxyribonucleic acid (DNA) and ribonucleic acid (RNA) are the fundamental molecules that carry and execute the genetic instructions essential for all forms of life. Like proteins, they are macromolecules. However, the repeating monomer is not an amino acid, but a nucleotide, which is a molecule consisting of a a cyclic sugar (a [pentose](https://en.wikipedia.org/wiki/Pentose)), a phosphate group, and a nitrogenous base. A nucleotide without the phosphate group is called a nucleoside.
 
 ```{figure} figures/DNA_schematics.png
 :name: fig:DNA_schematics
@@ -395,6 +395,7 @@ where $N_p$ is the number of phosphates in the duplex, so that $N_f / 2 = N$ is,
 
 [^magnesium]: Magnesium and other multivalent cations are not supported.
 
+(sec:two_state)=
 ## The two-state model
 
 ### Duplex formation
@@ -477,6 +478,7 @@ Experimental versus predicted melting temperatures of DNA oligonucleotides. (a) 
 
 [](#fig:SantaLucia) shows a comparison between the experimental and theoretical melting temperatures of hundreds of DNA oligonucleotides predicted with the [SantaLucia model](doi:10.1146/annurev.biophys.32.110601.141800). The average absolute deviation is smaller than $2.3$ K.
 
+(sec:hairpin_formation)=
 ### Hairpin formation
 
 Hairpin formation can also be modelled as a two-state process, where the equilibrium is between the open (random coil) and closed (stem-loop or hairpin) states:

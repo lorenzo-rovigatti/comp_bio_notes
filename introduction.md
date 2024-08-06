@@ -35,7 +35,7 @@ There are some boxes scattered throughout the text. Their colour weakly correlat
 
 Your final grade will be based on:
 
-* the final group project ($40\%$)
+* the final project ($40\%$)
 * the part of the individual oral exam devoted to discussing the final project ($30\%$)
 * the part of the individual oral exam where you will be asked questions about the lectures OR the homework assignements carried out during the course ($30\%$)
 
@@ -44,21 +44,21 @@ About the last bullet point, during the course you will be asked to complete thr
 (sec:homeworks)=
 ### Homework assignments
 
-More or less every couple of weeks I will ask you to do a homework assignment in which you will have to write a code that does something "useful", connected to what explained in the classroom. These assignments are not mandatory, but if you carry out enough of them in a satisfactorily manner, you will be able to "skip" part of the oral exam where you would be asked questions about the frontal lessons.
+More or less every couple of weeks I will ask you to do a homework assignment in which you will have to write or use a code that does something "useful", connected to what explained in the classroom. These assignments are not mandatory, but if you carry out enough of them in a satisfactorily manner, you will be able to "skip" part of the oral exam where you would be asked questions about the frontal lessons.
 
 The output of each assignment should be:
 
-1. Your code, written in any (sensible) language (*e.g.* C, C++, Python, Fortran, Java, but other languages may be also fine, just let me know beforehand).
+1. A code, written in any (sensible) language (*e.g.* C, C++, Python, Fortran, Java, but other languages may be also fine, just let me know beforehand).
 2. A short (but not too short!) document containing the documentation of your code, and a presentation of the results asked in the assignment.
-3. Each assignment has a mandatory part and a few "possible extensions". The "possible extensions" are only suggestions: feel free to extend your code or your analysis in any way you like it, provided it makes sense from the computational and biophysical points of view. Extending your code or what you did with it can (and most likely will) improve the grade of the assignment. 
+3. Each assignment has a mandatory part and a few "possible extensions". The "possible extensions" can be implemented to improve the rate of the assignment, or can be used as suggestions for the final project: you are free to extend your code or your analysis in any way you like it, provided it makes sense from the computational and biophysical points of view.
 
 The code documentation should be clear and concise, but also list features, limitations, and known bugs of your code. In addition, it should present a comprehensive guide about how to you use the code (*e.g.* how to call it, how to specify the input, how to read the output, *etc.*). I will provide examples of "good" documentation during the course.
 
-:::{warning} Using ChatGPT
-You are welcome to use ChatGPT or similar tools during the course. However, harsh penalties will be handed out to students who use AI-assisted tools without actually understanding their answers[^AI_penalty]. This applies to both code and text submitted for the homework assignments and for the final project.
+:::{warning} Using AI tools
+You are welcome to use ChatGPT, GitHub Copilot or similar tools during the course. However, harsh penalties will be handed out to students who use AI-assisted tools without actually understanding their answers[^AI_penalty]. This applies to both code and text submitted for the homework assignments and for the final project.
 :::
 
-[^AI_penalty]: Penalties will be given if I realise a student does not understand what he did, or why.
+[^AI_penalty]: Penalties will be given if I realise a student does not understand what they did, or why.
 
 (sec:intro_biophys)=
 # Introduction to biophysics
@@ -81,9 +81,43 @@ Eukaryotes
 
 [^binary_fission]: For what concerns us, this is a simpler version of mitosis.
 
+## Macromolecules and polymers
+
+A macromolecule is a molecule composed by a great number of covalently bonded atoms[^macromolecule]. The most common class of macromolecules is that of polymers, which are molecules composed by smaller subunits, the *monomers*, covalently linked together. If the monomers are all of the same type, the resulting molecule is a *homopolymer*, while if they are different, the molecule is a *heteropolymer*. In general, monomers can be connected in different ways, giving raise to unidimensional structures such as chains or rings, or to more complicated topologies such as brushes, stars, networks, *etc.* 
+
+Focussing on chains, the number of repeating units (also known as *residues*) composing a polymer is called *degree of polymerisation* $n$, and for common plastic materials is rather large ($n \sim 10^3 - 10^5$). The simplest polymer is the hydrocarbon polyethylene, $(-CH_2-)_n$, which is used to make cheap bags and bottles and accounts for more than $30\%$ of the plastic produced worldwide (see *e.g.* [](doi:10.1126/sciadv.1700782)). Other very common polymers used to build everyday objects are polypropilene, $-CH_2-CH(CH_3)-$, which is heat- and fatigue-resistant and threfore used to make hinges, piping systems, containers, and polystyrene, $-CH_2-CH(C_6H_5)-$, used to make plastic cutlery, containers or insulating foams. The skeletal formulas of these three polymers are shown in [](#fig:simple-polymers).
+
+```{figure} figures/simple_polymers.png
+:name: fig:simple-polymers
+:align: center
+:width: 500px
+
+The skeletal formulas of (a) polyethylene, (b) polypropilene and (c) polystyrene. Here the repeating unit in (a) is $-CH_2-CH_2-$ to make it more easy to compare it with the other two.
+```
+
+In the biological context, three of the four main macromolecular components of life are polymers: proteins, nucleic acids and carbohydrates, also known as biopolymers. While there exist (bio)polymeric substances with more complex architectures, the main macromolecules of life have a linear (chain) structure that makes it possible to assign a one dimensional *sequence* to each molecule. This sequence is just the list of monomers composing the chain, spelt from one chain end to the other.
+
+```{figure} figures/polymer_sequence.png
+:name: fig:polymer-sequence
+:align: center
+:width: 500px
+
+A cartoon of a polymer composed by 9 monomers (the coloured spheres) connected by covalent bonds (black lines). Panel (A) shows two 2D conformations, panel (B) shows the two 1D sequences built by listing the monomers that make up the chain, starting from either end.
+```
+
+[](#fig:polymer-sequence) shows an imaginary short polymer composed by 9 monomers of different nature (coloured differently). In general, there are many different spatial arrangements that the same (bio)polymer can take in solution. By contrast, its sequence is fixed, being given by the list of covalently-linked monomers. However, as shown in the figure, in absence of any convention, the sequence can be read from either end, giving raise to an ambiguity. As we will see, there exist conventions for proteins and nucleic acids that get rid of this ambiguity.
+
+[^macromolecule]: "great number" is a purposedly vague qualifier: there is no strict definition about the number of atoms required for a molecule to be dubbed a macromolecule.
+
+### Polymer physics in a nutshell
+
+:::{warning} TODO
+Use [FS's notes](https://www.roma1.infn.it/~sciortif/didattica/SOFTSTRUTTURA/SOFTSTRUTTURA/polimeri.pdf) as a starting point.
+:::
+
 ## DNA
 
-The DNA molecule stores the genetic information of an organism. DNA contains regions called genes, which encode for proteins to be produced. Other regions of the DNA contain regulatory elements, which partially influence the level of expression of each gene. Within the genetic code of DNA lies both the data about the proteins that need to be encoded, and the control circuitry, in the form of regulatory motifs.
+Deoxyribonucleic acid (DNA) is a macromolecule that stores the genetic information of an organism. DNA contains regions called genes, which encode for proteins to be produced. Other regions of the DNA contain regulatory elements, which partially influence the level of expression of each gene. Within the genetic code of DNA lies both the data about the proteins that need to be encoded, and the control circuitry, in the form of regulatory motifs.
 
 As we will see in depth, in cells DNA is usually found in a "double-stranded" helical form, where each strand is a long chain of repeating units, called nucleotides, of just four types: A(adenine), C(cytosine), T (thymine), and G (guanine). The list of nucleotides is called *sequence* or *primary structure*. In the double strand, A pairs with T and G with C, with the A-T pairing being weaker than the C-G pairing[^GC_pairing].
 
@@ -195,6 +229,10 @@ Several experimental methods can be used to understand the secondary structure o
 2. **Fourier Transform Infrared (FTIR) Spectroscopy:** FTIR spectroscopy measures the absorption of infrared light by the biomolecule, which provides information about the types of chemical bonds and functional groups present. The amide I and II bands are particularly informative for analyzing protein secondary structures.
    
 3. **Ultraviolet (UV) Absorption Spectroscopy:** UV absorption spectroscopy can provide some information about the secondary structure, especially in nucleic acids. It is less informative for proteins compared to CD spectroscopy but can still be useful when combined with other techniques.
+
+:::{warning} TODO
+Add figures from Finkelstein book (see pag 81).
+:::
 
 ### Three-dimensional structure
 
@@ -331,7 +369,7 @@ Thus, by induction, the theorem is proved.
 
 We can now leverage [](#eq:coin_change_weights) to calculate the minimum number of coins necessary to change any amount $x$ with a time that is linear in $x$ and in the number of coin types, $n$, *i.e.* with an algorithmic (time) complexity $\mathcal{O}(xn)$. First, we apply [](#eq:coin_change_weights) to progressively build a table containing the $w(y)$ values, with $y \leq x$, starting from $y = 0$:
 
-:::{code}
+:::{code} plaintext
 :label: code:coin-fillin
 :caption: Pseudocode for the fill-in phase.
 
@@ -347,7 +385,7 @@ FOR each value y between 1 and N
 
 Once the table is ready, the answer to our question about the minimum number of coins can be read off its last entry, $w(x)$. However, if we want to know the details of the solution, *e.g.* which coins add up to $x$, we have to trace back Eq. [](#eq:coin_change_weights):
 
-:::{code}
+:::{code} plaintext
 :label: code:coin-traceback
 :caption: Pseudocode for the trace-back phase.
 
@@ -362,7 +400,7 @@ WHILE y is larger than 0
 :::
 
 :::{warning}
-In some cases, there is more than one way of changing an amount with the minimum number of coins. The algorithm reported above will find one such solution, but can be extended to find all the solutions. In this case we have to keep track of all the branches happening every time there is more than one coin for which $w(y) = (y - c) + 1$.
+In some cases, multiple ways exist to change an amount using the minimum number of coins. The algorithm described above will identify one such solution but can be extended to find all possible solutions. To achieve this, we must keep track of all branching paths that occur whenever more than one coin satisfies the condition $w(y) = (y - c) + 1$.
 :::
 
 :::{hint} A simple example
@@ -395,4 +433,4 @@ You can find a Python implementation of the brute-force and dynamic-programming 
 3. **Hard**: Extend the brute-force solution so that it also returns an optimal solution.
 3. **Hard**: Extend the dynamic-programming solution so that it returns all optimal solutions.
 
-[^coin_combinations]: in some cases it may be worth to average over different $C$ at fixed $n$.
+[^coin_combinations]: in some cases it may be worth averaging over different $C$ at fixed $n$.

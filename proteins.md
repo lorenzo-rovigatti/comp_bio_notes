@@ -6,23 +6,7 @@ title: Proteins
 The main references for this part are @finkelstein2002protein, @lehninger2005lehninger, and @schlick2010molecular.
 ```
 
-Proteins are macromolecules composed by amino acids linked by peptide bonds. Let's analyse what these words mean.
-
-# Macromolecules
-
-A macromolecule is a molecule composed by a great number of covalently bonded atoms[^macromolecule]. The most common class of macromolecules is that of biopolymers, which comprise three of the four main macromolecular components of life: proteins, nucleic acids and carbohydrates. Biopolymers are, in turn, a subclass of polymers, which are defined as molecules composed by smaller subunits, the *monomers*, covalently linked together. While there exist polymeric substances with more complex architectures, the main macromolecules of life have a linear (chain) structure that makes it possible to assign a one dimensional *sequence* to each molecule. This sequence is just the list of monomers composing the chain, spelt from one chain end to the other.
-
-```{figure} figures/polymer_sequence.png
-:name: fig:polymer-sequence
-:align: center
-:width: 500px
-
-A cartoon of a polymer composed by 9 monomers (the coloured spheres) connected by covalent bonds (black lines). Panel (A) shows two 2D conformations, panel (B) shows the two 1D sequences built by listing the monomers that make up the chain, starting from either end.
-```
-
-[](#fig:polymer-sequence) shows an imaginary short polymer composed by 9 monomers of different nature (coloured differently). In general, there are many different spatial arrangements that the same (bio)polymer can take in solution. By contrast, its sequence is fixed, being given by the list of covalently-linked monomers. However, as shown in the figure, in absence of any convention, the sequence can be read from either end, giving raise to an ambiguity. As we will see, there exist conventions for proteins and nucleic acids that get rid of this ambiguity.
-
-[^macromolecule]: "great number" is a purposedly vague qualifier: there is no strict definition about the number of atoms required for a molecule to be dubbed a macromolecule.
+Proteins are macromolecules composed by amino acids linked by peptide bonds. Let's what these are.
 
 # Amino acids
 
@@ -420,7 +404,7 @@ Now we can consider what happens outside of the protein. Following @finkelstein2
 
 Everything said above rests on the assumption that the medium can be regarded as continous and homogeneous. However, when dealing with atomic distances ($\approx \angstrom$), the granularity of the solvent cannot, in principle, be neglected. For instance, if two charges are $3-4 \, \angstrom$ apart, no atoms or molecules can get in between them and affect the resulting electrostatic interaction. However, it turns out that the water molecules that are attracted by the pair of charges and come from the sides are enough to screen the electrostatic interactions almost as if the solvent were homogeneous and had the "macroscopic" dielectric permittivity $\epsilon_r$.
 
-This should not come as a surprise if we think about kitchen salt, $NaCl$: the binding energy between the $Na^+$ and $Cl^-$ ions, if we again take $R = 3 \, \angstrom$, is $-1.5$ kcal/mol and $-120 kcal/mol$ in bulk water ($\epsilon_r = 80$) and vacuum ($\epsilon_r = 1$), respectively. Even if we assume that the breakdown of the assumption of the continouous and homogeneous nature of the solvent brings the relative dielectric constant down to "only" $\epsilon_r = 20$, we would still have an interaction energy of $-6.0$ kcal/mol, which is about the same strength of a single water-water [hydrogen bond](#sec:hydrogen-bonds). In this case we would expect the concentration of a saturated salt solution to be close to that of saturated water vapour, which is $\approx 10^{-4}$ mol / l (or $10^{-4}$ M). However, this is many times smaller than the $NaCl$ concentration in salty sea water ($\sim 1$ M), which confirms that $\epsilon_r$ should be much larger than $20$, and therefore rather close to the bulk value of $80$, even when $R \approx 3 \, \angstrom$.
+This should not come as a surprise if we think about kitchen salt, $NaCl$: the binding energy between the $Na^+$ and $Cl^-$ ions, if we again take $R = 3 \, \angstrom$, is $-1.5$ kcal/mol and $-120$ kcal/mol in bulk water ($\epsilon_r = 80$) and vacuum ($\epsilon_r = 1$), respectively. Even if we assume that the breakdown of the assumption of the continouous and homogeneous nature of the solvent brings the relative dielectric constant down to "only" $\epsilon_r = 20$, we would still have an interaction energy of $-6.0$ kcal/mol, which is about the same strength of a single water-water [hydrogen bond](#sec:hydrogen-bonds). In this case we would expect the concentration of a saturated salt solution to be close to that of saturated water vapour, which is $\approx 10^{-4}$ mol / l (or $10^{-4}$ M). However, this is many times smaller than the $NaCl$ concentration in salty sea water ($\sim 1$ M), which confirms that $\epsilon_r$ should be much larger than $20$, and therefore rather close to the bulk value of $80$, even when $R \approx 3 \, \angstrom$.
 
 [^self_energy]: This quantity is just the work required to charge up a spherical body of radius $R$, $\int_0^q \frac{q'dq'}{4 \pi \epsilon R}$.
 [^basic_electrostatics]: basic but by no means obvious or straightforward.
@@ -440,7 +424,7 @@ Each amino acid side chain can adopt multiple rotameric states, influenced by st
 (sec:primary_structure)=
 # Primary structure
 
-The order in which amino acids are linked together by peptide bonds is known as the *primary structure* of a protein. The convention to list the sequence of a protein is to use the one-letter or three-letter codes for amino acids in the sequence, which has a well-defined directionality. The sequence starts at the end of the amino acid chain that has a free amine group ($-NH2$), which is called N-terminus and, by convention, marks the beginning of a protein. The other end has a free carboxyl group (-COOH) and is known as the C-terminus, which is considered the end of the protein.
+The order in which amino acids are linked together by peptide bonds is known as the *primary structure* of a protein. The convention to list the sequence of a protein is to use the one-letter or three-letter codes for amino acids in the sequence, which has a well-defined directionality. The sequence starts at the end of the amino acid chain that has a free amine group ($-NH2$), which is called N-terminus and, by convention, marks the beginning of a protein. The other end has a free carboxyl group ($-COOH$) and is known as the C-terminus, which is considered the end of the protein.
 
 :::{tip} An example
 :class: dropdown
@@ -458,6 +442,7 @@ The secondary structure of proteins refers to the local, repetitive folding patt
 
 The most common secondary structures found in proteins are helices (and $\alpha$-helices in particular) and $\beta$-sheets.
 
+(sec:protein_helices)=
 ## Helices
 
 A helix of length $n_0$ is a repetitive structure whereby the $C=O$ group of the $i$-th AA in thee chain is hydrogen-bonded to the $H-N$ group of a $(i + k)$-th residue, for $n_0$ consecutive values of $i$. In protein systems, a helix is identified by a name $k_N^{H}$, where:
@@ -739,10 +724,6 @@ The [crystal structure](https://www.rcsb.org/structure/2x9k) of an E. coli porin
 ```
 
 [](#fig:porin) shows a E. coli porin, a class of membrane proteins that form large, water-filled channels through the outer membrane of gram-negative bacteria, mitochondria, and chloroplasts and facilitate the passive diffusion of small molecules, such as ions, nutrients, and metabolic waste products, across the membrane. The figure shows only the protein, with the top view highlighting the large pore in the middle, and the side view demonstrating the regular pattern formed by the anti-parallel $\beta$-strands. In the figure residues are coloured according to their hydrophobic character[^hydrophobic_residues], which determines an alternating pattern that is typical for $\beta$-barrels, where the hydrophobic residues face outward to interact with the lipid bilayer, and the hydrophilic residues face inward to create a water-filled channel.
-
-:::{attention} Possible project
-Choose a protein membrane, embed it in a lipid bilayer and study its conformation?
-:::
 
 [^hydrophobic_residues]: The binary classification into hydrophobic/non-hydrophobic is somewhat ambiguous, but it will serve its purpose here.
 

@@ -81,7 +81,7 @@ If $T_M < T_G$, the slow dynamics asssociated to the glass state makes it kineti
 :align: center
 :width: 600
 
-(a) An example of frustrated interactions: if interaction is such that only like colours want to be close to each other, there is no way of arranging the three spheres so that all favourable contacts are made. As a result, the ground state is degenerate. (b) A schematic energy landscape of a 60 amino-acid helical protein. $A$ and $Q$ are the fractions of correct dihedral angles in the backbone and correct native-like contacts, respectively, $\Delta E$ is the "ruggedness" of the landscape, and $\delta E_s$ is the energy gap. Taken from [](doi:10.1073/pnas.92.8.3626).
+(a) An example of frustrated interactions: if the particle-particle interaction is such that only like colours want to be close to each other, there is no way of arranging the three spheres so that all favourable contacts are made. As a result, the ground state is degenerate. (b) A schematic energy landscape of a 60 amino-acid helical protein. $A$ and $Q$ are the fractions of correct dihedral angles in the backbone and correct native-like contacts, respectively, $\Delta E$ is the "ruggedness" of the landscape, and $\delta E_s$ is the energy gap. Taken from [](doi:10.1073/pnas.92.8.3626).
 ```
 
 All these concepts are not merely qualitative, but have been grounded in theory by using sophisticated statistical mechanics approaches that have generated the "funnel landscape" folding picture, which is schematically shown in [](#fig:frustration)(b).
@@ -444,7 +444,7 @@ But to what extent lattice and real proteins are similar? I will present some re
 * In HP100, which is the one described above, only HH contacts contribute to a conformation's free energy.
 * In HP211 topological contacts between H and P and P and P contribute $-1$ (*i.e.* $\epsilon_{HP} = \epsilon_{PP} = -1$) to the free energy, while HH contacts contribute $\epsilon = -2$. As a result, compared to the HP100 model, all residues feel an attraction that makes compact conformations more favourable.
 
-Some interesting results pertaining to folding sequences are reported in [](#fig:HP_model_comparison). [](#fig:HP_model_comparison)(a) shows, as a proxy for compactness, the normalised radius of gyration $R_g/{\rm Min}(R_g)$, where ${\rm Min}(R_g)$ is the smallest radius of gyration among the structures of a given length, for the lattice and real proteins. For real proteins the authors have considered a non-redundant set of 2401 single-domain proteins from the PDB with lengths between 50 and 200 residues long. By comparing the two lattice models, it is evident that the additional attraction between non-hydrophobic residues enhances the compactness in HP211 more, but the variation in compactness, given by the error bars, is very small in both cases, and the compactness itself does not depend on the chain length. The same behaviour is observed in real proteins.
+Some interesting results pertaining to folding sequences are reported in [](#fig:HP_model_comparison). [](#fig:HP_model_comparison)(a) shows, as a proxy for compactness, the normalised radius of gyration $R_g/\min(R_g)$, where $\min(R_g)$ is the smallest radius of gyration among the structures of a given length, for the lattice and real proteins. For real proteins the authors have considered a non-redundant set of 2401 single-domain proteins from the PDB with lengths between 50 and 200 residues long. By comparing the two lattice models, it is evident that the additional attraction between non-hydrophobic residues enhances the compactness in HP211 more, but the variation in compactness, given by the error bars, is very small in both cases, and the compactness itself does not depend on the chain length. The same behaviour is observed in real proteins.
 
 [](#fig:HP_model_comparison)(b) shows the percentage of residues that are hydrophobic in the lattice structures and for the same real proteins used for the radius of gyration. Both lattice and real proteins have an average hydrophobicity of $\approx 50\%$, independent of $m$, and the error bars and total range (dashed lines) are comparable in the two cases (although both are a bit larger for the HP model). Folding sequences in the HP model are "protein-like".
 
@@ -498,9 +498,267 @@ Head over [here](./notebooks/HP_model.ipynb) for a Jupyter notebook containing t
 
 ## Sequence alignment
 
+```{tip}
+The main reference for this part is @kellis_comp_bio.
+```
+
+Simple models are useful to understand the underlying physics of some particular phenomena. However, how can we understand something very specific, like what is the 3D structure of a particular sequence? The simplest way is to look for similarities: if we already have a list of sequence $\to$ structure connections, we can try to look whether the new sequence, for which the 3D structure is unknown, is similar, and to what degree, to another for which the 3D structure is already known. This operation is called "sequence alignment" (SA).
+
+Sequence alignment is a fundamental technique in bioinformatics. The primary goal of sequence alignment is to identify regions of similarity that may indicate functional, structural, or evolutionary relationships between the sequences being compared. In the context of proteins, sequence alignment can be useful for reasons that go beyond the 3D structure prediction:
+
+* It helps predict the function of unknown proteins based on their similarity to known proteins.
+* It aids in understanding evolutionary relationships by identifying conserved sequences among different species, allowing the construction of phylogenetic trees.
+* It can identify conserved domains that are crucial for the function of proteins.
+* It helps in identifying potential drug targets by finding unique sequences in pathogens that differ from the host.
+* It assists in annotating genomes by finding homologous sequences, thus providing insights into gene function and regulation.
+
+Turning a biological problem into an algorithm that can be solved on a computer requires making some assumptions in order to obtain a model with relative simplicity and tractability. In practice, for our sequence alignment model we ignore realistic events that occur with low probability (*e.g.* duplications) and focus on the following three mechanisms through which sequences vary:
+
+1. A (point) mutation, or substitution, occurs when some amino acid in a sequence changes to some other amino acid during the course of evolution.
+2. A deletion occurs when an amino acid is deleted from a sequence during the course of evolution.
+3. A insertion occurs when an amino acid is added to a sequence during the course of evolution.
+
+There are many possible sequences of events that could change one genome into another, and we wish to establish an optimality criterion that allows us to pick the "best" series of events describing changes between sequences. We choose to invoke Occam's razor and select a maximum parsimony method as our optimality criterion[^parsimony]: we wish to minimize the number of events used to explain the differences between two sequences. In practice, it is found that point mutations are more likely to occur than insertions and deletions, and certain mutations are more likely than others. We now develop an algorithmic framework where these concepts can be incorporated explicitly by introducing parameters that take into account the "biological cost" of each of these changes.
+
+(sec:homology)=
+### Homology 
+
+While here my focus is on protein structure, I also want to point out that in bioinformatics one of the key goals of sequence alignment is to identify homologous sequences (*e.g.*, genes) in a genome. Two sequences that are homologous are evolutionarily related, specifically by descent from a common ancestor. The two primary types of homologs are orthologous and paralogous. While they are outside the scope of these notes, I note here that other forms of homology exist (*e.g.*, xenologs, which are genes in different species that have arisen through horizontal gene transfer[^HGT] rather than through vertical inheritance from a common ancestor, and often perform similar functions in their respective organisms despite their distinct evolutionary origins). 
+
+* Orthologs arise from speciation events, leading to two organisms with a copy of the same gene. For example, when a single species A speciates into two species B and C, there are genes in species B and C that descend from a common gene in species A, and these genes in B and C are orthologous (the genes continue to evolve independent of each other, but still perform the same relative function).
+* Paralogs arise from duplication events within a species. For example, when a gene duplication occurs in some species A, the species has an original gene B and a gene copy B', and the genes B and B' are paralogus.
+
+Generally, orthologous sequences between two species will be more closely related to each other than paralogous sequences. This occurs because orthologous typically (although not always) preserve function over time, whereas paralogous often change over time, for example by specializing a gene's (sub)function or by evolving a new function. As a result, determining orthologous sequences is generally more important than identifying paralogous sequences when gauging evolutionary relatedness.
+
+[^HGT]: Horizontal gene transfer is the movement of genetic material between organisms in a manner other than traditional reproduction (vertical inheritance). This process allows genes to be transferred across different species, leading to genetic diversity and the rapid acquisition of new traits, and can occur through several mechanisms.
+
+### Definitions
+
+Following @kellis_comp_bio, we introduce a simplified version of the alignment problem and make it more complex by adding the required ingredients. First, some definitions:
+
+Sequence
+: In mathematics (and combinatorics) a sequence is a series of characters taken from an alphabet $\Sigma$. For what concerns us, DNA molecules are sequences over the alphabet $\lbrace A, C, G, T\rbrace$, RNA sequences over the alphabet $\lbrace A, C, G, U\rbrace$, and proteins are sequences over the alphabet $\lbrace A, R, N, D, C, Q, E, G, H, I, L, K, M, F, P, S, T, W, Y, V \rbrace$.
+
+Substring
+: A consecutive part of a sequence. A sequence of length $N$ has $N$ substrings of length 1, $N(N-1)/2$ substrings of length 2, $\ldots$, $2$ substrings of length $(N - 1)$. Given the sequence "SUPERCALIFRAGILISTICHESPIRALIDOSO", "FRAGILI" is a substring, but "SUPERDOSO" is not.
+
+Subsequence
+: A set of characters of a sequence. The characters do not have to be consecutive, but they should be ordered like in the original sequence. Given the sequence "SUPERCALIFRAGILISTICHESPIRALIDOSO", "FRAGILI" and "SUPERDOSO" are two subsequences, but "SOSUPER" is not. Formally, given a sequence $S = (s_1, s_2, \ldots, s_N)$, $K = (z_1, z_2, \ldots, s_n)$, with $n \leq N$, is a subsequence of $S$ if there exists a strictly increasing sequence $i_1 < i_2 < \ldots < i_n$ of indices of $S$ such that $S_{i_j} = K_j$ for each $j: 1 \leq j \leq n$.
+
+Sequence alignment
+: An alignment of two sequences $S$ and $T$, defined over the same alphabet $\Sigma$, is a $2 \times L$ table containing either a character from $\Sigma$, or the gap symbol "`-`". In the table there is no column in which both characters are "`-`", and the non-gap characters in the first line give back sequence $S$, while the non-gap characters in the second line give back sequence $T$.
+
+### Problem formulation
+
+We warm up by considering the following simple problem: given two sequences, $S$ and $T$, what is their longest common substring? We take the two following DNA fragments as examples: `ACGTCATCA` and `TAGTGTCA`. The problem can be solved by aligning the first characters of the two sequences, and then shifting one, say $T$, by an integer amount $i \in \mathcal{N}$. By computing the number of matching characters for every $i$ we can find the optimal alignment, which in this case is given by $i = -2$:
+
+```
+--ACGTCATCA
+--xx||||---
+TAGTGTCA---
+```
+
+The first and third rows of the diagram above describe the alignment itself, as introduced earlier, showing that gaps are characters that align to a space, while the central row shows the character matches: here `x` and `|` stand for mismatches and matches, respectively. In this example, the longest common substring is `GTCA`. The algorithm I just described has a complexity of $\mathcal{O}(n^2)$, where $n$ is the length of the shortest sequence.
+
+A more complicated problem is to find the longest common *subsequence* (LCS) between two sequences. In the language we are introducing, this means allowing internal gaps in the alignment. The LCS between the $S$ and $T$ sequences defined earlier is
+
+```
+-ACGTCATCA
+-|-||x-|||
+TA-GTG-TCA
+```
+
+In this case the LCS is `AGTTCA`, which is longer than the longest commond substring.
+
+The LCS problem as formulated here is a particular case of the full sequence-alignment problem. In order to generalise the problem, we introduce a cost function that makes it possible to recast it in terms of an optimisation problem. Given two sequences $S$ and $T$, we define $\delta(S, T)$ as the "biological cost" of turning $S$ into $T$. For the case just considered, I implicitly used as a cost function the [Levenshtein (or edit) distance](https://en.wikipedia.org/wiki/Levenshtein_distance), which is defined as the minimum number of single-character edits required to change one string into another. In other words, the problem has been formulated by implicitly considering that all possible operations (mutations, insertions and deletions) are equally likely. In a more generalised formulation, each edit operation is associated to a specific cost (penalty) that should reflect its biological occurrence, as discussed [later](#seq:substitution_matrices).
+
+What about gaps? In general, the cost of creating a gap depends on many variables. There are varying degrees of approximations that can be taken in order to simplify the problem. At the zero-th order each gap can be assumed to have a fixed cost, as we implicitly did above. This is called the "linear gap penalty". An improvement can be done by considering that, biologically, the cost of creating a gap is more expensive than the cost of extending an already created gap. This is taken into account by the "affine gap penalty" method, whereby there is a large initial cost for opening a gap, and then a small incremental cost for each gap extension.
+There are other (more complicated and more context-specific) methods that can be considered and that we will not analyse further here, such as the general gap penalty, which allows for any cost function, and the frame-aware gap penalty, which is applied to DNA sequences and tailors the cost function to take into account disruptions to the coding frame[^frame-aware].
+
+### The Needleman-Wunsch algorithm
+
+Once we allow for gaps, the enumeration of all possible alignments (as done for the longest common substring method) becomes unfeasible. Indeed, the number of non-boring alignments, *i.e.* alignments where gaps are always paired with characters, in a sequence of size $N$ containing $M$ gaps (where $N \approx M$) can be estimated as
+
+$$
+\binom{N + M}{M} = \frac{(N + M)!}{N!M!} \approx \frac{(2N)!}{(N!)^2} \approx \frac{2^{2N}}{\sqrt{\pi n}},
+$$
+
+where we used the second-order Stirling's approximation, $\log(N!) \approx N \log(N) - N + \frac{1}{2}\log (2 \pi N)$. Note that this number grows **very** fast: for $N = 30$ it is already larger than $10^{17}$. Considering that we also have to compute the score of each alignment, it is clear that the problem is untractacle with a brute-force method. Here is where dynamic programming enters the field.
+
+Suppose we have an optimal alignment for two sequences $S$, of length $N$, and $T$, of length $M$, in which $S_i$ matches $T_j$. The alignment can be conceptually split into three parts:
+
+1. Left subalignment: The alignment of the subsequences $(S_1 , \ldots , S_{i−1})$​ and $(T_1 , \ldots , T_{j −1} )$​.
+2. Middle match/mismatch: The alignment of $S_i$​ with $T_j$​ (this could be a match or a mismatch).
+3. Right subalignment: The alignment of the subsequences $(S_{i+1}, \ldots, S_N)$​ and $(T_{j+1} , \ldots, T_M)$​.
+
+The overall alignment score is the sum of the scores from these three parts: the score of the left subalignment, the score for aligning $S_i$​ with $T_j$​, and the score of the right subalignment. Therefore, if the overall alignment is optimal, both the left and right subalignments must themselves be optimal. This follows from a cut-and-paste argument: imagine that one of the two subalignment was not optimal. This would mean there exists another alignment of these subsequences with a higher score. If such a better alignment for the subsequences existed, we could "cut" the suboptimal subalignment from the original alignment and "paste" in this better alignment. This would result in a new alignment for $S$ and $T$ with a higher total score than the supposed "optimal" alignment. This is a contradiction because the original alignment was assumed to be optimal. Since the same argument applies to both subalignments, the overall alignment's optimality depends on the optimality of both its left and right subalignments. Of course, this is true only if the scores are additive, so that the score of the overall alignment is the sum of the scores of the alignments of the subsequences. The implicit assumption is that the sub-problems of computing the optimal scoring alignments of the subsequences are independent.
+
+Let $F_{i,j}$ be the score of the optimal alignment of $(S_1 , \ldots , S_i)$ and $(T_1 , \ldots , T_j)$. Since $i \in [0, N]$ and $j \in [0, M]$, the matrix $F$ storing the solutions (*i.e.* optimal scores) of the subproblems has a size of $(M + 1) \times (N + 1)$.
+
+We can compute the optimal solution for a subproblem by making a locally optimal choice based on the results from the smaller subproblems. Thus, we need to establish a recursive function that shows how the solution to a given problem depends on its subproblems and can be used to fill up the matrix $F$. At each iteration we consider the four possibilities (insert, delete, substitute, match), and evaluate each of them based on the results we have computed for smaller subproblems.
+
+We start by considering the linear gap penalty model, and define $d$, with $d < 0$, as the cost of a gap. We are now equipped to set the values of the elements of the matrix. Let's consider the first row: the value of $F_{0,j}$ is the cost of aligning a sequence of length $0$ (taken from $S$) to a sequence of length $j$ (taken from $T$), which can be obtained only by adding $j$ gaps, yielding $F_{0,j} = jd$. Likewise, for the first column we have $F_{i,0} = id$. Then, we traverse the matrix element by element. Let's consider a generic element $F_{ij}$: this is the cost of aligning the first $i$ characters of $S$ to the first $j$ characters of $T$. There are three ways we can obtain this alignment:
+
+* a gap is added to $S$: the total cost is $F_{i-1, j} + d$;
+* a gap is added to $T$: the total cost is $F_{i, j - 1} + d$;
+* $S_i$ and $T_j$ are matched: the total cost is $F_{i - 1, j - 1} + s(S_i, T_j)$, where $s(x, y)$ is the cost of (mis)matching $x$ and $y$.
+
+Leveraging the cut-and-paste argument sketched above, the optimal cost is given by the largest of the three values. Formally,
+
+$$
+F_{i,j} = \max
+\begin{cases}
+F_{i - 1, j} + d \\
+F_{i, j - 1} + d \\
+F_{i - 1, j - 1} + s(S_i, T_j).
+\end{cases}
+$$ (eq:needleman_wunsch)
+
+This is a recursive relation: computing the value of any $F_{i,j}$ requires the knowledge of the values of its left, top, and top-left neighbours. Therefore, the fill-in phase amounts to traversing the table in row or column major order, or even diagonally from the top left cell to the bottom right cell. After traversing the matrix, the optimal score for the alignment is given by the bottom-right element, $F_{MN}$. In order to obtain the actual alignment we have to traceback through the choices made during the fill-in phase. It is helpful to maintain a pointer for each cell while filling up the table that shows which choice was made to get the score for that cell. Then the pointers can be followed backwards to reconstruct the optimal alignment. 
+
+The complexity analysis of this algorithm is straightforward. Each update takes $\mathcal{O}(1)$ time, and since there are $MN$
+elements in the matrix $F$, the total running time is $\mathcal{O}(MN)$. Similarly, the total storage space is $\mathcal{O}(MN)$. For the more general case where the update rule is more complicated, the running time may be more expensive. For instance, if the update rule requires testing all sizes of gaps (*e.g.* the cost of a gap is not linear), then the running time would be $\mathcal{O}(MN(M + N)$).
+
+:::{tip} A simple example
+Consider the two DNA sequences $S = AGT$ and $T = AAGC$, a gap penalty $d = -2$, and $s(x, y) = \pm 1$, where the plus and minus signs are used for matches and mismatches, respectively.
+
+```{figure} figures/needleman_wunsch_example.png
+:name: fig:needleman_wunsch_example
+:align: center
+
+The dynamic programming table of the example during three stages of the fill-in phase: (a) at the beginning, (b) halfway through, and (c) at the end. The arrows point from each box to the box that has been used to compute its score. Panel (b) highlights one $(i, j)$ pair for which two of the cases of Eq. [](#eq:needleman_wunsch) give the same value. Each "branching" such as this one doubles the number of optimal alignments. Tracing back the arrows from the bottom-right box (in green) to the first row ($i = 0$) or first column ($j = 0$) the optimal alignment(s) can be reconstructed.
+```
+
+[](#fig:needleman_wunsch_example) shows how the dynamic programming table of the problem looks when initialised, halfway through the fill-in phase, and after being fully traversed. Once the full table has been computed, the bottom-right box contains the optimal score, while the solutions (*i.e.* the optimal alignments) can be reconstructed by tracing back the matrix, following the arrows. Note that sometimes the maximum value computed from Eq. [](#eq:needleman_wunsch) is degenerate, *i.e.* the same value can be obtained by performing several operations (see [](#fig:needleman_wunsch_example)(b)). In this case there are multiple optimal alignments. For instance, for the simple example shown here there are two optimal alignments:
+
+```
+A-GT
+|-|x
+AAGC
+
+-AGT
+-||x
+AAGC
+```
+:::
+
+### Local alignment: the Smith-Waterman algorithm
+
+The Needleman-Wunsch algorithm find the best possible alignment across the entire length of two sequences. It tries to align every character from the start to the end of the sequences, which means both sequences are considered in their entirety. This is called "global alignment", and it is most useful when the sequences being compared are of similar length and are expected to be homologous across their entire length.
+
+Local alignment, on the other hand, focuses on finding the best alignment within a subset of the sequences. It identifies regions of similarity between the two sequences and aligns only those regions, ignoring the parts of the sequences that do not match well. Local alignment is particularly useful when comparing sequences that may only share a segment of similarity, such as when comparing domains within proteins, detecting conserved motifs, or identifying homologous regions in sequences that may not be overall similar[^local_alignment_DNA], which is why is very useful for the prediction of the 3D structure of proteins (or protein subdomains).
+
+The most used method for local alignment is the Smith-Waterman algorithm, which is a modification of the Needleman-Wunsch algorithm. The key difference between the two lies in how the scoring matrices are constructed and scored. In Needleman-Wunsch, every cell in the matrix is filled to reflect the best global alignment, with the final alignment score found in the bottom-right corner of the matrix. Smith-Waterman, on the other hand, sets any negative scores to zero, which allows the algorithm to "reset" when the alignment quality dips. The highest score in the matrix indicates the end of the best local alignment, which is then traced back to identify the optimal aligned subsequence. This approach ensures that only the most relevant, highest-scoring local alignments are highlighted. Here is how the Smith-Waterman algorithm looks like in practice:
+
+1. Initialisation: since a local alignment can start anywhere, the first row and column in the matrix are set to zeros, *i.e.* $F_{0,j} = jd$, $F_{i,0} = id$.
+2. Iteration $\forall (i, j)$: this step is modified so that the score is never allowed to become negative but it is reset to zero. This is done by slightly modifying Eq. [](#eq:needleman_wunsch) as follows:
+$$
+F_{i,j} = \max
+\begin{cases}
+0\\
+F_{i - 1, j} + d \\
+F_{i, j - 1} + d \\
+F_{i - 1, j - 1} + s(S_i, T_j).
+\end{cases}
+$$
+3. Trace-back: starts from the position of the maximal number in the table and proceeds until a zero is encountered.
+
+:::{tip} The Needleman-Wunsch algorithm
+For reference, this is summary of the Needleman-Wunsch algorithm:
+
+1. Initialisation: $F_{0,j} = jd$, $F_{i,0} = id$.
+2. Iteration $\forall (i, j)$: Eq. [](#eq:needleman_wunsch).
+3. Trace-back: starts from the bottom-right value and stops when $i = 0$ or $j = 0$.
+:::
+
 :::{seealso} Python implementation
 Head over [here](./notebooks/sequence_alignment.ipynb) for Jupyter notebook containing code implementing the various alignment algorithms discussed in this section.
 :::
+
+[^parsimony]: Note that this is not the only possible choice: we could choose a probabilistic method, for example using Hidden Markov Models (HMMs), that would assign a probability measure over the space of possible event paths and use other methods for evaluating alignments (*e.g.*, Bayesian methods).
+[^frame-aware]: Indels (shorthand for "insertions/deletions") that cause frame-shifts in functional elements generally cause important phenotypic modifications.
+[^local_alignment_DNA]: It is also valuable in cases where one sequence may be a subsequence of another, like when searching for a gene within a cromosome or a whole genome.
+
+(seq:substitution_matrices)=
+### Substitution matrices
+
+How is the substitution matrix $s(x, y)$ determined? One possibility is to leverage what we know about the biological processes that underlie mutations. For instance, in DNA the biological reasoning behind the scoring decision can be linked to the probabilities of bases being transcribed incorrectly during polymerization. We already know that of the four nucleotide bases, A and G are purines, while C and T are pyrimidines. Thus, DNA polymerase is much more likely to confuse two purines or two pyrimidines since they are similar in structure. As a result, a simple improvement over the uniform cost function used above is the following scoring matrix for matches and mismatches:
+
+||A|G|T|C|
+|-|-|-|-|-|
+|A|+1|-0.5|-1|-1|
+|G|-0.5|+1|-1|-1|
+|T|-1|-1|+1|-0.5|
+|C|-1|-1|-0.5|+1|
+
+Here a mismatch between like-nucleotides (*e.g.* A and G) is less expensive than one between unlike nucleotides (*e.g.* A and C).
+
+However, we can be more quantitative by taking a probabilistic approach. Here I will describe how the widely-used [BLOSUM matrices](https://en.wikipedia.org/wiki/BLOSUM) are built (see also the [original paper](doi:10.1073/pnas.89.22.10915)). We assume that alignment score reflects the probability that two similar sequences are [homologous](#sec:homology). Thus, given two sequences $S$ and $T$, we define two hypotheses:
+
+1. The alignment between the two sequences is due to chance and the sequences are, in fact, unrelated.
+2. The alignment is due to common ancestry and the sequences are actually related.
+
+In order to compare two hypotheses, a good score is given by the logarithm of the ratio of their likelihoods (the so-called log-odds score). Therefore, for our case the alignment score is 
+
+$$
+A \equiv \log \frac{P(S, T|R)}{P(S, T|U)}.
+$$
+
+Under the rather strict assumption ("biologically dubious, but mathematically convenient", as aptly put in [](doi:10.1038/nbt0804-1035)) that pairs of aligned residues are statistically independent of each other, and thanks to the properties of logarithms and probabilities, the overall alignment score is the sum of the log-scores of the individual residue pairs. Considering 20 amino acids, there are 400 such log-scores, which form a 20x20 substitution (score) matrix. Each entry of the matrix takes the form
+
+$$
+s(x, y) = \frac{1}{\lambda} \log \frac{p_{xy}}{q_x q_y},
+$$
+
+where 
+
+* $p_{xy}$ is the likelihood of the second hypothesis (the two residues are correlated);
+* $q_x q_y$ is the likelihood of the first (null) hypothesis: the two residues are there by chance, their occurrence is unrelated and therefore the likelihood factorises in two terms that account for the average probability of observing those two residues in any protein;
+* $\lambda$ is an overall scaling factor that is used to obtain values that can be rounded off to integers.
+
+A positive score indicates that 
+
+If $p_{xy} > q_x q_y$ (and therefore $s(x, y)$ is positive), the substitution $x \to y$, and therefore their alignment in homologous sequences, occurs more frequently than would be expected by chance, suggesting that this substitution is favored in evolution. These substitutions are called "conservative". As noted in [](doi:10.1038/nbt0804-1035), this definition is purely statistical and has nothing directly to do with amino acid structure or biochemistry. Likewise, substitutions with $p_{xy} < q_x q_y$, and therefore negative values of $s(x, y)$, are termed "nonconservative".
+
+The procedure applied to compute the $p_{xy}$ and $q_x$ values starts with a collection of protein sequences.
+
+1. The sequences are grouped into families based on their evolutionary relatedness. A common source for these families is the BLOCKS database, which contains aligned, ungapped regions of proteins that are highly conserved across members of the family. 
+2. Within these protein families, highly conserved regions (blocks) are identified. These regions are short segments of amino acid sequences that are believed to be important for the protein's function and are conserved across different species. 
+3. Once blocks are identified, the sequences within each block are clustered, choosing a threshold value $V$: two sequences that share more than this percentage of identical amino acids identity are clustered together, and only one representative from each cluster is used to avoid over-representation of very similar sequences.
+4. Within each block, the actual counts of amino acid pairs are made.
+    * The background frequencies $q_x$ are estimated by computing the overall frequency of each amino acid $x$ in the sequences, not considering any substitutions.
+    * To evaluate the $p_{xy}$ terms, for each position in the aligned block, we count how many times one amino acid (say, Alanine) is substituted by another amino acid (say, Glycine) in the aligned positions across the different sequences. For instance, if there is an alignment of 5 sequences, for each single position we make $\binom{5}{2} = 10$ comparisons.
+
+Of course, the final scores depend on $V$: if $V$ is large, protein blocks that are still rather similar will be considered belonging to different clusters, and therefore compared to each other to derive the scores; the resulting matrix will be more sensitive in identifying closely related sequences but less effective for more distantly related sequences (and vice versa for small values of $V$). Common values for $V$ are $45\%$, $62\%$, and $80\%$, which yield the matrices BLOSUM45, BLOSUM62, and BLOSUM80, with BLOSUM62 being the de-facto standard (and default) one. 
+
+```{figure} figures/BLOSUM62.svg
+:name: fig:BLOSUM62
+:align: center
+
+The BLOSUM62 matrix. The amino acids are grouped and coloured based on [Margaret Dayhoff's classification](https://en.wikipedia.org/wiki/Margaret_Oakley_Dayhoff#Table_of_Dayhoff's_encoding_of_amino_acids). Non-negative values are highlighted. Credits to [Ppgardne via Wikimedia Commons](https://upload.wikimedia.org/wikipedia/commons/f/f5/Blosum62-dayhoff-ordering.svg).
+```
+
+The BLOSUM62 matrix is shown in [](#fig:BLOSUM62). First of all, note that substitution matrices are symmetric, because the biological process of amino acid substitution is symmetric: as empirically observed, there is no preferred direction when one amino acid replaces another. Secondly, it is evident that conservative substitutions tend to be those between amino acids that are similar, as made evident by grouping the amino acids according to the classification introduced by [Margaret Dayhoff](https://en.wikipedia.org/wiki/Margaret_Oakley_Dayhoff#Table_of_Dayhoff's_encoding_of_amino_acids).
+
+:::{tip} Margaret Dayhoff's classification
+According to [Margaret Dayhoff](https://en.wikipedia.org/wiki/Margaret_Oakley_Dayhoff), one of the pioneers of biophysics and bioinformatics, amino acids can be classified in the following 6 groups, listed in the order with which they are shown in [](#fig:BLOSUM62):
+
+|Amino acids|One-letter code|Property|Dayhoff|
+|-|-|-|-|
+Cysteine| C | Sulfur polymerization | a |
+Glycine, Serine, Threonine, Alanine, Proline | G, S, T, A, P | Small | b |
+Aspartic acid, Glutamic acid, Asparagine, Glutamine | D, E, N, Q | Acid and amide | c |
+Arginine, Histidine, Lysine | R, H, K | Basic | d |
+Leucine, Valine, Methionine, Isoleucine | L, V, M, I | Hydrophobic |e |
+Tyrosine, Phenylalanine, Tryptophan | Y, F, W | Aromatic | f |
+:::
+
+Why the values of the matrix diagonal, representing the scores of "substituting" one amino acid with itself, are all different? 
+
+> The rarer the amino acid is, the more surprising it would be to see two of them align together by chance. In the homologous alignment data that BLOSUM62 was trained on, leucine/leucine (L/L) pairs were in fact more common than tryptophan/tryptophan (W/W) pairs ($p_{LL} = 0.0371$, $p_{WW} = 0.0065$), but tryptophan is a much rarer amino acid ($f_L = 0.099$, $f_W = 0.013$). Run those numbers (with BLOSUM62's original $\lambda = 0.347$) and you get +3.8 for L/L and +10.5 for W/W, which were rounded to +4 and +11.
+>
+> -- [](doi:10.1038/nbt0804-1035)
+
 
 ## AlphaFold
 

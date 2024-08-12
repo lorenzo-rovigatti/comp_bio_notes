@@ -194,7 +194,7 @@ The single most important fact about biology is the so-called "central dogma of 
 :name: central-dogma
 :align: center
 
-The first outline of the central dogma, from un unpublished note made by Crick in 1956. Credit: [Wellcome Library](https://wellcomecollection.org/works/xmscu3g4), London. Taken from [](doi:10.1371/journal.pbio.2003243).
+The first outline of the central dogma, from un unpublished note made by Crick in 1956. Credits: [Wellcome Library](https://wellcomecollection.org/works/xmscu3g4), London. Taken from [](doi:10.1371/journal.pbio.2003243).
 ```
 
 In later formulations Crick expanded and clarified his view on this matter, writing that 

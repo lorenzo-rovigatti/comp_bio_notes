@@ -499,7 +499,7 @@ Head over [here](./notebooks/HP_model.ipynb) for a Jupyter notebook containing t
 ## Sequence alignment
 
 ```{tip}
-The main reference for this part is @kellis_comp_bio.
+The main references for this part are @kellis_comp_bio and @miklos2016introduction.
 ```
 
 Simple models are useful to understand the underlying physics of some particular phenomena. However, how can we understand something very specific, like what is the 3D structure of a particular sequence? The simplest way is to look for similarities: if we already have a list of sequence $\to$ structure connections, we can try to look whether the new sequence, for which the 3D structure is unknown, is similar, and to what degree, to another for which the 3D structure is already known. This operation is called "sequence alignment" (SA).
@@ -593,9 +593,9 @@ Suppose we have an optimal alignment for two sequences $S$, of length $N$, and $
 
 The overall alignment score is the sum of the scores from these three parts: the score of the left subalignment, the score for aligning $S_i$​ with $T_j$​, and the score of the right subalignment. Therefore, if the overall alignment is optimal, both the left and right subalignments must themselves be optimal. This follows from a cut-and-paste argument: imagine that one of the two subalignment was not optimal. This would mean there exists another alignment of these subsequences with a higher score. If such a better alignment for the subsequences existed, we could "cut" the suboptimal subalignment from the original alignment and "paste" in this better alignment. This would result in a new alignment for $S$ and $T$ with a higher total score than the supposed "optimal" alignment. This is a contradiction because the original alignment was assumed to be optimal. Since the same argument applies to both subalignments, the overall alignment's optimality depends on the optimality of both its left and right subalignments. Of course, this is true only if the scores are additive, so that the score of the overall alignment is the sum of the scores of the alignments of the subsequences. The implicit assumption is that the sub-problems of computing the optimal scoring alignments of the subsequences are independent.
 
-Let $F_{i,j}$ be the score of the optimal alignment of $(S_1 , \ldots , S_i)$ and $(T_1 , \ldots , T_j)$. Since $i \in [0, N]$ and $j \in [0, M]$, the matrix $F$ storing the solutions (*i.e.* optimal scores) of the subproblems has a size of $(M + 1) \times (N + 1)$.
+Let $F_{i,j}$ be the score of the optimal alignment of $(S_1 , \ldots , S_i)$ and $(T_1 , \ldots , T_j)$. Since $i \in [0, N]$ and $j \in [0, M]$, the matrix $\hat F$ storing the solutions (*i.e.* optimal scores) of the subproblems has a size of $(M + 1) \times (N + 1)$.
 
-We can compute the optimal solution for a subproblem by making a locally optimal choice based on the results from the smaller subproblems. Thus, we need to establish a recursive function that shows how the solution to a given problem depends on its subproblems and can be used to fill up the matrix $F$. At each iteration we consider the four possibilities (insert, delete, substitute, match), and evaluate each of them based on the results we have computed for smaller subproblems.
+We can compute the optimal solution for a subproblem by making a locally optimal choice based on the results from the smaller subproblems. Thus, we need to establish a recursive function that shows how the solution to a given problem depends on its subproblems and can be used to fill up the matrix $\hat F$. At each iteration we consider the four possibilities (insert, delete, substitute, match), and evaluate each of them based on the results we have computed for smaller subproblems.
 
 We start by considering the linear gap penalty model, and define $d$, with $d < 0$, as the cost of a gap. We are now equipped to set the values of the elements of the matrix. Let's consider the first row: the value of $F_{0,j}$ is the cost of aligning a sequence of length $0$ (taken from $S$) to a sequence of length $j$ (taken from $T$), which can be obtained only by adding $j$ gaps, yielding $F_{0,j} = jd$. Likewise, for the first column we have $F_{i,0} = id$. Then, we traverse the matrix element by element. Let's consider a generic element $F_{ij}$: this is the cost of aligning the first $i$ characters of $S$ to the first $j$ characters of $T$. There are three ways we can obtain this alignment:
 
@@ -617,7 +617,7 @@ $$ (eq:needleman_wunsch)
 This is a recursive relation: computing the value of any $F_{i,j}$ requires the knowledge of the values of its left, top, and top-left neighbours. Therefore, the fill-in phase amounts to traversing the table in row or column major order, or even diagonally from the top left cell to the bottom right cell. After traversing the matrix, the optimal score for the alignment is given by the bottom-right element, $F_{MN}$. In order to obtain the actual alignment we have to traceback through the choices made during the fill-in phase. It is helpful to maintain a pointer for each cell while filling up the table that shows which choice was made to get the score for that cell. Then the pointers can be followed backwards to reconstruct the optimal alignment. 
 
 The complexity analysis of this algorithm is straightforward. Each update takes $\mathcal{O}(1)$ time, and since there are $MN$
-elements in the matrix $F$, the total running time is $\mathcal{O}(MN)$. Similarly, the total storage space is $\mathcal{O}(MN)$. For the more general case where the update rule is more complicated, the running time may be more expensive. For instance, if the update rule requires testing all sizes of gaps (*e.g.* the cost of a gap is not linear), then the running time would be $\mathcal{O}(MN(M + N)$).
+elements in the matrix $\hat F$, the total running time is $\mathcal{O}(MN)$. Similarly, the total storage space is $\mathcal{O}(MN)$. For the more general case where the update rule is more complicated, the running time may be more expensive. For instance, if the update rule requires testing all sizes of gaps (*e.g.* the cost of a gap is not linear), then the running time would be $\mathcal{O}(MN(M + N)$).
 
 :::{tip} A simple example
 Consider the two DNA sequences $S = AGT$ and $T = AAGC$, a gap penalty $d = -2$, and $s(x, y) = \pm 1$, where the plus and minus signs are used for matches and mismatches, respectively.
@@ -626,7 +626,7 @@ Consider the two DNA sequences $S = AGT$ and $T = AAGC$, a gap penalty $d = -2$,
 :name: fig:needleman_wunsch_example
 :align: center
 
-The dynamic programming table of the example during three stages of the fill-in phase: (a) at the beginning, (b) halfway through, and (c) at the end. The arrows point from each box to the box that has been used to compute its score. Panel (b) highlights one $(i, j)$ pair for which two of the cases of Eq. [](#eq:needleman_wunsch) give the same value. Each "branching" such as this one doubles the number of optimal alignments. Tracing back the arrows from the bottom-right box (in green) to the first row ($i = 0$) or first column ($j = 0$) the optimal alignment(s) can be reconstructed.
+The dynamic programming table of the example during three stages of the fill-in phase: (a) at the beginning, (b) halfway through, and (c) at the end. The arrows point from each box to the box that has been used to compute its score. Panel (b) highlights one $(i, j)$ pair for which two of the cases of Eq. [](#eq:needleman_wunsch) give the same value. Each "branching" such as this one doubles the number of optimal alignments. Tracing back the arrows from the bottom-right corner (in green) to the top-left corner in grey) the optimal alignment(s) can be reconstructed.
 ```
 
 [](#fig:needleman_wunsch_example) shows how the dynamic programming table of the problem looks when initialised, halfway through the fill-in phase, and after being fully traversed. Once the full table has been computed, the bottom-right box contains the optimal score, while the solutions (*i.e.* the optimal alignments) can be reconstructed by tracing back the matrix, following the arrows. Note that sometimes the maximum value computed from Eq. [](#eq:needleman_wunsch) is degenerate, *i.e.* the same value can be obtained by performing several operations (see [](#fig:needleman_wunsch_example)(b)). In this case there are multiple optimal alignments. For instance, for the simple example shown here there are two optimal alignments:
@@ -668,16 +668,52 @@ For reference, this is summary of the Needleman-Wunsch algorithm:
 
 1. Initialisation: $F_{0,j} = jd$, $F_{i,0} = id$.
 2. Iteration $\forall (i, j)$: Eq. [](#eq:needleman_wunsch).
-3. Trace-back: starts from the bottom-right value and stops when $i = 0$ or $j = 0$.
-:::
-
-:::{seealso} Python implementation
-Head over [here](./notebooks/sequence_alignment.ipynb) for Jupyter notebook containing code implementing the various alignment algorithms discussed in this section.
+3. Trace-back: starts from the bottom-right value and stops at the top-left corner.
 :::
 
 [^parsimony]: Note that this is not the only possible choice: we could choose a probabilistic method, for example using Hidden Markov Models (HMMs), that would assign a probability measure over the space of possible event paths and use other methods for evaluating alignments (*e.g.*, Bayesian methods).
 [^frame-aware]: Indels (shorthand for "insertions/deletions") that cause frame-shifts in functional elements generally cause important phenotypic modifications.
 [^local_alignment_DNA]: It is also valuable in cases where one sequence may be a subsequence of another, like when searching for a gene within a cromosome or a whole genome.
+
+(sec:affine_gaps)=
+### Affine gap penalty
+
+For both the global and local alignment algorithms introduced we have used a linear gap penalty: the cost of adding a gap is constant, regardless of the nature of the aligned character, or of the length of the gap. From the biological point of view, this means that an indel of *any* length is considered as the result of independent insertions or deletions. However, in reality long indels can form in single evolutionary steps, and in these cases the linear gap model overestimates their cost. To overcome this issue, more complex gap penalty functions have been introduced. As mentioned before, a generic gap penalty function would result in an algorithmic complexity worse than $\mathcal{O}(N^2)$ (where for simplicity I'm considering two sequences of the same length). Let's see why. Any gap penalty function can be implemented in the Needleman-Wunsch or Smith-Waterman algorithms by changing the recursive rule, which can be done trivially for element $F_{i,j}$ by evaluating terms such as $\max_{0 \leq k \leq i} \lbrace F_{k,j} + d_{i - k} \rbrace$ and $\max_{0 \leq k \leq i} \lbrace F_{i,k} + d_{i - k} \rbrace$. However, this means that the update of every cell of the dynamic programming matrix would take $\mathcal{O}(N)$ instead of $\mathcal{O}(1)$, bringing the algorithmic complexity up to $\mathcal{O}(N^3)$ (for $N = M$ sequences).
+
+However, the computational cost can be mitigated by using particular gap penalty functions. Here I will present the most common variant, which is known as the *affine* gap penalty. In this model, the cost of a gap of size $k$ is
+
+$$
+d_k = o + (k - 1) e,
+$$
+
+where $o$ and $e$ are the opening and extension penalties, respectively, and $o > e$. To incorporate affine-gap penalties into the Needleman-Wunsch or Smith-Waterman algorithms in an efficient manner, the primary adjustment involves tracking whether consecutive gaps occur in the alignment. This requires the alignment process to be split into three distinct cases: insertions, deletions, and matches/mismatches. Instead of using a single dynamic programming table as in the linear-gap penalty approach, three separate tables are used: $\hat I$ for insertions, $\hat D$ for deletions, and $\hat F$ for the overall score.
+
+In this setup, each entry in the $\hat I$ table, denoted by $i_{i,j}$, stores the best alignment score when the last column includes an insertion (*i.e.* a gap in the first sequence), and each entry in the $\hat D $ table, $ d_{i,j} $, captures the best score for alignments ending in a deletion (*i.e.* a gap in the second sequence). As before, $F_{i,j} $ records the overall score. The recursive update rules of the three tables are
+
+\begin{align}
+
+I_{i,j} &= \max \begin{cases}
+F_{i-1,j} + o\\
+I_{i-1,j} + e
+\end{cases}\\
+
+D_{i,j} &= \max \begin{cases}
+F_{i,j-1} + o\\
+D_{i,j-1} + e
+\end{cases}\\
+
+F_{i,j} &= \max \begin{cases}
+F_{i-1,j-1} + s(S_i, T_j)\\
+I_{i, j}\\
+D_{i,j}.
+\end{cases}
+\end{align}
+
+Note that with this algorithm each cell update is $\mathcal{O}(1)$, and therefore the overall complexity remains the same ($\mathcal{O}(NM)$ or $\mathcal{O}(N^2)$ for same-length sequences).
+
+:::{seealso} Python implementation
+Head over [here](./notebooks/sequence_alignment.ipynb) for Jupyter notebook containing code implementing the Needleman-Wunsch and Smith-Waterman algorithms, with linear and affine gap penalty functions.
+:::
 
 (seq:substitution_matrices)=
 ### Substitution matrices
@@ -759,6 +795,51 @@ Why the values of the matrix diagonal, representing the scores of "substituting"
 >
 > -- [](doi:10.1038/nbt0804-1035)
 
+### BLAST
+
+The sheer volume of sequence data generated by high-throughput sequencing technologies presents a significant challenge. Databases now contain millions of nucleotide and protein sequences, each potentially spanning thousands of characters. When comparing a new sequence against these massive databases, traditional alignment methods like the ones we just discussed become computationally demanding. Performing a global or even local alignment between a query sequence and every sequence in a large database can require immense computational resources and time, especially as the number of sequences and their lengths continue to grow exponentially.
+
+The need for a more efficient method resulted in the [most cited paper of the 1990s](doi:10.1016/S0022-2836(05)80360-2), where BLAST (Basic Local Alignment Search Tool), now a critical tool in bioinformatics, was introduced. BLAST operates by finding regions of local similarity between sequences, which is more computationally feasible and faster than aligning entire sequences globally. The algorithm requires a query sequence and a target database. First of all, the query sequence is broken down into smaller fragments (called words or $W$-mers). For each $W$-mer, a list of similar words is generated, and only those with a similarity measure that is higher than a threshold $T$ are retained add added to the final $K$-mer list. The similarity is evaluated by using a [substitution matrix](#seq:substitution_matrices) (BLOSUM62 is a common choice). Then, the target database is searched for matches to these words, extending the matches in both directions to find the best local alignments. BLAST assigns scores to these alignments based on the degree of similarity *via* a Smith-Waterman algorithm, with higher scores indicating closer matches.
+
+:::{warning}
+The Needleman-Wunsch and Smith-Waterman algorithms always find the correct solution (*i.e.* the global minimum). By contrast, BLAST uses a heuristic approach, trading off some sensitivity for speed.
+:::
+
+The BLAST algorithm can be broken down into the following steps[^BLAST_wiki]
+
+1. **Optional**: *remove low-complexity region or sequence repeats in the query sequence.* Here "Low-complexity region" means a region of a sequence composed of few kinds of elements. These regions might give high scores that confuse the program to find the actual significant sequences in the database, so they should be filtered out. The regions will be marked with an X (protein sequences) or N (nucleic acid sequences) and then be ignored by the BLAST program. To filter out the low-complexity regions, the SEG program is used for protein sequences and the program DUST is used for DNA sequences. On the other hand, the program XNU is used to mask off the tandem repeats in protein sequences.
+2. *Make a $W$-letter word list of the query sequence.* The words of length $W$ ($W$-mers) in the query sequence are listed "sequentially", until the last letter of the query sequence is included. The method is illustrated in FIGURE XXX. $W$ is usually 3 and 11 for a protein and a DNA sequence, respectively.
+3. *List the possible matching words.* A [substitution matrix](#seq:substitution_matrices) (*e.g.* BLOSUM62) is used to match the words listed in step 2 with all the $20^W$ $W$-mers. For example, the score obtained by comparing PQG with PEG and PQA is respectively 15 and 12 with the BLOSUM62 matrix[^DNA_BLAST_words]. After that, a neighborhood word score threshold $T$ is used to reduce the number of possible matching words. The words whose scores are greater than the threshold *T* will remain in the possible matching words list, while those with lower scores will be discarded. For example, if $T = 13$ PEG is kept, but PQA is abandoned.
+4.  *Organize the remaining high-scoring words into an efficient search tree.* This allows the program to rapidly compare the high-scoring words to the database sequences.
+5.  *Repeat step 3 to 4 for each $W$-mer in the query sequence.*
+6.  *Scan the database sequences for exact matches with the remaining high-scoring words.* The BLAST program scans the database sequences for the remaining high-scoring words, such as PEG. If an exact match is found, this match is used to seed a possible ungapped alignment between the query and database sequences.
+7.  *Extend the exact matches to high-scoring segment pair (HSP).* The original version of BLAST stretches a longer alignment between the query and the database sequence in the left and right directions, from the position where the exact match occurred. The extension does not stop until the accumulated total score of the HSP begins to decrease. To save more time, a newer version of BLAST, called BLAST2 or gapped BLAST, has been developed. BLAST2 adopts a lower neighborhood word score threshold to maintain the same level of sensitivity for detecting sequence similarity. Therefore, the list of possible matching words list in step 3 becomes longer. Next, exact matched regions that are within distance $A$ from each other on the same diagonal are joined as a longer new region. Finally, the new regions are then extended by the same method as in the original version of BLAST, and the scores for each HSP of the extended regions are created by using a substitution matrix as before.
+8.  *List all of the HSPs in the database whose score is high enough to be considered.* All the HSPs whose scores are greater than the empirically determined cutoff score $S$ are listed. By examining the distribution of the alignment scores modeled by comparing random sequences, a cutoff score $S$ can be determined such that its value is large enough to guarantee the significance of the remaining HSPs.
+9.  *Evaluate the significance of the HSP score.* [It has been shown](doi:10.1073/pnas.87.6.2264) that the distribution of Smith-Waterman local alignment scores between two random sequences is
+$$
+p\left( S\ge x \right) =1-\exp \left( -KMN e^{-\lambda x } \right),
+$$
+where $M$ and $N$ are the length of the query and database sequences[^BLAST_MN], and the statistical parameters $\lambda$ and $K$ depend upon the substitution matrix, gap penalties, and sequence composition (the letter frequencies) and are estimated by fitting the distribution of the ungapped local alignment scores of the query sequence and of a lot (globally or locally) shuffled versions of a database sequence. Note that the validity of this distribution, known as the Gumbel extreme value distribution (EVD), has not been proven for local alignments containing gaps yet, but there is strong evidence that it works also for those cases. The expect score $E$ of a database match is the number of times that an unrelated database sequence would obtain a score $S$ higher than $x$ by chance. The expectation $E$ obtained in a search for a database of total length $N$
+$$
+E = K M N e^{-\lambda S}
+$$
+This expectation or expect value $E$ (often called $E$-score, $E$-value or $e$-value) assessing the significance of the HSP score for ungapped local alignment is reported in the BLAST results. The relation above is different if individual HSPs are combined, such as when producing gapped alignments (described below), due to the variation of the statistical parameters.
+10. *Make two or more HSP regions into a longer alignment.* Sometimes, two or more HSP regions in one database sequence can be made into a longer alignment. This provides additional evidence of the relation between the query and database sequence. There are two methods, the Poisson method and the sum-of-scores method, to compare the significance of the newly combined HSP regions. Suppose that there are two combined HSP regions with the pairs of scores $(65, 40)$ and $(52, 45)$, respectively. The Poisson method gives more significance to the set with the maximal lower score $(45 > 40)$. However, the sum-of-scores method prefers the first set, because $65+40=105$ is greater than $52+45 = 97$. The original BLAST uses the Poisson method; BLAST2 uses the sum-of scores method.
+11. *Show the gapped Smith-Waterman local alignments of the query and each of the matched database sequences.* The original BLAST algorithm only generates ungapped alignments including the initially found HSPs individually, even when there is more than one HSP found in one database sequence. By contrast, BLAST2 produces a single alignment with gaps that can include all of the initially found HSP regions. Note that the computation of the score and its corresponding $E$-value involves use of adequate gap penalties.
+
+The $E$-value is the single most important parameter to rate the quality of the alignments reported by BLAST. For instance, if $E = 10$ for a particular alignment with score $S$, it means that there are $10$ alignments with score $\geq S$ that can happen by chance between any query sequence and the database used for the search. Therefore, this particular alignment is most likely not very significant. By contrast, values much smaller than $1$ (*e.g* $10^{-3}$ or even smaller) are likely to signal that the sequences are homologous. On most webserver, it is possible to filter out all matches that have an $E$-value larger than some threshold. For instance, on the [NCBI webserver](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastp&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome), the "expect threshold" defaults to $0.05$.
+
+[^BLAST_wiki]: I took most of this description from [Wikipedia](https://en.wikipedia.org/wiki/BLAST_(biotechnology)#Algorithm), which in my opinion provides one the thorough explanation of the BLAST algorithm
+[^DNA_BLAST_word]: For DNA words, a match is scored as +5 and a mismatch as -4, or as +2 and -3.
+[^BLAST_MN]: It is possible to derive expressions that use effective rather than true sequence lengths, to compensate for edge effects (an alignment that starts near the end of the query or database sequence is likely not to have enough sequence to build an optimal alignment).
+
+Note that the sequence database used to search for matches is preprocessed first, which increases further the overall computational efficiency. With BLAST, the algorithmic complexity of searching the database for a sequence of length $N$ is only $\mathcal{O}(N)$.
+
+:::{seealso} Using BLAST
+A short tutorial on how to use BLAST from the command line can be found [here](./notebooks/BLAST.ipynb)
+:::
+
+## Threading
 
 ## AlphaFold
 

@@ -423,7 +423,7 @@ $$
 hence
 
 $$
-\frac{C_A C_B}{C_{AB}} = C^\circ )\exp\left( \beta \Delta G_{AB}^\circ \right.
+\frac{C_A C_B}{C_{AB}} = C^\circ \exp\left( \beta \Delta G_{AB}^\circ \right).
 $$ (eq:equilibrium)
 
 :::{hint} The dissociation constant

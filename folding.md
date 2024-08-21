@@ -847,7 +847,15 @@ A short tutorial on how to use BLAST from the command line can be found [here](.
 
 ## Threading
 
+:::{warning} TODO
+ADD TEXT
+:::
+
 ## AlphaFold
+
+:::{warning} TODO
+ADD TEXT
+:::
 
 # Nucleic acids
 
@@ -865,7 +873,7 @@ Now we want to predict the secondary structure of the RNA, given its sequence. S
 1. we use a scoring scheme whereby the free-energy contribution that each base pair (or, more generally, "local" secondary structure motif) has on the overall stability of the molecule is additive;
 2. we assume that pseudoknots cannot form, so that the RNA can be split into two smaller ones which are independent.
 
-Indeed, under these conditions the solution to the full problem can be built by solving subproblems (finding the optimal secondary structure for subsequences).
+Indeed, under these conditions the solution to the full problem can be built by solving subproblems, which can be done efficiently by applying dynamic programming. The next two sections will describe two algorithms that can be used to obtain the optimal structure, *i.e. the one with the minimum free-energy (MFE).
 
 ## Nussinov's algorithm
 
@@ -1084,11 +1092,82 @@ $$ (eq:V_recursion_M)
 
 The algorithmic complexity of the four cases are $\mathcal{O}(1)$, $\mathcal{O}(1)$, $\mathcal{O}(N^2)$ and $\mathcal{O}(N)$. Since there are $\sim N^2$ entries, the overall algorithmic complexity is $\mathcal{O}(N^4)$, and the required storage space is $\mathcal{O}(N^2)$, since only $N \times N$ matrices are required. The computational efficiency can be improved by limiting the size of a bulge or interior loop to some value (often taken to be $30$), which brings the complexity of the third case of Eq. [](#eq:V_recursion_M) down to $\mathcal{O}(N^2)$, and the overall algorithmic complexity down to $\mathcal{O}(N^3)$.
 
+## Beyond the MFE: the McCaskill algorithm
+
+The derivations in this section are taken from [](doi:10.1371/journal.pcbi.1006341).
+
+The Nussinov's and Zuker's algorithm find the optimal secondary structure of an RNA strand, defined as the structure that minimise the overall (free) energy. However, the conformations of macromolecules that are in thermal equilibrium with their environment are not fixed: in principle *any* allowed structure can be visited, given enough time (remember the concept of ergodicity and phase space?). In particular, if we define $\mathcal{P}$ as the *structural ensemble*, *i.e.* the ensemble of allowed structures, the probability that a macromolecule has a specific secondary structure $P$ is given by
+
+$$
+p(P) = \frac{e^{-\beta F_P}}{\sum_{P' \in \mathcal{P}} e^{-\beta F_{P'}}} \equiv \frac{e^{-\beta F_P}}{Q},
+$$
+
+where $F_P$ is the energy of secondary structure $P$, and $Q$ is the partition function. We now look for a recursive relation to compute the partition function of a sequence $S$. Given a subsequence $S_{ij}$, $i$ is either unpaired, or it is paired with the $k$-th nucleotide, where $i < k \leq j$. The total partition function will be a sum over all these cases, *viz*
+
+$$
+Q_{i,j} = Q_{i + 1, j} + \sum_{i < k \leq j} Q_{i + 1, k - 1} Q_{k + 1, j} q_{i, k},
+$$ (eq:mccaskill)
+
+where $q_{kj} \equiv e^{-\beta \Delta G_{k,j}}$ is the statistical weight of the base pair formed by $S_k$ and $S_j$. This relation makes it possible to write down a dynamic programming code that fill the $\hat Q$ matrix with a complexity $\mathcal{O}(N^3)$. As before, the partition function of the sequence is found in the $Q_{0, N-1}$ entry.
+
+:::{note} The connection with Nussinov's algorithm
+Here I'm implicitly using a simplified version of the McCaskill algorithm, where the overall energy is only due to base pairing. If you look closely, you will notice that there is a direct connection between Eq. [](#eq:mccaskill) and Eq. [](#eq:nussinov), which is summarised in the following table (adapted from the Appendix C of @finkelstein2016protein):
+
+| MFE | Partition function |
+| --- | --- |
+| Energy $E$ | Boltzmann factor $e^{-\beta E}$ |
+| Minimisation | Summation |
+| Summation | Multiplication |
+
+Therefore, it is possible to turn any MFE algorithm into an algorithm that can compute partition functions, provided that there is no overlap between the cases appearing in the recursive relations of the former, *i.e.* that some structures are counted more than once. Indeed, ambiguous decompositions (as they are called) are not a problem when carrying out a minimisation, but they are when doing a summation...
+:::
+
+How can we use the information contained in the partition function to obtain the equilibrium (structural) ensemble of the strand? The most granular information we can compute is the probability that two nucleotides $i$ and $j$ are base paired, $p(i, j)$. However, in order to do so we first have to introduce the auxiliary matrix $\hat Q^{\rm bp}$, whose generic entry $Q^{\rm bp}_{i,j}$ stores the partition function of the subsequence $S_{i,j}$, with the constraint that nucleotides $i$ and $j$ form the $(i, j)$ base pair. Its recursive relation is
+
+$$
+Q^{\rm bp}_{i,j} = \begin{cases}
+Q_{i + 1, j - 1} q_{i,j} & \text{if } i \text{ and } j \text{ are complementary}\\
+0 & \text{otherwise} \\
+\end{cases}
+$$ (eq:mccaskill_bp)
+
+so that the recursive relation of $\hat Q$ (Eq. [](#eq:mccaskill)) becomes
+
+$$
+Q_{i,j} = Q_{i + 1, j} + \sum_{i < k \leq j} Q^{\rm bp}_{i, k} Q_{k + 1, j} q_{kj}.
+$$
+
+Note that with this formalism it is easier to employ more realistic energy functions by adding contributions (due to interior and multiloops, for instance) to Eq. [](#eq:mccaskill_bp), in analogy with the strategy devised by Zuker. See [here](doi:10.1186/1748-7188-6-3) for additional details.
+
+We can write down the probability $p(i, j)$ recursively, as the sum of two contributions:
+
+1. The probability that the $(i, j)$ edge exists and it is external, *i.e.* that there are no edges $(k, l)$ for which $k < i < j < l$. This is just
+$$
+p_{\rm ext}(i, j) = \frac{Q_{0, i - 1} Q^{\rm bp}_{i,j} Q_{j + 1, N - 1}}{Q_{0, N-1}}.
+$$
+2. The probability that the $(i, j)$ edge exists and it is enclosed by other base pairs. This is a sum over all the possible enclosing base pairs $(h, k)$, with $h < i < j < k$, of the probability that the $(h, k)$ edge exists, $p(h, k)$, times the probability that the $(i, j)$ edge is the exterior edge of the $S_{h + 1, k - 1}$ subsequence, which is given by[^denominator_difference]
+$$
+\frac{Q_{h + 1, i - 1} Q^{\rm bp}_{i,j} Q_{j + 1, k - 1}}{Q_{h + 1, k - 1}}.
+$$
+All in all, this contribution amounts to
+$$
+P_{\rm int}(i, j) = \sum_{h < i < j < k} p(h, k) \frac{Q_{h + 1, i - 1} Q^{\rm bp}_{i,j} Q_{j + 1, k - 1}}{Q_{h + 1, k - 1}}.
+$$
+
+The total probability that $i$ and $j$ form a base pair is thus
+
+$$
+p(i, j) = \frac{Q_{0, i - 1} Q^{\rm bp}_{i,j} Q_{j + 1, N - 1}}{Q_{0, N-1}} + \sum_{h < i < j < k} p(h, k) \frac{Q_{h + 1, i - 1} Q^{\rm bp}_{i,j} Q_{j + 1, k - 1}}{Q_{h + 1, k - 1}}.
+$$
+
 :::{seealso} Python implementation
 Head over [here](./notebooks/RNA_folding.ipynb) for Jupyter notebook containing code implementing the two algorithms discussed here. My version of Zuker's algorithm is highly simplified so that the code is short and readable.
 :::
 
 [^read_original_papers]: It is very common for papers that contributed greatly to a field to be also very well thought out and written. This is only partially true for the paper in question (as mentioned below).
+[^denominator_difference]: Eq. (10) of [](doi:10.1371/journal.pcbi.1006341) is written slightly differently, since they use the fact that $Q^{\rm bp}_{h, k} = Q_{h + 1, k - 1} q_{hk}$
 
-## NUPACK and ViennaRNA
+## Folding software
+
+The current state-of-the-art software codes for RNA folding are RNAFold, bundled in the [ViennaRNA](https://www.tbi.univie.ac.at/RNA/) package, and mFold, which was originally developed by M. Zuker and is been since merged with other packages in the [UNAFold](http://www.unafold.org/) software. Both softwares can be used online as webservers, but can also downloaded and installed locally. However, ViennaRNA can be downloaded freely, while UNAFold requires a license (although older versions of mFold can be freely downloaded [here](http://www.unafold.org/download/mfold-3.6.tar.gz)).
 

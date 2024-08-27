@@ -6,7 +6,7 @@ title: Proteins
 The main references for this part are @finkelstein2002protein, @lehninger2005lehninger, and @schlick2010molecular.
 ```
 
-Proteins are macromolecules composed by amino acids linked by peptide bonds. Let's what these are.
+Proteins are macromolecules composed by amino acids linked by peptide bonds. Let's understand what these two things are.
 
 # Amino acids
 

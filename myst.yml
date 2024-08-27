@@ -15,10 +15,12 @@ project:
         '\angstrom': '\textup{\AA}'
         '\matr': '\mathbf{#1}'
     abbreviations:
-        MD: Molecular Dynamics
+        MD: molecular dynamics
+        AIMD: ab-initio molecular dynamics
+        CPMD: Car-Parrinello molecular dynamics
         MC: Monte Carlo
-        FF: Force Field
-        HPC: High-Performance Computing
+        FF: force field
+        HPC: high-performance computing
         1D: one-dimensional
         2D: two-dimensional
         3D: three-dimensional
@@ -32,6 +34,8 @@ project:
         NN: nearest-neighbour
         MG: molten globule
         MFE: minimum free energy
+        DFT: Density functional theory
+        BO: Born-Oppenheimer
     numbering: true
 site:
     template: book-theme

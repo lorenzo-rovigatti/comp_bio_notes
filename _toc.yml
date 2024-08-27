@@ -26,3 +26,4 @@ parts:
         - file: notebooks/sequence_alignment.ipynb
         - file: notebooks/BLAST.ipynb
         - file: notebooks/RNA_folding.ipynb
+        - file: notebooks/NUPACK.ipynb

@@ -1,26 +1,132 @@
 ---
 title: Classical molecular dynamics and all-atom simulations
+exports:
+   - format: pdf
 ---
+
+```{tip}
+The main references for this part are @frenkel2023understanding, @schlick2010molecular and @leach2001molecular.
+```
 
 Quantum mechanics provides a rigorous framework for describing the behavior of molecules that explicitly includes the effect of the electrons. However, the calculations are very heavy and thus the evolution of a system can be followed for short times only. In addition, the computational complexity of simulating quantum systems often scales super-linearly with the size of the problem[^scaling]. This poses significant challenges when attempting to model large-scale many-body systems accurately and for long times.
 
-One of the fundamental distinctions between quantum and classical approaches lies in the treatment of electron contributions. In quantum calculations, the interactions and motions of electrons are computed explicitly, accounting for their wave-like nature and the intricacies of their interactions with nuclei and other electrons. This level of detail enables precise predictions of electronic structure and properties but comes at a high computational cost, particularly as the number of electrons and/or atoms increases.
+One of the fundamental distinctions between quantum and classical approaches lies in the treatment of electron contributions. In quantum calculations, the interactions and motions of electrons are computed explicitly, for instance with DFT methods, as discussed in the previous Chapter. This level of detail enables precise predictions of electronic structure and properties but comes at a high computational cost, particularly as the number of electrons and/or atoms increases.
 
-In contrast, classical force fields adopt a simplified approach where the contributions of electrons are averaged out. Instead of explicitly modeling individual electron behaviors, classical force fields approximate the interactions between atoms using simplified mathematical models based on classical mechanics. While this approach sacrifices the quantum mechanical rigor of true wavefunction-based simulations, it significantly reduces computational complexity, making it feasible to simulate large-scale many-body systems over longer timescales and larger spatial dimensions.
+In contrast, classical force fields adopt a simplified approach where the contributions of electrons are averaged out. Instead of explicitly modeling individual electron behaviors, classical force fields approximate the interactions between atoms using simplified mathematical models based on classical mechanics. Note that there exist also "mixed" methods, where some degrees of freedom are accounted for by using a quantum-mechanical treatment, while others are treated classically, *e.g.* the nuclear degrees of freedom in the CPMD approach.
 
-[^scaling]: The complexity ranges from $\mathcal{O}(e^N)$ for brute-force implementations, to $mathcal{N^3}$ for many DFT codes, but can be linear in some cases (see *e.g.* [](doi:10.1088/0034-4885/75/3/036503)).
-
-# From quantum to classical mechanics
-
-```{warning}
-TODO
-```
+[^scaling]: The complexity ranges from $\mathcal{O}(e^N)$ for brute-force implementations, to $\mathcal{N^3}$ for many DFT codes, but can be linear in some cases (see *e.g.* [](doi:10.1088/0034-4885/75/3/036503)).
 
 # Molecular dynamics
 
-## Reduced units
+In a molecular dynamics simulation, the atoms, or particles, follow Newton's equations of motions. As a result, the dynamics happens on a hypersurface defined by $E = \text{const}$, where $E$ is the energy of the system. In practice, the equations of motions are solved iteratively by discretising time: the quantities of interest (position $r$, velocity $v$ and force $F$) at time $t$ are used to obtain those at time $t + \Delta t$, where $\Delta t$ is the integration *time step*. The flow of a simple MD program is:
 
-## Integration of the equations of motion
+1. The simulation parameters (*e.g.* temperature, density, time step) are read and initialised.
+2. The initial configuration (*i.e.* the initial positions and velocities) is read or generated.
+3. The simulation runs, iterating the following steps:
+   1. The forces (and possibly torques) on all particles are computed.
+   2. The positions and velocities are updated according to Newton's equations.
+4. The simulation stops when some condition is met (*e.g.* number of steps run).
+
+The following snippet shows a pseudo-code implementation of foregoing algorithm:
+
+:::{code} pseudocode
+:label: code:MD_simple
+:caption: Pseudo-code for a simple molecular dynamics code.
+
+CALL initialise_parameters()
+CALL initialise_system()
+
+WHILE t is smaller than t_max
+   CALL compute_force()
+   CALL integrate()
+   t += delta_t
+   CALL sample_observables()
+:::
+
+## The force calculation
+
+This is the most time-consuming part of an MD simulation. It consists of evaluating the force (and, for rigid bodies, the torque) acting on each individual particle. Since, in principle, every particle can interact with every other particle, for a system of $N$ objects the number of interacting contributions will be equal to the number of pairs, $N (N - 1) / 2$. Therefore, the time required to evaluate all forces scales as $\mathcal{O}(N^2)$. Although, as we will see later, there are methods that can bring this complexity down to $\mathcal{O}(N)$, here I present the simplest case.
+
+## Integrating the equations of motion
+
+:::{important}
+For the sake of simplicity, I will derive equations for 1D systems, but these remain valid for 2D and 3D systems, as the dynamics is decoupled along the three dimensions.
+:::
+
+Consider a particle moving along the $ x $-axis under the influence of a force $F(t)$. Newton's second law gives $m \frac{d^2 x(t)}{dt^2} = F(t)
+$, so that the acceleration $ a(t) $ is $a(t) = \frac{F(t)}{m}$
+
+Expanding the position $ x(t) $ around the time $t$ using a Taylor series we obtain
+
+\begin{align}
+x(t + \Delta t) = x(t) + v(t) \Delta t + \frac{1}{2} a(t) \Delta t^2 + \frac{1}{6} \frac{da(t)}{dt} \Delta t^3 + \mathcal{O}(\Delta t^4)\\
+x(t - \Delta t) = x(t) - v(t) \Delta t + \frac{1}{2} a(t) \Delta t^2 - \frac{1}{6} \frac{da(t)}{dt} \Delta t^3 + \mathcal{O}(\Delta t^4)
+\end{align}
+
+Adding the two Taylor expansions yields
+
+$$
+x(t + \Delta t) + x(t - \Delta t) = 2x(t) + a(t) \Delta t^2 + \mathcal{O}(\Delta t^4),
+$$
+
+which, if we neglect the higher-order terms $ \mathcal{O}((\Delta t)^4)$ becomes
+
+$$
+x(t + \Delta t) = 2x(t) - x(t - \Delta t) + a(t) \Delta t^2.
+$$
+
+This is the Verlet algorithm, which allows us to calculate the position $x(t + \Delta t)$ at the next time step using the current position $x(t)$, the previous position $ x(t - \Delta t)$, and the current acceleration $a(t)$. Although this basic Verlet method does not explicitly involve velocity, we can compute it as
+
+$$
+v(t) = \frac{x(t + \Delta t) - x(t - \Delta t)}{2\Delta t} + \mathcal{O}(\Delta t^2).
+$$
+
+Note that this is accurate only up to order $\Delta t^2$. We can modify the basic Verlet approach to include an explicit update for the velocity, leading to the Velocity Verlet method. Instead of relying on the positions from the previous and current time steps, the Velocity Verlet algorithm updates the position and velocity in a two-step process.
+
+First, we use the current velocity and acceleration to update the position at time $ t + \Delta t $. This is done similarly to the basic Verlet method but with the velocity term explicitly included:
+
+$$
+x(t + \Delta t) = x(t) + v(t) \Delta t + \frac{1}{2} a(t) \Delta t^2
+$$ (eq:velocity_verlet_x)
+
+This equation uses the current position $ x(t) $, the current velocity $ v(t) $, and the current acceleration $ a(t) $ to compute the new position $ x(t + \Delta t) $. Next, after updating the position, we need to compute the new acceleration at time $ t + \Delta t $ because the force (and hence the acceleration) may have changed due to the updated position. The new acceleration is given by:
+
+$$
+a(t + \Delta t) = \frac{F(t + \Delta t)}{m}
+$$
+
+With this new acceleration in hand, we can update the velocity. Instead of using just the current acceleration, the Velocity Verlet method uses the average of the current and new accelerations to update the velocity:
+
+$$
+v(t + \Delta t) = v(t) + \frac{1}{2} \left[ a(t) + a(t + \Delta t) \right] \Delta t
+$$ (eq:velocity_verlet_v)
+
+This velocity update equation accounts for the change in acceleration over the time step, providing a more accurate velocity update than simply using the current acceleration. The Velocity Verlet method is the *de-facto* standard for MD codes. The common way to implement it is to split the velocity integration step in two, so that a full MD interation becomes
+
+1. Update the velocity, first step, $v(t + \Delta t / 2) = v(t) + \frac{1}{2} a(t) \Delta t$.
+2. Update the position, $r(t + \Delta t) = r(t) + v(t + \Delta t / 2)\Delta t = r(t) + v(t) \Delta t + \frac{1}{2} a(t) \Delta t^2$ (*e.g.* Eq. [](#eq:velocity_verlet_x)).
+3. Calculate the force (and therefore the acceleration) using the new position, $r(t + \Delta t) \to a(t + \Delta t) = F(t + \Delta t) / m$.
+4. Update the velocity, second step, $v(t + \Delta t) = v(t + \Delta t / 2) + \frac{1}{2} a(t + \Delta t) = v(t) + \frac{1}{2} \left[ a(t) + a(t + \Delta t) \right] \Delta t$ (*e.g.* Eq. [](#eq:velocity_verlet_v)).
+
+An MD implementation based on [](#code:MD_simple) that implements a Velocity Verlet algorithm is
+
+:::{code} pseudocode
+:label: code:MD_velocity_verlet
+:caption: Pseudo-code for an MD code implementing the Velocity Verlet algorithm.
+
+CALL initialise_parameters()
+CALL initialise_system()
+
+WHILE t is smaller than t_max
+   CALL integrate_first_step()
+   CALL compute_force()
+   CALL integrate_second_step()
+   
+   t += delta_t
+   CALL sample_observables()
+:::
+
+## Reduced units
 
 ## Energy conservation
 

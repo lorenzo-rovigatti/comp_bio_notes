@@ -1,5 +1,7 @@
 ---
 title: Basic notions
+exports:
+   - format: pdf
 ---
 
 # Introduction to the course

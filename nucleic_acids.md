@@ -1,5 +1,7 @@
 ---
 title: Nucleic acids
+exports:
+   - format: pdf
 ---
 
 ```{tip}

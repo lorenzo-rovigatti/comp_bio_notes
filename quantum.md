@@ -1,8 +1,7 @@
 ---
 title: Molecular quantum mechanics
 exports:
-    - format: pdf
-      template: plain_latex
+   - format: pdf
 ---
 
 ```{warning}
@@ -10,7 +9,7 @@ This is the part that is the farthest from my own expertise, which is about clas
 ```
 
 ```{tip}
-The main references for this part are @bottcher2021computational, @leach2001molecular and @schlick2010molecular.
+The main references for this part are @giustino2014materials and @bottcher2021computational.
 ```
 
 In this chapter I briefly present the background required to understand the basic algorithms used to run *ab-initio* molecular dynamics (AIMD) simulations. The methods presented here makes it possible to simulate the dynamics of atoms and molecules from first principles, which is what "ab initio" means.
@@ -162,6 +161,10 @@ The Born-Oppenheimer approximation is widely used in *ab initio* simulations bec
 
 The Hohenberg-Kohn theorems form the foundation of Density Functional Theory (DFT), a widely used approach in *ab initio* simulations. DFT simplifies the quantum many-body problem by shifting the focus from the many-body wavefunction to the electron density $n(\vec{r})$. These theorems, established by [Pierre Hohenberg and Walter Kohn in 1964](doi:10.1103/PhysRev.136.B864), provide the theoretical justification for this approach, proving that all ground-state properties of a system are uniquely determined by its electron density. By leveraging this result, it is possible to reformulate quantum mechanics in terms of the electron density, which depends on only three spatial coordinates, rather than the many-body wavefunction, which depends on the coordinates of all electrons. This leads to a significant reduction in complexity and makes DFT one of the most efficient methods for electronic structure calculations in large systems.
 
+:::{important}
+The Hohenberg-Kohn theorems apply to non-degenerate ground states only! Here "ground state" means that the energy corresponding to this state is the lowest possible.
+:::
+
 Expliciting the terms of an $N$-electron Hamiltonian (see Eqs. [](#eq:many_body_H) and [](#eq:electronic_H)) one obtains
 
 $$
@@ -284,32 +287,30 @@ The Kohn-Sham (KS) approximation, introduced by [Walter Kohn and Lu Jeu Sham in 
 
 ## The Kohn-Sham equations
 
-The central idea of the Kohn-Sham approach is to introduce a fictitious system of non-interacting electrons that reproduces the exact ground-state electron density of the real, interacting system. For this non-interacting system, the kinetic energy can be computed exactly, because the wavefunction of non-interacting electrons is a simple Slater determinant of single-particle orbitals.
+The central idea of the Kohn-Sham approach is to introduce a fictitious system of non-interacting electrons that reproduces the exact ground-state electron density of the real, interacting system. For this non-interacting system, the kinetic energy can be computed exactly in terms of the of single-particle orbitals, which in this context are called the Kohn-Sham orbitals, $\psi_i$. The electron density is also constructed from the Kohn-Sham orbitals as:
 
-Thus, instead of attempting to directly approximate the total energy functional $E[n]$ for the interacting system, we decompose it into parts that can be computed exactly and parts that require approximations. The total energy functional in the Kohn-Sham formalism is written as:
+$$
+n(\vec{r}) = \sum_{i=1}^{N} |\psi_i(\vec{r})|^2.
+$$
+
+Instead of attempting to directly approximate the total energy functional $E[n]$ for the interacting system, we decompose it into parts that can be computed exactly and parts that require approximations. The total energy functional in the Kohn-Sham formalism is written as:
 
 $$
 E[n] = T_s[n] + \int v(\vec{r}) n(\vec{r}) \, d\vec{r} + U[n] + E_{\text{xc}}[n],
-$$
+$$ (eq:kohn-sham_functional)
 
 where $T_s[n]$ is the kinetic energy of the non-interacting electrons, $U[n]$ is the Hartree (Coulomb) energy, representing the classical electrostatic interaction between electrons, and $E_{\text{xc}}[n]$ is the exchange-correlation energy, which includes all the many-body effects not captured by the other terms.
 
-To find the ground-state density, the Kohn-Sham approach involves solving a set of single-particle equations, known as the Kohn-Sham equations. These equations describe the motion of non-interacting electrons in an effective potential $v_{\text{eff}}(\vec{r})$:
+To find the ground-state density, the Kohn-Sham approach involves solving a set of single-particle equations, known as the Kohn-Sham equations. These equations describe the motion of non-interacting electrons in an effective potential $v_{\text{eff}}(\vec{r})$, and can be obtained by using the fact that the functional in Eq. [](#eq:kohn-sham_functional) is minimised by the ground-state electron density. Therefore, $\delta E / \delta n = 0$. If we carry out the functional derivative with the constraint that the Kohn-Sham orbitals are orthonormal, we obtain (see Appendix B of @giustino2014materials for the full derivation)
 
 $$
 \left( -\frac{\hbar^2}{2m} \nabla^2 + v_{\text{eff}}(\vec{r}) \right) \psi_i(\vec{r}) = \epsilon_i \psi_i(\vec{r}),
 $$ (eq:kohn-sham)
 
-where $\psi_i(\vec{r})$ are the Kohn-Sham orbitals, which are the single-particle wavefunctions of the non-interacting electrons, $\epsilon_i$ are the corresponding single-particle energies, and the effective potential, which includes the effects of the external potential, the Hartree potential, and the exchange-correlation potential, is given by
+$\epsilon_i$ is the single-particle energy corresponding to $\psi_i$, and the effective potential, which includes the effects of the external potential, the Hartree potential, and the exchange-correlation potential, is given by
 
 $$
 v_{\text{eff}}(\vec{r}) = v(\vec{r}) + \int \frac{n(\vec{r'})}{|\vec{r} - \vec{r'}|} d\vec{r'} + v_{\text{xc}}(\vec{r})
-$$
-
-The electron density is constructed from the Kohn-Sham orbitals as:
-
-$$
-n(\vec{r}) = \sum_{i=1}^{N} |\psi_i(\vec{r})|^2
 $$
 
 The Kohn-Sham equations must be solved self-consistently:
@@ -358,7 +359,7 @@ However, the accuracy of DFT calculations depends heavily on the choice of excha
 
 # The Hellmann-Feynman Theorem
 
-In *ab initio* simulations, such as molecular dynamics and geometry optimization, calculating the forces on atoms is crucial for determining how atomic structures evolve. The Hellmann-Feynman theorem provides a convenient and efficient way to compute these forces within the framework of quantum mechanics, without requiring the explicit calculation of the derivatives of the wavefunction.
+In the sections above I have sketched a way of solving the electronic problem and obtain the ground-state electron density. However, in *ab initio* simulations we have to also evolve the positions of the nuclei. How do we connect $n(r)$ to the forces acting on the nuclear degrees of freedom? The Hellmann-Feynman theorem provides a convenient and efficient way to compute these forces within the framework of quantum mechanics, without requiring the explicit calculation of the derivatives of the wavefunction.
 
 The theorem states that when a system is in an eigenstate of its Hamiltonian, the force on a nucleus can be calculated directly from the electron density and the external potential. This result greatly simplifies force calculations in Density Functional Theory (DFT) and other quantum mechanical methods, making it possible to efficiently perform simulations of atomic motion.
 
@@ -473,7 +474,7 @@ for some values of $k_{ij}$. Now the Pulay term can be rewritten by leveraging E
 
 The Car-Parrinello method, introduced by [Roberto Car and Michele Parrinello in 1985](doi:10.1103/PhysRevLett.55.2471), revolutionized the field of *ab initio* molecular dynamics (AIMD) by combining classical molecular dynamics with electronic structure calculations based on DFT. The key innovation of this method is its ability to simultaneously evolve both nuclear and electronic degrees of freedom within a unified framework.
 
-As discussed [earlier](#sec:born-oppenheimer), in traditional Born-Oppenheimer molecular dynamics, the forces on the nuclei are obtained by solving the electronic structure problem for each configuration of the nuclei. The nuclei are then moved according to classical equations of motion, and this process is repeated iteratively. Although this approach is accurate, it is computationally expensive because a self-consistent field (SCF) calculation must be performed at every MD time step to obtain the forces.
+As discussed [earlier](#sec:born-oppenheimer), in traditional Born-Oppenheimer molecular dynamics, the forces on the nuclei are obtained by solving the electronic structure problem for each configuration of the nuclei, possibly with DFT-like approaches. The nuclei are then moved according to classical equations of motion, and this process is repeated iteratively. Although this approach is accurate, it is computationally expensive because a self-consistent field (SCF) calculation must be performed at every MD time step to obtain the forces.
 
 In contrast, the Car-Parrinello molecular dynamics (CPMD) method evolves both the nuclear positions and the electronic wavefunctions simultaneously. This avoids the need for repeated SCF calculations, making the method more efficient while retaining accuracy. The key idea is to treat the Kohn-Sham orbitals as fictitious dynamical variables governed by a classical-like equation of motion, allowing them to follow the nuclear motion without needing to re-optimize the electronic structure at each step.
 

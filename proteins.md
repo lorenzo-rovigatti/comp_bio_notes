@@ -1,5 +1,7 @@
 ---
 title: Proteins
+exports:
+   - format: pdf
 ---
 
 ```{tip}

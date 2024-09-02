@@ -1,5 +1,7 @@
 ---
 title: Folding
+exports:
+   - format: pdf
 ---
 
 # Proteins

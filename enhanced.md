@@ -6,6 +6,8 @@ math:
 abbreviations:
     CV: Collective Variable
     RC: Reaction Coordinate
+exports:
+   - format: pdf
 ---
 
 ```{note}

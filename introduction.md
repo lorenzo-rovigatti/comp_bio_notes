@@ -87,7 +87,7 @@ Eukaryotes
 
 A macromolecule is a molecule composed by a great number of covalently bonded atoms[^macromolecule]. The most common class of macromolecules is that of polymers, which are molecules composed by smaller subunits, the *monomers*, covalently linked together. If the monomers are all of the same type, the resulting molecule is a *homopolymer*, while if they are different, the molecule is a *heteropolymer*. In general, monomers can be connected in different ways, giving raise to unidimensional structures such as chains or rings, or to more complicated topologies such as brushes, stars, networks, *etc.* 
 
-Focussing on chains, the number of repeating units (also known as *residues*) composing a polymer is called *degree of polymerisation* $n$, and for common plastic materials is rather large ($n \sim 10^3 - 10^5$). The simplest polymer is the hydrocarbon polyethylene, $(-CH_2-)_n$, which is used to make cheap bags and bottles and accounts for more than $30\%$ of the plastic produced worldwide (see *e.g.* [](doi:10.1126/sciadv.1700782)). Other very common polymers used to build everyday objects are polypropilene, $-CH_2-CH(CH_3)-$, which is heat- and fatigue-resistant and threfore used to make hinges, piping systems, containers, and polystyrene, $-CH_2-CH(C_6H_5)-$, used to make plastic cutlery, containers or insulating foams. The skeletal formulas of these three polymers are shown in [](#fig:simple-polymers).
+Focussing on chains, the number of repeating units (also known as *residues*) composing a polymer is called *degree of polymerisation* $N$, and for common plastic materials is rather large ($N \sim 10^3 - 10^5$). The simplest polymer is the hydrocarbon polyethylene, $(-CH_2-)_n$, which is used to make cheap bags and bottles and accounts for more than $30\%$ of the plastic produced worldwide (see *e.g.* [](doi:10.1126/sciadv.1700782)). Other very common polymers used to build everyday objects are polypropilene, $-CH_2-CH(CH_3)-$, which is heat- and fatigue-resistant and threfore used to make hinges, piping systems, containers, and polystyrene, $-CH_2-CH(C_6H_5)-$, used to make plastic cutlery, containers or insulating foams. The skeletal formulas of these three polymers are shown in [](#fig:simple-polymers).
 
 ```{figure} figures/simple_polymers.png
 :name: fig:simple-polymers
@@ -111,11 +111,111 @@ A cartoon of a polymer composed by 9 monomers (the coloured spheres) connected b
 
 [^macromolecule]: "great number" is a purposedly vague qualifier: there is no strict definition about the number of atoms required for a molecule to be dubbed a macromolecule.
 
-### Polymer physics in a nutshell
+### Some useful observables
 
-:::{warning} TODO
-Use [FS's notes](https://www.roma1.infn.it/~sciortif/didattica/SOFTSTRUTTURA/SOFTSTRUTTURA/polimeri.pdf) as a starting point.
+:::{tip} Source
+This section has been adapted from the [Soft and Biological Matter notes](https://www.roma1.infn.it/~sciortif/didattica/SOFTSTRUTTURA/SOFTSTRUTTURA/polimeri.pdf) by Prof. Sciortino.
 :::
+
+First, some definitions.
+
+End-to-end vector, $\vec R_{ee}$
+: The vector distance between the first and last residue of a polymer chain. Its length is the end-to-end distance, $R_{ee}$.
+
+Contour length, $R_\text{max}$
+: The maximum possible end-to-end distance, which is achieved for a fully-extended polymer chain.
+
+Monomer position, $\vec R_i$
+: The position of the $i$-th monomer.
+
+Bond vector, $\vec r_i$
+: The vector connecting the $(i - 1)-th$ and $i$-th residues, defined as $\vec r_i = \vec R_{i} - \vec R_{i - 1}$.
+
+Ideal chain
+: A chain in which two residues that are far from each other, *i.e.* residues $i$ and $j$ for which $|i - j| \gg 1$, do not interact.
+
+Chemical distance
+: The number of bonds separating two monomers along the chain.
+
+Consider a polymer chain composed by $N = n + 1$ monomers connected by $n$ bonds. Its instantaneous end-to-end vector is
+
+$$
+\vec R_{ee} = \sum_{i=1}^n \vec r_i.
+$$
+
+Consider the ensemble average of this quantity, $\langle \vec R_{ee} \rangle$, which denotes an average over all possible states of the system (accessed either by considering many chains or many different conformations of the same chain). In this particular case the ensemble average corresponds to averaging over an ensemble of
+chains having $n$ bonds, with all possible bond orientations. Since there is no preferred direction in this ensemble, the average end-to-end vector is zero. A simple non-zero average that can be built out of the end-to-end vector is
+
+$$
+\langle \vec R^2_{ee} \rangle = \langle \vec R_{ee} \cdot \vec R_{ee} \rangle = \left\langle \left( \sum_{i=1}^n \vec r_i \right) \cdot \left( \sum_{j=1}^n \vec r_j \right ) \right \rangle.
+$$
+
+If the bond vector are all of the same length $l$ (which is often a good approximation, given the rigidity of the backbone covalent bonds), $\vec r_i \cdot \vec r_j = l^2 \hat{r}_i \cdot \hat{r}_j = l^2 \cos \theta_{ij}$, where $\cos \theta_{ij}$ is the angle between $\vec r_i$ and $\vec r_j$, and the mean-squared end-to-end distance can be written as
+
+$$
+\langle \vec R^2_{ee} \rangle = l^2 \sum_{i=1}^n \sum_{j=1}^n \langle \cos \theta_{ij} \rangle.
+$$ (eq:rmsee)
+
+Note that in this case the contour length has the simple expression $R_\text{max} = nl$.
+
+In the simplest polymer model there is no correlation between *any* two monomers $i$ and $j$. In such a *freely-jointed chain* the average cosine vanishes if $i \neq j$, since
+
+$$
+\langle \cos \theta_{ij} \rangle = \frac{\int_0^\pi \cos \theta \sin \theta d\theta \int_0^{2 \pi} d\phi}{\int_0^\pi \sin \theta d\theta \int_0^{2 \pi} d\phi} = -\frac{1}{4} \cos^2 \theta |_0^\pi = 0,
+$$
+
+and therefore the double sum in Eq. [](#eq:rmsee) becomes a single sum of $n$ ones, yielding
+
+$$
+\langle \vec R^2_{ee} \rangle = n l^2.
+$$
+
+However, in a typical ideal chain, $\langle \cos \theta_{ij} \rangle = 0$ only if $i$ and $j$ are sufficiently far apart from each other. In this case, if we assume that there is a maximum chemical distance $m$ beyond which $\langle \cos \theta_{ij} \rangle = 0$, we can write the inner sum of Eq. [](#eq:rmsee) as
+
+$$
+\sum_{j=1}^n \langle \cos \theta_{ij} \rangle = \sum_{j=1}^m \langle \cos \theta_{ij} \rangle \equiv C_\infty,
+$$
+
+where $C_\infty > 1$, the so-called *Flory's characteristic ratio*, accounts for the local monomer-monomer correlations due to steric hindrances and hampered rotations around chemical bonds and varies from polymer to polymer. For these ideal chains, Eq. [](#eq:rmsee) can be written as
+
+$$
+\langle \vec R^2_{ee} \rangle = l^2 \sum_{i=1}^n C_\infty = C_\infty n l^2.
+$$
+
+Flexible polymers have many universal properties that are independent of the local chemical structure, and they can all be described in terms of equivalent freely-jointed chains. The equivalent chain has the same mean-squared end-to-end distance and contour length, but a different number of effective beads $N$ of length $b$, chosen to match the values of $\langle \vec R^2_{ee} \rangle$ and $R_\text{max}$:
+
+\begin{align}
+R_\text{max} &= N b\\
+\langle \vec R^2_{ee} \rangle &= C_\infty n l^2 = N b^2,
+\end{align}
+
+so that 
+
+\begin{align}
+b &= \frac{\langle \vec R^2_{ee} \rangle}{R_\text{max}}\\
+N &= \frac{R_\text{max}}{b}.
+\end{align}
+
+The effective bond length $b$ is known as *Kuhn's length*, and it represents the size of a segment that behaves as a freely-jointed monomer in the equivalent chain.
+
+The size of a linear chain is well-described by the square root of its mean-squared end-to-end distance, $\sqrt{\langle \vec R^2_{ee} \rangle}$. However, in some cases this quantity is not well defined (*e.g.* for ring or branched polymers), or it is not easily accessible in experiments. In these cases is useful to define the radius of gyration, which can be computed for any set of atoms or particles:
+
+$$
+\vec R_g^2 = \frac{1}{N} \sum_{i = 1}^N (\vec R_i - \vec R_\text{cm})^2,
+$$ (eq:Rg_cm)
+
+where $\vec R_\text{cm} = \frac{1}{N} \sum_{j = 1}^N \vec R_j$ is the position of the centre of mass of the polymer. Sometimes (also in simulations), it is not convenient, or possible, to compute the centre of mass. For these cases, Eq. [](#eq:Rg_cm) can be rewritten in another form by substituting the definition of $R_\text{cm}$, obtaining
+
+\begin{align}
+\vec R_g^2 & = \frac{1}{N^2} \sum_{i = 1}^N \sum_{j = 1}^N (\vec R_i^2 - \vec R_i \cdot \vec R_j) = \frac{1}{2N}  \sum_{i = 1}^N \sum_{j = 1}^N (\vec R_i - \vec R_j)^2 \\
+& = \frac{1}{N}  \sum_{i = 1}^N \sum_{j = 1}^N (\vec R_i - \vec R_j)^2,
+\end{align}
+
+where we have first completed the square of the binomial by duplicating the double sum (hence the factor of 2 at the denominator), and then run the inner sum on monomers having index $j > i$, so that each pair of monomers only enters once in the double sum. The associated ensemble average is then
+
+$$
+\langle \vec R_g^2 \rangle = = \frac{1}{N} \sum_{i = 1}^N \sum_{j = 1}^N \langle (\vec R_i - \vec R_j)^2 \rangle.
+$$ (eq:rg)
 
 ## DNA
 

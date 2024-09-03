@@ -56,15 +56,15 @@ The chemical structure of the 20 standard amino acids. As discussed in the text,
     * Glycine (Gly, G), Alanine (Ala, A), Valine (Val, V), Isoleucine (Ile, I), Leucine (Leu, L), Methionine (Met, M), Proline (Pro, P)
     * Cysteine (Cys, C) - has been traditionally considered a polar (hydrophilic) AA, but this view has been challenged, which is why here it is listed among the hydrophobic AAs. See for instance [](doi:10.1016/S0014-5793(99)01122-9).
 
-```{note} Non-standard amino acids
-:class: dropdown
+:::{note} Non-standard amino acids
+:open: true
 In addition to the 20 standard amino acids, there are a few non-standard amino acids that are found in some proteins or are used in specialized biological processes. Two notable ones are:
 
 * Selenocysteine (Sec, U): Sometimes referred to as the 21st amino acid, it is incorporated into proteins by a unique mechanism that involves a specific tRNA and a specific sequence in the mRNA.
 * Pyrrolysine (Pyl, O): Sometimes referred to as the 22nd amino acid, it is found in some archaeal and bacterial proteins and is also incorporated by a specific tRNA and sequence in the mRNA.
 
 There are also many other amino acids that are not incorporated into proteins but have important roles in metabolism, such as ornithine and citrulline. Additionally, post-translational modifications can lead to the formation of amino acid derivatives within proteins, such as phosphorylated serine or hydroxyproline.
-```
+:::
 
 Note that in amino acids, the carbon atoms in the side chains are named systematically based on their position relative to the alpha carbon $C^\alpha$. The naming convention is to use successive Greek letters (and possibly numerals for branched side chains) to denote each carbon atom, where the beta carbon, $C^\beta$, is attached to $C^\alpha$, $C^\gamma$ follows the beta carbon, and so on and so forth.
 
@@ -273,7 +273,6 @@ $$
 where $\epsilon$ is the depth of the minimum arising from the competition between attraction and repulsion, and $r_{\rm min}$ is its position. A plot of the LJ potential is presented in [](#fig:LJ). The figure highlights an additional length, $r_0$, which is the distance at which the energy becomes positive, and therefore can be seen as an estimate for the minimum distance below which two atoms "clash"[^LJ_parameters]. Therefore, the value that $r_0$ takes for each pair of noncovalent interaction can be useful to estimate the stability of a given conformation.
 
 :::{tip} An alternative form of the Lennard-Jones potential
-:class: dropdown
 In molecular simulations, it is common to express the LJ potential in the following slightly different manner:
 
 $$
@@ -434,8 +433,122 @@ The order in which amino acids are linked together by peptide bonds is known as 
 The sequence of [bovine (cow) rhodopsin](https://www.uniprot.org/uniprotkb/P02699/entry#sequences) expressed with the one-letter code is
 
 > MNGTEGPNFYVPFSNKTGVVRSPFEAPQYYLAEPWQFSMLAAYMFLLIMLGFPINFLTLYVTVQHKKLRTPLNYILLNLAVADLFMVFGGFTTTLYTSLHGYFVFGPTGCNLEGFFATLGGEIALWSLVVLAIERYVVVCKPMSNFRFGENHAIMGVAFTWVMALACAAPPLVGWSRYIPEGMQCSCGIDYYTPHEETNNESFVIYMFVVHFIIPLIVIFFCYGQLVFTVKEAAAQQQESATTQKAEKEVTRMVIIMVIAFLICWLPYAGVAFYIFTHQGSDFGPIFMTIPAFFAKTSAVYNPVIYIMMNKQFRNCMVTTLCCGKNPLGDDEASTTVSKTETSQVAPA
-
 :::
+
+# Visualising molecules
+
+When dealing with molecular models, it is very important to be able to visualise the 3D structure of the system. Indeed, visualization tools make it possible to explore the three-dimensional conformation of molecules, helping to identify key structural features (*e.g.* active sites, binding pockets, regions of flexibility, *etc.*). When performing simulations, the are many uses for visualisations. Here I will list the main ones:
+
+1. It is very important to familiarise with the system under investigation: always look at what you simulate!
+2. A big part of setting up complicated simulations is to prepare the initial configuration. This is often a multi-step process, and being able to visually follow this process can speed-up the troubleshooting of possible issues.
+3. Sometimes (often...) simulations provide "wrong" results, either because something went awry during the simulation itself, or because some parameters were incorrectly set. You should always make sure that the final (or equilibrium) configurations of your simulations make sense and match the results you obtain, and visualising them help in this direction.
+4. A big part of doing science is to be able to efficiently and clearly explain your results to an audience. Good figures are fundamental to convey the important messages of your work, and sometimes a visualisation of a 3D structure (or part of a 3D structure) can very efficiently make a point across.
+
+The next two sections will briefly introduce how information about a molecular system can be stored on a computer, and how to visualise a molecular structure.
+
+## File formats
+
+```{figure} figures/xkcd_standards.png
+:name: fig:xkcd_standards
+
+The proliferation of standards. Credits to [xkcd](https://xkcd.com/927).
+```
+
+For historical (but not only, as shown in [](#fig:xkcd_standards)) reasons, there exist multiple file formats for representing molecular structures, simulation data, and related information. While each main simulation software has its own, there are also some (usually software-agnostic) standard formats that are widely used to share information about molecular structures. In structural and computational biology, the standard is the Protein Data Bank (PDB) file format, originally developed in the 1970s to archive experimental data from X-ray crystallography, NMR spectroscopy, and cryo-electron microscopy. Each PDB file contains a detailed description of the atomic coordinates, connectivity, and sometimes additional information like secondary structure annotations, heteroatoms, and crystallographic data.
+
+The full format specification can be found [at this link](https://www.wwpdb.org/documentation/file-format). Here I will provide a short description based on [this one](https://www.cgl.ucsf.edu/chimera/docs/UsersGuide/tutorials/pdbintro.html), which should be enough for most use cases. A PDB file is a human-readable text file where each line of information in the file is called a record, and the records are arranged in a specific order to describe a structure. The first part of a PDB file usually contains some metadata, stored in **HEADER**, **TITLE**, **AUTHOR**, **REMARK**, and similar records.
+
+The actual structure and connectivity is stored by records that are usually of the following types:
+
+* **ATOM**: atomic coordinate record containing the $x, y, z$ coordinates, in $\angstrom$, for atoms in standard residues (amino acids and nucleic acids).
+* **HETATM**: same as ATOM, but for atoms in nonstandard residues. Nonstandard residues include ions, solvent (such as water molecules), and other molecules such as co-factors. The only functional difference from ATOM records is that HETATM residues are by default not connected to other residues.
+* **TER**: indicates the end of a chain of residues.
+* **HELIX**: indicates the location and type (right-handed $\alpha$, *etc.*) of helices, which are secondary structures that will be introduced soon. One record per helix.
+* **SHEET**: indicates the location, sense (anti-parallel, *etc.*) and registration with respect to the previous strand in the sheet (if any) of each $\beta$-strand, which is another type of secondary structure (see below). One record per strand.
+* **SSBOND**: defines disulfide bonds, which are particular bonds linking cysteine residues that will be introduced later.
+
+Each record has a specific format that was designed when [punched cards](https://en.wikipedia.org/wiki/Punched_card) where still common. Therefore, records are made of fields that have a fixed width, and never go beyond 80 columns. Here I report the format of the ATOM, HETATM, and TER records:
+
+| Record Type | Columns | Data | Justification | Data Type |
+| --- | --- | --- | --- | --- |
+| ATOM | 1-4 | "ATOM" |     | character |
+| | 7-11 | Atom serial number | right | integer |
+| | 13-16 | Atom name | left | character |
+| | 17  | Alternate location indicator |     | character |
+| | 18-20 | Residue name | right | character |
+| | 22  | Chain identifier |     | character |
+| | 23-26 | Residue sequence number | right | integer |
+| | 27  | Code for insertions of residues |     | character |
+| | 31-38 | $x$ coordinate | right | real (8.3) |
+| | 39-46 | $y$ coordinate | right | real (8.3) |
+| | 47-54 | $z$ coordinate | right | real (8.3) |
+| | 55-60 | Occupancy | right | real (6.2) |
+| | 61-66 | Temperature factor | right | real (6.2) |
+| | 73-76 | Segment identifier | left | character |
+| | 77-78 | Element symbol | right | character |
+| | 79-80 | Charge |     | character |
+| HETATM | 1-6 | "HETATM" |     | character |
+| | 7-80 | same as ATOM records |     |     |
+| TER | 1-3 | "TER" |     | character |
+| | 7-11 | Serial number | right | integer |
+| | 18-20 | Residue name | right | character |
+| | 22  | Chain identifier |     | character |
+| | 23-26 | Residue sequence number | right | integer |
+| | 27  | Code for insertions of residues |     | character |
+
+The following excerpt, taken from the [PDB file of human hemoglobin](https://www.rcsb.org/structure/1a3n), shows how a PDB file looks like:
+
+```
+HEADER    OXYGEN TRANSPORT                        22-JAN-98   1A3N
+TITLE     DEOXY HUMAN HEMOGLOBIN
+...
+AUTHOR    J.TAME,B.VALLONE
+...
+REMARK   2
+REMARK   2 RESOLUTION.    1.80 ANGSTROMS.
+REMARK   3
+REMARK   3 REFINEMENT.
+REMARK   3   PROGRAM     : REFMAC
+REMARK   3   AUTHORS     : MURSHUDOV,SKUBAK,LEBEDEV,PANNU,STEINER,
+REMARK   3               : NICHOLLS,WINN,LONG,VAGIN
+...
+HELIX    1   1 PRO A    4  SER A   35  1                                  32
+HELIX    2   2 PRO A   37  TYR A   42  5                                   6
+HELIX    3   3 ALA A   53  ALA A   71  1                                  19
+HELIX    4   4 MET A   76  ALA A   79  1                                   4
+HELIX    5   5 SER A   81  HIS A   89  1                                   9
+...
+ATOM    219  CB  ARG A  31      -2.135   3.057  22.133  1.00  6.25           C
+ATOM    220  CG  ARG A  31      -3.684   3.130  22.122  1.00  7.07           C
+ATOM    221  CD  ARG A  31      -4.155   4.091  21.001  1.00  7.50           C
+ATOM    222  NE  ARG A  31      -5.608   4.102  20.966  1.00  8.30           N
+...
+TER    4374      HIS D 146
+HETATM 4375  CHA HEM A 142       8.456  12.968  30.943  1.00 12.71           C
+HETATM 4376  CHB HEM A 142       6.923  14.956  26.818  1.00 15.63           C
+HETATM 4377  CHC HEM A 142       8.220  10.950  24.353  1.00  9.88           C
+HETATM 4378  CHD HEM A 142       9.359   8.784  28.599  1.00  7.91           C
+...
+END
+```
+
+:::{important} The PDB is a legacy format
+While PDB files are still very common, they are being superseded by more flexible[^PDB_flexible] file formats. For instance, the PDB format has been declared obsolete by the Protein Data Bank database, whose default has become the [PDBx/mmCIF format](10.1107/S2059798319004522). Except the PDB format to slowly disappear!
+:::
+
+[^PDB_flexible]: but less human-readable, if you ask me
+
+## Software tools
+
+There are many software tools that make it possible to visualise and interact with molecular models. Here is a (very non-comprehensive) list:
+
+* [VMD](https://www.ks.uiuc.edu/Research/vmd/) is open source. It supports many formats, handles large systems efficiently, and has numerous plugins available and powerful scripting capabilities. However, its interface is rather ugly (especially compared to the other visualisation tools), and many functionalities can be complex for beginners.
+* [PyMol](https://pymol.org/) is open source. It can be used to (more or less) easily producing high-quality, publication-ready images and animations, it has an extensive user community and good documentation and powerful scripting capabilities with Python. However, it can be get slow with very large molecular systems, and it can be complex for beginners to master all features and functionalities.
+* [Chimera](https://www.cgl.ucsf.edu/chimera/download.html)[^chimera] is not open source, although its source code is available. It is the most intuitive and easy to use software presented here, especially for beginners, and it has excellent visual quality for creating publication-quality images, supports a wide range of file formats and integrates well with other bioinformatics tools. It has somewhat less powerful scripting capabilities compared to VMD and PyMOL, and ChimeraX has some features behind a paywall.
+
+I urge you to install and try at least one of these programs. Use [this file](files/alpha_helix_H.gro), which I used to generate [](#fig:alpha_helix), or [this real protein file](files/1ecl.pdb) to test the software. In Chimera and PyMol you can directly open the file, while with VMD you'll have to create a new molecule (File $\to$ New molecule... $\to$ Browse $\to$ Load) and choose a sensible representation (Graphics $\to$ Representations... and then pick *e.g.* "NewCartoon" from the "Drawing method" menu).
+
+[^chimera]: There is also a new software, called [ChimeraX](https://www.cgl.ucsf.edu/chimerax/), that is advertised for having "higher performance and many new features".
 
 (sec:secondary_structure)=
 # Secondary structure
@@ -476,25 +589,12 @@ An $\alpha$-helix made by a polypeptide made of consecutive Ala. (a) Licorice re
 
 Figure [](#fig:alpha_helix) shows an optimal $\alpha$-helix made with a [Python library](https://github.com/clauswilke/peptidebuilder) that makes it possible to build polypeptides specifying the sequence and the geometry (in terms of $\phi$ and $\psi$). The polypeptide is composed of consecutive Alanine residues with $\phi = -60^\circ$ and $\psi = -45^\circ$, and it is shown with different representations:
 
-* The licorice representation, where atoms are small spheres and bonds are cylinders, and everything has the same diameter, is very useful to look at molecular connections.
+* The licorice representation, also known as "ball-and-stick", where atoms are small spheres and bonds are cylinders, and everything has the same diameter, is very useful to look at molecular connections.
 * Ribbon-like and/or wireframe representations are very useful to understand the organisation in terms of secondary structures.
-* Drawing atoms as van der Waals spheres makes it possible to appreciate the efficient packing of folded structures, but it is otherwise rather limited in its utility since it leaves only the protein surface visibile.
-
-:::{tip} Visualising molecules
-:class: dropdown
-
-There are many software tools that make it possible to visualise and interact with molecular models. Here is a (very non-comprehensive) list:
-
-* [VMD](https://www.ks.uiuc.edu/Research/vmd/) is open source. It supports many formats, handles large systems efficiently, and has numerous plugins available and powerful scripting capabilities. However, its interface is rather ugly (especially compared to the other visualisation tools), and many functionalities can be complex for beginners.
-* [PyMol](https://pymol.org/) is open source. It can be used to (more or less) easily producing high-quality, publication-ready images and animations, it has an extensive user community and good documentation and powerful scripting capabilities with Python. However, it can be get slow with very large molecular systems, and it can be complex for beginners to master all features and functionalities.
-* [Chimera](https://www.cgl.ucsf.edu/chimera/download.html)[^chimera] is not open source, although its source code is available. It is the most intuitive and easy to use software presented here, especially for beginners, and it has excellent visual quality for creating publication-quality images, supports a wide range of file formats and integrates well with other bioinformatics tools. It has somewhat less powerful scripting capabilities compared to VMD and PyMOL, and ChimeraX has some features behind a paywall.
-
-I urge you to install and try at least one of these programs. Use [this file](files/alpha_helix_H.gro), which I used to generate [](#fig:alpha_helix), or [this real protein file](files/1ecl.pdb) to test the software. In Chimera and PyMol you can directly open the file, while with VMD you'll have to create a new molecule (File $\to$ New molecule... $\to$ Browse $\to$ Load) and choose a sensible representation (Graphics $\to$ Representations... and then pick *e.g.* "NewCartoon" from the "Drawing method" menu).
-:::
+* Drawing atoms as van der Waals spheres, also known as space-filling representation, makes it possible to appreciate the efficient packing of folded structures, but it is otherwise rather limited in its utility since it leaves only the protein surface visibile.
 
 [^R-helix]: Short segments of left-handed $\alpha$-helices can occur in glycine-rich segments, since Gly is the only achiral amino acid.
 [^pi-helix]: Short $\pi$-helices are often found flanked by $\alpha$-helices and near functional sites of proteins, but their identification has sparked some debate (see *e.g.* [](doi:10.1110/ps.9.1.201 ), [](doi:10.1093/protein/15.5.353), [](doi:10.1016/j.sbi.2019.06.011)).
-[^chimera]: There is also a new software, called [ChimeraX](https://www.cgl.ucsf.edu/chimerax/), that is advertised for having "higher performance and many new features".
 
 ## $\beta$-structures
 

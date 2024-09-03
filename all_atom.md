@@ -43,9 +43,106 @@ WHILE t is smaller than t_max
    CALL sample_observables()
 :::
 
+## Initialisation
+
+## Reduced units
+
 ## The force calculation
 
 This is the most time-consuming part of an MD simulation. It consists of evaluating the force (and, for rigid bodies, the torque) acting on each individual particle. Since, in principle, every particle can interact with every other particle, for a system of $N$ objects the number of interacting contributions will be equal to the number of pairs, $N (N - 1) / 2$. Therefore, the time required to evaluate all forces scales as $\mathcal{O}(N^2)$. Although, as we will see later, there are methods that can bring this complexity down to $\mathcal{O}(N)$, here I present the simplest case.
+
+Consider, for simplicity, a system made of $N$ like atoms interacting through the Lennard-Jones potential modelling [Van der Walls forces](#sec:van-der-waals). The atom-atom interaction depends only on the inter-atomic distance $r$, and reads
+
+$$
+V_\text{LJ}(r) = 4 \epsilon \left( \left( \frac{\sigma}{r} \right)^{12} - \left( \frac{\sigma}{r} \right)^{6} \right),
+$$
+
+where $\epsilon$ is the potential well depth and $\sigma$ is the atom diameter. The force associated to this potential is then
+
+$$
+\vec{f}(\vec r) = - \vec \nabla V_\text{LJ}.
+$$
+
+### Interaction cut-off
+
+:::{important} The range of the interaction
+A "short-range potential" is a definition that applies to all those potentials that can be truncated at a certain distance $r_c$ (called *cut-off distance*), and whose tail contribution (*i.e.* the contribution for $r > r_c$) is finite. This can happen either because $V(r > r_c) = 0$, or if the potential decays to zero quickly enough. Indeed, the tail correction can be estimated by considering the continuous limit, *viz.*
+
+$$
+U_\text{tail} \approx \frac{N\rho}{2} \int_{r_c}^\infty V(r) d \vec{r},
+$$ (eq:U_tail)
+
+where $\rho$ is the number density of the system, and $d\vec{r} = 4 \pi r^2 dr$ in 3D and $d\vec{r} = 2 \pi r dr$ in 2D. In order to yield a finite value, the integrand in Eq. [](#eq:U_tail) should decay faster than $r^{-1}$. If $V(r)$ decays at large distances as $\sim r^{-\alpha}$, the convergence condition becomes $\alpha > d$, where $d$ is the dimensionality.
+:::
+
+Given the definition above, the LJ potential is short ranged[^long-range_interactions]. As a result, the total potential energy of a particle is dominated by the contributions of those particles that are closer than some cut-off distance $r_c$. Therefore, in order to save some computing time, it is common to truncate the interaction at $r_c$, so that the potential reads
+
+(eq:truncation)=
+\begin{align}
+V_\text{tr}(r) = \begin{cases}
+4 \epsilon \left( \left( \frac{\sigma}{r} \right)^{12} - \left( \frac{\sigma}{r} \right)^{6} \right) & \; \text{if} \; r \leq r_c\\
+0 & \; \text{otherwise.}
+\end{cases}
+\end{align}
+
+In this way, only pairs of particles closer than $r_c$ feel a mutual interaction. However, the potential has a discontinuity, and therefore the force diverges, at $r = r_c$. The discontinuity introduces errors in the estimates of several quantities. For instance, the potential energy will lack the contributions of distance atoms, which can be estimated through Eq. [](#eq:U_tail) and for a 3D LJ potential is
+
+$$
+U_\text{tail} \approx 2 \pi N\rho \int_{r_c}^\infty V(r) r^2 dr = \frac{8}{3} \pi N \rho \epsilon \sigma^3 \left[ \frac{1}{3}\left(\frac{\sigma}{r_c} \right)^9 - \left(\frac{\sigma}{r_c} \right)^3 \right].
+$$ (eq:U_tail_LJ)
+
+Another important observable affected by the truncation is the pressure. The correction can be estimated by using the virial theorem and Eq. [](#eq:U_tail_LJ) as
+
+$$
+\Delta P_\text{tail} = 2 \pi \rho^2 \int_{r_c}^\infty \vec{r} \cdot \vec{f}(r) r^2 dr = \frac{16}{3} \pi \rho^2 \epsilon \sigma^3 \left[ \frac{2}{3}\left(\frac{\sigma}{r_c} \right)^9 - \left(\frac{\sigma}{r_c} \right)^3 \right].
+$$
+
+Note that this is the contribution that should be added to $P$ if one wishes to estimate the pressure of the true (untruncated) potential, rather than the true pressure of the truncated potential[^true_pressure].
+
+A common way of removing the divergence in Eq. [](#eq:truncation) is to truncate and shift the potential:
+
+\begin{align}
+V_\text{tr,sh}(r) = \begin{cases}
+4 \epsilon \left( \left( \frac{\sigma}{r} \right)^{12} - \left( \frac{\sigma}{r} \right)^{6} \right) - V(r_c) & \; \text{if} \; r \leq r_c\\
+0 & \; \text{otherwise.}
+\end{cases}
+\end{align}
+
+This is especially important in constant-energy MD simulations (*i.e.* simulations in the NVE ensemble), since the discontinuity of the truncated (but not shifted) potential would greatly deteriorate the energy conservation. In this case the pressure tail correction remains the same, while the energy requires an additional correction on top of Eq. [](#eq:U_tail_LJ), which accounts for the average number of particles that are closer than $r_c$ from a given particle, multiplied by $\frac{1}{2} V(r_c)$.
+
+[^long-range_interactions]: But Coulomb and dipolar interactions are not, and has to be treated differently, as we will see later on.
+[^true_pressure]: Check @frenkel2023understanding if you want an expression for the latter.
+
+### Minimum image convention and periodic boundary conditions
+
+The number of particles in a modern-day simulation ranges from hundreds to millions, thus being very far from the thermodynamic limit. Therefore, it is not surprising that finite-size effects are always present (at least to some extent). In particular, the smaller the system, the larger boundary effects are: since in 3D the volume scales as $N^3$ and the surface as $N^2$, the fraction of particles that are at the surface scales as $N^{-1/3}$, which is a rather slowly decreasing function of $N$. For instance, if $N = 1000$, in a cubic box of volume $V = L^3$ more than half of the particles are at the surface. One would have to simulate $\approx 10^6$ particles to see this fraction decrease below $10\%$!
+
+Those pesky boundary effect can be decreased by using periodic boundary conditions (PBCs): we get rid of the surface by considering the volume containing the system, which is often but not always a cubic box, one of cell of an infinite periodic lattice made of identical cells. Then, each particle $i$ iteracts with any other particle: not only with those in the original cell, but also with their "images", including its own images, contained in all the other cells. For instance, the total energy of a (pairwise interacting) cubic system of side length $L$ simulated with PBCs would be
+
+$$
+U_\text{tot} = \frac{1}{2} \sum_{i,j,\vec{n}}\phantom{}^{'} V(|\vec{r}_{ij} + \vec{n}L|),
+$$ (eq:PBC_sum)
+
+where $\vec r_{ij}$ is the distance between particles $i$ and $j$, $\vec{n}$ is a vector of three integer numbers $\in [-\infty, +\infty]$, and the prime over the sum indicates that the $i = j$ term should be excluded if $\vec n = (0, 0, 0)$. How do we handle such an infinite sum in a simulation? Keeping the focus on short-range interactions, it is clear that all terms with $|\vec{r}_{ij} + \vec{n}L| > r_c$ vanish, leaving only a finite number of non-zero interactions. In practice, Eq. [](#eq:PBC_sum) is carried out by making sure that $r_c < L / 2$, so that each particle can interact **at most** with a single periodic image of another particle. Then, given any two particles $i$ and $j$, the vector distance $\vec r_{ij} = (x_{ij}, y_{ij}, z_{ij})$ between the closest pair of images is
+
+(eq:minimum_image)=
+\begin{align}
+x_{ij} & = x_j - x_i - \text{round}\left(\frac{x_j - x_i}{L_x}\right) L_x\\
+y_{ij} & = y_j - y_i - \text{round}\left(\frac{y_j - y_i}{L_y}\right) L_y\\
+z_{ij} & = z_j - z_i - \text{round}\left(\frac{z_j - z_i}{L_z}\right) L_z,
+\end{align}
+
+where, for the sake of completeness, I'm considering a non-cubic box of side lengths $L_x$, $L_y$ and $L_z$, and $\text{round}(\cdot)$ is the function that rounds its argument to its closest integer. Figure [](#fig:PBC) shows a 2D schematic of periodic-boundary conditions and of the minimum-image construction.
+
+```{figure} figures/PBC.png
+:name: fig:PBC
+:align: center
+:width: 500px
+
+A schematic representation of periodic-boundary conditions and the minimum-image construction for a two-dimensional system. The system shown here contains 4 particles (labelled $i$, $j$, $k$, and $l$), with the black lines connecting particle $i$ with the closest periodic images of the other particles. Credits to [Abusaleh AA via Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Minimum_Image_Convention.png).
+```
+
+The total force acting on a particle $i$ can now be computed by summing up the contributions due to each particle $j \neq i$, where the distance is given by Eq. [](#eq:minimum_image).
 
 ## Integrating the equations of motion
 
@@ -125,8 +222,6 @@ WHILE t is smaller than t_max
    t += delta_t
    CALL sample_observables()
 :::
-
-## Reduced units
 
 ## Energy conservation
 

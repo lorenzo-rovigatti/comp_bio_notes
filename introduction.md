@@ -8,7 +8,21 @@ exports:
 
 As with most computational courses, this course is supposed to have a practical side that should not be overlooked. However, as some of you may have noticed, there will be frontal lessons only. While this may seem contradictory (and in some sense it is), it also means that you are strongly advised to practice on your (or someone else's) computer what you'll hear about (and be shown) during the lectures. Moreover, I will also set up some hands-on (bring-your-own-laptop) lectures to guide you through the most important technical hurdles we will be encountering.
 
+The material that form the bulk of the lectures is based on these books:
+
+* @lehninger2005lehninger: a bible of biochemistry. Very useful as a reference for the basic biochemistry reactions involved in all biological systems.
+* @finkelstein2016protein: protein physics in a nutshell. It is based on a series of lectures that the authors have been delivering for years (if not decades). It is very comprehensive, and uses a informal approach that I find very compelling.
+* @leach2001molecular: principles of molecular modelling, both quantum and classical. Perhaps a bit outdated in some parts, but still a very useful resource for a general introduction to modelling molecular interactions.
+* @schlick2010molecular: also on molecular modelling, but oriented towards nucleic acids and proteins. Very useful as a crash course to DNA, RNA, and proteins, as well as to the way the are modelled with a computer.
+* @frenkel2023understanding: the bible of molecular dynamics and Monte Carlo simulations. I use it to introduce the Monte Carlo algorithm and the basic molecular dynamics techniques.
+* @israelachvili2011intermolecular: an incredible (and comprehensive) book on intermolecular forces. For our class, it is especially useful to understand van der Walls and hydrophobic forces
+* @giustino2014materials and @bottcher2021computational: I did not read them front-to-back, but only used them as sources for the [](./quantum.md) chapter.
+
 # About these notes
+
+I have prepared these notes mainly for myself, but I decided to share them because I think they can be useful to others, if used correctly. Everything that is in here sould be regarded as my take on the topics I present, and therefore should not be trusted. The truth can be found in the books I used as sources, or in the original papers, both of which are always referenced.
+
+Here are some useful things to know:
 
 * Internal links are styled [like this](#sec:intro_comp_phys). Hover a link to see a preview.
 * Wikipedia links are styled [like this](https://en.wikipedia.org/wiki/Biophysics). Hover a wikipedia link to see a preview.

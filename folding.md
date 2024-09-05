@@ -94,9 +94,8 @@ To draw a parallel with proteins, we can consider a random heteropolymers, where
 
 A classic funnel diagram, such as the one shown in [](#fig:frustration)(b), represents an energy-entropy landscape, with the width being a measure of the entropy, whereas the depth represents both the energy and two correlated order parameters $Q$ and $A$, which are the fractions of native contacts and correct dihedral angles in the protein backbone. Although in reality the landscape is multidimensional, here the projection attempts to retain its main features, such as the barrier heights, which are a measure of the "ruggedness" or "roughness" of the landscape. The typical height of these barriers, together with the energy gap and the number of available conformations, are the three main parameters of the Random Energy Model, which is one of the main theoretical tools in this context.
 
-## Some simple lattice models
-
-### The helix-to-coil transition
+(sec:zimm-bragg)=
+## The Zimm-Bragg model for the helix-to-coil transition
 
 As we discussed, polypeptides can, in general, be reversibly denatured (with temperature or pH, for instance). Here we theoretically investigate this phenomenon in the context of secondary structure with the [Zimm-Bragg model](doi:10.1063/1.1730390), which is a toy model for a chain that can exhibit a continuous coil-to-helix transition. Note that it is possible to synthesise polypeptide chains that undergo such a transition, see *e.g.* [](doi:10.1021/ja01583a070).
 
@@ -124,7 +123,7 @@ Following @finkelstein2016protein, we define two accessory quantities: $C_i$ is 
 * For $i = 2$, we have two sequences ending with c, which are `hc` and `cc`, and two sequences ending with h, which are `hh` and `ch`. Each partition function is given by a sum of the statistical weights of the allowed microstates, so that we have $C_2 = 1 + \sigma s$ and $H_2 = \sigma s^2 + \sigma s$.
 * For $i = 3$, there are 8 available sequences, which are built by taking each $i = 2$ sequence and adding either `c` or `h` at its end. Each of the resulting sequence will have a statistical weight that is that of the base $i = 2$ sequence, multiplied by 1 if the sequence ends with `c`, and by $s$ or $\sigma s$ if the sequence ends with `h` and the preceeding character is `h` or `c`, respectively. Summing up the contribution we obtain $C_3 = 1 + 2 \sigma s$ and $H_3 = \sigma s + \sigma s^2 + \sigma^2 s^2 + \sigma s^3$.
 
-In general the operations carried out to compute the $i = 3$ partial partition functions can be applied to any other value of $i$, meaning that we can write down recursive relationships connecting $H_{i}$ and $C_{i}$ to $H_{i-1}$ and $C_{i-1}$. These relationships take a very simple form if expressed in matricial form:
+In general the operations carried out to compute the $i = 3$ partial partition functions can be applied to any other value of $i$, meaning that we can write down recursive relationships connecting $H_{i}$ and $C_{i}$ to $H_{i-1}$ and $C_{i-1}$. These relationships can be neatly expressed in matricial form:
 
 $$
 (C_i, H_i) =

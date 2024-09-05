@@ -144,6 +144,14 @@ A schematic representation of periodic-boundary conditions and the minimum-image
 
 The total force acting on a particle $i$ can now be computed by summing up the contributions due to each particle $j \neq i$, where the distance is given by Eq. [](#eq:minimum_image).
 
+The use of periodic boundary conditions gets rid of surface effects altogether, and more generally can greatly limit finite-size effects, even for small numbers of particles. However there are some important things that should always be kept in mind when using PBCs (which is by far the most common form of boundary conditions employed in molecular simulations):
+
+1. If the system under study exhibit correlations that are of the same order of or exceed the box size, the system will "feel itself" through the PBCs, leading to spurious non-linear effects.
+2. Only wavelengths compatible with the box size are allowed. This is true for any observable, and applies to a wide range of phenomena. For instance
+   * If one wishes to simulate equilibrium crystals, the shape of the box and the length of its sides should be compatible with the lattice's unit cell.
+   * Fluctuations with wavelengths longer than the box size are suppressed. This makes it hard to study critical phenomena, which have diverging correlation lengths.
+3. Angular momentum is not conserved, since the system is **not** rotationally invariant (even if the Hamiltonian is).
+
 ## Integrating the equations of motion
 
 :::{important}

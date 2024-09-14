@@ -20,7 +20,9 @@ parts:
         - file: exercises/molecular_dynamics.md
     - caption: Hands-on notebooks
       chapters:
+        - file: notebooks/Python_crash_course.ipynb
         - file: notebooks/coin_change.ipynb
+        - file: notebooks/PDB.ipynb
         - file: notebooks/zimm_bragg.ipynb
         - file: notebooks/HP_model.ipynb
         - file: notebooks/sequence_alignment.ipynb

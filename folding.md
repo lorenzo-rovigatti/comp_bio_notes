@@ -848,9 +848,52 @@ A short tutorial on how to use BLAST from the command line can be found [here](.
 
 ## Threading
 
-:::{warning} TODO
-ADD TEXT
-:::
+```{tip}
+Most of the text of this part has been adapted from [](doi:10.1385/1-59259-890-0:921) and @finkelstein2016protein.
+```
+
+If pair alignment tools find that a given query sequence is found to share more than 30% of its sequence with another, then it is common to think that a reasonable model for that sequence can be built. By contrast, an alignment yielding a similarity of 20% - 25% could be purely coincidental. In reality, things are more complicated, as it has been shown that proteins with rather high sequence identity could be very differently from a structural point of view ([](doi:10.1073/pnas.95.11.607)). This and other results show that a single quantity, such as sequence identity, is not enough to determine the 3D similarity between two proteins, and more numbers (such as the length of the chain or of the well-aligned regions) are required to build reliable models. For instance, it makes sense that for a short 50-residue protein a 40% sequence identity would be required to generate a good match, while 25% may be enough for 250 residues. However, note that these numbers have a purely statistical value.
+
+A better approach is to go beyond pairwise alignments by using sequence database searching programs such as BLAST which, as we have seen, provide E-values or similar quantities that estimate the reliability of a sequence match by looking at it in the context of the whole library of sequence scores. In addition, more sophisticated BLAST versions (such as PSI-BLAST) make it possible to obtain good matches with less than 20% sequence identity.
+
+Thanks to these tools, and to the ever-growing number of sequences stored in databases, "simple" database searches are often enough to build a model of the query sequence out of a reliable homolog of known structure. However, if no matches are found, or if an independent confirmation is required, we need methods that do not rely on sequence homology. In this case we recast the problem of protein structure prediction as a problem of choice of the 3D structure best fitting the given sequence among many other possible folds. However, what can be the source of "possible" structures?
+
+While an a priori classification is sometimes possible (see, *e.g.*, [](doi:10.1016/0022-2836(88)90366-X)) or [](doi:10.1016/0014-5793(85)80697-9)), a more practical answer is the [Protein Data Bank (PDB)](https://www.wwpdb.org/) where all the solved and publicly available 3D structures are collected. However, using structures stored in the PDB turns a "prediction" problem into a "recognition" one: a fold cannot be recognized if the PDB does not contain an already solved analog. This limits the power of recognition. Nevertheless, there is an important advantage associated to this procedure: if the protein fold is recognized among the PDB-stored structures, one can hope to recognize also the most interesting feature of the protein, namely its function—by analogy with that of an already studied protein.
+
+Certainly, not all protein folding patterns have been collected in PDB yet; however, it most likely already includes the majority of all the folding patterns existing in nature. This hope, substantiated by [](doi:10.1038/357543a0), is based on the fact that the folds found in newly solved protein structures turn out to be similar to already known folds more and more frequently. Extrapolation shows that perhaps about 1500–2000 folding patterns of protein domains exist in genomes, and we currently know more than half of them (including the majority of the most common folds).
+
+```{figure} figures/threading.png
+:name: fig:threading
+:align: center
+:width: 600px
+
+The basic idea of threading: a sequence is "threaded" through templates extracted from a database of known folds (*e.g.* the PDB), and the resulting structure is assigned an energy. The structure having the lowest energy is taken as the optimal candidate.
+```
+
+To recognize the fold of a chain having no visible homology with already solved proteins, one can use various superimpositions of the chain in question onto all examined (taken from an a priori classification or from PDB) 3D folds in search of the lowest-energy chain-with-fold alignment, as sketched in [](#fig:threading). This is called the *threading method*. When a chain is aligned with the given fold, it is threaded onto the fold's backbone until its energy (or rather, free energy) is minimized, including both local interactions and interactions between remote chain regions. The threading alignment allows "gaps" in the chain and in the fold's backbone (the latter are often allowed for irregular backbone regions only). Many different algorithms have been proposed for finding the correct threading of a sequence onto a structure, though many make use of dynamic programming in some form. Indeed, in principle, threading is similar to a homology search; the difference is that only sequences are aligned in a homology search, while threading aligns a "new" sequence with "old" folds.
+
+Being physics-inspired, threading serves now as a powerful tool of bioinformatics. It uses mostly statistics-derived pseudopotentials rather than actual energies. These are based on the contact statistics between amino acids as found in known protein structures.
+
+As with any other structure-prediction model, there are some issues with threading, the main ones being:
+
+1. The conformations of the gapped regions remain unknown, together with all interactions in these regions.
+2. Even the conformations of the aligned regions and their interactions are known only approximately, since the alignment does not include side-chain conformations (which may differ in "new" and "old" structures). Estimates show that threading takes into account, at best, half of the interactions operating in the protein chain, while the other half remain unknown to us. Thus, again, the protein structure is to be judged from only a part of the interactions occurring in this structure. Therefore, this can only be a probabilistic judgment.
+3. The number of possible alignments is enormous (remember Levinthal's paradox?), which makes it very hard to sort out all possible threading alignments and single out the best one (or ones). Here there are many methods that can be employed, one of which being the statistical mechanics of one-dimensional systems, and the related dynamic programming techniques.
+
+```{figure} figures/threading_example.png
+:name: fig:threading_example
+:align: center
+:width: 600px
+
+The 3D structures of (left) chicken histone H5 and (right) replication terminating protein (rtp). Note that the C-terminal helix of rtp is not shown, since it has no analoug in the histone. The root mean-squared deviation between 65 equivalent $C^\alpha$ positions in the two structures is 2.4 $\angstrom$. Taken from [](doi:10.1002/prot.340230311).
+```
+
+As an example, @finkelstein2016protein shows the structure prediction done for the replication terminating protein (rtp) by threading. Having threaded the rtp sequence onto all PDB-stored folds, [](doi:10.1002/prot.340230311) used threading with statistics-based pseudopotentials to show that the rtp fold must be similar to that of H5 histone. This a priori recognition, which is shown in [](#fig:threading_example), turned out to be correct.
+ 
+However, it also turned out that the alignment provided by threading deviates from the true alignment obtained from superposed 3D structures of rtp and H5 histone. On the one hand, this shows that even a rather inaccurate picture of residue-to-residue contacts can lead to an approximately correct structure prediction. On the other hand, this shows once again that all the mentioned flaws (insufficiently precise interaction potentials, uncertainty in conformations of nonaligned regions, of side chains, *etc.*) make it possible to single out only a more-or-less narrow set of plausible folds rather than one unique correct fold. Indeed, the set of the "most plausible" folds can be singled out quite reliably, but it still remains unclear which of these is the best. The native structure is a member of the set of the plausible ones, it is more or less close to the most plau-
+sible (predicted) fold, but this is all that one can actually say even in the very best case.
+
+Threading methods became a tool for a tentative recognition of protein folds from their sequences. The advantage of these methods is that they formulate a recipe—do this, this and this, and you will obtain a few plausible folds, one of which has a fairly high chance of being correct.
 
 ## AlphaFold
 

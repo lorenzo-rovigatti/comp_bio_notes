@@ -357,12 +357,12 @@ The 3D structure of biomacromolecules such as proteins and nucleic acids can be 
 1. **X-ray Crystallography**:
    - **Procedure**: The biomolecule is crystallized, and then X-rays are directed at the crystal. The X-rays diffract as they pass through the crystal, creating a diffraction pattern that can be recorded. The diffraction pattern is analyzed to determine the electron density map, which is used to model the atomic structure of the biomolecule.
    - **Advantages**: High resolution, can be used for large biomolecules.
-   - **Limitations**: Requires high-quality crystals, which can be difficult to obtain for some biomolecules (*e.g.* molecules that are not soluble in water).
+   - **Limitations**: Requires high-quality crystals, which can be difficult to obtain for some biomolecules (*e.g.* molecules that are not soluble in water, like many membrane proteins).
 
 2. **Nuclear Magnetic Resonance (NMR) Spectroscopy**:
    - **Procedure**: The biomolecule is dissolved in solution, and NMR spectra are obtained by applying a magnetic field and measuring the resulting interactions between nuclear spins. The spectra provide information about the distances and angles between atoms, which are used to calculate the 3D structure.
    - **Advantages**: Provides information about the dynamics and flexibility of biomolecules in solution.
-   - **Limitations**: Generally limited to smaller biomolecules (up to about 50 kDa), although recent advances are pushing these limits.
+   - **Limitations**: Generally limited to smaller biomolecules (up to about 50 kDa, *i.e.* $\approx 500$ amino acids or $\approx 200$ nucleotides), although recent advances are pushing these limits.
 
 3. **Cryo-Electron Microscopy (cryo-EM)**:
    - **Procedure**: The biomolecule is rapidly frozen in a thin layer of ice, and then imaged using an electron microscope. Thousands of 2D images are collected and computationally combined to reconstruct a 3D model of the biomolecule.
@@ -405,7 +405,7 @@ Despite the enormous variety of methods and applications, there are some common 
 * **Bridging Theory and Experiment:** Historically known as "computer experiments", computer simulations sit in the middle between theory and experiment. As such, a good computational physicist is able to act as a bridge between these two worlds. A proficient computational physicist can effectively bridge these two realms, provided he develops a familiarity with the specific jargon, techniques, and methodologies of both fields. This dual expertise is a significant advantage. However, it is sometimes hard to find a fit in a dichotomic world, where "theory or experiment" is all there is. Fortunately, that world is dying (but has not died yet).
 * **Algorithmic Problem Solving:** Problem-solving is a critical skill for any physicist, often involving the application of algorithmic reasoning to find solutions. For computational physicists, the ability to think in terms of algorithms is even more crucial. Developing this skill enables them to tackle complex problems systematically and effectively. During the course I will present many algorithms used to tackle some specific (bio)physical problem. Most of the time there will be an accompanying pseudo-code or real code, but in [some cases](#sec:homeworks) you will be asked to do it yourself.
 
-Just to brush up your programming skill, I will start with presenting a programming technique that will be applied later to some biophysical problems.
+Just to brush up your programming skill, I will start with presenting a programming technique that will be applied later to some biophysical problems. However, before doing that, let's brush up our Python skills with [this notebook](./notebooks/Python_crash_course.ipynb).
 
 ## Dynamic programming
 

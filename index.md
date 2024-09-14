@@ -14,3 +14,4 @@ These notes are not a book, and I will not advertise them as such. I took the li
 * Add threading/AlphaFold sections
 * Fill the NUPACK notebook
 * Add a lesson on DNA nanotechnology at the end of the folding doc?
+* Maybe show example simulations from [softmatterdemos.org](https://softmatterdemos.org/)?

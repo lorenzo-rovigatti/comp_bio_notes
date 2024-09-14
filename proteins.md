@@ -57,7 +57,6 @@ The chemical structure of the 20 standard amino acids. As discussed in the text,
     * Cysteine (Cys, C) - has been traditionally considered a polar (hydrophilic) AA, but this view has been challenged, which is why here it is listed among the hydrophobic AAs. See for instance [](doi:10.1016/S0014-5793(99)01122-9).
 
 :::{note} Non-standard amino acids
-:open: true
 In addition to the 20 standard amino acids, there are a few non-standard amino acids that are found in some proteins or are used in specialized biological processes. Two notable ones are:
 
 * Selenocysteine (Sec, U): Sometimes referred to as the 21st amino acid, it is incorporated into proteins by a unique mechanism that involves a specific tRNA and a specific sequence in the mRNA.
@@ -456,9 +455,21 @@ The proliferation of standards. Credits to [xkcd](https://xkcd.com/927).
 
 For historical (but not only, as shown in [](#fig:xkcd_standards)) reasons, there exist multiple file formats for representing molecular structures, simulation data, and related information. While each main simulation software has its own, there are also some (usually software-agnostic) standard formats that are widely used to share information about molecular structures. In structural and computational biology, the standard is the Protein Data Bank (PDB) file format, originally developed in the 1970s to archive experimental data from X-ray crystallography, NMR spectroscopy, and cryo-electron microscopy. Each PDB file contains a detailed description of the atomic coordinates, connectivity, and sometimes additional information like secondary structure annotations, heteroatoms, and crystallographic data.
 
-The full format specification can be found [at this link](https://www.wwpdb.org/documentation/file-format). Here I will provide a short description based on [this one](https://www.cgl.ucsf.edu/chimera/docs/UsersGuide/tutorials/pdbintro.html), which should be enough for most use cases. A PDB file is a human-readable text file where each line of information in the file is called a record, and the records are arranged in a specific order to describe a structure. The first part of a PDB file usually contains some metadata, stored in **HEADER**, **TITLE**, **AUTHOR**, **REMARK**, and similar records.
+The full format specification can be found [at this link](https://www.wwpdb.org/documentation/file-format). Here I will provide a short description based on [this one](https://www.cgl.ucsf.edu/chimera/docs/UsersGuide/tutorials/pdbintro.html), which should be enough for most use cases. A PDB file is a human-readable text file where each line of information in the file is called a record, and the records are arranged in a specific order to describe a structure. The first part of a PDB file usually contains some metadata, with the most common record types being:
 
-The actual structure and connectivity is stored by records that are usually of the following types:
+* **HEADER**: a general description of the contents of the file, including the name of the macromolecule, classification, deposition date, and PDB ID.
+* **TITLE**: a more detailed description of the structure, often including the protein’s function, any ligands or cofactors, and relevant experimental conditions.
+* **COMPND**: the macromolecular components of the structure (*e.g.* the names of individual protein chains, nucleic acids, ligands, *etc.*).
+* **SOURCE**: the source of each macromolecule (*e.g.* the organism, tissue, or cell line from which the structure was derived).
+* **KEYWDS**: keywords that describe the structure, such as enzyme classification, protein family, or biological process.
+* **EXPDTA**: nformation about the experimental method used to determine the structure (*e.g.* X-ray crystallography, NMR spectroscopy, cryo-electron microscopy, *etc.*).
+* **AUTHOR**: the names of the researchers who contributed to the structure determination.
+* **REVDAT**: the revision history of the PDB file, including the dates of modifications and a brief description of the changes made.
+* **JRNL**: reference(s) of the publication(s) associated with the structure determination.
+* **REMARK**: more general remarks or comments related to the structure (*e.g.* experimental details, data processing, *etc.*).
+* **SEQRES**: the primary sequences of the macromolecules stored in the file, with the amino acid or nucleotide residues given by their one-letter codes.
+
+The actual structure and connectivity is stored in records that are usually of the following types:
 
 * **ATOM**: atomic coordinate record containing the $x, y, z$ coordinates, in $\angstrom$, for atoms in standard residues (amino acids and nucleic acids).
 * **HETATM**: same as ATOM, but for atoms in nonstandard residues. Nonstandard residues include ions, solvent (such as water molecules), and other molecules such as co-factors. The only functional difference from ATOM records is that HETATM residues are by default not connected to other residues.

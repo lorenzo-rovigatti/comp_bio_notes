@@ -15,6 +15,7 @@ project:
         '\angstrom': '\textup{\AA}'
         '\matr': '\mathbf{#1}'
     abbreviations:
+        PDB: Protein Data Bank
         MD: molecular dynamics
         AIMD: ab-initio molecular dynamics
         CPMD: Car-Parrinello molecular dynamics

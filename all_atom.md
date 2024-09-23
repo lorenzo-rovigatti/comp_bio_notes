@@ -45,7 +45,48 @@ WHILE t is smaller than t_max
 
 ## Initialisation
 
+Initialising a simulation is a trivial task when simulating simple systems, *e.g.* gases, most liquids and even many solids, but can become extremely difficult for highly heterogeneous systems interacting through complicated, and possibly steep, interactions. Biomacromolecules modelled at the all-atom level are definitely within this class of systems.
+
+In general, the initial configuration should be such that there is no sensible overlap between the system's constituents (atoms, molecules, particles, *etc.*), in order to avoid large initial forces that could lead to numerical instabilities that could lead to crashes or, which is worse, unphysical behaviour, such as two chains crossing each other. For simple systems this can be done in several ways:
+
+* Particle coordinates are chosen randomly one after the other, ensuring that the distance between the new particle and any other particle is larger than sum threhsold. This works great as long as the density is not too high.
+* Particles are placed on a lattice, making it possible to go to generate highly dense systems.
+
+For more complicated systems, the generation of the initial configuration is often done in steps. In some cases, and I will show some examples, it is also common to run short-ish simulations where the dynamics is constrained (*e.g.* some degrees of freedom such as bond lengths or angles are kept fixed) and the energy is minimised to remove (part of) the initial stress.
+
+In the case of highly heterogeneous systems, it is very common to use external tools to build part of (or the whole) system. Take for instance the simulation of protein-membrane systems (*e.g.* [](#fig:GPCR)), where one has to build a membrane with a given composition and density, embed one or more proteins, add ions and solvate the system.
+
+What about velocities (or, in general, momenta)? Here initialisation is more straightforward, but there are some subtleties that can lead to errors later on if one is not careful. First of all, recall that, in a system in thermal equilibrium,
+
+$$
+\langle v_{i,\alpha}^2 \rangle = \frac{k_B T}{m},
+$$ (eq:equipartition)
+
+where $v_{i,\alpha}$ is the $\alpha$-th component of the velocity of particle $i$. We can then define the instantaneous temperature of a system of $N$ particles[^only_velocities] as
+
+$$
+k_B T(t) = \sum_{i}^N \frac{m v_{i,\alpha}^2}{d N},
+$$ (eq:instantaneous_T)
+
+where $d$ is the dimensionality of the system. We now use this relation in the following initialisation procedure:
+
+1. Randomly extract each velocity component of each particle from a distribution with zero mean. A good choice is a Gaussian, but a uniform distribution will also do (but don't be lazy!).
+2. Set the total momentum of the system to zero by computing $\langle v_\alpha \rangle = \frac{1}{N} \sum_i^N v_{i, \alpha}$ and subtracting it from each $v_{i, \alpha}$.
+3. Rescale all velocities so that the initial temperature $T(0)$ matches the desired value $T$, *i.e.* multiply each component by $\sqrt{T/T(0)}$.
+
+If you chose to use a Gaussian distribution for step 1., then you will end up with velocities distributed according to the Maxwell-Boltzmann probability distribution at temperature $T$, *viz.*
+
+$$
+P(v) = \left(\frac{\beta}{2 \pi m}\right)^{3/2} \exp\left(-\frac{\beta m v^2}{2}\right).
+$$ (eq:maxwell-boltzmann)
+
+However, since the initial configuration is most likely *not* an equilibrium configuration, the subsequence equilibration will change the average temperature, so that $\langle T(t) \rangle \neq T$. We will see later on how to couple the system to a [thermostat](#sec:thermostats) to restore thermal equilibrium at the desired temperature.
+
+[^only_velocities]: here I assume that we are dealing with point-like objects.
+
 ## Reduced units
+
+In molecular simulations, reduced units are employed to simplify calculations by scaling physical quantities relative to characteristic properties of the system, such as particle size or interaction strength. This approach not only makes the equations dimensionless and more general, but it also prevents the numerical instability that can arise from dealing with values that are extremely small or large, which can occur when using standard physical units (*e.g.* SI units). For example, distances are often scaled by the size of the particles, *e.g.* the particle diameter $\sigma$, energies by a characteristic interaction energy, *e.g.* the well depth of the attraction $\epsilon$, and masses by the particle mass, $m$. Any other unit is then expressed as a combination of these basic quantities; for instance, given $\sigma$, $\epsilon$, and $m$, time is in units of $\sigma \sqrt{m / \epsilon}$, and pressure is in units of $\epsilon / \sigma^3$. This allows quantities like temperature to be expressed as $T^* = \frac{k_B T}{\epsilon}$, reducing the need to handle numbers with extreme magnitude, which can hinder numerical stability and therefore lead to inaccuracies in the simulation. As an alternative, it is also possible to use the characteristic constants directly as units of measurements. For instance, a distance may be written as $L = 10 \, \sigma$, or an energy as $U = 0.1 \, \epsilon$.
 
 ## The force calculation
 
@@ -233,23 +274,23 @@ WHILE t is smaller than t_max
 
 ## Energy conservation
 
-## Thermostats
+The Velocity Verlet algorithm is [*symplectic*](https://en.wikipedia.org/wiki/Symplectic_integrator), which means that it conserves the energy (*i.e.* the value of the Hamiltonian)[^symplectic]. This is not a common property, as most schemes (such as the explicit Euler scheme or the famous Runge-Kutta method) are not symplectic, and therefore generate trajectories that do not live on the $H = \text{const}$ hypersurface. Since this is where the dynamics of systems evolving through Newton's equations move, MD integrators should always be symplectic. If this is the case, the resulting molecular dynamics simulations will conserve the total energy, which is a constant of motion. In turn, this means that MD simulations sample the microcanonical ensemble (as long as the system is ergodic, so that time and ensemble averages are equivalent).
 
-(sec:andersen_thermostat)=
-### Andersen
+Since we are discretising the equations, there are two caveats associated to the energy conservation:
 
-### Nose-Hoover
+1. If the time step $\Delta t$ is too large, then a deviation (drift) from the "correct" value of the energy will be observed. A good rule of thumb to avoid an energy drift, which would invalidate the simulation, is to calculate the highest vibrational frequency associated to the interaction potential employed, $\omega_c \equiv \sqrt{k_c / m}$, where $k_c$ is the highest curvature of the potential, *i.e.* the largest value of $d^2V(r)/dr^2$, and $m$ is the mass of the particle. Then, a sensible value for the integration time step is an order of magnitude less than the characteristic time associated to $\omega_c$, *i.e.* $\Delta t \approx \frac{1}{10} \frac{2 \pi }{\omega_c}$.
+2. If the value of $\Delta t$ is appropriate, then the energy will be conserved *on average*, meaning that it will fluctuate around its average value with an amplitude, $\delta U \equiv \sqrt{\langle \Delta U^2 \rangle}$. If the integrator is of the Verlet family (*i.e.* Velocity Verlet), then $\delta U \sim \Delta t^2$. This behaviour can be exploited to ensure that codes and simulations are working correctly, at least from the point of view of the energy conservation. See [](#fig:energy_conservation) for an example.
+```{figure} figures/energy_conservation.png
+:name: fig:energy_conservation
+:align: center
+:width: 500px
 
-### Bussi-Donadio-Parrinello
+The extent of the fluctuations of the total energy, $\delta U$, for a Lennard-Jones system simulated at $k_B T / \epsilon = 1.5$ and $\rho \sigma^3 = 0.36$ as a function of the time step $\Delta t$. The line is a quadratic fit. **Nota Bene:** this scaling requires that truncation errors are small, which is why I had to use a rather large cut-off, $r_c = 3.5$.
+```
 
-## Barostats
+We know from statistical mechanics that, in the thermodynamic limit, all ensembles are equivalent. However, in simulations it can be convenient to use different ensembles, depending on the phenomena one wishes to study. I will now briefly present some methods that can be used to fix the temperature (rather than energy) and the pressure (rather than volume) in MD simulations.
 
-## Tricks of the trade
-
-(sec:neighbour_lists)=
-### Neighbour lists
-
-### Long-range interactions
+[^symplectic]: it is also time-invariant and conserves volumes in phase space.
 
 ## Some observables
 
@@ -259,6 +300,217 @@ WHILE t is smaller than t_max
 ### Radial distribution function
 
 ### Mean-squared displacement
+
+(sec:thermostats)=
+## Thermostats
+
+Before introducing some of the schemes that are used to perform Molecular Dynamics simulations at constant temperature, it is important to understand what "constant temperature" even means. From a statistical mechanical point of view, there is no ambiguity: we can impose a temperature on a system by bringing it into thermal contact with a large heat bath. Under those conditions, the distribution of the velocities is given by the Maxwell-Boltzmann distribution (Eq. [](#eq:maxwell-boltzmann)), whose second moment is connected to the temperature *via* Eq. [](#eq:equipartition). Given in this form, it is clear that the temperature also fluctuates, with the fluctuations being linked to the second and fourth moment of the Maxwell-Boltzmann distribution (*e.g.* $\propto \langle v^4 \rangle - \langle v^2 \rangle^2$). Therefore, any algorithm devised to fix the temperature of a MD simulation should reproduce not only the average $T$, but also its fluctuations. Here I will present three such algorithms.
+
+:::{important} No more energy conservation!
+As soon as a thermostat is coupled to the system, the energy will not be conserved any more. Therefore, we have one fewer way of testing the software, or the simulation parameters (*e.g.* the time step) we have chosen to use. My advice is to always turn off the thermostat and run a short simulation to see whether everything looks in order or not.
+:::
+
+(sec:andersen_thermostat)=
+### Andersen
+
+The Andersen thermostat is a widely used method in molecular dynamics simulations for controlling temperature, introduced by [Hans C. Andersen in 1980](doi:10.1063/1.439486). Its fundamental idea is to maintain a system's temperature by coupling the particles to an external heat bath through random collisions. In this approach, particles in the simulation periodically undergo stochastic collisions with a fictitious heat bath, resulting in velocity reassignment according to a Maxwell-Boltzmann distribution that corresponds to the desired temperature. This random reassignment of velocities, which can be considered as a Monte Carlo move that transports the system from one constant-energy shell to another, mimics the effect of a thermal reservoir, ensuring that the system reaches and maintains thermal equilibrium.
+
+The thermostat has a parameter $\nu$ that is the frequency of stochastic collisions, which represents the strength of the coupling to the heat bath: by adjusting this collision frequency, the user can control how frequently the system interacts with the heat bath, thus influencing the rate at which the system equilibrates. In practice, at each time step each particle has a probability $\nu \Delta t$ of undergoing a collision, *i.e.* of being reassigned a velocity from a Maxwell-Boltzmann distribution corresponding to the target temperature. This scheme reproduced the canonical ensemble, since temperature fluctuations align with those expected from statistical mechanics. 
+
+One drawback of the Andersen thermostat is connected to its stochastic nature: the random collisions "disturb" the dynamics in a way that is not realistic. In particular, they enhance the decorrelation of the particle velocities, thereby affecting quantities such as the diffusion constant. This effect depends on the value of $\nu$: the larger the collision frequency, the faster the decorrelation, the smaller the diffusion constant. Therefore, the Andersen thermostat should be used when we are interested in static properties only, and dynamics observables are not important.
+
+### Nose-Hoover
+
+The Nosé-Hoover thermostat is a more sophisticated method for controlling temperature in molecular dynamics simulations, designed to generate the canonical ensemble while preserving the continuous evolution of the system's dynamics. Unlike the Andersen thermostat, which introduces stochastic velocity reassignment, the Nosé-Hoover thermostat operates deterministically by coupling the system to a fictitious heat bath via an extended Lagrangian formalism. This allows the system to exchange energy with the thermostat in a smooth and continuous manner, maintaining temperature without introducing artificial randomness.
+
+The extended Lagrangian formalism starts by introducing a scaling factor, $s$, that modifies the velocities of particles in the system ([](doi:10.1080/00268978400101201)). The extended Lagrangian for the Nosé-Hoover thermostat is expressed as:
+
+$$
+L = \sum_{i=1}^{N} \frac{m_i}{2} \left( \frac{ \dot{\vec r}_i }{s} \right)^2 - V(\mathbf{r}) - g k_B T \log s,
+$$
+
+where $m_i$ and $\dot{\vec r}_i = \vec v_i$ are the mass and velocity particle $i$, $V(\{r\})$ is the potential energy of the system, and the term $ g k_B T \ln(s) $, where $ g $ is the number of degrees of freedom, introduces the necessary coupling between the system and the heat bath. The auxiliary variable $s$ is responsible for controlling the temperature by scaling the velocities of the particles so that the system's kinetic energy corresponds to the target temperature.
+
+The dynamics of the system are then derived from this Lagrangian. The equations of motion for the positions and velocities of the particles are modified by the thermostat, resulting in:
+
+$$
+\ddot{\vec r}_i = \frac{\vec F_i}{m_i} - \zeta \dot{\vec r}_i
+$$
+
+where $\vec F_i$ is the force acting on particle $i$, and the term $\zeta \equiv \dot{s} / s$ is a friction-like coefficient that emerges from the thermostat variable. This friction term adjusts the particle velocities in response to deviations from the target temperature, ensuring that the system remains at the correct thermal equilibrium, and evolves according to:
+
+$$
+\dot{\zeta} = \frac{1}{Q} \left( \sum_{i=1}^{N} \frac{\vec p_i^2}{m_i} - g k_B T \right),
+$$
+
+where $Q$ is a parameter that controls the strength of the coupling between the system and the thermostat, $\vec p_i = m \vec r_i$ is the momentum conjugate to $\vec r_i$, so that $\sum_{i=1}^{N} \frac{\vec p_i^2}{m_i}$ is the total kinetic energy of the system, and $g k_B T$ represents the target thermal energy. If the system's kinetic energy exceeds the desired value, the variable $\zeta$ increases, effectively damping the particle velocities to bring the temperature back in line. Conversely, if the kinetic energy is too low, $\zeta$ decreases, allowing the velocities to rise and the temperature to stabilize at the target value. The "inertia" of this process is controlled by the value of $Q$, which therefore plays the role of a fictitious mass. This deterministic feedback mechanism distinguishes the Nosé-Hoover thermostat from stochastic approaches. By continuously adjusting the velocities of all particles, this method preserves the natural evolution of the system’s dynamics while still achieving temperature control. The benefit of using this extended Lagrangian framework is that it allows for smooth, continuous temperature regulation without disrupting important dynamical properties, such as diffusion coefficients or time-dependent correlations.
+
+Note that the above equations of motion conserve the following quantity
+
+$$
+U_\text{NH} = \sum_{i=1}^N \frac{\vec p_i^2}{m_i} + V(\{ r \}) + \frac{\zeta^2 Q}{2} + g k_B T \log s,
+$$
+
+which can be used as a check when implementing the thermostat, or when testing the simulation parameters (*e.g.* the time step). [](doi:10.1103/PhysRevA.34.2499) demonstrated that the above equations of motion are unique, in the sense that are different equations of the same form (*i.e.* containing an additional friction-like parameter) cannot lead to a canonical distribution. However, the simulation samples from the canonical distribution *only* if there is a single non-zero constant of motion, the energy. If there are more conservation laws, which can happen, for instance, if there are no external forces and the total momentum of the system is different from zero, than the Nosé-Hoover method does not work any more.
+
+```{figure} figures/nose_hoover.png
+:name: fig:nose_hoover
+:align: center
+:width: 800px
+
+The trajectory of the harmonic oscillator for a single initial condition simulated (from left to right) without a thermostat, with the Andersen thermostat, with the Nosé-Hoover thermostat. Adapted from @frenkel2023understanding.
+```
+
+[](#fig:nose_hoover) shows the failure of this thermostat for a cases that is deceptively simple: that of a harmonic oscillator. It is obvious that the dynamics simulated in the microcanical ensemble or with the Nosé-Hoover thermostat becomes non-ergodic. Although in practice one can always set the initial velocity of the centre of mass of the system to zero to remain with a single non-trivial conserved quantity and therefore avoid this issue, it would be better to have an algorithm that works well in the general case[^why_not_andersen]. 
+
+As demonstrated in [](doi:10.1063/1.463940), this issue can be overcome by coupling the Nosé-Hoover thermostat to another thermostat or, if necessary, to a whole chain of thermostats, which take into account additional conservation laws. Here I provide the equations of motion for a system coupled to an $M$-link thermostat chain, where each link $i$ is an additional degree of freedom associated to a "mass" $Q_i$:
+
+$$
+\begin{align}
+\ddot{\vec r}_i &= \frac{\vec F_i}{m_i} - \zeta \dot{\vec r}_i\\
+\dot \zeta_k & = \frac{p_{\zeta_k}}{Q_k}\\
+\dot p_{\zeta_1} &= \left( \sum_{i=1}^{N} \frac{\vec p_i^2}{m_i} - g k_B T \right) -  \frac{p_{\zeta_2}}{Q_2} p_{\zeta_1}\\
+\dot p_{\zeta_k} &= \left[ \frac{p^2_{\zeta_{k-1}}}{Q_{k-1}} - k_BT \right] - \frac{p_{\zeta_{k+1}}}{Q_{k+1}} p_{\zeta_k}\\
+\dot p_{\zeta_M} &= \left[ \frac{p^2_{\zeta_{M-1}}}{Q_{M-1}} - k_BT \right].
+\end{align}
+$$
+
+As discussed in @frenkel2023understanding (where all these arguments are presented more in depth) of the $M$ additional degrees of freedom only two (the first link and the thermostat "centre", $\zeta_c \equiv \sum_{k=2}^M \zeta_k$) are independently coupled to the dynamics, which is what is needed when there are two conservation laws.
+
+:::{important}
+The chained Nosé-Hoover thermostat is the most common thermostat used in all-atom simulations. However, the default parameters change from package to package (at the time of writing $M = 3$ for LAMMPS and 10 for GROMACS, for instance). The choice of $Q$ (or of $\{ Q_i \}$ in the case of chains) is important and should be made with care. If $Q$ is very large, the energy exchange between the system and the reservoir is very slow, as in the $Q \to \infty$ limit we recover the Hamiltonian dynamics. By contrast, in the small-$Q$ limit the high coupling can be give raise to unphysical energy (and therefore temperature) fluctuations.
+:::
+
+[^why_not_andersen]: provided that the dynamics is of interest; otherwise, you can rely on the good old Andersen thermostat.
+
+### Bussi-Donadio-Parrinello
+
+We know from the equipartition theorem, Eq. [](#eq:equipartition), that the instantaneous temperature $T(t)$ is related to the kinetic energy of the system, $K(t)$, through:
+
+$$
+T(t) = \frac{2 K(t)}{3 N k_B}.
+$$
+
+Since on a computer we always have a discrete dynamics, in the following I will slightly abuse the notation by using $A(k)$ to mean $A(k \Delta t)$, where $k$ is an index that keeps track of the time step and $A$ is a time-dependent function.
+
+The simplest way of fixing the temperature is to scale the velocities to achieve the target temperature instantaneously: the new velocities $\vec{v}_i(k + 1) $ are obtained from the old velocities $ \vec{v}_i(k) $ by multiplying them by a scaling factor $\alpha$, *e.g.* $\vec{v}_i(k + 1) = \alpha \vec{v}_i(k)$, where $\alpha$ is given by
+
+$$
+\alpha = \sqrt{\frac{T}{T(k)}} = \sqrt{\frac{K}{K(k)}}
+$$ (eq:v_rescaling)
+
+where $T$ and $K$ are the target temperature and kinetic energy. This method has two drawbacks:
+
+1. It does not yield the correct fluctuations for the kinetic energy.
+2. The rescaling affects all particles at the same time in a abrupt way, greatly disturbing the dynamics, as was the case with the Andersen thermostat.
+
+The second issue can be mitigated by weakly coupling the system to a heat bath with a characteristic relaxation time $\tau$. With this method, called the [Berendsen thermostat](doi:10.1063/1.448118), the velocities are gradually adjusted to bring the temperature toward the target value. The velocity scaling factor in the Berendsen thermostat is given by:
+
+$$
+\alpha = \sqrt{1 + \frac{\Delta t}{\tau} \left( \frac{K}{K(k)} - 1 \right)}.
+$$ (eq:berendsen)
+
+This factor ensures that the system's temperature approaches $T$ over time, with the relaxation time $\tau$ controlling the speed of this adjustment. The Berendsen thermostat achieves smooth temperature control, but it still suppresses the natural energy fluctuations required for proper sampling of the canonical ensemble.
+
+[](doi:10.1063/1.2408420) introduced a thermostat that is based on the idea of velocity rescaling, but it samples the canonical ensemble. Note that in the continous limit, *i.e.* for $\Delta t \to 0$, Eq. [](#eq:berendsen) becomes
+
+$$
+dK = (K - K(t)) \frac{dt}{\tau}.
+$$
+
+This equation makes it obvious that $K(t) \to K$ exponentially, in a deterministic way (*i.e.* without fluctuations). A way of introducing fluctuations is to add a Weiner noise $dW$, weighted by a factor that ensures that the fluctuations of the kinetic energy are canonical[^wiener_factor]:
+
+$$
+dK = (K - K(t)) \frac{dt}{\tau} + 2 \sqrt{\frac{K(t)K}{N_f}} \frac{dW}{\sqrt{\tau}},
+$$ (eq:bussi)
+
+where $N_f$ is the number of degrees of freedom in the system. Since the total momentum is conserved, $N_f = 3N - 1$ in a 3D simulation. With some non-trivial math [](doi:10.1063/1.2408420) demonstrated that Eq. [](#eq:bussi) yields the following scaling factor:
+
+$$
+\begin{align}
+\alpha^2 &= e^{-\Delta t / \tau} + \frac{K}{N_f K(k)} \left( 1 - e^{-\Delta t / \tau} \right) \left( R_1^2 + \sum_{i = 2}^{N_f} R_i^2 \right)\\
+& + 2 R_1 e^{-\Delta t / \tau} \sqrt{\frac{K}{N_f K(k)} \left( 1 - e^{-\Delta t / \tau} \right) },
+\end{align}
+$$
+
+where the $\{ R_i \}$ are independent random numbers extracted from a Gaussian distribution with zero mean and unit variance.
+
+The interpretation of [](#eq:bussi) is that, in order to sample the canonical ensemble by rescaling the velocities, the target kinetic energy (*i.e.* the target temperature) should be chosen randomly from the associated canonical probability distribution function[^kinetic_PDF]:
+
+$$
+P(K(t)) \propto K(t)^{N_f / 2 - 1} e^{-\beta K(t)}.
+$$ (eq:K_PDF)
+
+One way of doing this would be to randomly extract a value $\bar K$ from Eq. [](#eq:K_PDF) each time a rescale should be performed, and use it as the target kinetic energy in Eq. [](#eq:v_rescaling). However, this would generate abrupt changes in the dynamics, as for the simple velocity rescaling and Andersen thermostats. By contrast, the stochastic process defined in Eq. [](#eq:bussi) is smoother, since the rescaling procedure happens on a timescale given by $\tau$, in the same vein as with the Berendsen thermostat.
+
+As for the Nosé-Hoover thermostat, this thermostat, which is sometimes called the stochastic velocity rescaling thermostat, has an associated conserved quantity that can be used to check the choice of the time step and of the other simulation parameters:
+
+$$
+U_\text{BDP} = \sum_{i=1}^N \frac{\vec p_i^2}{m_i} + V(\{ r \}) - \int_0^t (K - K(t')) \frac{dt'}{\tau} - 2 \int_0^t \sqrt{ \frac{K(t')K}{N_f}}. \frac{dW(t')}{\sqrt{\tau}}
+$$
+
+[^wiener_factor]: It turns out that there is some freedom in choosing this factor, but only if we don't want to keep the Berendsen part untouched.
+[^kinetic_PDF]: This is a chi-squared PDF, which appears when dealing with sums of the squares of independent Gaussian random variables. Since the kinetic energy is the sum of squared velocities, each of which is distributed normally, its PDF is a chi-square.
+
+### Other thermostats
+
+There are many other thermostats, which I will not introduce here because of time constraints. Here I list a few, just for reference:
+
+* Langevin thermostats for systems where the dynamics is overdamped. Examples are particles dispersed in a viscous fluid.
+* Brownian thermostats for systems where inertia is negligible. Examples are concentrated suspensions of colloids or bacteria.
+* Stochastic rotational dynamics to model hydrodynamic interaction. Examples are diluted solutions of colloids or bacteria where long-range hydrodynamic effects are important and of interest (*e.g.* sedimentation or flocking).
+
+:::{important}
+I reiterate that in equilibrium simulations the static properties of a system are independent on the thermostat used. However, if the dynamics is of interest (which is always the case in out-of-equilibrium systems, but it is often the case also for equilibrium systems), then choosing the right thermostat is [very important](doi:10.1140/epje/i2018-11689-4).
+:::
+
+## Barostats
+
+Experiments are usually performed at constant pressure (*e.g.* ambient pressure). Moreover, while statistical mechanics results ensure that ensembles are equivalent in equilibrium, there are many situations in which it is more convenient to simulate in a specific ensemble. For instance, equilibrating a crystal structure usually requires that the edge lengths of the box can relax and fluctuate, or the coexisting region between a gas and a liquid is extended in $(T, \rho)$, but it is just a line in the $(T, P)$ projection. In the same as controlling the temperature requires coupling the system to a thermostat, fixing $P$ means coupling the system to a barostat. When simulating at constant pressure it is very common, but by no means the only possibility, to also fix the temperature, thereby simulating in the so-called isothermal-isobaric ensemble.
+
+As for thermostats, there exist many barostats, each having its own unique advantages and disadvantages. Here I briefly present three barostats, two based on the extended-Lagrangian formalism and a stochastic one.
+
+### Nosè-Hoover barostat
+
+The Nosè-Hoover formalism can be extended to fix the pressure. In this case the Equations of motion, as presented in [](doi:10.1063/1.467468), which improves the original scheme by [Hoover](doi:10.1103/PhysRevA.34.2499) that only yields approximated constant-$P$ distributions, are:
+
+$$
+\begin{align}
+\dot{\vec r_i} &= \frac{\vec p_i}{m_i} + \frac{p_\epsilon}{W} \vec r_i\\
+\dot{\vec p_i} &= \vec F_i - \left( 1 + \frac{d}{dN} \right) \frac{p_\epsilon}{W} \vec p_i - \frac{p_\zeta}{Q} \vec p_i\\
+\dot{V} &= \frac{dVp_\epsilon}{W}\\
+\dot{p_\epsilon} &= dV (P(t) - P) + \frac{1}{N} \sum_{i=1}^N \frac{\vec p_i^2}{m_i} - \frac{p_\zeta}{Q}\vec p_\epsilon,
+\end{align}
+$$ (eq:nose-hoover_barostat)
+
+where $d$ is the space dimensionality, $\epsilon = \log(V / V(0)$, where $V(0)$ is the volume at $t = 0$, $W$ is the inertia parameter associated to $\epsilon$, $p_\epsilon$ is the conjugate momenum of $\epsilon$ (here I'm using the same notation as @frenkel2023understanding), and $P$ and $P(t)$ are the target and instantaneous pressures, respectively. In particular, the instantaneous pressure is
+
+$$
+P(t) = \frac{1}{dV} \left[ \sum_{i=1}^N \left( \frac{\vec p_i^2}{m_i} + \vec r_i \cdot \vec F_i \right) - dV \frac{\partial U(V)}{\partial V} \right],
+$$ (eq:pressure_NPT)
+
+which is the virial pressure of a system with a non-constant volume. Note that the second term in [](#eq:pressure_NPT) is non-zero if the energy depends explicitly on volume, which is always the case for interaction potentials that are long-range, or for which long-range corrections due to cut-offs have to be evaluated.
+
+Note that equations [](#eq:nose-hoover_barostat) also contain a coupling to a Nosé-Hoover thermostat, which can be generalised to a chain thermostat if $Q \to Q_1$, $p_\zeta \to p_{\zeta_1}$ the equations of motions of the other $M - 1$ links are added.
+
+### Parrinello-Rahman
+
+```{warning}
+TODO
+```
+
+### Stochastic cell rescaling
+
+```{warning}
+TODO
+```
+
+## Tricks of the trade
+
+(sec:neighbour_lists)=
+### Neighbour lists
+
+### Long-range interactions
 
 # Classical force fields
 

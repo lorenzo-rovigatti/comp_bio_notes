@@ -83,11 +83,20 @@ Biophysics is an interdisciplinary science that applies the principles and metho
 
 Biophysics involves the investigation of the physical principles governing biological processes. This includes understanding how forces and energy transfer within and between cells, the mechanics of biomolecular interactions, and the dynamics of complex biological networks. At larger length-scales, biophysics also encompasses the study of extended biological systems, such as the mechanics of muscle contraction, neural signal transmission, and the properties of biological membranes. By integrating concepts from (equilibrium and non-equilibrium) thermodynamics, statistical mechanics, and fluid dynamics, biophysics provides a comprehensive framework for understanding life at all levels of organization.
 
+Defined in this way, "biophysics" is an umbrella term whose utility is questionable. It becomes more useful if one acklowedges that phenomena at very different scales share features and properties that make it possible to use tools developed to investigate "classic" physical systems (such as statistical mechanics). In fact, one of the main endeavours of biophysics, which is one of the reasons why proper biologists often scorn biophysicists, 
+is to find unifying principles that can be used to explain or predict different phenomena.
+
 :::{tip} Source
 Some parts of this section have been adapted from [here](https://bio.libretexts.org/Bookshelves/Computational_Biology/Book:_Computational_Biology_-_Genomes_Networks_and_Evolution_(Kellis_et_al.)/01:_Introduction_to_the_Course/1.04:_Crash_Course_in_Molecular_Biology).
 :::
 
 ## Some definitions
+
+Cell
+: A cell is the basic structural and functional unit of all living organisms. It is the smallest unit capable of carrying out the processes necessary for life, such as energy production, metabolism, and reproduction.
+
+Organelles
+: Specialized structures within cells that perform distinct functions necessary for cellular life. Organelles make it possible to carry out tasks in isolation from the rest of the cell, ensure that the cell operates efficiently and responds to its environment.
 
 Procaryotes
 : Unicellular organisms that lack a true nucleus and membrane-bound organelles. Their genetic material is located in a nucleoid, and they typically have a single, circular chromosome along with plasmids. Prokaryotic cells have a rather small size ($0.1-5.0 \, {\rm \mu m}$) and reproduce through binary fission[^binary_fission]. Most have a rigid cell wall made of peptidoglycan (in bacteria). Examples of prokaryotes include bacteria and archaea.

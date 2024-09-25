@@ -5,7 +5,7 @@ exports:
 ---
 
 ```{tip}
-The main references for this part are @frenkel2023understanding, @schlick2010molecular and @leach2001molecular.
+The main references for this part are @frenkel2023understanding, @vsulcintroduction (which can be downloaded [here](https://www.public.asu.edu/~psulc/myimages/chapter.pdf)), @schlick2010molecular and @leach2001molecular.
 ```
 
 Quantum mechanics provides a rigorous framework for describing the behavior of molecules that explicitly includes the effect of the electrons. However, the calculations are very heavy and thus the evolution of a system can be followed for short times only. In addition, the computational complexity of simulating quantum systems often scales super-linearly with the size of the problem[^scaling]. This poses significant challenges when attempting to model large-scale many-body systems accurately and for long times.
@@ -509,6 +509,28 @@ TODO
 
 (sec:neighbour_lists)=
 ### Neighbour lists
+
+If the interaction cutoff is rc , it would be wasteful to calculate distances between all pairs of particles, as only a
+fraction of them will be within interaction radius. The most widely used techniques of keeping track of particles
+which are close enough to possibly interact are Verlet lists and cell lists.
+A Verlet lists stores for each particle a list of particles which are at a distance smaller than rc + rs , where
+rs is called the ”skin distance“. When calculating forces acting on a particle, only interactions with particles
+stored in its Verlet list are considered. All lists need to be updated when any particle moves a distance larger
+than rs from its original position when lists were last updated. The value of rs has to be carefully optimized:
+too small rs will result in very frequent updates, while large values will result in too many particles kept in each
+list.
+Cell lists partition the simulation box into smaller boxes, called cells, with side length set to rc . Each cell
+stores a list of particles inside it. For a given particle, we only consider interactions with particles inside its own
+cell and its neighboring cells (8 in 2D and 26 in 3D). When a particle moves, we check whether it has moved
+into a different cell, in which case we remove it from its old cell’s list and add it to the particle list in the new
+cell.
+Verlet lists and cell lists can be combined: When regenerating Verlet lists, we can only consider inclusion
+of particles in neighboring cells. The evaluation time for calculating interactions between N particles with cell
+lists scales as O(N ), while Verlet lists method scales as O(N 2 ). Combining both removes the N 2 dependence of
+the Verlet list scheme. The optimal choice, however, depends on the particular system and simulation method.
+Verlet lists are well suited for MD simulations, where particle displacement per time step is small. In MC
+simulations, which can allow large translation moves, it may be preferable to use cell lists alone.
+
 
 ### Long-range interactions
 

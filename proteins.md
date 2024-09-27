@@ -544,7 +544,7 @@ END
 ```
 
 :::{important} The PDB is a legacy format
-While PDB files are still very common, they are being superseded by more flexible[^PDB_flexible] file formats. For instance, the PDB format has been declared obsolete by the Protein Data Bank database, whose default has become the [PDBx/mmCIF format](10.1107/S2059798319004522). Except the PDB format to slowly disappear!
+While PDB files are still very common, they are being superseded by more flexible[^PDB_flexible] file formats. For instance, the PDB format has been declared obsolete by the Protein Data Bank database, whose default has become the [PDBx/mmCIF format](10.1107/S2059798319004522). Expect the PDB format to slowly disappear!
 :::
 
 [^PDB_flexible]: but less human-readable, if you ask me

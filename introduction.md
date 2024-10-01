@@ -239,13 +239,13 @@ where $\vec R_\text{cm} = \frac{1}{N} \sum_{j = 1}^N \vec R_j$ is the position o
 
 \begin{align}
 \vec R_g^2 & = \frac{1}{N^2} \sum_{i = 1}^N \sum_{j = 1}^N (\vec R_i^2 - \vec R_i \cdot \vec R_j) = \frac{1}{2N}  \sum_{i = 1}^N \sum_{j = 1}^N (\vec R_i - \vec R_j)^2 \\
-& = \frac{1}{N}  \sum_{i = 1}^N \sum_{j = 1}^N (\vec R_i - \vec R_j)^2,
+& = \frac{1}{N}  \sum_{i = 1}^N \sum_{j > i}^N (\vec R_i - \vec R_j)^2,
 \end{align}
 
 where we have first completed the square of the binomial by duplicating the double sum (hence the factor of 2 at the denominator), and then run the inner sum on monomers having index $j > i$, so that each pair of monomers only enters once in the double sum. The associated ensemble average is then
 
 $$
-\langle \vec R_g^2 \rangle = \frac{1}{N} \sum_{i = 1}^N \sum_{j = 1}^N \langle (\vec R_i - \vec R_j)^2 \rangle.
+\langle \vec R_g^2 \rangle = \frac{1}{N} \sum_{i = 1}^N \sum_{j > i}^N \langle (\vec R_i - \vec R_j)^2 \rangle.
 $$ (eq:rg)
 
 The radius of gyration and end-to-end distance are closely related. For instance, for a freely-jointed chain, it can be demonstrated that 
@@ -294,6 +294,14 @@ The structure of DNA allows the strands to be easily separated for the purpose o
 DNA polymerases attach to each of the strands at the origin of replication, reading each existing strand from the 3' to 5' direction and placing down complementary bases such that the new strand grows in the 5' to 3' direction. Because polymerases build the chains from 5' to 3', one strand (the leading strand) can be copied continuously, while the other (the lagging strand) grows in pieces which are later glued together by another enzyme, DNA ligase. The end result is 2 double-stranded pieces of DNA, where each is composed of one old strand, and one new strand; for this reason, DNA replication is a semiconservative process.
 
 Many organisms have their DNA split into several chromosomes. Each chromosome contains two strands of DNA, which are complementary to each other but are read in opposite directions. Genes can occur on either strand of DNA. The DNA before a gene (in the 5' region) is considered "upstream", whereas the DNA after a gene (in the 3' region) is considered "downstream".
+
+```{figure} figures/genome_sizes.png
+:name: fig:genome_sizes
+:align: center
+:width: 700
+
+Genome size ranges (in base pairs) of various life forms. Credits to [Abizar via Wikipedia Commons](https://commons.wikimedia.org/wiki/File:Genome_Sizes.png).
+```
 
 [^GC_pairing]: For this reason, the genetic composition of bacteria that live in hot springs is $80\%$ G-C.
 [^enzyme]: An enzyme is a protein that speeds up a specific biochemical reaction.
@@ -444,7 +452,7 @@ Despite the enormous variety of methods and applications, there are some common 
 * **Bridging Theory and Experiment:** Historically known as "computer experiments", computer simulations sit in the middle between theory and experiment. As such, a good computational physicist is able to act as a bridge between these two worlds. A proficient computational physicist can effectively bridge these two realms, provided he develops a familiarity with the specific jargon, techniques, and methodologies of both fields. This dual expertise is a significant advantage. However, it is sometimes hard to find a fit in a dichotomic world, where "theory or experiment" is all there is. Fortunately, that world is dying (but has not died yet).
 * **Algorithmic Problem Solving:** Problem-solving is a critical skill for any physicist, often involving the application of algorithmic reasoning to find solutions. For computational physicists, the ability to think in terms of algorithms is even more crucial. Developing this skill enables them to tackle complex problems systematically and effectively. During the course I will present many algorithms used to tackle some specific (bio)physical problem. Most of the time there will be an accompanying pseudo-code or real code, but in [some cases](#sec:homeworks) you will be asked to do it yourself.
 
-Just to brush up your programming skill, I will start with presenting a programming technique that will be applied later to some biophysical problems. However, before doing that, let's brush up our Python skills with [this notebook](./notebooks/Python_crash_course.ipynb).
+To get thing started, I will present a programming technique that will be applied later to some biophysical problems. However, before doing that, let's brush up our Python skills with [this notebook](./notebooks/Python_crash_course.ipynb).
 
 ## Dynamic programming
 

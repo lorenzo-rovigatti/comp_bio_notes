@@ -19,12 +19,8 @@ Deoxyribonucleic acid (DNA) and ribonucleic acid (RNA) are the fundamental molec
 :align: center
 :width: 500px
 
-(a) The different parts that make up a nucleotide, which is an RNA or DNA nucleotide depending on whether the bottom-right group of the sugar is a hydroxyl or a hydrogen, respectively. Here the nitrogenous base is a guanine, and the picture also shows the labeling of the sugar and base atoms. (b) A sketch showing two bonded DNA dinucleotides. The presence of a $-CH_3$ group connected to the pyrimidine ring highlighted in red makes the yellow-shaded base a thymine instead of a uracil. Adapted from [here](https://commons.wikimedia.org/wiki/File:0322_DNA_Nucleotides_Numbered.jpg).
+(a) The sugar and nitrogenous bases that make up DNA and RNA. Non-hydrogen atoms are labelled, and the broken lines indicate links that bind the compound to the other building blocks. Adapted from @schlick2010molecular. (b) A sketch showing two bonded DNA dinucleotides. The presence of a $-CH_3$ group connected to the pyrimidine ring highlighted in red makes the yellow-shaded base a thymine instead of a uracil. Adapted from [here](https://commons.wikimedia.org/wiki/File:0322_DNA_Nucleotides_Numbered.jpg).
 ```
-
-:::{warning} TODO
-Substitute panel (a) with Fig 5.2 from Schlick's book
-:::
 
 In the classic DNA double helix (or *duplex*) described by [Watson and Crick](doi:10.1038/171737a0), a flexible ladder-like structure is formed by two chains (strands) that wrap around a virtual central axis. The two chains' backbones consist of alternating sugar and phosphate units, while the rungs that connect them consist of nitrogenous bases held together by hydrogen bonds and stabilised by stacking interactions. A schematic of a single nucleotide and of the Watson-Crick mechanism are shown in [](#fig:DNA_schematics).
 

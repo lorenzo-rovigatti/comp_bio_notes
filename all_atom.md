@@ -104,6 +104,7 @@ $$
 \vec{f}(\vec r) = - \vec \nabla V_\text{LJ}.
 $$
 
+(sec:cut-off)=
 ### Interaction cut-off
 
 :::{important} The range of the interaction
@@ -510,26 +511,28 @@ TODO
 (sec:neighbour_lists)=
 ### Neighbour lists
 
-If the interaction cutoff is rc , it would be wasteful to calculate distances between all pairs of particles, as only a
-fraction of them will be within interaction radius. The most widely used techniques of keeping track of particles
-which are close enough to possibly interact are Verlet lists and cell lists.
-A Verlet lists stores for each particle a list of particles which are at a distance smaller than rc + rs , where
-rs is called the ”skin distance“. When calculating forces acting on a particle, only interactions with particles
-stored in its Verlet list are considered. All lists need to be updated when any particle moves a distance larger
-than rs from its original position when lists were last updated. The value of rs has to be carefully optimized:
-too small rs will result in very frequent updates, while large values will result in too many particles kept in each
-list.
-Cell lists partition the simulation box into smaller boxes, called cells, with side length set to rc . Each cell
-stores a list of particles inside it. For a given particle, we only consider interactions with particles inside its own
-cell and its neighboring cells (8 in 2D and 26 in 3D). When a particle moves, we check whether it has moved
-into a different cell, in which case we remove it from its old cell’s list and add it to the particle list in the new
-cell.
-Verlet lists and cell lists can be combined: When regenerating Verlet lists, we can only consider inclusion
-of particles in neighboring cells. The evaluation time for calculating interactions between N particles with cell
-lists scales as O(N ), while Verlet lists method scales as O(N 2 ). Combining both removes the N 2 dependence of
-the Verlet list scheme. The optimal choice, however, depends on the particular system and simulation method.
-Verlet lists are well suited for MD simulations, where particle displacement per time step is small. In MC
-simulations, which can allow large translation moves, it may be preferable to use cell lists alone.
+If the interaction potential is short-ranged, in the sense that it goes to zero at some distance $r_c$, it is clear that particles that are further away than $r_c$ will not feel any reciprocal force. If this is the case, calculating distances between all pairs of particles would be wasteful, as only a
+fraction of pairs will feel a mutual interaction. There are several techniques that can be used to optimise the force calculation step (and therefore the simulation performance) by performing some kind of bookkeeping that makes it possible to evaluate only those contributions due to pairs that are "close enough" to each other. Here I will present the most common ones: cells and Verlet lists.
+
+The idea behind cell lists is to partition the simulation box into smaller boxes, called cells, with side lengths $\geq r_c$[^cubic_cells]. This partitioning is done by using a data structure that, for each cell, stores the list of particles that are inside it. Then, during the force calculation loop, we consider that particle $i$, which is in cell $c$, can interact only with particles that are either inside $c$ or in one of its neighbouring cells (8 in 2D and 26 in 3D). The cell data structure can either be built every step, or updated after each integration step. In this latter case, the code checks whether a particle has crossed a cell boundary, and in this case it removes the particle from the old cell and adds it to the new one. This can be done efficiently with [linked lists](https://en.wikipedia.org/wiki/Linked_list). With this technique, each particle has a number of possibly-interacting neighbours that depends only on particle density and cell size, and therefore is independent on $N$. As a result, the algorithmic complexity of the simulation is $\mathcal{O}(N)$ rather than $\mathcal{O}(N^2)$. 
+
+Differently from cell lists, in Verlet lists for each particle the code stores a list of particles that are within a certain distance $r_v = r_c + r_s$, where $r_s$ is a free parameter called "Verlet skin". Every time the lists are updated, the current position of each particle $i$, $\vec r_{i, 0}$ is also stored. During the force calculation step of particle $i$, only those particles that are in $i$'s Verlet list are considered. For a homogeneous system of density $\rho$, the average number if neighbours is
+
+$$
+N_v = \frac{4}{3} \pi r_v^3 \rho,
+$$
+
+which should be compared to the average number of neighbours if cell lists are used, which in three dimensions is
+
+$$
+N_c = 27 r_c^3 \rho.
+$$
+
+In the limit $r_s \ll r_c$, which is rather common, $r_v \approx r_c$, so that $N_c / N_v = 81 / 4 \pi \approx 6$, which means that if Verlet lists are used, the number of distances to be checked is six times smaller than with cell lists.
+
+Verlet lists do not have to be updated at every step, or we would go back to checking all pairs, but only when when any particle has moved a distance larger than $r_s / 2$ from its original position $\vec r_{i, 0}$. Note that the overall performance will depend on the value of $r_s$, as small values will result in very frequent updates, while large values will generate large lists, which means useless distance checks on particles that are too far away to interact. Although the average number of neighbours of each particle $i$ is independent on $N$ and therefore the actual force calculation is $\mathcal{O}(N)$, the overall algorithmic complexity is still $\mathcal{O}(N^2)$, since list updating, even if not done at each time step, requires looping over all pairs. To overcome this problem it is common to use cell lists to build Verlet lists, bringing the complexity of the list update step, and therefore of the whole simulation, down to $\mathcal{O}(N)$, while at the same time retaining the smaller average number of neighbours of Verlet lists.
+
+[^cubic_cells]: In principle, cells don't have to be cubic.
 
 
 ### Long-range interactions

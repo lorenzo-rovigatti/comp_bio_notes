@@ -86,7 +86,7 @@ Another important PTM is [glycosylation](https://en.wikipedia.org/wiki/Glycosyla
 
 Additional types of PTMs include ubiquitination, where ubiquitin proteins are attached to lysine of a target protein, marking it for degradation by the proteasome[^proteasome]. [Acetylation](https://en.wikipedia.org/wiki/Protein_acetylation), the addition of an acetyl group ($−COCH_3$) to lysine, can impact protein stability and gene expression by modifying histones and other nuclear proteins. [Methylation](https://en.wikipedia.org/wiki/Protein_methylation), the addition of methyl groups ($-CH_3$), typically occurs on lysine and arginine and can regulate gene expression and protein-protein interactions.
 
-Finally, a very common PTM is the hydroxylation of proline, whereby a prolinee's pyrrolidine ring gains a hydroxyl ($-OH$) group. It is one of the main components of [collagen](#sec:collagen) which, as we will see in a few lessons, is a structural protein that provides strength, support, and elasticity to connective tissues throughout the body.
+Finally, a very common PTM is the hydroxylation of proline, whereby a proline's pyrrolidine ring gains a hydroxyl ($-OH$) group. It is one of the main components of [collagen](#sec:collagen) which, as we will see in a few lessons, is a structural protein that provides strength, support, and elasticity to connective tissues throughout the body.
 
 [^proteasome]: Proteasomes are large, multi-protein complexes responsible for degrading and recycling damaged, misfolded, or unneeded proteins within the cell. It recognizes proteins tagged with the small protein [ubiquitin](https://en.wikipedia.org/wiki/Ubiquitin) and breaks them down into small peptides.
 

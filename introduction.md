@@ -483,9 +483,9 @@ Big O notation abstracts away constants and less significant terms to highlight 
 Algorithmic complexity also applies to memory footprint, known as space complexity, which describes the amount of memory an algorithm requires relative to the input size. Often, there is a tradeoff between time and memory, where optimizing for faster execution might increase memory usage and vice versa. Understanding these tradeoffs helps in selecting the most appropriate algorithm for a given problem, ensuring efficient use of computational resources.
 :::
 
-Using the notation introduced in the box, we can estimate the cost of the "brute-force" algorithm as follows. Given an amount N, a solution can contain $N / c$ times a coin $c$, and one way of not containing it. As a result, we have $(N / c) + 1$ ways of using each coin $c$, and we have $n$ such coins. Disregarding multiplying constants and lower-order terms, the overal complexity is then $\mathcal{O}(N^n)$. It is hard to understate how bad is an exponential scaling. We have to do better!
+Using the notation introduced in the box, we can estimate the cost of the "brute-force" algorithm as follows. Given an amount N, a solution can either not contain $c$, or contain it up to $N / c$ times. As a result, we have $(N / c) + 1$ ways of using each coin $c$, and we have $n$ such coins. Disregarding multiplying constants and lower-order terms, the overal complexity is then $\mathcal{O}(N^n)$. It is hard to overstate how bad is an exponential scaling. We have to do better!
 
-Let's try with a "greedy" algorithm: we find a solution by taking the largest coin $c$ that is smaller than $N$ and applying the same operation to $N - c$, until the remaining amount becomes zero. Applying this algorithm to the example above would immediately yield the correct $S = \{1, 2, 5\}$ solution. The algorithmic complexity is also much better: the worst-case scenario is the one where we use coins of the same size, which would yield $\mathcal{O}(N)$. However, note the algorithm requires that at each iteration we find the largest coin that is smaller than the residual amount. This can be done by either looping over $C$ at each iteration, which would make the complexity $\mathcal{O}(Nn)$, or, which is much better, by sorting $C$ beforehand, so that the total algorithmic complexity would be $\mathcal{O}(N) + \mathcal{O}(n \log n)$. This is **much** better than an exponential complexity. Unfortunately, greedy algorithms are known to be heavily attracted to local minima. For instance, if $N = 8$ and $C = \{1, 4, 5\}$, the greedy algorithm would yield a solution with 4 coins, since $8 = 5 + 1 + 1 + 1$. However it is clear that the best solution in this case is $8 = 4 + 4$.
+Let's try with a "greedy" algorithm: we find a solution by taking the largest coin $c$ that is smaller than $N$ and applying the same operation to $N - c$, until the remaining amount becomes zero. Applying this algorithm to the example above would immediately yield the correct $S = \{1, 2, 5\}$ solution. The algorithmic complexity is also much better: the worst-case scenario is the one where we use coins of the same size, which would yield $\mathcal{O}(N)$. However, the algorithm requires that at each iteration we find the largest coin that is smaller than the residual amount. This can be done by either looping over $C$ at each iteration, which would make the complexity $\mathcal{O}(Nn)$, or, which is much better, by sorting $C$ beforehand, so that the total algorithmic complexity would be $\mathcal{O}(N) + \mathcal{O}(n \log n)$. This is **much** better than an exponential complexity. Unfortunately, greedy algorithms are known to be heavily attracted to local minima. For instance, if $N = 8$ and $C = \{1, 4, 5\}$, the greedy algorithm would yield a solution with 4 coins, since $8 = 5 + 1 + 1 + 1$. However it is clear that the best solution in this case is $8 = 4 + 4$.
 
 We need an algorithm that is fast but does reliably find the correct solution. In order to do so, we need to find a way of casting the solution to the problem in terms of solutions of subproblems. To do so we define the accessory function $w(x)$:
 
@@ -530,7 +530,7 @@ Assume that the equation holds for all values smaller than $x$. We need to show 
 Thus, by induction, the theorem is proved.
 :::
 
-We can now leverage [](#eq:coin_change_weights) to calculate the minimum number of coins necessary to change any amount $x$ with a time that is linear in $x$ and in the number of coin types, $n$, *i.e.* with an algorithmic (time) complexity $\mathcal{O}(xn)$. First, we apply [](#eq:coin_change_weights) to progressively build a table containing the $w(y)$ values, with $y \leq x$, starting from $y = 0$:
+We can now leverage Eq. [](#eq:coin_change_weights) to calculate the minimum number of coins necessary to change any amount $x$ with a time that is linear in $x$ and in the number of coin types, $n$, *i.e.* with an algorithmic (time) complexity $\mathcal{O}(xn)$. First, we apply Eq. [](#eq:coin_change_weights) to progressively build a table containing the $w(y)$ values, with $y \leq x$, starting from $y = 0$:
 
 :::{code} plaintext
 :label: code:coin-fillin
@@ -543,7 +543,7 @@ DEFINE table as an array with N + 1 entries
 
 table[0] = 0
 FOR each value y between 1 and N
-   SET table[y] to the mininum value of {w(y - c)}, where c is any coin in C
+   SET table[y] to the mininum value of {w(y - c) + 1}, where c is any coin in C
 :::
 
 Once the table is ready, the answer to our question about the minimum number of coins can be read off its last entry, $w(x)$. However, if we want to know the details of the solution, *e.g.* which coins add up to $x$, we have to trace back Eq. [](#eq:coin_change_weights):

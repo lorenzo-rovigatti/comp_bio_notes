@@ -337,7 +337,7 @@ Molecules or chemical groups capable of participating in hydrogen bonds are call
 Notable examples in this context are mainly those in which there are $O$ and $N$ atoms involved: $O-H :: O$, $N-H :: N$, $O-H :: N$, *etc.*, where $::$ is shorthand for a hydrogen bond. In all these cases, the atom covalently bound to the hydrogen (or sometimes the whole group) is called the *donor*, while the other one (or the molecule it is part of) is the *acceptor*. As a rule of thumb, the number of HBs that an electronegative atom can accept is equal to its number of lone pairs[^lone_pairs], which is one for nitrogen and two for oxygen. 
 
 We now look at the geometry of a hydrogen bond. In a HB, the distance between the acceptor and the hydrogen atom varies slightly depending on the specific molecules and environmental conditions, but typically ranges from $1.8$ to $2.2\, \angstrom$. As a result, the distance between the acceptor and the atom covalently bonded to the hydrogen is close to $r_{\rm min}$, the optimal van der Waals distance for interactions involving $O$ and/or $N$. 
-A fundamental property of hydrogen bonds is that, unlike in van der Waals interactions, are highly directional interactions: their strength depends on the relative orientations of the chemical groups involved. Specifically, the optimal hydrogen bond occurs when the donor atom, hydrogen atom, and acceptor atom are aligned linearly, with an angle close to 180$^\circ$. Deviation from this linear alignment results in weaker hydrogen bonds, or even bond breakage if it exceeds $\approx 20-30^\circ$.
+A fundamental property of hydrogen bonds is that, unlike in van der Waals interactions, HBs are highly directional: their strength depends on the relative orientations of the chemical groups involved. Specifically, the optimal hydrogen bond occurs when the donor atom, hydrogen atom, and acceptor atom are aligned linearly, with an angle close to 180$^\circ$. Deviation from this linear alignment results in weaker hydrogen bonds, or even bond breakage if it exceeds $\approx 20-30^\circ$.
 
 ```{figure} figures/hydrogen_bonds.png
 :name: fig:hydrogen_bonds
@@ -362,7 +362,7 @@ Following @finkelstein2002protein, the strength of hydrogen bonds can be estimat
 
 In water, hydrogen bonds are the main driving force for condensation and ice formation. Since each oxygen can accept two bonds, and each hydrogen can mediate one donor-acceptor interaction, each water molecule can be involved in four bonds that are arranged on a (nearly perfect) tetrahedron. This geometry can be rationalised as follows. In general, electron pairs (both bonding and lone pairs) around a central atom will arrange themselves to minimize repulsion, but the repulsion between lone pairs is greater than the repulsion between bonding pairs. Consequently, the two lone pairs will occupy positions that are as far apart as possible, pushing the bonding pairs closer together. As a result, the four pairs of electrons (two lone pairs and two bonding pairs) around the oxygen atom in water adopt a tetrahedral arrangement to minimize repulsion, with the bond angle between the hydrogen atoms in a water molecule being $\approx 104.5^\circ$, slightly less than the ideal tetrahedral angle of 109.5$^\circ$ due to the greater repulsion exerted by the lone pairs.
 
-Since the natural tetrahedral geometry of water molecules leads to the maximum number of HBs, it should not come as a surprise that regular ice has a diamond cubic cell, where each molecule is connected to four others through (almost) linear hydrogen bonds. When ice melts into liquid water, it releases 80 cal/g of heat. In turn, when water turns into vapour at $100^\circ$, $600 cal/g$ of boiling heat is released. If we assume that no hydrogen bonds are present in water vapour, we could estimate these values to estimate that a fraction of $80 / (600 + 80) \approx 0.12$ breaks when ice melts. However, this is not the case. In fact, it is perhaps surprising that liquid water at ambient conditions has roughly the same number of HBs of ice, *i.e.* $\approx 4$. What happens then when ice melts into liquid water? The hydrogen bonds become looser, and their length and, more importantly, angular fluctuations increase. Of course, these fluctuations have an energetic cost, which is counterbalanced by the entropy provided by the many possible ways of realising disordered networks made of molecules connected by "flexible" hydrogen bonds.
+Since the natural tetrahedral geometry of water molecules leads to the maximum number of HBs, it should not come as a surprise that regular ice has a diamond cubic cell, where each molecule is connected to four others through (almost) linear hydrogen bonds. When ice melts into liquid water, it releases 80 cal/g of heat. In turn, when water turns into vapour at $100^\circ$, $600$ cal/g of boiling heat is released. If we assume that no hydrogen bonds are present in water vapour, we could use these values to estimate that a fraction of $80 / (600 + 80) \approx 0.12$ breaks when ice melts. However, this is not the case. In fact, it is perhaps surprising that liquid water at ambient conditions has roughly the same number of HBs of ice, *i.e.* $\approx 4$. What happens then when ice melts into liquid water? The hydrogen bonds become looser, and their length and, more importantly, angular fluctuations increase. Of course, these fluctuations have an energetic cost, which is counterbalanced by the entropy provided by the many possible ways of realising disordered networks made of molecules connected by "flexible" hydrogen bonds.
 
 :::{tip} Why does ice float on water?
 The famous property of liquid water being denser than ice, which is one of the very many anomalies of water, can be qualitatively understood by considering the geometrical constraints set by hydrogen bonds. 
@@ -370,7 +370,7 @@ The famous property of liquid water being denser than ice, which is one of the v
 In hexagonal ice, which is the most stable form of ice at ambient pressure, each water molecule forms four linear hydrogen bonds with neighboring water molecules, creating an almost perfect tetrahedral arrangement that leads to an open, hexagonal lattice structure with a lot of empty space within. By contrast, in liquid water each molecule still participates in nearly four hydrogen bonds. However, these bonds are not fixed and can fluctuate, allowing the molecules to pack closer together, which leads to a higher density, $1.00$ g/cm$^3$ at $4^\circ$ C, compared to that of ice, $0.917$ g/cm$^3$.
 :::
 
-We now go back to proteins, with the working hypothesis that, under ambient conditions, all hydrogen bonds are formed[^all_hbs]. If we look at peptide backbones, we see that it contains nitrogen and oxygen, which are polar groups and can be involved in hydrogen bonds. In addition, as [discussed before](#sec:AA_list), many side chains are polar, or even charged under physiological conditions. As a result, a polypeptide has many chemical groups that can be involved in hydrogen bonds. What partners do these chemical groups bond to: other polar groups or water molecules?
+We now go back to proteins, with the working hypothesis that, under ambient conditions, all hydrogen bonds are formed[^all_hbs]. If we look at the peptide backbone, we see that it contains nitrogen and oxygen, which are polar groups and can be involved in hydrogen bonds. In addition, as [discussed before](#sec:AA_list), many side chains are polar, or even charged under physiological conditions. As a result, a polypeptide has many chemical groups that can be involved in hydrogen bonds. What partners do these chemical groups bond to: other polar groups or water molecules?
 
 To answer this question let us consider two chemical groups on the same polypeptide, an acceptor $A$ and a donor $D$, that can form a hydrogen bond. Assuming that all hydrogen bonds are formed, there are two possible states: $A$ is bonded to $D$, or they are both bonded to water molecules. The equilibrium between these two states can be described by
 
@@ -381,9 +381,9 @@ $$
 When $D$ and $A$ form a HB, the two water molecules are freed to form hydrogen bonds with other water molecules. Since the number of hydrogen bonds on the left-hand side matches that on the right-hand side, the energy remains essentially unchanged. However, entropic contributions must also be considered:
 
 1. When a hydrogen bond forms between $A$ and $D$, the polypeptide's flexible backbone is typically forced to adopt a more constrained and specific conformation to facilitate this interaction, leading to a loss of conformational freedom and therefore a loss of entropy.
-2. When the intramolecular hydrogen bond forms, When the intramolecular hydrogen bond forms, the water molecules previously bonded to the polar groups are released into the bulk solvent. These water molecules, previously constrained in position and orientation (low-entropy state), now return to a more disordered state, increasing the system's entropy
+2. When the intramolecular hydrogen bond forms, the water molecules previously bonded to the polar groups are released into the bulk solvent. These water molecules, previously constrained in position and orientation (low-entropy state), now return to a more disordered state, increasing the system's entropy
 
-Interestingly, it turns out that, on average, the entropic contributions of these two effects not only have opposite signs but are also comparable in magnitude (see @finkelstein2002protein for a more thorough discussion).
+Interestingly, it turns out that, on average, the entropic contributions of these two effects not only have opposite signs but are also comparable in magnitude (see @finkelstein2002protein for a more thorough discussion), so that the conformation the backbone adopts is "marginally" stable and depends on the local environment rather than on intrinsic factors.
 
 [^lone_pairs]: Pairs of valence electrons that are not shared with another atom in a covalent bond and are not involved in bonding.
 [^latent_heat]: The amount of energy (usually expressed per mole) that must be supplied to a liquid to transform it into a gas.
@@ -402,7 +402,7 @@ where $\epsilon = \epsilon_r \epsilon_0$, $\epsilon_r$ is the relative dielectri
 Let's start by considering what happens inside a protein. If we consider two positive charges separated by a distance of $3 \, \angstrom$, their interaction energy is $\approx 1.5$ kcal/mol ($\approx 2.5 k_BT$) in water, while a whopping $\approx 40$ kcal/mol ($\approx 70 k_B T$) in a non-polarisable medium such as plastics or dry proteins ($\epsilon_r \approx 3$). Such a large repulsion would be enough to destroy a protein, which is usually stabilised by a "reserve" free energy of $\approx 10$ kcal/mol (@finkelstein2002protein). This tells us that charged side chains will not be found close to each other in a protein core. However, we can go further and consider the electrostatic self-energy of a single atom of charge $q$ and radius $R$[^self_energy]:
 
 $$
-U_{\rm self} = \frac{q^2}{4 \pi \epsilon R}.
+U_{\rm self} = \frac{q^2}{8 \pi \epsilon R}.
 $$
 
 Setting $q = e$ and $R = 1.5\, \angstrom$ yield the same values we obtained for interacting pairs (*i.e.* $\approx 1.5$ kcal/mol in water, $\approx 40$ kcal/mol in the protein), meaning that the cost of having a single charged group inside a protein core exceeds the stability of the protein itself. As a consequence, ionisable side chains are nearly always uncharged when embedded in a core, since the free-energy cost of donating or accepting a $H^+$ (to or from water) is much smaller than the energetic contribution due to the electrostatic self-energy of a charge.
@@ -431,7 +431,7 @@ Each amino acid side chain can adopt multiple rotameric states, influenced by st
 (sec:primary_structure)=
 # Primary structure
 
-The order in which amino acids are linked together by peptide bonds is known as the *primary structure* of a protein. The convention to list the sequence of a protein is to use the one-letter or three-letter codes for amino acids in the sequence, which has a well-defined directionality. The sequence starts at the end of the amino acid chain that has a free amine group ($-NH2$), which is called N-terminus and, by convention, marks the beginning of a protein. The other end has a free carboxyl group ($-COOH$) and is known as the C-terminus, which is considered the end of the protein.
+The order in which amino acids are linked together by peptide bonds is known as the *primary structure* of a protein. The convention to list the sequence of a protein is to use the one-letter or three-letter codes for amino acids in the sequence, which has a well-defined directionality. The sequence starts at the end of the amino acid chain that has a free amine group ($-NH_2$), which is called N-terminus and, by convention, marks the beginning of a protein. The other end has a free carboxyl group ($-COOH$) and is known as the C-terminus, which is considered the end of the protein.
 
 :::{tip} An example
 :class: dropdown
@@ -554,7 +554,11 @@ END
 While PDB files are still very common, they are being superseded by more flexible[^PDB_flexible] file formats. For instance, the PDB format has been declared obsolete by the Protein Data Bank database, whose default has become the [PDBx/mmCIF format](10.1107/S2059798319004522). Expect the PDB format to slowly disappear!
 :::
 
-[^PDB_flexible]: but less human-readable, if you ask me
+:::{seealso} Python implementation
+Head over [here](./notebooks/PDB.ipynb) for a Python notebook that shows how to parse and analyse PDB files.
+:::
+
+[^PDB_flexible]: but less human-readable, if you ask me.
 
 ## Software tools
 
@@ -593,7 +597,7 @@ Given the periodicity of a helix, there are optimal values of $\phi$ and $\psi$ 
 |$3_{10}^R$|$i \to i + 3$|3|6.0|$-50^\circ$|$-25^\circ$|
 |$\alpha_R$-helix ($3.6_{13}^R$)|$i \to i + 4$|3.6|5.4|$-60^\circ$|$-45^\circ$|
 
-Since these helices are usually right handed, I will drop the $R$ sub- and superscript.
+Since both these helices are usually right handed, I will drop the $R$ sub- and superscript.
 
 In helices, the side chains (R groups) of the amino acids are oriented outward from the helical axis: If you imagine looking down the helical axis, the side chains would appear as spokes radiating out from the central helical core. Due to the helical twist, the side chains are staggered along the length of the helix, so that they are not directly above or below each other, and they are tilted back towards the N-terminus, giving them a slightly downward orientation relative to the helical axis.
 
@@ -674,7 +678,15 @@ $$
 \mu_{{\rm ex},w} - \mu_{{\rm ex},b} \equiv \Delta \mu = k_B T \log \left( \frac{c_b}{c_w} \right).
 $$
 
-This quantity is the free-energy cost of moving one molecule from the bulk to the water, also known as the solvation free energy, $\Delta G$[^delta_mu_delta_G]. In turns out that this cost is approximately proportional to the molecule's accessible nonpolar surface area $A$, as described by the relationship $\gamma = \Delta G / A \sim 0.02$ kcal/mol, where $\gamma$ is the surface (or interfacial) free energy. This relationship implies that larger nonpolar surface areas result in greater free-energy costs for solvation. Interestingly, the free-energy cost increases with temperature, highlighting that the entropic contribution, $-T \Delta S$, plays a major role in the process.
+This quantity is the free-energy cost of moving one molecule from the bulk to the water, also known as the solvation free energy, $\Delta G$[^delta_mu_delta_G]. In turns out that this cost is approximately proportional to the molecule's accessible nonpolar surface area $A$, as described by the relationship $\gamma = \Delta G / A \sim 0.02$ kcal/mol$\angstrom^2$, where $\gamma$ is the surface (or interfacial) free energy. This relationship implies that larger nonpolar surface areas result in greater free-energy costs for solvation. Interestingly, the free-energy cost increases with temperature, highlighting that the entropic contribution, $-T \Delta S$, plays a major role in the process.
+
+```{figure} figures/AA_hydrophobicity.png
+:name: fig:AA_hydrophobicity
+:align: center
+:width: 400
+
+The solvation free energy as a function of the accessible surface area of amino acid side chains. Note that for both quantities the value associated to glycine (which has no side chain) has been substracted prior to plotting. The side chains of Ala, Val, Leu, Phe consist of hydrocarbons only; those of Thr and Tyr additionally have one OH-group each, Met an SH-group, Trp an NH-group, and His an N-atom and an NH-group. Therefore, their accessible non-polar area is smaller than their total accessible surface. Taken from @finkelstein2016protein.
+```
 
 But what causes entropy to decrease when a hydrophobic molecule is inserted into an aqueous solvent? The effect arises from the high cost of breaking hydrogen bonds in liquid water. Indeed, when a nonpolar solute is introduced, water molecules reorient around the solute to maintain as many hydrogen bonds as possible in order to avoid breaking existing hydrogen bonds, which would be energetically very expensive. This reorientation, while preserving hydrogen bonds, restricts the movement of water molecules and effectively "freezes" their orientations, leading to a decrease in entropy. It is these ice-like water molecules that causes the anomalously high heat capacity of hydrocarbons such as cyclohexane, $C_6H_{12}$, which can increase by up to an order of magnitude in an aqueous solvent ("iceberg effect").
 
@@ -682,7 +694,7 @@ But what causes entropy to decrease when a hydrophobic molecule is inserted into
 Water molecules take "frozen" orientations close to a hydrophobic surface to avoid breaking hydrogen bonds, but they do so without becoming crystalline: there is no long-range translational order, but few layers of molecules that adopt orientations that are compatible with HBs close to the underlying surface.
 :::
 
-The hydrophobic effect, which is the observation that non-polar substances are immiscible with water because of entropic effects, is very important in determining the stability of proteins. In fact, proteins that live in aqueous environments[^proteins_in_water] have a core composed by non-polar AAs whose formation is, by and large, driven by hydrophobic forces. The origin of these forces can be understood by considering two hydrophobic objects with accessible surface area $A_1$ and $A_2$, respectively. The cost of solvating the two objects when they are far from each other is $\Delta G_{\rm sep} \approx \gamma (A_1 + A_2)$, where $(A_1 + A_2)$ is the extent of the hydrophobic surface. However, if the two objects approach each other, the nonpolar surface area exposed to water decreases, leading to fewer water molecules with 'frozen' orientations, which in turn reduces the entropic cost associated with solvating the objects. As a result, the solvation free energy, so that $\Delta G_{\rm bonded} = \gamma A_{12} < \Delta G_{\rm sep}$. Therefore, a state where hydrophobic surfaces are close enough that no water molecule can slip in is thermodynamically favoured with respect to a state where the same surfaces are far from each other. 
+The hydrophobic effect, which is the observation that non-polar substances are immiscible with water because of entropic effects, is very important in determining the stability of proteins. In fact, proteins that live in aqueous environments[^proteins_in_water] have a core composed by non-polar AAs whose formation is, by and large, driven by hydrophobic forces. The origin of these forces can be understood by considering two hydrophobic objects with accessible surface area $A_1$ and $A_2$, respectively. The cost of solvating the two objects when they are far from each other is $\Delta G_{\rm sep} \approx \gamma (A_1 + A_2)$, where $(A_1 + A_2)$ is the extent of the hydrophobic surface. However, if the two objects approach each other, the nonpolar surface area exposed to water decreases, leading to fewer water molecules with 'frozen' orientations, which in turn reduces the entropic cost associated with solvating the objects. As a result, the solvation free energy decreases, $\Delta G_{\rm bonded} = \gamma A_{12} < \Delta G_{\rm sep}$. Therefore, a state where hydrophobic surfaces are close enough that no water molecule can slip in is thermodynamically favoured with respect to a state where the same surfaces are far from each other. 
 
 ## Structured water
 

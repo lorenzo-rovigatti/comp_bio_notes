@@ -13,13 +13,13 @@ The SantaLucia (SL) model is the most famous (and widely-used) [nearest-neighbou
 The code should
 
 1. Check that the secondary structure is compatible with the given sequence (*e.g.* check that they are of the same length, that the base pairs specified in the secondary structure are valid Watson-Crick pairs, and that each opening parenthesis has a closing partner).
-2. Evaluate the enthalpic and entropic contributions to the given secondary structure $\Delta H^\circ$ and $\Delta S^\circ$, as evaluated by the SantaLucia model.
-3. Apply the two-state model to plot the yield of the secondary structure. **Nota Bene:** for complicated examples the main assumption behind the two-state model[^two_state] will not hold, but for the sake of this assignment we will pretend that is not the case.
+2. Evaluate the enthalpic and entropic contributions to the given secondary structure $\Delta H^\circ$ and $\Delta S^\circ$, as evaluated by the SantaLucia model. You can assume that the total strand concentration is $C^\circ = 1$ M for simplicity.
+3. Apply the two-state model to plot the melting temperature of the secondary structure. **Nota Bene:** for complicated examples the main assumption behind the two-state model[^two_state] will not hold, but for the sake of this assignment we will pretend that is not the case.
 
 :::{important} Choose and document the supported features
 A fully-fledged NN model has many parameters that take into account all possible secondary structures (internal mismatches, internal loops, bulges, hairpins, coaxial stacking, *etc.*). You do not have to necessarily to write a code that supports all these motifs, but:
 
-1. the more the better;
+1. the more the better (although supporting only the basic ones, shown in [](#tbl:SL_watson_crick) would be already good enough);
 2. if you choose to support only a subset of structures, the documentation should be clear about it, and the code should explicitly fail when an unsupported secondary structure is supplied.
 :::
 
@@ -27,8 +27,10 @@ A fully-fledged NN model has many parameters that take into account all possible
 
 # Possible extensions
 
+* Add the possibility of choosing the temperature and strand concentrations.
 * Extend the code to support multi-strand systems: this will also require to extend the dot-paren notation to also cover this case.
 * Add the possibility of choosing the NN model: you can, for instance, add support for one of the RNA models listed [here](https://rna.urmc.rochester.edu/NNDB/).
+* Add the possibility of visualising the melting curve of the given secondary structure (*i.e.* the yield of the secondary structure as a function of temperature).
 
 # Additional details
 

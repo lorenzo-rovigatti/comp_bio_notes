@@ -29,6 +29,7 @@ In the classic DNA double helix (or *duplex*) described by [Watson and Crick](do
 ```{figure} figures/photo_51.jpg
 :name: fig:photo_51
 :align: center
+:width: 300
 
 The famous "Photo 51", taken 1952 by Raymond Gosling during his work with Rosalind Franklin. Credits to [Raymond Gosling/King's College London](http://www-project.slac.stanford.edu/wis/images/photo_51.jpg).
 ```
@@ -82,7 +83,7 @@ The strong hydrophilic character of DNA and RNA strands makes their tertiary str
 (sec:hybridisation)=
 ## Hybridisation and denaturation
 
-Two nucleotides coming together and binding to each other for a base pair (BP). Since hydrogen bonds are [highly directional](#sec:hydrogen-bonds), HB formation requires that the two nucleotides approach each other with the right mutual orientation. However, note that bases on their own (*i.e.* not part of a strand) can pair with any other base, as well as with themselves, often with more than one arrangement ([](doi:10.1016/S0079-6603(08)60565-6)). It is only in an extended paired region that the correct orientation is obtained only if the two nucleotides are compatible (*i.e.* if they can form a canonical or a non-canonical base pair, as mentioned above), and the strands run anti-parallel to each other. In this geometry, which is adopted by the most common DNA and RNA helical conformations,
+Two nucleotides coming together and binding to each other form a base pair (BP). Since hydrogen bonds are [highly directional](#sec:hydrogen-bonds), HB formation requires that the two nucleotides approach each other with the right mutual orientation. However, note that bases on their own (*i.e.* not part of a strand) can pair with any other base, as well as with themselves, often with more than one arrangement ([](doi:10.1016/S0079-6603(08)60565-6)). It is only in an extended paired region that the correct orientation is obtained only if the two nucleotides are compatible (*i.e.* if they can form a canonical or a non-canonical base pair, as mentioned above), and the strands run anti-parallel to each other. In this geometry, which is adopted by the most common DNA and RNA helical conformations,
 
 * the bases on one strand can align perfectly with their complementary bases on the opposite strand, allowing stable hydrogen bonding;
 * the sugar-phosphate backbones run in opposite directions, allowing the bases to stack neatly on top of each other, contributing to the overall stability of the double helix through van der Waals forces and hydrophobic interactions;
@@ -95,7 +96,7 @@ In addition to hydrogen bonding, duplexes are stabilised by interactions acting 
 (box:stacking)=
 :::{hint} Measuring the stacking strength
 
-The classic study of [](doi:10.1016/j.jmb.2004.07.075) used a clever experimental setup based on the observation that a duplex where one of the composing strands is broken in two (*i.e.* it is *nicked*) has a mobility that is lower compared to an intact one. The reason is that a nicked strand can take two conformations: one straight, where all the stacking interactions are present that resembles that of an intact duplex, and one kinked, where all base pairs are formed but the stacking interaction at the nicked site is broken.
+The classic study of [](doi:10.1016/j.jmb.2004.07.075) used a clever experimental setup based on the observation that a duplex where one of the composing strands is broken in two (*i.e.* it is *nicked*) has a mobility that is lower compared to an intact one. The reason is that a nicked strand can take two conformations: one straight, where all the stacking interactions that resembles that of an intact duplex are present, and one kinked, where all base pairs are formed but the stacking interaction at the nicked site is broken.
 
 Assuming that
 
@@ -141,7 +142,7 @@ Hydrogen bonding and base stacking drives are the main drivers for the formation
 The last two decades has seen the steady rise of DNA nanotechnology, which uses synthetic DNA to mimic, at least to some degree, the complexity of RNA secondary structure in order to exploit it for applications.
 :::
 
-Assuming that each base can either be unbound or involved in a single base pair[^no_triplex], the secondary structure of nucleic acids is defined by the pairing information of the nucleotides. By assigning a unique index to each nucleotide, this information can be represented as a list of index pairs, where each entry represents a single base pair. While, as I mentioned already, there are key differences between DNA and RNA, the surge of DNA nanotechnology have blurred the boundaries between the two, and many of the secondary structures that were unique to RNA can also be found in synthetic DNA systems. As a result, in this part I will refer to generic "nucleic acids", if not explicitly stated otherwise.
+Assuming that each base can either be unbound or involved in a single base pair[^no_triplex], the secondary structure of nucleic acids is defined by the pairing information of the nucleotides. By assigning a unique index to each nucleotide, this information can be represented as a list of index pairs, where each entry represents a single base pair. While, as I mentioned already, there are key differences between DNA and RNA, the surge of DNA nanotechnology has blurred the boundaries between the two, and many of the secondary structures that were unique to RNA can also be found in synthetic DNA systems. As a result, in this part I will refer to generic "nucleic acids", if not explicitly stated otherwise.
 
 ```{figure} figures/secondary_structure.png
 :name: fig:secondary_structure
@@ -171,12 +172,10 @@ In particular, the primary function of tRNA is to translate the genetic code fro
 :align: center
 :width: 600
 
-The (a) secondary and (b) threedimensional structure of a tRNA ([yeast phenylalanine tRNA, 1EHZ](https://www.rcsb.org/structure/1EHZ)). The specific secondary motifs are coloured differently in (b), and highlighted by coloured dashed rectangles in (a). The nucleotides that bear chemical modifications are shown in blue[^modified_nucleotides].
-
-[^modified_nucleotides]: **m$_2^G$**: 2-methyl-guanosine, **D**: 5,6-Dihydrouridine, **m$_2^2$G**: N2-dimethylguanosine, **C$_m$**: O2'-methyl-cytdine, **G$_m$**: O2'-methyl-guanosine, **T**: 5-Methyluridine (Ribothymidine), **Y**: wybutosine (Y-base), $\psi$: pseudouridine, **m$^5_C$**: 5-methyl-cytidine, **m$^7_G$**: 7-methyl-guanosine, **m$^1_A$**: 1-methyl-adenosine.
+The (a) secondary and (b) three-dimensional structure of a tRNA ([yeast phenylalanine tRNA, 1EHZ](https://www.rcsb.org/structure/1EHZ)). The specific secondary motifs are coloured differently in (b), and highlighted by coloured dashed rectangles in (a). The nucleotides that bear chemical modifications are shown in blue[^modified_nucleotides].
 ```
 
-[](#fig:tRNA) presents the secondary and threedimensional structure of a tRNA molecule, highlighting its [cloverleaf](https://en.wikipedia.org/wiki/Four-leaf_clover) structure. It is worth mentioning that, as shown in the figure, many of the nucleotides of a tRNA molecule are chemically modified in order to tune their interaction with the ribosome or with the mRNA codons. The four main parts of a tRNA molecule are:
+[](#fig:tRNA) presents the secondary and three-dimensional structure of a tRNA molecule, highlighting its [cloverleaf](https://en.wikipedia.org/wiki/Four-leaf_clover) structure. It is worth mentioning that, as shown in the figure, many of the nucleotides of a tRNA molecule are chemically modified in order to tune their interaction with the ribosome or with the mRNA codons. The four main parts of a tRNA molecule are:
 
 1. **The Acceptor Stem:** This is the site where a specific amino acid is attached. The 3' end of the tRNA has a conserved sequence (CCA) where the amino acid binds.
 2. **The Anticodon loop:** This contains a sequence of three nucleotides (the anticodon) that is complementary to a specific mRNA codon, ensuring the correct amino acid is added to the growing polypeptide chain.
@@ -184,6 +183,7 @@ The (a) secondary and (b) threedimensional structure of a tRNA ([yeast phenylala
 4. **The T$\psi$C loop:** Named for the conserved sequence of thymine, [pseudouridine](https://en.wikipedia.org/wiki/Pseudouridine), and cytosine, this arm is important for tRNA recognition by the ribosome.
 
 [^aaRS]: There is one aminoacyl-tRNA synthetase for each amino acid of the genetic code: in humans, there are 20.
+[^modified_nucleotides]: **m$_2^G$**: 2-methyl-guanosine, **D**: 5,6-Dihydrouridine, **m$_2^2$G**: N2-dimethylguanosine, **C$_m$**: O2'-methyl-cytdine, **G$_m$**: O2'-methyl-guanosine, **T**: 5-Methyluridine (Ribothymidine), **Y**: wybutosine (Y-base), $\psi$: pseudouridine, **m$^5_C$**: 5-methyl-cytidine, **m$^7_G$**: 7-methyl-guanosine, **m$^1_A$**: 1-methyl-adenosine.
 :::
 
 (sec:dot-paren)=
@@ -248,7 +248,7 @@ CGCUUCAUAAUGCACAUCCUCAAGCUGAUAGUGUGCUUGGGAAUGUCUGCACCAAGAGCCUUAAACUCUUGUGAUUAUGA
 Note the square brackets: this is a (non-standard but common) way of representing pseudoknots.
 :::
 
-There are other formats to store nucleic acid secondary structures that overcome some of the problems with the dot-paren notation (pseudoknot representation, lack of multi-strand support, poor readability, *etc.*), but none has become a standard yet. You can look at some examples [here](https://www.tbi.univie.ac.at/RNA/ViennaRNA/doc/html/io/rna_structures.html) or [here](https://it.mathworks.com/help/bioinfo/ug/predicting-and-visualizing-the-secondary-structure-of-rna-sequences.html).
+There are other formats to store nucleic acid secondary structures that overcome some of the problems with the dot-paren notation (pseudoknot representation, lack of multi-strand support, poor readability, *etc.*), but none has become a standard yet. You can look at some examples [here](https://viennarna.readthedocs.io/en/latest/io/rna_structures.html) or [here](https://it.mathworks.com/help/bioinfo/ug/predicting-and-visualizing-the-secondary-structure-of-rna-sequences.html).
 
 [^no_triplex]: This is already an approximation, since some non-canonical (*e.g.* Hoogsteen) base pairings can connect a nucleotide to another which is already involved in a base pair.
 
@@ -325,12 +325,12 @@ In the presence of self-complementary duplexes (*i.e.* if the sequence of the tw
 
 ```
 5'- AGCGCT -3'
-3'- TCGCGT -5'
+3'- TCGCGA -5'
 ```
 
 ### Loop Free Energies
 
-Forming a hairpins, bulges, external, internal or multibranched loops costs both entropy (since we constrain the strand backbone) and enthalpy (since the backbone has to be bent or twisted to some extent). These free-energy penalties are, in general, sequence-dependent, but the number of possible combinations grows exponentially with the loop size. Therefore, the free-energy cost of these motifs is usually approximated to depend only on the loop size (with some exceptions such as hairpins with loops of length three and four, see *e.g.* [](doi:10.1146/annurev.biophys.32.110601.141800)).
+Forming hairpins, bulges, external, internal or multibranched loops costs both entropy (since we constrain the strand backbone) and enthalpy (since the backbone has to be bent or twisted to some extent). These free-energy penalties are, in general, sequence-dependent, but the number of possible combinations grows exponentially with the loop size. Therefore, the free-energy cost of these motifs is usually approximated to depend only on the loop size (with some exceptions such as hairpins with loops of length three and four, see *e.g.* [](doi:10.1146/annurev.biophys.32.110601.141800)).
 
 (sec:mismatches)=
 ### Penalties for Mismatches and Terminal Mismatches
@@ -351,7 +351,7 @@ Dangling ends refer to unpaired nucleotides at the 5' or 3' ends of a helix that
 3'-  ATGGAC  -5'
 ```
 
-These terms tend to be sequence-dependent: in the example above, the contribution of the 5' dangling end would be different the sequence was TT/A or AC/A instead of AT/A. Note that a helix end extended on both strands has a [terminal mismatch](#sec:mismatches) rather than two dangling ends.
+These terms tend to be sequence-dependent: in the example above, the contribution of the 5' dangling end would be different if the sequence was TT/A or AC/A instead of AT/A. Note that a helix end extended on both strands has a [terminal mismatch](#sec:mismatches) rather than two dangling ends.
 
 ### Coaxial Stacking Parameters
 
@@ -389,7 +389,7 @@ $$
 \Delta S_{\rm salt} = 0.368 \frac{N_p}{2} \log C_S,
 $$
 
-where $N_p$ is the number of phosphates in the duplex, so that $N_f / 2 = N$ is, under usual conditions, the duplex length, $C_S$ is the molar concentration of monovalent cations[^magnesium], and the resulting contribution is in units of cal / mol K.
+where $N_p$ is the number of phosphates in the duplex, so that $N_p / 2 = N$ is, under usual conditions, the duplex length, $C_S$ is the molar concentration of monovalent cations[^magnesium], and the resulting contribution is in units of cal / mol K.
 
 [^magnesium]: Magnesium and other multivalent cations are not supported.
 
@@ -412,7 +412,7 @@ $$
 K_{AB} = \frac{C_A C_B}{C_{AB}},
 $$
 
-where $C_X$ is the (molar) concentration of $X$ and K is the dissociation constant associated to the reaction, which is in turn connected to the free-energy difference between the two states, $\Delta G_{AB}^\circ$, through
+where $C_X$ is the (molar) concentration of $X$ and K_{AB} is the dissociation constant associated to the reaction, which is in turn connected to the free-energy difference between the two states, $\Delta G_{AB}^\circ$, through
 
 $$
 K_{AB} = C^\circ \exp\left( \beta \Delta G_{AB}^\circ \right),
@@ -430,7 +430,7 @@ The dissociation constant, often denoted as $K_d$​, is a measure of the affini
 
 We define the concentrations of the two isolated strands (*i.e.* when $C_{AB} = 0$) as $C_{A,0}$ and $C_{B,0}$, so that the total strand concentration is $C_0 \equiv C_{A,0} + C_{B,0}$. Without loss of generality we assume that $C_{A,0} \leq C_{B,0}$.
 
-Every time a duplex forms, the number of A and B strands decreases by one each, so that the total strand concentration can be written as $C_0 = C_A + C_B + 2 C_{AB}$. We first compute the *melting temperature* $T_m$, which is the temperature at which half of duplexes are formed. Under this condition $C_{AB} = C_A$, since the number of duplexes that can form is controlled by the number of strands in the minority species. Under this condition, Eq. [](#eq:equilibrium) becomes
+Every time a duplex forms, the number of A and B strands decreases by one each, so that the total strand concentration can be written as $C_0 = C_A + C_B + 2 C_{AB}$. We first compute the *melting temperature* $T_m$, which is the temperature at which half of the duplexes are formed. Under this condition, $C_{AB} = C_A$, since the number of duplexes that can form is controlled by the number of strands in the minority species, so that Eq. [](#eq:equilibrium) becomes
 
 $$
 \frac{C_B}{C^\circ} = \exp\left( \frac{\Delta G_{AB}^\circ}{R T_m} \right),
@@ -442,7 +442,7 @@ $$
 T_m = \frac{\Delta H_{AB}^\circ}{\Delta S_{AB}^\circ + R \log\left( \frac{C_B}{C^\circ} \right)}.
 $$
 
-However, since $C_B = C_0 - C_A - 2 C_{AB} = C_0 - 3 C_A = C_{A,0} + C_{B,0}$, and, by definition of melting temperature, $C_A = C_{A,0} / 2$, so that $C_B = C_{B,0} - C_{A,0} / 2$, we find
+However, since $C_B = C_0 - C_A - 2 C_{AB} = C_0 - 3 C_A = C_{A,0} + C_{B,0} - 3 C_A$, and, by definition of melting temperature, $C_A = C_{A,0} / 2$, so that $C_B = C_{B,0} - C_{A,0} / 2$, we find
 
 $$
 T_m = \frac{\Delta H_{AB}^\circ}{\Delta S_{AB}^\circ + R \log\left( \frac{2C_{B,0} - C_{A,0}}{2 C^\circ} \right)}.
@@ -464,7 +464,7 @@ $$
 \Delta S_{AB} \equiv \Delta S_{AB}^\circ + R \log \left( \frac{C_{0,A}}{C^\circ} \right)
 $$ (eq:renormalised_entropy)
 
-is a renormalised entropy difference that takes into account the concentration at which the reaction takes place. Using Eq. [](#eq:renormalised_entropy) makes it possible to directly drive the free-energy difference $\Delta G_{AB} = \Delta H_{AB}^\circ - T \Delta S_{AB}$ between the $A + B$ and $AB$ states at any strand concentration. In the general case $C_{A,0} \leq C_{B,0}$, the additional entropic factor is $R\log \left( \frac{2C_{B,0} - C_{A,0}}{C^\circ} \right)$.
+is a renormalised entropy difference that takes into account the concentration at which the reaction takes place. Using Eq. [](#eq:renormalised_entropy) makes it possible to directly derive the free-energy difference $\Delta G_{AB} = \Delta H_{AB}^\circ - T \Delta S_{AB}$ between the $A + B$ and $AB$ states at any strand concentration. In the general case $C_{A,0} \leq C_{B,0}$, the additional entropic factor is $R\log \left( \frac{2C_{B,0} - C_{A,0}}{C^\circ} \right)$.
 
 ```{figure} figures/SantaLucia.png
 :name: fig:SantaLucia

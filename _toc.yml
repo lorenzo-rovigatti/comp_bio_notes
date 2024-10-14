@@ -13,9 +13,9 @@ parts:
         - file: enhanced.md
     - caption: Exercises
       chapters:
-        - file: exercises/HP_model.md
         - file: exercises/SantaLucia.md
         - file: exercises/zimm_bragg.md
+        - file: exercises/HP_model.md
         - file: exercises/Zuker.md
         - file: exercises/molecular_dynamics.md
     - caption: Hands-on notebooks

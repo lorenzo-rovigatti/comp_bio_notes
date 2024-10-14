@@ -281,6 +281,7 @@ Since we are discretising the equations, there are two caveats associated to the
 
 1. If the time step $\Delta t$ is too large, then a deviation (drift) from the "correct" value of the energy will be observed. A good rule of thumb to avoid an energy drift, which would invalidate the simulation, is to calculate the highest vibrational frequency associated to the interaction potential employed, $\omega_c \equiv \sqrt{k_c / m}$, where $k_c$ is the highest curvature of the potential, *i.e.* the largest value of $d^2V(r)/dr^2$, and $m$ is the mass of the particle. Then, a sensible value for the integration time step is an order of magnitude less than the characteristic time associated to $\omega_c$, *i.e.* $\Delta t \approx \frac{1}{10} \frac{2 \pi }{\omega_c}$.
 2. If the value of $\Delta t$ is appropriate, then the energy will be conserved *on average*, meaning that it will fluctuate around its average value with an amplitude, $\delta U \equiv \sqrt{\langle \Delta U^2 \rangle}$. If the integrator is of the Verlet family (*i.e.* Velocity Verlet), then $\delta U \sim \Delta t^2$. This behaviour can be exploited to ensure that codes and simulations are working correctly, at least from the point of view of the energy conservation. See [](#fig:energy_conservation) for an example.
+
 ```{figure} figures/energy_conservation.png
 :name: fig:energy_conservation
 :align: center
@@ -288,10 +289,6 @@ Since we are discretising the equations, there are two caveats associated to the
 
 The extent of the fluctuations of the total energy, $\delta U$, for a Lennard-Jones system simulated at $k_B T / \epsilon = 1.5$ and $\rho \sigma^3 = 0.36$ as a function of the time step $\Delta t$. The line is a quadratic fit. **Nota Bene:** this scaling requires that truncation errors are small, which is why I had to use a rather large cut-off, $r_c = 3.5$.
 ```
-
-We know from statistical mechanics that, in the thermodynamic limit, all ensembles are equivalent. However, in simulations it can be convenient to use different ensembles, depending on the phenomena one wishes to study. I will now briefly present some methods that can be used to fix the temperature (rather than energy) and the pressure (rather than volume) in MD simulations.
-
-[^symplectic]: it is also time-invariant and conserves volumes in phase space.
 
 ## Some observables
 
@@ -301,6 +298,114 @@ We know from statistical mechanics that, in the thermodynamic limit, all ensembl
 ### Radial distribution function
 
 ### Mean-squared displacement
+
+## Tricks of the trade
+
+(sec:neighbour_lists)=
+### Neighbour lists
+
+If the interaction potential is short-ranged, in the sense that it goes to zero at some distance $r_c$, it is clear that particles that are further away than $r_c$ will not feel any reciprocal force. If this is the case, calculating distances between all pairs of particles would be wasteful, as only a
+fraction of pairs will feel a mutual interaction. There are several techniques that can be used to optimise the force calculation step (and therefore the simulation performance) by performing some kind of bookkeeping that makes it possible to evaluate only those contributions due to pairs that are "close enough" to each other. Here I will present the most common ones: cells and Verlet lists.
+
+The idea behind cell lists is to partition the simulation box into smaller boxes, called cells, with side lengths $\geq r_c$[^cubic_cells]. This partitioning is done by using a data structure that, for each cell, stores the list of particles that are inside it. Then, during the force calculation loop, we consider that particle $i$, which is in cell $c$, can interact only with particles that are either inside $c$ or in one of its neighbouring cells (8 in 2D and 26 in 3D). The cell data structure can either be built every step, or updated after each integration step. In this latter case, the code checks whether a particle has crossed a cell boundary, and in this case it removes the particle from the old cell and adds it to the new one. This can be done efficiently with [linked lists](https://en.wikipedia.org/wiki/Linked_list). With this technique, each particle has a number of possibly-interacting neighbours that depends only on particle density and cell size, and therefore is independent on $N$. As a result, the algorithmic complexity of the simulation is $\mathcal{O}(N)$ rather than $\mathcal{O}(N^2)$. 
+
+Differently from cell lists, in Verlet lists for each particle the code stores a list of particles that are within a certain distance $r_v = r_c + r_s$, where $r_s$ is a free parameter called "Verlet skin". Every time the lists are updated, the current position of each particle $i$, $\vec r_{i, 0}$ is also stored. During the force calculation step of particle $i$, only those particles that are in $i$'s Verlet list are considered. For a homogeneous system of density $\rho$, the average number if neighbours is
+
+$$
+N_v = \frac{4}{3} \pi r_v^3 \rho,
+$$
+
+which should be compared to the average number of neighbours if cell lists are used, which in three dimensions is
+
+$$
+N_c = 27 r_c^3 \rho.
+$$
+
+In the limit $r_s \ll r_c$, which is rather common, $r_v \approx r_c$, so that $N_c / N_v = 81 / 4 \pi \approx 6$, which means that if Verlet lists are used, the number of distances to be checked is six times smaller than with cell lists.
+
+Verlet lists do not have to be updated at every step, or we would go back to checking all pairs, but only when when any particle has moved a distance larger than $r_s / 2$ from its original position $\vec r_{i, 0}$. Note that the overall performance will depend on the value of $r_s$, as small values will result in very frequent updates, while large values will generate large lists, which means useless distance checks on particles that are too far away to interact. Although the average number of neighbours of each particle $i$ is independent on $N$ and therefore the actual force calculation is $\mathcal{O}(N)$, the overall algorithmic complexity is still $\mathcal{O}(N^2)$, since list updating, even if not done at each time step, requires looping over all pairs. To overcome this problem it is common to use cell lists to build Verlet lists, bringing the complexity of the list update step, and therefore of the whole simulation, down to $\mathcal{O}(N)$, while at the same time retaining the smaller average number of neighbours of Verlet lists.
+
+[^cubic_cells]: In principle, cells don't have to be cubic.
+
+### Long-range interactions
+
+:::{tip}
+Most of the text of this part comes from @frenkel2023understanding.
+:::
+
+In molecular simulations, long-range interactions refer to forces that decay slowly with distance. The definition of "long-range" can be made unambiguous if we consider the general form of a pairwise interaction potential $V(r)$ between two particles separated by a distance $r$. The energy contribution of these interactions beyond a certain cut-off distance $r_c$ is given by the "tail" correction of [](#eq:U_tail). For a potential that decays as $1/r^\alpha$, the tail correction is, asymptotically,
+
+$$
+U_{\text{tail}} \sim \int_{r_c}^\infty \frac{r^2}{r^\alpha} \, dr = \int_{r_c}^\infty \frac{1}{r^{\alpha - 2}} \, dr \sim \left. \frac{1}{r_c^{\alpha - 3}}\right|_{r_c}^\infty
+$$
+
+which converges for any $r_c$ as long as $\alpha > 3$ (*e.g.* the Lennard-Jones potential, for which $\alpha = 6$)[^dipole_convergence]. By contrast, if $\alpha < 3$, the integral diverges, indicating that the energy contribution from the interaction tail remains significant when any cut-off is applied: 
+the tail of the interaction potential beyond $r_c$ contributes non-negligibly to the total energy of the system, making a direct cut-off inaccurate.
+
+I'll now quickly introduce the most popular methods used to handle long-range interactions, together with two techniques used to improve its efficiency. First, we start by considering a system consisting of $N$ charged particles in a box of volume $V = L^3$ and periodic boundary conditions. We assume that particles cannot overlap (*i.e.* that there is at least an additional short-range repulsion), and that the system is electrically neutral, *e.g.* that $\sum_i q_i = 0$. The total electrostatic energy of the system (in Gaussian units, which make the notation lighter) is
+
+$$
+U_\text{el} = \frac{1}{2} \sum_{i, j, \vec{n}}\phantom{}^{'} \frac{q_i q_j}{|\vec r_{ij} + \vec n L|},
+$$ (eq:U_el)
+
+where the prime on the summation indicates that the sum is over all periodic images $\vec n$ and over all particle pairs $(i, j)$, except $i = j$ if $\vec n = (0, 0, 0)$, *i.e.* particle $i$ interacts with all its periodic images but not with itself. Unfortunately, Eq. [](#eq:U_el) cannot be used to compute the electrostatic energy in a simulation because it contains a conditionally convergent sum.
+
+To improve the convergence of the expression for the electrostatic potential energy, we follow [](doi:10.1002/andp.19213690304) and rewrite the expression for the charge density. In equation [](#eq:U_el) we have represented the charge density as a sum of $\delta$-functions. The contribution to the electrostatic potential due to these point charges decays as $1 / r$. Now consider what happens if we assume that every particle $i$ with charge $q_i$ is surrounded by a diffuse charge distribution of the opposite sign, such that the total charge of this cloud exactly cancels $q_i$ . In that case only the fraction of $q_i$ that is not screened contributed to the electrostatic potential due to particle $i$. At large distances, this fraction goes to $0$ in a way that depends on the functional form of the screening charge distribution, which we will take as Gaussian in the following.
+
+```{figure} figures/ewald.png
+:name: fig:ewald
+:align: center
+:width: 500px
+
+The elecrostatic effect due to point charges can be seen as a sum of screend charges, minus the smoothly varying screening background. Taken from @frenkel2023understanding.
+```
+
+The contribution to the electrostatic potential at a point $r$ due to a set of screened charges can be easily computed by direct summation, because the
+electrostatic potential due to a screened charge is a rapidly decaying function of $r$. However, it was not our aim to evaluate the potential due to a
+set of screened charges but due to point charges. Hence, we must correct for the fact that we have added a screening charge cloud to every particle. This is shown schematically in [](#fig:ewald). This compensating charge density varies smoothly in space (because the screening charge distribution is a smoothly varying function!). We wish to compute the electrostatic energy at the site of ion $i$. Of course, we should exclude the electrostatic interaction of the ion with itself. We have three contributions to the electrostatic potential: first of all, the one due to the point charge $q_i$, secondly, the one due to the Gaussian screening charge cloud with charge $-q_i$ , and finally the one due to the compensating charge cloud with charge $q_i$. In order to exclude Coulomb self-interactions, we should not include any of these three contributions to the electrostatic potential at the position of ion $i$. However, it turns out that it is convenient to retain the contribution due to the compensating charge distribution and correct for the resulting spurious interaction afterwards. The reason we retain the compensating charge cloud for ion $i$ is that, if we do so, the compensating charge distribution is not only a smoothly varying function, but it is also periodic. Such a function can be represented by a (rapidly converging) Fourier series, and this turns out to be essential for the numerical implementation. Of course, in the end we should correct for the inclusion of a spurious "self" interaction between ion and the compensating charge cloud.
+
+Considering screening Gaussians with width $\sqrt{2/\alpha}$, the splitting can be written as follows:
+
+$$
+\frac{1}{|\vec{r}_i - \vec{r}_j|} = \frac{\text{erfc}(\alpha |\vec{r}_i - \vec{r}_j|)}{|\vec{r}_i - \vec{r}_j|} + \frac{\text{erf}(\alpha |\vec{r}_i - \vec{r}_j|)}{|\vec{r}_i - \vec{r}_j|},
+$$ (eq:ewald)
+
+where $\alpha$ is a parameter that controls the width of the Gaussian distribution used to split the potential, and $\text{erfc}(x)$ and $\text{erf}(x)$ are the complementary error function and error function, respectively, and they come out from integrating the Gaussian screening function. In Eq. [](#eq:ewald), the first term decays quickly as $|\vec{r}_i - \vec{r}_j|$ increases, so it is computed only for nearby particles within a cut-off $ r_c$. By contrast, the second term decays slowly in real space, but can be computed efficiently in Fourier space, using a sum over reciprocal lattice vectors $\vec{k}$.
+
+The total electrostatic energy using Ewald summation is the sum of the real-space term, the reciprocal-space term, and the self-interaction correction:
+
+$$
+E_{\text{tot}} = E_{\text{real}} + E_{\text{rec}} + E_{\text{self}}.
+$$
+
+* The real-space contribution to the total energy, $E_{\text{real}}$ is given by:
+$$
+E_{\text{real}} = \frac{1}{2} \sum_{i=1}^N \sum_{j \neq i}^N \frac{q_i q_j \, \text{erfc}(\alpha |\vec{r}_i - \vec{r}_j|)}{|\vec{r}_i - \vec{r}_j|},
+$$
+where the sum is truncated at a cut-off distance $r_c$.
+
+* The reciprocal-space contribution $E_{\text{rec}}$ is computed using the Fourier transform of the charges and involves a sum over the reciprocal lattice vectors $\vec{k}$:
+$$
+E_{\text{rec}} = \frac{1}{2 V} \sum_{\vec{k} \neq 0} \frac{4 \pi}{k^2} \exp\left( -\frac{k^2}{4 \alpha^2} \right) \left| \sum_{j=1}^N q_j \exp(i \vec{k} \cdot \vec{r}_j) \right|^2,
+$$
+The exponential term ensures that the sum converges rapidly, and therefore the sum can be safely truncated at some cut-off wave vector $k_c$.
+
+* The self-interaction term, $E_{\text{self}}$, is:
+$$
+E_{\text{self}} = -\frac{\alpha}{\sqrt{\pi}} \sum_{i=1}^N q_i^2.
+$$
+
+For fixed values of $k_c$ and $r_c$, the algorithmic time scales as $\mathcal{O}(N^2)$. However, this behaviour can be improved by realising that there are values of the cut-offs that minimise the error due to the truncations. Using these values, that depend on $N$, the complexity can be brought down to $\mathcal{O}(N^{3/2})$.
+
+Note that there are many subtleties that are linked to the boundary conditions that are applied to the system (even though the latter is infinite!). Have a look at @frenkel2023understanding and references therein for details.
+
+[^dipole_convergence]: Note that if $\alpha = 3$ (*e.g.* a dipole-dipole interaction), the tail correction is $U_\text{tail} \sim [\log r]_{r_c}^\infty$, which diverges.
+
+# Other ensembles
+
+We know from statistical mechanics that, in the thermodynamic limit, all ensembles are equivalent. However, in simulations it can be convenient to use different ensembles, depending on the phenomena one wishes to study. I will now briefly present some methods that can be used to fix the temperature (rather than energy) and the pressure (rather than volume) in MD simulations.
+
+[^symplectic]: it is also time-invariant and conserves volumes in phase space.
 
 (sec:thermostats)=
 ## Thermostats
@@ -462,7 +567,7 @@ There are many other thermostats, which I will not introduce here because of tim
 * Stochastic rotational dynamics to model hydrodynamic interaction. Examples are diluted solutions of colloids or bacteria where long-range hydrodynamic effects are important and of interest (*e.g.* sedimentation or flocking).
 
 :::{important}
-I reiterate that in equilibrium simulations the static properties of a system are independent on the thermostat used. However, if the dynamics is of interest (which is always the case in out-of-equilibrium systems, but it is often the case also for equilibrium systems), then choosing the right thermostat is [very important](doi:10.1140/epje/i2018-11689-4).
+I reiterate that in equilibrium simulations the static properties of a system are independent on the thermostat used (provided that the thermostat reproduces the correct temperature fluctuations). However, if the dynamics is of interest (which is always the case in out-of-equilibrium systems, but it is often the case also for equilibrium systems), then choosing the right thermostat is [very important](doi:10.1140/epje/i2018-11689-4).
 :::
 
 ## Barostats
@@ -505,37 +610,6 @@ TODO
 ```{warning}
 TODO
 ```
-
-## Tricks of the trade
-
-(sec:neighbour_lists)=
-### Neighbour lists
-
-If the interaction potential is short-ranged, in the sense that it goes to zero at some distance $r_c$, it is clear that particles that are further away than $r_c$ will not feel any reciprocal force. If this is the case, calculating distances between all pairs of particles would be wasteful, as only a
-fraction of pairs will feel a mutual interaction. There are several techniques that can be used to optimise the force calculation step (and therefore the simulation performance) by performing some kind of bookkeeping that makes it possible to evaluate only those contributions due to pairs that are "close enough" to each other. Here I will present the most common ones: cells and Verlet lists.
-
-The idea behind cell lists is to partition the simulation box into smaller boxes, called cells, with side lengths $\geq r_c$[^cubic_cells]. This partitioning is done by using a data structure that, for each cell, stores the list of particles that are inside it. Then, during the force calculation loop, we consider that particle $i$, which is in cell $c$, can interact only with particles that are either inside $c$ or in one of its neighbouring cells (8 in 2D and 26 in 3D). The cell data structure can either be built every step, or updated after each integration step. In this latter case, the code checks whether a particle has crossed a cell boundary, and in this case it removes the particle from the old cell and adds it to the new one. This can be done efficiently with [linked lists](https://en.wikipedia.org/wiki/Linked_list). With this technique, each particle has a number of possibly-interacting neighbours that depends only on particle density and cell size, and therefore is independent on $N$. As a result, the algorithmic complexity of the simulation is $\mathcal{O}(N)$ rather than $\mathcal{O}(N^2)$. 
-
-Differently from cell lists, in Verlet lists for each particle the code stores a list of particles that are within a certain distance $r_v = r_c + r_s$, where $r_s$ is a free parameter called "Verlet skin". Every time the lists are updated, the current position of each particle $i$, $\vec r_{i, 0}$ is also stored. During the force calculation step of particle $i$, only those particles that are in $i$'s Verlet list are considered. For a homogeneous system of density $\rho$, the average number if neighbours is
-
-$$
-N_v = \frac{4}{3} \pi r_v^3 \rho,
-$$
-
-which should be compared to the average number of neighbours if cell lists are used, which in three dimensions is
-
-$$
-N_c = 27 r_c^3 \rho.
-$$
-
-In the limit $r_s \ll r_c$, which is rather common, $r_v \approx r_c$, so that $N_c / N_v = 81 / 4 \pi \approx 6$, which means that if Verlet lists are used, the number of distances to be checked is six times smaller than with cell lists.
-
-Verlet lists do not have to be updated at every step, or we would go back to checking all pairs, but only when when any particle has moved a distance larger than $r_s / 2$ from its original position $\vec r_{i, 0}$. Note that the overall performance will depend on the value of $r_s$, as small values will result in very frequent updates, while large values will generate large lists, which means useless distance checks on particles that are too far away to interact. Although the average number of neighbours of each particle $i$ is independent on $N$ and therefore the actual force calculation is $\mathcal{O}(N)$, the overall algorithmic complexity is still $\mathcal{O}(N^2)$, since list updating, even if not done at each time step, requires looping over all pairs. To overcome this problem it is common to use cell lists to build Verlet lists, bringing the complexity of the list update step, and therefore of the whole simulation, down to $\mathcal{O}(N)$, while at the same time retaining the smaller average number of neighbours of Verlet lists.
-
-[^cubic_cells]: In principle, cells don't have to be cubic.
-
-
-### Long-range interactions
 
 # Classical force fields
 

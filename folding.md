@@ -10,46 +10,46 @@ exports:
 The main references for this part are @finkelstein2002protein and @bialek2012biophysics. Note that here I refer mostly to globular proteins.
 ```
 
-If each amino acid of a $100$-residue peptide chain had only two available conformations, the number of configurations available to the chain would be $2^{100} \sim 10^{30}$. If the time required to switch between any two configurations was $10^{-12}$ s (a picosecond), and we assume that no configuration is visited twice, it would take approximately $10^{18}$ seconds to explore all the "phase space": this is close to the age of the universe! In reality, proteins fold on time scales ranging from microseconds to hours. This is the gist of the famous ["Levinthal's paradox"](https://en.wikipedia.org/wiki/Levinthal%27s_paradox), which implies that the search for the folded structure does not happen randomly, but it is guided by the energy surface of residue-residue interactions.
+Let's consider a $100$-residue peptide chain with a unique folded state. If each amino acid had only two available conformations, the number of configurations available to the chain would be $2^{100} \sim 10^{30}$. If the time required to switch between any two configurations was $10^{-12}$ s (a picosecond), and we assume that no configuration is visited twice, it would take approximately $10^{18}$ seconds to explore all the "phase space" (and therefore, on average, to fold): this is close to the age of the universe! In reality, proteins fold on time scales ranging from microseconds to hours. This is the gist of the famous ["Levinthal's paradox"](https://en.wikipedia.org/wiki/Levinthal%27s_paradox), which implies that the search for the folded structure does not happen randomly, but it is guided by the energy surface of residue-residue interactions.
 
 Proteins can be denatured by changing the solution conditions. Very high or low temperature and pH, or high concentration of a denaturant (like urea or guanine dihydrochloride) can "unfold" a protein, which loses its solid-like, native structure, as well as its ability to perform its biological function. Investigations of the unfolding of small globular proteins showed that, as the denaturing agent (*e.g.* temperature or denaturant concentration) increases, many of the properties of the protein go through an "S-shaped" change, which is characteristic of cooperative transitions.
 
 Furthermore, calorimetric studies show that the denaturation transition is an "all-or-none" transition, *i.e.* that the "melting unit" of the transition is the protein as a whole, and not some subparts. This of course applies to single-domain small proteins, or to the single domains of larger proteins. Here "all-or-none" means that the protein exist only in one of two states (native or denaturated), with all the other "intermediate" states being essentially unpopulated at equilibrium. Therefore, this transition is the microscopic equivalent of a first-order phase transition (*e.g.* boiling or melting) occurring in a macroscopic system. Of course, since proteins are finite systems and therefore very far from the thermodynamic limit, this is not a true phase transition, as the energy jump is continuous, and the transition width is finite.
 
 :::{note} The van't Hoff criterion
-Let $N$ and $D$ be two states in chemical equilibrium, *i.e.* $N \rightleftharpoons D$, at a certain temperature $T$. Recalling the two-state equilibrium concepts derived [before](#sec:two_state), and defining $p(T)$ as the fraction of, say, state $D$, we have
+Let $N$ and $D$ be two states in chemical equilibrium, *i.e.* $N \rightleftharpoons D$, at a certain temperature $T$. Recalling the two-state equilibrium concepts derived [before](#sec:two_state), and defining $p(T)$ as the fraction of, say, state $N$, we have
 
 $$
-K_{\rm eff}(T) = \frac{p(T)}{1 - p(T)} = e^{- \beta \Delta G_{ND}},
+K_{\rm eff}(T) = \frac{p(T)}{1 - p(T)} = e^{\beta \Delta G_{ND}},
 $$
 
-where $K(T)$ is the effective equilibrium constant at temperature $T$ and $\Delta G_{ND} = \Delta H_{ND} - T \Delta S_{ND}$ is the free-energy differences between the two states. By simple algebra we have that
+where $K_{\rm eff}(T)$ is the effective dissociation constant at temperature $T$ and $\Delta G_{ND} = \Delta H_{ND} - T \Delta S_{ND}$ is the free-energy differences between the two states. By simple algebra we have that
 
 $$
-\Delta H_{ND} = k_B T^2 \frac{d \log K_{\rm eff}(T)}{dT}.
+\Delta H_{ND} = -k_B T^2 \frac{d \log K_{\rm eff}(T)}{dT}.
 $$
 
 Note that $K_{\rm eff}(T)$ is connected to $p(T)$, which can be measured experimentally (for instance with Circular Dicroism). The value of $\Delta H_{ND}$ obtained can be interpreted as the heat consumed by the "melting unit" associated to the transition.
 
 The enthalpy change can also be estimated by integrating the heat capacity, measured with calorimetry, over the range of temperature associated to the transition. This is the heat consumed by all proteins during the transition, $\Delta H_{\rm tot} = N_p \Delta H_{\rm cal}$, where $N_p = m / M$ is the number of proteins, with $m$ being the total mass and $M$ the protein's molecular mass.
 
-If $H_{\rm cal} = \Delta H_{ND}$, it means that the "melting unit" is the whole protein, and therefore the transition is of the "all-or-none" type, as it is the case of small globular proteins.
+If $\Delta H_{\rm cal} = \Delta H_{ND}$, it means that the "melting unit" is the whole protein, and therefore the transition is of the "all-or-none" type, as it is the case of small globular proteins.
 
-Note that there are [some subtleties](10.1110/ps.8.5.1064) that should be taken into account when applying this method, but the general concept is still useful, provided that the results are confirmed by other experimental methods.
+Note that there are [some subtleties](10.1110/ps.8.5.1064) that should be taken into account when applying this method, but the general concept is still useful, provided that the results are confirmed by independent experimental measurements.
 :::
 
 ```{figure} figures/molten_globule.png
 :name: fig:molten_globule
 :align: center
 
-(a) Phase diagram of the conformational states of lysozyme at pH 1.7 as a function of denaturant (guanine dihydrochloride) concentration and temperature. The red lines correspond to the mid transitio, the dashed lines outline the transition zone. (b) Schematic model of the native and molten globule protein states. Here the protein consists of only two helices connected by a look, and the side chains are shown as shaded regions. Adapted from @finkelstein2002protein.
+(a) Phase diagram of the conformational states of lysozyme at pH 1.7 as a function of denaturant (guanine dihydrochloride) concentration and temperature. The red lines correspond to the mid transition, the dashed lines outline the transition zones. (b) Schematic model of the native and molten globule protein states. Here the protein consists of only two helices connected by a loop, and the side chains are shown as shaded regions. Adapted from @finkelstein2002protein.
 ```
 
 But how does the denatured state look like? As discovered by using a plethora of experimental methods, which often seemed contradicting each other, the answer depends on the denaturing conditions. [](#fig:molten_globule)(a) shows the phase diagram of lysozyme (a globular small protein) for different temperatures and concentrations of a denaturing agent. Increasing the latter leads to a transition to a disordered coil state where essentially no secondary structure is present. By contrast, the effect of temperature is qualitatively different, as the protein partially melts in a state (the *molten globule*, MG) that retains most of its secondary structure, but it is not solid like and it cannot perform any biological function. A schematic of the difference between the native and molten globule states is shown in [](#fig:molten_globule)(b).
 
 The cooperative transition that leads to the molten globule is due to the high packing of the side chains, which is energetically favourable but entropically penalised, since it impedes the small-scale backbone fluctuations that trap many of the internal degrees of freedom of the protein. The liberation of these small-scale fluctations, and the resulting entropy gain, requires a slight degree of swelling, which is why the MG is not much larger than the native state. However, such a swelling is large enough to greatly decrease the van der Waals attractions, which are strongly dependent on the distance, and to let solvent (water) molecules in the core.
 
-In general, not all proteins behave like this, as some (usually small) proteins that unfold directly into a coil, others that form the molten globule under the effect of specific denaturants, and coils under the effect of others, *etc.* However, the unfolding transition has nearly always an "all-or-none", cooperative nature.
+In general, not all proteins behave like this, as there exist some (usually small) proteins that unfold directly into a coil, others that form the molten globule under the effect of specific denaturants, and coils under the effect of others, *etc.* However, the unfolding transition has nearly always an "all-or-none", cooperative nature.
 
 :::{note} Coil-globule transition in polymers
 The cooperative denaturing of a protein is *very* different from the coil-globule transition observed in polymers, even when no molten globule is involved and the protein turns directly into a coil. The reason is that the coil-globule transition is not a microscopic analog of a first-order phase transition, and cannot be described by two-state models.
@@ -90,7 +90,7 @@ All these concepts are not merely qualitative, but have been grounded in theory 
 
 The basic idea is to leverage the concept of frustration, which happens when the interactions between the different parts of a system are such that they cannot be satisfied, from the energetic point of view, all at the same time. If this is the case, then there is no single ground state, but rather many low-energy stable states that, in a many-body system, are uncorrelated from each other and separated by (possibly large) energy barriers. An example is provided in [](#fig:frustration)(a). The resulting "energy surface" (or landscape) is said to be rugged (or rough), and generates a dynamics where the system sits in a valley for a long time before being able to jump over the barrier and move to a different stable conformation. This is a hallmark of glassiness.
 
-To draw a parallel with proteins, we can consider a random heteropolymers, where the interactions among the different amino acids will be frustrated, blocking the system from finding a single well isolated folded structure of minimum energy. A candidate principle for selecting functional sequences is thus the minimization of this frustration. Of course even in the absence of frustration, there are still energetic barriers on the path towards the native conformation due to local structural rearrangements which still give raise to a rugged landscape, slowing down the kinetics towards the folded state. This scenario has come to be called a folding "funnel", emphasizing that there is a single dominant valley in the energy landscape, into which all initial configurations of the system will be drawn.
+To draw a parallel with proteins, we can consider a random heteropolymer, where the interactions among the different amino acids will be frustrated, blocking the system from finding a single well isolated folded structure of minimum energy. A candidate principle for selecting functional sequences is thus the minimization of this frustration. Of course even in the absence of frustration, there are still energetic barriers on the path towards the native conformation due to local structural rearrangements which still give raise to a rugged landscape, slowing down the kinetics towards the folded state. This scenario has come to be called a folding "funnel", emphasizing that there is a single dominant valley in the energy landscape, into which all initial configurations of the system will be drawn.
 
 A classic funnel diagram, such as the one shown in [](#fig:frustration)(b), represents an energy-entropy landscape, with the width being a measure of the entropy, whereas the depth represents both the energy and two correlated order parameters $Q$ and $A$, which are the fractions of native contacts and correct dihedral angles in the protein backbone. Although in reality the landscape is multidimensional, here the projection attempts to retain its main features, such as the barrier heights, which are a measure of the "ruggedness" or "roughness" of the landscape. The typical height of these barriers, together with the energy gap and the number of available conformations, are the three main parameters of the Random Energy Model, which is one of the main theoretical tools in this context.
 
@@ -990,6 +990,8 @@ The quality of the training and of the final output of AlphaFold are determined 
 Another interesting aspect is MSA masking, inspired by self-supervised learning models, where some symbols in the MSA are masked and the model is asked to predict them. An additional trick employed is the so-called self-distillation: in this approach, they took a model trained exclusively on the PDB, and predicted the structures of ~300k diverse protein sequences. They then retrained the full model, incorporating a small random sample of these structures at every training cycle. The claim is that this operation allows the model to leverage the large amount of unlabelled data available in protein sequence repositories.
 
 ### Output
+
+The main output of AlphaFold is the 3D coordinates of each atom of the final predicted structure. However, another very useful metric that is reported by the model is the predicted local-distance difference test (pLDDT), which provides a per-residue confidence score on a scale from 0 to 100, indicating how certain the model is about the position of each amino acid in the predicted 3D structure. A higher pLDDT score suggests greater accuracy, with scores above 90 being highly reliable, while scores below 70 indicate regions with lower confidence, possibly due to disorder or flexibility.
 
 (sec:colabfold)=
 ### Using AlphaFold through ColabFold

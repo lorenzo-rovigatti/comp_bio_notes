@@ -10,7 +10,7 @@ exports:
 The main references for this part are @finkelstein2002protein and @bialek2012biophysics. Note that here I refer mostly to globular proteins.
 ```
 
-If each amino acid of a $100$-residue peptide chain could have only two available conformations, the number of configurations available to the chain would be $2^{100} \sim 10^{30}$. If the time required to switch between any two configurations was $10^{-12}$ s (a picosecond), and we assume that no configuration is visited twice, it would take approximately $10^{18}$ seconds to explore all the "phase space": this is close to the age of the universe! In reality, proteins fold on time scales ranging from microseconds to hours. This is the gist of the famous ["Levinthal's paradox"](https://en.wikipedia.org/wiki/Levinthal%27s_paradox), which implies that the search for the folded structure does not happen randomly, but it is guided by the energy surface of residue-residue interactions.
+If each amino acid of a $100$-residue peptide chain had only two available conformations, the number of configurations available to the chain would be $2^{100} \sim 10^{30}$. If the time required to switch between any two configurations was $10^{-12}$ s (a picosecond), and we assume that no configuration is visited twice, it would take approximately $10^{18}$ seconds to explore all the "phase space": this is close to the age of the universe! In reality, proteins fold on time scales ranging from microseconds to hours. This is the gist of the famous ["Levinthal's paradox"](https://en.wikipedia.org/wiki/Levinthal%27s_paradox), which implies that the search for the folded structure does not happen randomly, but it is guided by the energy surface of residue-residue interactions.
 
 Proteins can be denatured by changing the solution conditions. Very high or low temperature and pH, or high concentration of a denaturant (like urea or guanine dihydrochloride) can "unfold" a protein, which loses its solid-like, native structure, as well as its ability to perform its biological function. Investigations of the unfolding of small globular proteins showed that, as the denaturing agent (*e.g.* temperature or denaturant concentration) increases, many of the properties of the protein go through an "S-shaped" change, which is characteristic of cooperative transitions.
 
@@ -795,29 +795,6 @@ Why the values of the matrix diagonal, representing the scores of "substituting"
 >
 > -- [](doi:10.1038/nbt0804-1035)
 
-### Multiple sequence alignment
-
-Multiple sequence alignment (MSA) extends the concept of pairwise protein alignment to simultaneously align three or more sequences, providing a broader view of evolutionary relationships, structural conservation, and functional regions among a group of proteins. Aligning multiple sequences make it possible to identify conserved amino acids that may be critical for protein function or stability and therefore are biologically significant. This, in turn, can help to predict structural features, functional motifs, and evolutionary patterns across species, providing a fundamental tool to build phylogenetic trees or inform the classification of proteins into families.
-
-In principle, MSA can be carried out with the dynamic programming algorithms we already introduced. For instance, the recursive rule of the Needleman-Wunsch algorithm for globally aligning three sequences $S$, $T$, and $U$, which extends Eq. [](#eq:needleman_wunsch), is
-
-$$
-F_{i,j, k} = \max
-\begin{cases}
-F_{i - 1, j, k} + s(S_i, -, -) \\
-F_{i, j - 1, k} + s(-, T_j, -) \\
-F_{i, j - 1, k} + s(-, -, U_k) \\
-F_{i - 1, j - 1, k} + s(S_i, T_j, -)\\
-F_{i - 1, j, k - 1} + s(S_i, -, U_k)\\
-F_{i, j - 1, k - 1} + s(-, T_j, U_k)\\
-F_{i - 1, j - 1, k - 1} + s(S_i, T_j, U_k),
-\end{cases}
-$$ (eq:MSA)
-
-where the dynamic programming "table" is now three-dimensional, and $s = s(a, b, c)$ is the cost function of aligning $a$, $b$, and $c$, which can be either residues or gaps. It is straightforward to see that the dimensionality of the table grows linearly with the number of sequences $M$, and therefore the algorithmic complexity is $\mathcal{O}(N^M)$. The exponential dependence on $M$ makes this approach practically unfeasible when working with real-world examples. 
-
-Unfortunately, better-performing exact methods, *i.e.* methods that provide the global optimal solution by construction, do not exist (yet). As a result, we have to rely on heuristic methods, which only find local minima. One commonly used approach for multiple sequence alignment is called progressive multiple alignment. Here the prerequisite is that we need to know the evolutionary tree that connects the sequences we wish to align, which is usually built by using some low-resolution similarity measure, often based on pairwise alignment. Then, we start by aligning the two most closely related sequences in a pairwise fashion, creating what is known as the seed alignment. Next, we align the third closest sequence to this seed, replacing the previous alignment with the new one. This process continues, sequentially adding and aligning each sequence based on its proximity in the tree, until we reach the final alignment. Note that this is done using a "once a gap, always a gap" rule: gaps in an alignment are not modified during subsequence alignments.
-
 ### BLAST
 
 The sheer volume of sequence data generated by modern-day high-throughput sequencing technologies presents a significant challenge. Databases now contain millions of nucleotide and protein sequences, each potentially spanning thousands of characters. When comparing a new sequence against these massive databases, traditional pairwise alignment methods like the ones we just discussed become computationally demanding. Indeed, performing a global or even local alignment between a query sequence and every sequence in a large database can require huge computational resources and time, especially as the number of sequences and their lengths continue to grow exponentially.
@@ -867,6 +844,34 @@ A short tutorial on how to use BLAST from the command line can be found [here](.
 :::
 
 [^BLAST_webserver]: There are many!
+
+(sec:MSA)=
+### Multiple sequence alignment
+
+Pairwise sequence alignment suffers from some issues that are intrinsic to it, and becomes glaring when trying to align sequences that are distantly related. In particular, all pairwise methods depend in some way or another on a number of parameters (scoring matrix, gap penalties, *etc.*), and it is hard to tell what is the "best" alignment if the method finds multiple alignments with the same score. Moreover, a pairwise alignment is not necessarily informative about the evolutionary relationship (and therefore about possibly conserved amino acids or whole motifs) of the sequences that are compared.
+
+In order to overcome these issues, a number of multiple sequence alignment (MSA) methods have been developed. MSA extends the concept of pairwise protein alignment to simultaneously align three or more sequences, providing a broader view of evolutionary relationships, structural conservation, and functional regions among a group of proteins. Aligning multiple sequences make it possible to identify conserved amino acids that may be critical for protein function or stability and therefore are biologically significant. This, in turn, can help to predict structural features, functional motifs, and evolutionary patterns across species, providing a fundamental tool to build phylogenetic trees or inform the classification of proteins into families.
+
+In principle, MSA can be carried out with the dynamic programming algorithms we already introduced. For instance, the recursive rule of the Needleman-Wunsch algorithm for globally aligning three sequences $S$, $T$, and $U$, which extends Eq. [](#eq:needleman_wunsch), is
+
+$$
+F_{i,j, k} = \max
+\begin{cases}
+F_{i - 1, j, k} + s(S_i, -, -) \\
+F_{i, j - 1, k} + s(-, T_j, -) \\
+F_{i, j - 1, k} + s(-, -, U_k) \\
+F_{i - 1, j - 1, k} + s(S_i, T_j, -)\\
+F_{i - 1, j, k - 1} + s(S_i, -, U_k)\\
+F_{i, j - 1, k - 1} + s(-, T_j, U_k)\\
+F_{i - 1, j - 1, k - 1} + s(S_i, T_j, U_k),
+\end{cases}
+$$ (eq:MSA)
+
+where the dynamic programming "table" is now three-dimensional, and $s = s(a, b, c)$ is the cost function of aligning $a$, $b$, and $c$, which can be either residues or gaps. It is straightforward to see that the dimensionality of the table grows linearly with the number of sequences $M$, and therefore the algorithmic complexity is $\mathcal{O}(N^M)$. The exponential dependence on $M$ makes this approach practically unfeasible when working with real-world examples. 
+
+Unfortunately, better-performing exact methods, *i.e.* methods that provide the global optimal solution by construction, do not exist (yet). As a result, we have to rely on heuristic methods, which only find local minima. One commonly used approach for multiple sequence alignment is called progressive multiple alignment. Here the prerequisite is that we need to know the evolutionary tree, often called the *guide tree*, that connects the sequences we wish to align, which is usually built by using some low-resolution similarity measure, often based on (global) pairwise alignment. Then, we start by aligning the two most closely related sequences in a pairwise fashion, creating what is known as the seed alignment. Next, we align the third closest sequence to this seed, replacing the previous alignment with the new one. This process continues, sequentially adding and aligning each sequence based on its proximity in the tree, until we reach the final alignment. Note that this is done using a "once a gap, always a gap" rule: gaps in an alignment are not modified during subsequence alignments. These methods have a computational complexity of $\mathcal{O}(M^2)$, which makes it possible to align thousands of sequences.
+
+One of the most commonly used tools to perform MSAs is [Clustal Omega](doi:10.1038/msb.2011.75), which is a [command-line tool](http://www.clustal.org/omega/), but it is also available as a [webserver](https://www.ebi.ac.uk/jdispatcher/msa/clustalo). Clustal Omega builds the guide tree using an efficient algorithm (adapted from [](doi:10.1186/1748-7188-5-21)) which has an algorithmic complexity of $\mathcal{O}(M log M)$, making it possible to generate multiple alignments of hundreds of thousands sequences.
 
 ## Threading
 
@@ -920,9 +925,76 @@ Threading methods became a tool for a tentative recognition of protein folds fro
 
 ## AlphaFold
 
-:::{warning} TODO
-ADD TEXT
+:::{tip}
+The most technical part of this section has been taken/adapted from a [great blog post](https://www.blopig.com/blog/2021/07/alphafold-2-is-here-whats-behind-the-structure-prediction-miracle/) written by [Carlos Outeiral](https://carlos.outeiral.net/).
 :::
+
+AlphaFold2 (which I will refer to simply as "AlphaFold" from now on) is a recent deep learning model developed by DeepMind, presented in [](doi:10.1038/s41586-021-03819-2), designed to predict protein structures with remarkable accuracy. The work behind AlphaFold [has been awarded](https://www.nobelprize.org/prizes/chemistry/2024/press-release/) half of the 2024 Nobel Prize in Chemistry. The model's architecture is based on neural networks, and integrates several advanced techniques from machine learning and structural biology to predict the 3D structure of a protein out of its sequence (*i.e.*, the *folding problem*). I will briefly describe the internal architecture of Alphafold, and then show how to use it (in a slightly improved version called ColabFold, presented in [](doi:10.1038/s41592-022-01488-1)).
+
+### Input and preprocessing
+
+```{figure} figures/alphafold.png
+:name: fig:alphafold
+:align: center
+
+The architecture of AlphaFold. Arrows show how the information flows among the components. The input (preprocessing) module, the evoform and the structure module are highlighted in red, blue and yellow, respectively. Adapted from [](doi:10.1038/s41586-021-03819-2).
+```
+
+The overall architecture, as presented in the original paper, is shown in [](#fig:alphafold). The first part, which handles the user input and is highlighted in red in [](#fig:alphafold), is a preprocessing pipeline that can be carried out independently of the rest as done, for instance, in [ColabFold](#sec:colabfold). First of all, the AlphaFold system uses the input amino acid sequence to query several databases of protein sequences, and constructs a [multiple sequence alignment](#sec:MSA) in order to determine the parts of the sequence that are more likely to mutate. The underlying idea is that, if two amino acids (possibly far apart along the sequence) are in close spatial contact, mutations in one of them will be closely followed by mutations of the other, so that the overall 3D structure is preserved. To make an extreme (and somewhat unrealistic) example, suppose we have a protein where an amino acid with negative charge (say, glutamate) is spatially close to an amino acid with positive charge (say, lysine), although they are both far away in the sequence. Most likely, the resulting electrostatic interaction stabilises the structure of the protein. If for evolutionary reasons the first AA mutates into a positively charged amino acid, the second AA will be under evolutionary pressure to mutate into a negatively charged amino acid in order to preserve the electrostatic attraction and therefore the contribution to the stability of the folded protein. The MSA makes it possible to detect this sort of correlations. 
+
+```{figure} figures/myoglobin_templates.png
+:name: fig:myoglobin_templates
+:align: center
+:width: 500
+
+The 3D structure of human myoglobin (top left), african elephant myoglobin (top right, 80% sequence identity), blackfin tuna myoglobin (bottom right, 45% sequence identity) and pigeon myoglobin (bottom left, 25% sequence identity). Credits to [Carlos Outeiral](https://www.blopig.com/blog/2021/07/alphafold-2-is-here-whats-behind-the-structure-prediction-miracle/).
+```
+
+AlphaFold also tries to identify proteins that may have a similar structure to the input ("templates"), and constructs an initial representation of the structure called the "pair representation" which is, in essence, a model of which amino acids are likely to be in contact with each other. Finding templates follows a completely different, but closely related principle: proteins mutate and evolve, but their structures tend to remain similar despite the changes. In [](#fig:myoglobin_templates), for example, I display the structure of four different myoglobin proteins, corresponding to different organisms. You can appreciate that they all look pretty much the same, but if you were to look at the sequences, you would find enormous differences. The protein on the bottom right, for example, only has ~25% amino acids in common with the protein on the top left. 
+
+### The Evoformer
+
+For years, the use of MSAs to detect correlations between amino acids relied on statistical analysis, but its limited accuracy required substantial improvements. Early breakthroughs in coevolutionary analysis helped identify biases in the data and correct them using more advanced statistical techniques. These methods contributed to better but still imperfect predictions of protein structures.
+
+In AlphaFold, the information about the MSA and the templates is jointly analysed by a special type of transformer, which is a deep learning method introduced in [](doi:10.48550/arXiv.1706.03762) that uses a mechanism called attention, allowing the model to focus on different parts of the input data, assigning varying importance to specific regions. This architecture became popular in tasks like natural language processing (NLP) due to its ability to model long-range dependencies in sequences. Instead of processing data sequentially, transformers look at all parts of the input simultaneously, which significantly speeds up learning and makes it more efficient. In bioinformatics, this approach has been adapted to analyze MSAs, improving how relationships between residues are understood. AlphaFold takes the application of transformers a step further with its Evoformer architecture (highlighted in blue in [](#fig:alphafold)), which processes both the MSA and the templates, allowing information to flow back and forth between the sequence and the structural representations. Unlike previous deep learning approaches, where geometric proximity was inferred only at the end, AlphaFold continuously updates and refines its structural predictions throughout the process.
+
+Evoformer uses a two-tower transformer model, with one tower dedicated to the MSA (called the MSA transformer) and the other focusing on pairwise residue interactions (pair representation). At each iteration, these representations exchange information, improving both the understanding of the sequence and the predicted pair representation. This iterative refinement, performed 48 times in the published model, allows AlphaFold to adjust its predictions based on both the sequence data and evolving structural hypotheses.
+
+For example, if the MSA transformer identifies a correlation between two residues, it hypothesizes that they are spatially close. This information is passed to the pair representation, which updates the structural model. The pair transformer can then detect further correlations between other residues, perhaps close to the first pair, refining the structure hypothesis. This back-and-forth exchange continues until the model reaches a confident structural prediction.
+
+### The structure module
+
+The information generated by the Evoformer is taken to the the structure module (highlighted in yellow in [](#fig:alphafold)). The idea behind the structure module is conceptually very simple, but its implementation is fairly complex.
+
+The structure module considers the protein as a "residue gas": every AA is modelled as a triangle, representing the three atoms of the backbone. These triangles float around in space, and are moved by the network to form the structure. The transformations are parametrised as 4x4 affine matrices that handle rotations and translations. At the beginning of the structure module, all of the residues are placed at the origin of coordinates. At every step of the iterative process, AlphaFold produces a set of affine matrices that displace and rotate the residues in space. This representation does not reflect any physical or geometrical assumptions, and as a result the network has a tendency to generate structural violations. This is particularly visible in the supplementary videos of [](doi:10.1038/s41586-021-03819-2), that display some deeply unphysical snapshots (see [](#fig:alphafold_structure_module) for a striking example).
+
+:::{figure} figures/alphafold_structure_module.mp4
+:name: fig:alphafold_structure_module
+:align: center
+
+The evolving prediction of the CASP14 multi-domain target (863 residues) T1091. Individual domains' structure is determined early, while the domain packing evolves throughout the network. The network explores unphysical configurations throughout the process, resulting in the long "strings" that appear during the evolution. Supplementary Video 4 of [](doi:10.1038/s41586-021-03819-2), which can be downloaded [here](https://static-content.springer.com/esm/art%3A10.1038%2Fs41586-021-03819-2/MediaObjects/41586_2021_3819_MOESM6_ESM.mp4).
+:::
+
+The secret sauce of the structure module is a new flavour of attention devised specifically for working with three-dimensional structures which is based on the very simple fact that the L2-norm of a vector is invariant with respect to translations and rotations[^IPA]. Why is this invariance such a big deal? You may understand this as a form of data augmentation: if the model knows that any possible rotation of translation of the data will lead to the same answer, it will need a lot less data to pull it away from wrong models and will therefore be able to learn much more.
+
+Finally, it is also worth noting that the Structure Module also generates a model of the side chains. To simplify the system, their positions are parametrised by a list of dihedral angles $\chi_1$, $\chi_2$, *etc.* (depending on the AA), which are predicted in their normal form by the network, and implemented with standard geometric subroutines.
+
+[^IPA]: An explanation of this Invariant Point Attention (IPA) is well-beyond my expertise. If you are interested, I refer to  section 1.8 of the Supplementary Information of the original paper.
+
+### Recycling and loss function
+
+AlphaFold leverages a so-called "recycling mechanism": after generating a final structure, it takes all the information (*i.e.* the MSA and pair representations, as well as the predicted structure) and passes it back to the beginning of the Evoformer blocks. In the original paper the whole pipeline is executed three times.
+
+The quality of the training and of the final output of AlphaFold are determined by a specialized loss function called Frame Aligned Point Error (FAPE), a modified version of RMSD, to align atomic positions, which helps preventi incorrect protein chirality. However, this is only part of a more complex loss function, which is a weighted sum of various auxiliary losses. These include losses calculated from multiple iterations of the structure module and a distogram loss, which compares predicted 2D distance matrices with the true structure.
+
+Another interesting aspect is MSA masking, inspired by self-supervised learning models, where some symbols in the MSA are masked and the model is asked to predict them. An additional trick employed is the so-called self-distillation: in this approach, they took a model trained exclusively on the PDB, and predicted the structures of ~300k diverse protein sequences. They then retrained the full model, incorporating a small random sample of these structures at every training cycle. The claim is that this operation allows the model to leverage the large amount of unlabelled data available in protein sequence repositories.
+
+### Output
+
+(sec:colabfold)=
+### Using AlphaFold through ColabFold
+
+
 
 # Nucleic acids
 

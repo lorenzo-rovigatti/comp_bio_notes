@@ -14,7 +14,7 @@ The code should
 
 1. Check that the secondary structure is compatible with the given sequence (*e.g.* check that they are of the same length, that the base pairs specified in the secondary structure are valid Watson-Crick pairs, and that each opening parenthesis has a closing partner).
 2. Evaluate the enthalpic and entropic contributions to the given secondary structure $\Delta H^\circ$ and $\Delta S^\circ$, as evaluated by the SantaLucia model. You can assume that the total strand concentration is $C^\circ = 1$ M for simplicity.
-3. Apply the two-state model to plot the melting temperature of the secondary structure. **Nota Bene:** for complicated examples the main assumption behind the two-state model[^two_state] will not hold, but for the sake of this assignment we will pretend that is not the case.
+3. Apply the two-state model to plot the melting temperature of the secondary structure. **Nota Bene:** for complicated examples the main assumption behind the two-state model[^two_state] will not hold, but for the sake of this assignment we will pretend that this is never the case.
 
 :::{important} Choose and document the supported features
 A fully-fledged NN model has many parameters that take into account all possible secondary structures (internal mismatches, internal loops, bulges, hairpins, coaxial stacking, *etc.*). You do not have to necessarily to write a code that supports all these motifs, but:
@@ -28,7 +28,6 @@ A fully-fledged NN model has many parameters that take into account all possible
 # Possible extensions
 
 * Add the possibility of choosing the temperature and strand concentrations.
-* Extend the code to support multi-strand systems: this will also require to extend the dot-paren notation to also cover this case.
 * Add the possibility of choosing the NN model: you can, for instance, add support for one of the RNA models listed [here](https://rna.urmc.rochester.edu/NNDB/).
 * Add the possibility of visualising the melting curve of the given secondary structure (*i.e.* the yield of the secondary structure as a function of temperature).
 
@@ -56,3 +55,12 @@ Initiation | +0.2 | −5.7 |
 Terminal AT penalty | +2.2 | +6.9 |
 Symmetry correction | 0.0 | −1.4 |
 :::
+
+Just to give you some numbers you can use to test your code, consider the following secondary structure (which is a duplex made of 6 base pairs):
+
+```
+5'-CGTTGA-3'
+3'-GCAACT-5'
+```
+
+Its SL free energy contributions are $\Delta H = 40900$ kcal/mol, $\Delta S = 114.6$ cal/mol K, so that $\Delta G = -5.35$ kcal/mol at 37$^\circ$. Its melting temperature at $C = 1$ M is $T_m = 79.5$ C.

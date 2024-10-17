@@ -286,7 +286,7 @@ We now analyse the main free-energy contributions to the formation of secondary 
 
 ### Nearest-Neighbor Interactions
 
-Double-strand formation is driven by the combined effects of base stacking and hydrogen bonding between adjacent base pairs. In NN models, these are accounted by summing up the enthalpy and entropy contributions of each dinucleotide base steps. Therefore, for a sequence of length $N$ there are $N - 1$ terms. As an example, consider the two fully-complementary strands
+Double-strand formation is driven by the combined effects of base stacking and hydrogen bonding between adjacent base pairs. In NN models, these are accounted for by summing up the enthalpy and entropy contributions of each dinucleotide base steps. Therefore, for a sequence of length $N$ there are $N - 1$ terms. As an example, consider the two fully-complementary strands
 
 ```
 5'- TACCTG -3'
@@ -491,7 +491,7 @@ $$
 \frac{C_c}{C_h} = e^{\beta \Delta G_{ch}^\circ},
 $$
 
-where $C_c$ and $C_h$ are the concentrations of strands in the coil and hairpin conformations, respectively, and $\Delta G_{h}^\circ$ is the free-energy difference between the two states. The condition for the melting temperature $C_c = C_h$, which yields
+where $C_c$ and $C_h$ are the concentrations of strands in the coil and hairpin conformations, respectively, and $\Delta G_{h}^\circ$ is the free-energy difference between the two states. The condition for the melting temperature is $C_c = C_h$, which yields
 
 $$
 T_m = \frac{\Delta H^\circ}{\Delta S^\circ}.
@@ -503,7 +503,7 @@ $$
 
 We now consider a generic nucleic acid system where one or more strands can pair and/or fold into a product P. We define the melting curve as the yield of P, in terms of concentration or fraction of formed product, as a function of temperature or another thermodynamic parameter that is changed experimentally, such as pH or salt concentration.
 
-I will know show how the same two-state formalism introduced ealier can be used to predict the melting curve of a system. For the sake of simplicity I will use the $A + B \rightleftharpoons AB$ system with $C_{A,0} = C_{B,0}$. Defining $X$ as the probability that a strand is *not* part of a duplex, the equilibrium concentrations can be written as $C_A = C_B = X C_{A,0}$ and $C_{AB} = (1 - X) C_{A,0}$. Substituting these relations in Eq. [](#eq:equilibrium) and simplifying common factors we find
+I will now show how the same two-state formalism introduced ealier can be used to predict the melting curve of a system. For the sake of simplicity I will use the $A + B \rightleftharpoons AB$ system with $C_{A,0} = C_{B,0}$. Defining $X$ as the probability that a strand is *not* part of a duplex, the equilibrium concentrations can be written as $C_A = C_B = X C_{A,0}$ and $C_{AB} = (1 - X) C_{A,0}$. Substituting these relations in Eq. [](#eq:equilibrium) and simplifying common factors we find
 
 $$
 \frac{X^2}{1 - X} = \frac{C^\circ}{C_{A,0}} e^{\beta \Delta G_{AB}^\circ} = e^{\beta \Delta G_{AB}},
@@ -532,7 +532,7 @@ The yield of a 10-bp duplex as predicted by SantaLucia (red line), and two coars
 
 The tertiary structure of nucleic acids is, in general, much simpler than that of proteins. This is due to the more limited variety of building blocks involved (4 *vs* 20), and to the charged (and, in general, hydrophilic) nature of the DNA and RNA backbones, which tend to destabilise the type of "super-secondary structures" that are so common in proteins. Moreover, the lack of tightly-packed structures blurs the difference between secondary and tertiary structures, since most of the times, especially in simple systems, the tertiary structure is straightforwardly implied by the secondary structure.
 
-In general, the most dominant tertiary structure of RNA and DNA is the double helix, and is the main one we will consider going forward. Many different helical structures have been discovered in biological contexts or synthesised artificially under specific conditions. However, here I will present only the three main ("canonical") ones.
+In general, the most dominant tertiary structure of RNA and DNA is the double helix, and is the main one we will consider going forward. Many different helical structures have been discovered in biological contexts or synthesised artificially under specific conditions. However, here I will present only the three main ("canonical") ones. Note that they I will provide only an average characterisation for each helix, as it is known that their properties can depend (even strongly in some cases) on the local sequence. You can use [this webserver]() (which is presented in [](doi:10.1016/j.jmb.2023.167978)) to visualise the 3D structures of a given sequence, as estimated with a coarse-grained, realistic model.
 
 (sec:canonical_helices)=
 ## Canonical helices

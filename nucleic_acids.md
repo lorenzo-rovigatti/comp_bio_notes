@@ -91,7 +91,15 @@ Two nucleotides coming together and binding to each other form a base pair (BP).
 
 Interestingly the spontaneous process through which single strands pair and form a duplex, which is called *hybridisation*, is now taken for granted, but was initially met with skepticism[^without_enzyme], since researchers at the time believed that duplex formation required enzymes to overcome electrostatic and entropic penalties ([](doi:10.1017/S0033583509004776)).
 
-In addition to hydrogen bonding, duplexes are stabilised by interactions acting between the aromatic rings of consecutive nitrogenous bases. These so-called base stacking interactions have a hydrophobic nature that is complemented by van der Waals and dipole-dipole termsthat contribute significantly to the stability and structural integrity of the DNA molecule. Rather counterintuitively, there is now ample evidence that base stacking is at least as important for duplex stability as base pairing, if not more (see *e.g.* [](doi:10.1093/nar/gkj454), [](doi:10.1016/j.plrev.2017.11.012), and [](doi:10.1038/s41565-023-01485-1)).
+```{figure} figures/HB_stacking.png
+:name: fig:HB_stacking
+:align: center
+:width: 600
+
+A base pair step where hydrogen bonds and stacking interactions, the two main mechanisms responsible for hybridisation, are highlighted by arrows.
+```
+
+In addition to hydrogen bonding, duplexes are stabilised by interactions acting between the aromatic rings of consecutive nitrogenous bases (see [](#fig:HB_stacking)). These so-called base stacking interactions have a hydrophobic nature that is complemented by van der Waals and dipole-dipole termsthat contribute significantly to the stability and structural integrity of the DNA molecule. Rather counterintuitively, there is now ample evidence that base stacking is at least as important for duplex stability as base pairing, if not more (see *e.g.* [](doi:10.1093/nar/gkj454), [](doi:10.1016/j.plrev.2017.11.012), and [](doi:10.1038/s41565-023-01485-1)).
 
 (box:stacking)=
 :::{hint} Measuring the stacking strength

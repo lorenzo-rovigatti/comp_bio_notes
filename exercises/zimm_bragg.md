@@ -10,7 +10,9 @@ Remember to read the [homeworks](#sec:homeworks) section to understand what you 
 
 The Zimm-Bragg model is a simple model to describe the cooperative coil-to-helix transition that occurs in polypeptides. The theoretical background, discussed during an earlier lecture, can be found [here](#sec:zimm-bragg), and a Jupyter notebook containing a code that solves the model (theoretically, as well as numerically through Monte Carlo simulations) is [here](../notebooks/zimm_bragg.ipynb). Here you are asked to adapt my code (or write your own) to study the effect of some of the model parameters on the melting temperature of the transition, defined as the temperature at which half of the residues are in the helical state, *i.e.* $\theta = 0.5$.
 
-In order to be positively evaluated, your code should be able to produce at least one plot (or the data, to be plotted separately) of the melting temperature as a function of $\sigma$, $N$, $\Delta H$ or $\Delta S$. The accompanying paper (or README) should also contain an interpretation of the results. My advice is to use the exact solution rather than Monte Carlo simulations.
+In order to be positively evaluated, your code should be able to produce plots (or the data, to be plotted separately) of the melting temperature as a function of $\sigma$, $N$, $\Delta H$, and $\Delta S$ (where the latter are the entalphic and entropic contributions to $s$). The accompanying paper (or README) should also contain an interpretation of the results. My advice is to use the exact solution rather than Monte Carlo simulations.
+
+Note that the melting temperature should be plotted against the quantity we wish to vary, while keeping all the others fixed to some sensible value.
 
 # Possible extensions
 

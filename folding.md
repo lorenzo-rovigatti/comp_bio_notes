@@ -437,7 +437,7 @@ The distribution of the number of sequences having $g(s)$ native conformations f
 :name: fig:HP_model_comparison
 :align: center
 
-(a) Compactness and (b) hydrophobicity as a function of the chain length for two HP lattice models and for real proteins. Adapted from [](doi:10.1002/prot.24067).
+(a) Compactness and (b) hydrophobicity as a function of the chain length for two HP lattice models and for real proteins. Dashed lines show the range of values. Adapted from [](doi:10.1002/prot.24067).
 ```
 
 But to what extent lattice and real proteins are similar? I will present some results reported in [](doi:10.1002/prot.24067). Therein, an exhaustive enumeration of all conformations of chains of lengths up to 25 has been carried out with two HP models:
@@ -653,15 +653,13 @@ The most used method for local alignment is the Smith-Waterman algorithm, which 
 
 1. Initialisation: since a local alignment can start anywhere, the first row and column in the matrix are set to zeros, *i.e.* $F_{0,j} = jd$, $F_{i,0} = id$.
 2. Iteration $\forall (i, j)$: this step is modified so that the score is never allowed to become negative but it is reset to zero. This is done by slightly modifying Eq. [](#eq:needleman_wunsch) as follows:
-$$
-F_{i,j} = \max
+$$F_{i,j} = \max
 \begin{cases}
 0\\
 F_{i - 1, j} + d \\
 F_{i, j - 1} + d \\
 F_{i - 1, j - 1} + s(S_i, T_j).
-\end{cases}
-$$
+\end{cases}$$
 3. Trace-back: starts from the position of the maximal number in the table and proceeds until a zero is encountered.
 
 :::{tip} The Needleman-Wunsch algorithm
@@ -696,12 +694,10 @@ I_{i,j} &= \max \begin{cases}
 F_{i-1,j} + o\\
 I_{i-1,j} + e
 \end{cases}\\
-
 D_{i,j} &= \max \begin{cases}
 F_{i,j-1} + o\\
 D_{i,j-1} + e
 \end{cases}\\
-
 F_{i,j} &= \max \begin{cases}
 F_{i-1,j-1} + s(S_i, T_j)\\
 I_{i, j}\\
@@ -820,13 +816,9 @@ The BLAST algorithm can be broken down into the following steps[^BLAST_wiki]
 7.  *Extend the exact matches to high-scoring segment pair (HSP).* The original version of BLAST stretches a longer alignment between the query and the database sequence in the left and right directions, from the position where the exact match occurred. The extension does not stop until the accumulated total score of the HSP begins to decrease. To save more time, a newer version of BLAST, called BLAST2 or gapped BLAST, has been developed. BLAST2 adopts a lower neighborhood word score threshold to maintain the same level of sensitivity for detecting sequence similarity. Therefore, the list of possible matching words list in step 3 becomes longer. Next, exact matched regions that are within distance $A$ from each other on the same diagonal are joined as a longer new region. Finally, the new regions are then extended by the same method as in the original version of BLAST, and the scores for each HSP of the extended regions are created by using a substitution matrix as before.
 8.  *List all of the HSPs in the database whose score is high enough to be considered.* All the HSPs whose scores are greater than the empirically determined cutoff score $S$ are listed. By examining the distribution of the alignment scores modeled by comparing random sequences, a cutoff score $S$ can be determined such that its value is large enough to guarantee the significance of the remaining HSPs.
 9.  *Evaluate the significance of the HSP score.* [It has been shown](doi:10.1073/pnas.87.6.2264) that the distribution of Smith-Waterman local alignment scores between two random sequences is
-$$
-p\left( S\ge x \right) =1-\exp \left( -KMN e^{-\lambda x } \right),
-$$
+$$p\left( S\ge x \right) =1-\exp \left( -KMN e^{-\lambda x } \right),$$
 where $M$ and $N$ are the length of the query and database sequences[^BLAST_MN], and the statistical parameters $\lambda$ and $K$ depend upon the substitution matrix, gap penalties, and sequence composition (the letter frequencies) and are estimated by fitting the distribution of the ungapped local alignment scores of the query sequence and of a lot (globally or locally) shuffled versions of a database sequence. Note that the validity of this distribution, known as the Gumbel extreme value distribution (EVD), has not been proven for local alignments containing gaps yet, but there is strong evidence that it works also for those cases. The expect score $E$ of a database match is the number of times that an unrelated database sequence would obtain a score $S$ higher than $x$ by chance. The expectation $E$ obtained in a search for a database of total length $N$
-$$
-E = K M N e^{-\lambda S}
-$$
+$$E = K M N e^{-\lambda S}$$
 This expectation or expect value $E$ (often called $E$-score, $E$-value or $e$-value) assessing the significance of the HSP score for ungapped local alignment is reported in the BLAST results. The relation above is different if individual HSPs are combined, such as when producing gapped alignments (described below), due to the variation of the statistical parameters.
 10. *Make two or more HSP regions into a longer alignment.* Sometimes, two or more HSP regions in one database sequence can be made into a longer alignment. This provides additional evidence of the relation between the query and database sequence. There are two methods, the Poisson method and the sum-of-scores method, to compare the significance of the newly combined HSP regions. Suppose that there are two combined HSP regions with the pairs of scores $(65, 40)$ and $(52, 45)$, respectively. The Poisson method gives more significance to the set with the maximal lower score $(45 > 40)$. However, the sum-of-scores method prefers the first set, because $65+40=105$ is greater than $52+45 = 97$. The original BLAST uses the Poisson method; BLAST2 uses the sum-of scores method.
 11. *Show the gapped Smith-Waterman local alignments of the query and each of the matched database sequences.* The original BLAST algorithm only generates ungapped alignments including the initially found HSPs individually, even when there is more than one HSP found in one database sequence. By contrast, BLAST2 produces a single alignment with gaps that can include all of the initially found HSP regions. Note that the computation of the score and its corresponding $E$-value involves use of adequate gap penalties.
@@ -970,7 +962,7 @@ The information generated by the Evoformer is taken to the the structure module 
 
 The structure module considers the protein as a "residue gas": every AA is modelled as a triangle, representing the three atoms of the backbone. These triangles float around in space, and are moved by the network to form the structure. The transformations are parametrised as 4x4 affine matrices that handle rotations and translations. At the beginning of the structure module, all of the residues are placed at the origin of coordinates. At every step of the iterative process, AlphaFold produces a set of affine matrices that displace and rotate the residues in space. This representation does not reflect any physical or geometrical assumptions, and as a result the network has a tendency to generate structural violations. This is particularly visible in the supplementary videos of [](doi:10.1038/s41586-021-03819-2), that display some deeply unphysical snapshots (see [](#fig:alphafold_structure_module) for a striking example).
 
-:::{figure} figures/alphafold_structure_module.mp4
+:::{figure} figures/alphafold_structure_module.*
 :name: fig:alphafold_structure_module
 :align: center
 
@@ -1302,17 +1294,11 @@ Note that with this formalism it is easier to employ more realistic energy funct
 We can write down the probability $p(i, j)$ recursively, as the sum of two contributions:
 
 1. The probability that the $(i, j)$ edge exists and it is external, *i.e.* that there are no edges $(k, l)$ for which $k < i < j < l$. This is just
-$$
-p_{\rm ext}(i, j) = \frac{Q_{0, i - 1} Q^{\rm bp}_{i,j} Q_{j + 1, N - 1}}{Q_{0, N-1}}.
-$$
+$$p_{\rm ext}(i, j) = \frac{Q_{0, i - 1} Q^{\rm bp}_{i,j} Q_{j + 1, N - 1}}{Q_{0, N-1}}.$$
 2. The probability that the $(i, j)$ edge exists and it is enclosed by other base pairs. This is a sum over all the possible enclosing base pairs $(h, k)$, with $h < i < j < k$, of the probability that the $(h, k)$ edge exists, $p(h, k)$, times the probability that the $(i, j)$ edge is the exterior edge of the $S_{h + 1, k - 1}$ subsequence, which is given by[^denominator_difference]
-$$
-\frac{Q_{h + 1, i - 1} Q^{\rm bp}_{i,j} Q_{j + 1, k - 1}}{Q_{h + 1, k - 1}}.
-$$
+$$\frac{Q_{h + 1, i - 1} Q^{\rm bp}_{i,j} Q_{j + 1, k - 1}}{Q_{h + 1, k - 1}}.$$
 All in all, this contribution amounts to
-$$
-P_{\rm int}(i, j) = \sum_{h < i < j < k} p(h, k) \frac{Q_{h + 1, i - 1} Q^{\rm bp}_{i,j} Q_{j + 1, k - 1}}{Q_{h + 1, k - 1}}.
-$$
+$$P_{\rm int}(i, j) = \sum_{h < i < j < k} p(h, k) \frac{Q_{h + 1, i - 1} Q^{\rm bp}_{i,j} Q_{j + 1, k - 1}}{Q_{h + 1, k - 1}}.$$
 
 The total probability that $i$ and $j$ form a base pair is thus
 

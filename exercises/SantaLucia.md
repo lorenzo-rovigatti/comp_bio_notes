@@ -91,4 +91,4 @@ Just to give you some numbers you can use to test your code, consider the follow
 3'-GCAACT-5'
 ```
 
-Its SL free energy contributions are $\Delta H = -40.9$ kcal/mol, $\Delta S = -114.6$ cal/mol K, so that $\Delta G = -5.35$ kcal/mol at 37$^\circ$. Its melting temperature at $C = 1$ M is $T_m = 79.5^\circ$ C.
+Its SL free energy contributions are $\Delta H = -40.9$ kcal/mol, $\Delta S = -114.6$ cal/mol K, so that $\Delta G = -5.35$ kcal/mol at 37$^\circ$. Its melting temperature at $C = 1$ M is $T_m = 75.4^\circ$ C.

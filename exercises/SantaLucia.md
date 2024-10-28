@@ -66,13 +66,23 @@ Terminal AT penalty | +2.2 | +6.9 |
 Symmetry correction | 0.0 | −1.4 |
 :::
 
-For the hairpin code, you can model the free-energy cost of a loop of length $L$ as
+For the hairpin code, the free-energy cost of a loop of length $L$ in kcal / mol is given by the following table
 
-$$
-F_H(L) = 4.8 + 0.19 L - 0.0031 L^2,
-$$
+:::{table} Turner parameters for hairpin loops
+:label: tbl:turner_hairpin
+:align: center
 
-where the resulting number is expressed in kcal / mol.
+|$L$|$\Delta G^\circ_{37^\circ}$|$\Delta H^\circ$|
+|:---|:---:|:---:|
+3 | 3.20 | 1.30 |
+4 | 3.60 | 4.80 |
+5 | 4.00 | 3.60 |
+6 | 4.40 | -2.90 |
+7 | 4.60 | 1.30 |
+8 | 4.70 | -2.90 |
+9 | 4.80 | 5.00 |
+&gt;9 | $\Delta G^\circ_{37^\circ}(L = 9) + 1.75 R T \log(L / 9)$ |5.00|
+:::
 
 Just to give you some numbers you can use to test your code, consider the following secondary structure (which is a duplex made of 6 base pairs):
 
@@ -81,4 +91,4 @@ Just to give you some numbers you can use to test your code, consider the follow
 3'-GCAACT-5'
 ```
 
-Its SL free energy contributions are $\Delta H = -409$ kcal/mol, $\Delta S = -114.6$ cal/mol K, so that $\Delta G = -5.35$ kcal/mol at 37$^\circ$. Its melting temperature at $C = 1$ M is $T_m = 79.5$ C.
+Its SL free energy contributions are $\Delta H = -40.9$ kcal/mol, $\Delta S = -114.6$ cal/mol K, so that $\Delta G = -5.35$ kcal/mol at 37$^\circ$. Its melting temperature at $C = 1$ M is $T_m = 79.5^\circ$ C.

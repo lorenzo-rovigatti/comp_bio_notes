@@ -463,14 +463,14 @@ The output of the computation was to enumerate all the native structures of each
 :name: fig:HP_model_folding_1
 :align: center
 
-(a) The number of structures with the given $N_s$ for the (top) 3x3x3 cube and (bottom) 6x6 square. (b) The most designable (A) 3D and (B) 2D structures. Hydrophobic and polar residues are coloured in black and grey, respectively. (c) The probability of finding a polar residue as a function of the sequence index for the same two structures. Adapted from [](10.1126/science.273.5275.666).
+(a) The number of structures with the given $N_s$ for the (top) 3x3x3 cube and (bottom) 6x6 square. In the bottom panel, the number of structures goes below $1$ for large $N_s$, which, given its definition, should not happen. Perhaps the authors normalised the data in some way that, as far as I understand, is not specified in the original paper. (b) The most designable (A) 3D and (B) 2D structures. Hydrophobic and polar residues are coloured in black and grey, respectively. (c) The probability of finding a polar residue as a function of the sequence index for the same two structures. Adapted from [](10.1126/science.273.5275.666).
 ```
 
-Compact structures differ markedly in terms of their designability: there are structures that can be designed by a large number of sequences, and there are "poor" structures that can be designed by only a few or even no sequences. In fact, for $\approx 10\%$ of the conformations there is no sequence  that has that structure as its ground state. The majority of the sequences ($\approx 95\%$ in 3D) have degenerate ground states, *i.e.* more than one compact conformation of lowest energy, and the number of structures with a given $N_s$ value decreases continuously and monotonically as $N_S$ increases. The data for the 3D and largest 2D cases is shown in [](#fig:HP_model_folding_1)(a), where the long tails of the distributions, with some structures being the ground states of thousands of sequences, highlight the presence of "highly-designable" compact conformations.
+Compact structures differ markedly in terms of their designability: there are structures that can be designed by a large number of sequences, and there are "poor" structures that can be designed by only a few or even no sequences. In fact, for $\approx 10\%$ of the conformations there is no sequence  that has that structure as its ground state. The majority of the sequences ($\approx 95\%$ out $2^{27}$ total sequences in 3D) have degenerate ground states, *i.e.* more than one compact conformation of lowest energy, which means that in 3D there exist almost 7 million sequences of length 27 that have a unique compact ground state. Moreover, the number of structures with a given $N_s$ value decreases continuously and monotonically as $N_S$ increases. The data for the 3D and largest 2D cases is shown in [](#fig:HP_model_folding_1)(a), where the long tails of the distributions, with some structures being the ground states of thousands of sequences, highlight the presence of "highly-designable" compact conformations.
 
 Structures with large $N_S$ exhibit specific motifs (*i.e.* secondary structures) that small $N_S$ compact structures lack. For instance, the 3D compact structures with the 10 largest $N_S$ values contain parallel running lines packed regularly and eight or nine strands (three amino acids in a row), sensibly more than the average compact structure. [](#fig:HP_model_folding_1)(b) shows the most designable structures in 3D and in 2D, where it is easy to spot the regularity of the "secondary structures" and, for the 3D structure, also the "strands".
 
-With the simple lattice model is also possible to directly assess the effect of mutations, which in real proteins is particularly important in the context of homologous sequences (sequences related by a common ancestor). Indeed, focussing on highly designable structures and referring to the $N_s$ different sequences that fold into them as "homologous", it is possible to observe phenomena that are qualitatively similar to those observed in real proteins. For example, sequences that differ by more than half of their residues can design the same structure. Looking at the effect of mutations, the rightmost panel of [](#fig:HP_model_folding_1)(c) shows that some in very designable conformations residues are highly mutable, whereas others are highly conserved, with the conserved sites being those sites with the smallest or largest number of sides exposed to water.
+With the simple lattice model is also possible to directly assess the effect of mutations, which in real proteins is particularly important in the context of homologous sequences (sequences related by a common ancestor). Indeed, focussing on highly designable structures and referring to the $N_s$ different sequences that fold into them as "homologous", it is possible to observe phenomena that are qualitatively similar to those observed in real proteins. For example, sequences that differ by more than half of their residues can design the same structure (see [](#fig:myoglobin_templates), which will be discussed later, for a real-protein example). Looking at the effect of mutations, the rightmost panel of [](#fig:HP_model_folding_1)(c) shows that some in very designable conformations residues are highly mutable, whereas others are highly conserved, with the conserved sites being those sites with the smallest or largest number of sides exposed to water.
 
 ```{figure} figures/HP_model_folding_2.png
 :name: fig:HP_model_folding_2
@@ -569,7 +569,7 @@ A more complicated problem is to find the longest common *subsequence* (LCS) bet
 TA-GTG-TCA
 ```
 
-In this case the LCS is `AGTTCA`, which is longer than the longest commond substring.
+In this case the LCS is `AGTTCA`, which is longer than the longest common substring.
 
 The LCS problem as formulated here is a particular case of the full sequence-alignment problem. In order to generalise the problem, we introduce a cost function that makes it possible to recast it in terms of an optimisation problem. Given two sequences $S$ and $T$, we define $\delta(S, T)$ as the "biological cost" of turning $S$ into $T$. For the case just considered, I implicitly used as a cost function the [Levenshtein (or edit) distance](https://en.wikipedia.org/wiki/Levenshtein_distance), which is defined as the minimum number of single-character edits required to change one string into another. In other words, the problem has been formulated by implicitly considering that all possible operations (mutations, insertions and deletions) are equally likely. In a more generalised formulation, each edit operation is associated to a specific cost (penalty) that should reflect its biological occurrence, as discussed [later](#sec:substitution_matrices).
 
@@ -578,10 +578,10 @@ There are other (more complicated and more context-specific) methods that can be
 
 ### The Needleman-Wunsch algorithm
 
-Once we allow for gaps, the enumeration of all possible alignments (as done for the longest common substring method) becomes unfeasible. Indeed, the number of non-boring alignments, *i.e.* alignments where gaps are always paired with characters, in a sequence of size $N$ containing $M$ gaps (where $N \approx M$) can be estimated as
+Once we allow for gaps, the enumeration of all possible alignments (as done for the longest common substring method) becomes unfeasible. Indeed, the number of non-boring alignments, *i.e.* alignments where gaps are always paired with characters, in a sequence of size $N$ containing $G$ gaps (where $N \approx G$) can be estimated as
 
 $$
-\binom{N + M}{M} = \frac{(N + M)!}{N!M!} \approx \frac{(2N)!}{(N!)^2} \approx \frac{2^{2N}}{\sqrt{\pi n}},
+\binom{N + G}{G} = \frac{(N + G)!}{N!G!} \approx \frac{(2N)!}{(N!)^2} \approx \frac{2^{2N}}{\sqrt{\pi N}},
 $$
 
 where we used the second-order Stirling's approximation, $\log(N!) \approx N \log(N) - N + \frac{1}{2}\log (2 \pi N)$. Note that this number grows **very** fast: for $N = 30$ it is already larger than $10^{17}$. Considering that we also have to compute the score of each alignment, it is clear that the problem is untractacle with a brute-force method. Here is where dynamic programming enters the field.
@@ -600,8 +600,8 @@ We can compute the optimal solution for a subproblem by making a locally optimal
 
 We start by considering the linear gap penalty model, and define $d$, with $d < 0$, as the cost of a gap. We are now equipped to set the values of the elements of the matrix. Let's consider the first row: the value of $F_{0,j}$ is the cost of aligning a sequence of length $0$ (taken from $S$) to a sequence of length $j$ (taken from $T$), which can be obtained only by adding $j$ gaps, yielding $F_{0,j} = jd$. Likewise, for the first column we have $F_{i,0} = id$. Then, we traverse the matrix element by element. Let's consider a generic element $F_{ij}$: this is the cost of aligning the first $i$ characters of $S$ to the first $j$ characters of $T$. There are three ways we can obtain this alignment:
 
-* a gap is added to $S$: the total cost is $F_{i-1, j} + d$;
-* a gap is added to $T$: the total cost is $F_{i, j - 1} + d$;
+* Align $S_i$ to a gap (*i.e.* a gap is added to $T$): the total cost is $F_{i-1, j} + d$;
+* Align $T_j$ to a gap (*i.e.* a gap is added to $S$): the total cost is $F_{i, j - 1} + d$;
 * $S_i$ and $T_j$ are matched: the total cost is $F_{i - 1, j - 1} + s(S_i, T_j)$, where $s(x, y)$ is the cost of (mis)matching $x$ and $y$.
 
 Leveraging the cut-and-paste argument sketched above, the optimal cost is given by the largest of the three values. Formally,
@@ -621,7 +621,7 @@ The complexity analysis of this algorithm is straightforward. Each update takes 
 elements in the matrix $\hat F$, the total running time is $\mathcal{O}(MN)$. Similarly, the total storage space is $\mathcal{O}(MN)$. For the more general case where the update rule is more complicated, the running time may be more expensive. For instance, if the update rule requires testing all sizes of gaps (*e.g.* the cost of a gap is not linear), then the running time would be $\mathcal{O}(MN(M + N)$).
 
 :::{tip} A simple example
-Consider the two DNA sequences $S = AGT$ and $T = AAGC$, a gap penalty $d = -2$, and $s(x, y) = \pm 1$, where the plus and minus signs are used for matches and mismatches, respectively.
+Consider the two DNA sequences $S = AAGC$ and $T = AGT$, a gap penalty $d = -2$, and $s(x, y) = \pm 1$, where the plus and minus signs are used for matches and mismatches, respectively.
 
 ```{figure} figures/needleman_wunsch_example.png
 :name: fig:needleman_wunsch_example
@@ -649,7 +649,7 @@ The Needleman-Wunsch algorithm find the best possible alignment across the entir
 
 Local alignment, on the other hand, focuses on finding the best alignment within a subset of the sequences. It identifies regions of similarity between the two sequences and aligns only those regions, ignoring the parts of the sequences that do not match well. Local alignment is particularly useful when comparing sequences that may only share a segment of similarity, such as when comparing domains within proteins, detecting conserved motifs, or identifying homologous regions in sequences that may not be overall similar[^local_alignment_DNA], which is why is very useful for the prediction of the 3D structure of proteins (or protein subdomains).
 
-The most used method for local alignment is the Smith-Waterman algorithm, which is a modification of the Needleman-Wunsch algorithm. The key difference between the two lies in how the scoring matrices are constructed and scored. In Needleman-Wunsch, every cell in the matrix is filled to reflect the best global alignment, with the final alignment score found in the bottom-right corner of the matrix. Smith-Waterman, on the other hand, sets any negative scores to zero, which allows the algorithm to "reset" when the alignment quality dips. The highest score in the matrix indicates the end of the best local alignment, which is then traced back to identify the optimal aligned subsequence. This approach ensures that only the most relevant, highest-scoring local alignments are highlighted. Here is how the Smith-Waterman algorithm looks like in practice:
+The most used method for local alignment is the Smith-Waterman algorithm, which is a modification of the Needleman-Wunsch algorithm. The key difference between the two lies in how the scoring matrices are constructed and scored. In Needleman-Wunsch, every cell in the matrix is filled to reflect the best global alignment, with the final alignment score found in the bottom-right corner of the matrix. Smith-Waterman, on the other hand, sets any negative scores to zero, which allows the algorithm to "reset" when the alignment quality dips. The highest score in the matrix indicates the end of the best local alignment, which is then traced back to a zero to identify the optimal aligned subsequence. This approach ensures that only the most relevant, highest-scoring local alignments are highlighted. Here is how the Smith-Waterman algorithm looks like in practice:
 
 1. Initialisation: since a local alignment can start anywhere, the first row and column in the matrix are set to zeros, *i.e.* $F_{0,j} = jd$, $F_{i,0} = id$.
 2. Iteration $\forall (i, j)$: this step is modified so that the score is never allowed to become negative but it is reset to zero. This is done by slightly modifying Eq. [](#eq:needleman_wunsch) as follows:
@@ -670,6 +670,15 @@ For reference, this is summary of the Needleman-Wunsch algorithm:
 3. Trace-back: starts from the bottom-right value and stops at the top-left corner.
 :::
 
+```{figure} figures/global_local_alignment.png
+:name: fig:global_local_alignment
+:align: center
+
+Example trace-back solutions generated by (a) global and (b) local alignment methods.
+```
+
+A visual comparison between the tables generated by global and local alignment algorithms is shown in [](#fig:global_local_alignment).
+
 [^parsimony]: Note that this is not the only possible choice: we could choose a probabilistic method, for example using Hidden Markov Models (HMMs), that would assign a probability measure over the space of possible event paths and use other methods for evaluating alignments (*e.g.*, Bayesian methods).
 [^frame-aware]: Indels (shorthand for "insertions/deletions") that cause frame-shifts in functional elements generally cause important phenotypic modifications.
 [^local_alignment_DNA]: It is also valuable in cases where one sequence may be a subsequence of another, like when searching for a gene within a cromosome or a whole genome.
@@ -677,7 +686,7 @@ For reference, this is summary of the Needleman-Wunsch algorithm:
 (sec:affine_gaps)=
 ### Affine gap penalty
 
-For both the global and local alignment algorithms introduced we have used a linear gap penalty: the cost of adding a gap is constant, regardless of the nature of the aligned character, or of the length of the gap. From the biological point of view, this means that an indel of *any* length is considered as the result of independent insertions or deletions. However, in reality long indels can form in single evolutionary steps, and in these cases the linear gap model overestimates their cost. To overcome this issue, more complex gap penalty functions have been introduced. As mentioned before, a generic gap penalty function would result in an algorithmic complexity worse than $\mathcal{O}(N^2)$ (where for simplicity I'm considering two sequences of the same length). Let's see why. Any gap penalty function can be implemented in the Needleman-Wunsch or Smith-Waterman algorithms by changing the recursive rule, which can be done trivially for element $F_{i,j}$ by evaluating terms such as $\max_{0 \leq k \leq i} \lbrace F_{k,j} + d_{i - k} \rbrace$ and $\max_{0 \leq k \leq i} \lbrace F_{i,k} + d_{i - k} \rbrace$. However, this means that the update of every cell of the dynamic programming matrix would take $\mathcal{O}(N)$ instead of $\mathcal{O}(1)$, bringing the algorithmic complexity up to $\mathcal{O}(N^3)$ (for $N = M$ sequences).
+For both the global and local alignment algorithms introduced we have used a linear gap penalty: the cost of adding a gap is constant, regardless of the nature of the aligned character, or of the length of the gap. From the biological point of view, this means that an indel of *any* length is considered as the result of independent insertions or deletions. However, in reality long indels can form in single evolutionary steps, and in these cases the linear gap model overestimates their cost. To overcome this issue, more complex gap penalty functions have been introduced. As mentioned before, a generic gap penalty function would result in an algorithmic complexity worse than $\mathcal{O}(N^2)$ (where for simplicity I'm considering two sequences of the same length). Let's see why. Any gap penalty function can be implemented in the Needleman-Wunsch or Smith-Waterman algorithms by changing the recursive rule, which can be done trivially for element $F_{i,j}$ by evaluating terms such as $\max_{0 \leq k \leq i} \lbrace F_{k,j} + d_{i - k} \rbrace$ and $\max_{0 \leq k \leq j} \lbrace F_{i,k} + d_{j - k} \rbrace$, where $d_x$ is the cost of a gap of size $x$. However, this means that the update of every cell of the dynamic programming matrix would take $\mathcal{O}(N)$ instead of $\mathcal{O}(1)$, bringing the algorithmic complexity up to $\mathcal{O}(N^3)$ (for $N = M$ sequences).
 
 However, the computational cost can be mitigated by using particular gap penalty functions. Here I will present the most common variant, which is known as the *affine* gap penalty. In this model, the cost of a gap of size $k$ is
 
@@ -723,7 +732,7 @@ How is the substitution matrix $s(x, y)$ determined? One possibility is to lever
 |T|-1|-1|+1|-0.5|
 |C|-1|-1|-0.5|+1|
 
-Here a mismatch between like-nucleotides (*e.g.* A and G) is less expensive than one between unlike nucleotides (*e.g.* A and C).
+Here a mismatch between like-nucleotides (*e.g.* A and G) is less expensive than one between unlike nucleotides (*e.g.* T and C).
 
 However, we can be more quantitative by taking a probabilistic approach. Here I will describe how the widely-used [BLOSUM matrices](https://en.wikipedia.org/wiki/BLOSUM) are built (see also the [original paper](doi:10.1073/pnas.89.22.10915)). We assume that alignment score reflects the probability that two similar sequences are [homologous](#sec:homology). Thus, given two sequences $S$ and $T$, we define two hypotheses:
 
@@ -921,7 +930,17 @@ Threading methods became a tool for a tentative recognition of protein folds fro
 The most technical part of this section has been taken/adapted from a [great blog post](https://www.blopig.com/blog/2021/07/alphafold-2-is-here-whats-behind-the-structure-prediction-miracle/) written by [Carlos Outeiral](https://carlos.outeiral.net/).
 :::
 
-AlphaFold2 (which I will refer to simply as "AlphaFold" from now on) is a recent deep learning model developed by DeepMind, presented in [](doi:10.1038/s41586-021-03819-2), designed to predict protein structures with remarkable accuracy. The work behind AlphaFold [has been awarded](https://www.nobelprize.org/prizes/chemistry/2024/press-release/) half of the 2024 Nobel Prize in Chemistry. The model's architecture is based on neural networks, and integrates several advanced techniques from machine learning and structural biology to predict the 3D structure of a protein out of its sequence (*i.e.*, the *folding problem*). I will briefly describe the internal architecture of Alphafold, and then show how to use it (in a slightly improved version called ColabFold, presented in [](doi:10.1038/s41592-022-01488-1)).
+```{figure} figures/alphafold_CASP.png
+:name: fig:alphafold_CASP
+:align: center
+:width: 500px
+
+The performance of CASP winners in the last eight contests. Taken from [](doi:10.1038/d41586-020-03348-4).
+```
+
+The CASP (Critical Assessment of protein Structure Prediction) contest is a biennial competition established to evaluate the performance of computational methods for protein structure prediction. Since its inception in 1994, CASP has become a benchmark for assessing progress in the field, gathering researchers from across the globe to tackle one of the most complex challenges in computational biology. Participants receive amino acid sequences of proteins for which the 3D structure remains experimentally unknown to them but has been solved by researchers outside the competition. They then attempt to predict these structures using their algorithms, which are later evaluated against the experimentally determined ones. [](#fig:alphafold_CASP) shows the score of the winners of the last 8 contests. As can be seen in the figure, in 2020 there was a breakthrough that made it possible to predict the 3D structure of proteins with a precision close to the experimental one.
+
+The breakthrough has been possible thanks to AlphaFold2 (which I will refer to simply as "AlphaFold" from now on), which is a deep learning model developed by DeepMind, presented in [](doi:10.1038/s41586-021-03819-2), designed to predict protein structures with remarkable accuracy. The work behind AlphaFold [has been awarded](https://www.nobelprize.org/prizes/chemistry/2024/press-release/) half of the 2024 Nobel Prize in Chemistry. The model's architecture is based on neural networks, and integrates several advanced techniques from machine learning and structural biology to predict the 3D structure of a protein out of its sequence (*i.e.*, the *folding problem*). I will briefly describe the internal architecture of Alphafold, and then show how to use it (in a slightly improved version called ColabFold, presented in [](doi:10.1038/s41592-022-01488-1)).
 
 ### Input and preprocessing
 
@@ -990,7 +1009,7 @@ The single most useful output of AlphaFold is the 3D coordinates of each atom of
 (sec:colabfold)=
 ### Using AlphaFold through ColabFold
 
-
+ColabFold, presented in [](doi:10.1038/s41592-022-01488-1), is an optimized implementation of AlphaFold that runs on Google Colab, providing a more accessible and user-friendly way to perform protein structure predictions. Unlike the "pure" AlphaFold, which can be downloaded [here](https://github.com/google-deepmind/alphafold) and requires extensive computational resources and a setup that may be challenging for individual users, ColabFold makes AlphaFold's capabilities more widely available by leveraging Google's cloud infrastructure. The ColabFold version is streamlined for easier use and has a faster input preprocessing, with the option to use precomputed databases for sequence searching, that significantly reduces both runtime and storage requirements. ColabFold provides an easy way to customise the most common options of the model, allowing users to adjust parameters, access multi-sequence alignments, and use additional input sequences to improve prediction accuracy. The code behind the notebook is open source (see [here](https://github.com/sokrypton/ColabFold)), and the notebook itself can be accessed [here](https://colab.research.google.com/github/sokrypton/ColabFold/blob/main/AlphaFold2.ipynb).
 
 # Nucleic acids
 

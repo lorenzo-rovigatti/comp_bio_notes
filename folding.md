@@ -734,30 +734,33 @@ How is the substitution matrix $s(x, y)$ determined? One possibility is to lever
 
 Here a mismatch between like-nucleotides (*e.g.* A and G) is less expensive than one between unlike nucleotides (*e.g.* T and C).
 
-However, we can be more quantitative by taking a probabilistic approach. Here I will describe how the widely-used [BLOSUM matrices](https://en.wikipedia.org/wiki/BLOSUM) are built (see also the [original paper](doi:10.1073/pnas.89.22.10915)). We assume that alignment score reflects the probability that two similar sequences are [homologous](#sec:homology). Thus, given two sequences $S$ and $T$, we define two hypotheses:
+However, we can be more quantitative by taking a probabilistic approach. Here I will describe how the widely-used [BLOSUM matrices](https://en.wikipedia.org/wiki/BLOSUM) are built (see also the [original paper](doi:10.1073/pnas.89.22.10915)). We assume that the alignment score reflects the probability that two similar sequences are [homologous](#sec:homology). Thus, given two sequences $S$ and $T$ of the same length[^same_length_ungapped] for which we have an ungapped alingment, we define two hypotheses:
 
 1. The alignment between the two sequences is due to chance and the sequences are, in fact, unrelated.
 2. The alignment is due to common ancestry and the sequences are actually related.
 
+Under the rather strict assumption ("biologically dubious, but mathematically convenient", as aptly put in [](doi:10.1038/nbt0804-1035)) that pairs of aligned residues are statistically independent of each other, so that the likelihoods associated to the two hypotheses, $P(S, T|R)$ and $P(S, T|U)$, can be expressed as products of probabilities, *viz.*
+
+\begin{align}
+P(S, T|R) & \propto \prod_i p_{S_iT_i}\\
+P(S, T|U) & \propto \prod_i q_{S_i} q_{T_i}
+\end{align}
+
+where $p_{xy}$ is the likelihood that residues $x$ and $y$ are aligned because correlated, while the product $q_x q_y$ is the likelihood that the two residues are there by chance: their occurrence is unrelated and therefore the likelihood factorises in two terms that account for the average probability of observing those two residues in any protein.
+
 In order to compare two hypotheses, a good score is given by the logarithm of the ratio of their likelihoods (the so-called log-odds score). Therefore, for our case the alignment score is 
 
 $$
-A \equiv \log \frac{P(S, T|R)}{P(S, T|U)}.
+A \equiv \log \frac{P(S, T|R)}{P(S, T|U)},
 $$
 
-Under the rather strict assumption ("biologically dubious, but mathematically convenient", as aptly put in [](doi:10.1038/nbt0804-1035)) that pairs of aligned residues are statistically independent of each other, and thanks to the properties of logarithms and probabilities, the overall alignment score is the sum of the log-scores of the individual residue pairs. Considering 20 amino acids, there are 400 such log-scores, which form a 20x20 substitution (score) matrix. Each entry of the matrix takes the form
+so that, thanks to the properties of logarithms and probabilities, the overall alignment score is the sum of the log-scores of the individual residue pairs. Considering 20 amino acids, there are 400 such log-scores, which form a 20x20 substitution (score) matrix. Each entry of the matrix takes the form
 
 $$
 s(x, y) = \frac{1}{\lambda} \log \frac{p_{xy}}{q_x q_y},
 $$
 
-where 
-
-* $p_{xy}$ is the likelihood of the second hypothesis (the two residues are correlated);
-* $q_x q_y$ is the likelihood of the first (null) hypothesis: the two residues are there by chance, their occurrence is unrelated and therefore the likelihood factorises in two terms that account for the average probability of observing those two residues in any protein;
-* $\lambda$ is an overall scaling factor that is used to obtain values that can be rounded off to integers.
-
-A positive score indicates that 
+where $\lambda$ is an overall scaling factor that is used to obtain values that can be rounded off to integers. Note that the previous definition can be formally substantiated (see *e.g.* [](doi:10.1073/pnas.87.6.2264)).
 
 If $p_{xy} > q_x q_y$ (and therefore $s(x, y)$ is positive), the substitution $x \to y$, and therefore their alignment in homologous sequences, occurs more frequently than would be expected by chance, suggesting that this substitution is favored in evolution. These substitutions are called "conservative". As noted in [](doi:10.1038/nbt0804-1035), this definition is purely statistical and has nothing directly to do with amino acid structure or biochemistry. Likewise, substitutions with $p_{xy} < q_x q_y$, and therefore negative values of $s(x, y)$, are termed "nonconservative".
 
@@ -796,23 +799,28 @@ Tyrosine, Phenylalanine, Tryptophan | Y, F, W | Aromatic | f |
 
 Why the values of the matrix diagonal, representing the scores of "substituting" one amino acid with itself, are all different? 
 
-> The rarer the amino acid is, the more surprising it would be to see two of them align together by chance. In the homologous alignment data that BLOSUM62 was trained on, leucine/leucine (L/L) pairs were in fact more common than tryptophan/tryptophan (W/W) pairs ($p_{LL} = 0.0371$, $p_{WW} = 0.0065$), but tryptophan is a much rarer amino acid ($f_L = 0.099$, $f_W = 0.013$). Run those numbers (with BLOSUM62's original $\lambda = 0.347$) and you get +3.8 for L/L and +10.5 for W/W, which were rounded to +4 and +11.
+> The rarer the amino acid is, the more surprising it would be to see two of them align together by chance. In the homologous alignment data that BLOSUM62 was trained on, leucine/leucine (L/L) pairs were in fact more common than tryptophan/tryptophan (W/W) pairs ($p_{LL} = 0.0371$, $p_{WW} = 0.0065$), but tryptophan is a much rarer amino acid ($q_L = 0.099$, $q_W = 0.013$). Run those numbers (with BLOSUM62's original $\lambda = 0.347$) and you get +3.8 for L/L and +10.5 for W/W, which were rounded to +4 and +11.
 >
 > -- [](doi:10.1038/nbt0804-1035)
+
+[^same_length_ungapped]: It is clear that in this context $S$ and $T$ are part of larger sequences.
 
 ### BLAST
 
 The sheer volume of sequence data generated by modern-day high-throughput sequencing technologies presents a significant challenge. Databases now contain millions of nucleotide and protein sequences, each potentially spanning thousands of characters. When comparing a new sequence against these massive databases, traditional pairwise alignment methods like the ones we just discussed become computationally demanding. Indeed, performing a global or even local alignment between a query sequence and every sequence in a large database can require huge computational resources and time, especially as the number of sequences and their lengths continue to grow exponentially.
 
-The need for a more efficient method resulted in the [most cited paper of the 1990s](doi:10.1016/S0022-2836(05)80360-2), where BLAST (Basic Local Alignment Search Tool), now a critical tool in bioinformatics, was introduced. BLAST operates by finding regions of local similarity between sequences, which is more computationally feasible and faster than aligning entire sequences globally. The algorithm requires a query sequence and a target database. First of all, the query sequence is broken down into smaller fragments (called words or $W$-mers). For each $W$-mer, a list of similar words is generated, and only those with a similarity measure that is higher than a threshold $T$ are retained add added to the final $K$-mer list. The similarity is evaluated by using a [substitution matrix](#sec:substitution_matrices) (BLOSUM62 is a common choice). Then, the target database is searched for matches to these words, extending the matches in both directions to find the best local alignments. BLAST assigns scores to these alignments based on the degree of similarity *via* a Smith-Waterman algorithm, with higher scores indicating closer matches.
+The need for a more efficient method resulted in the [most cited paper of the 1990s](doi:10.1016/S0022-2836(05)80360-2), where BLAST (Basic Local Alignment Search Tool), now a critical tool in bioinformatics, was introduced. BLAST operates by finding regions of local similarity between sequences, which is more computationally feasible and faster than aligning entire sequences globally. The algorithm requires a query sequence and a target database. First of all, the query sequence is broken down into smaller fragments (called words or $W$-mers). For each $W$-mer, a list of similar words is generated, and only those with a similarity measure that is higher than a threshold $T$ are retained add added to the final $W$-mer list. The similarity is evaluated by using a [substitution matrix](#sec:substitution_matrices) (BLOSUM62 is a common choice). Then, the target database is searched for matches to these words, extending the matches in both directions to find the best local alignments. BLAST assigns scores to these alignments based on the degree of similarity *via* a Smith-Waterman algorithm, with higher scores indicating closer matches.
 
 :::{warning}
 The Needleman-Wunsch and Smith-Waterman algorithms always find the optimal solution (*i.e.* the global minimum). By contrast, BLAST uses a heuristic approach, trading off some sensitivity for speed.
 :::
 
-:::{warning} TODO
-ADD FIGURE
-:::
+```{figure} figures/blast.png
+:name: fig:blast
+:align: center
+
+The three most important steps of the BLAST algorithm. (a) Generate the initial $W$-mers ($W = 3$). (b) Make the list of BLAST words using a threshold $T$. (c) Extend the matches into both directions until the score drops below a predetermined threshold.
+```
 
 The BLAST algorithm can be broken down into the following steps[^BLAST_wiki]
 
@@ -824,9 +832,9 @@ The BLAST algorithm can be broken down into the following steps[^BLAST_wiki]
 6.  *Scan the database sequences for exact matches with the remaining high-scoring words.* The BLAST program scans the database sequences for the remaining high-scoring words, such as PEG. If an exact match is found, this match is used to seed a possible ungapped alignment between the query and database sequences.
 7.  *Extend the exact matches to high-scoring segment pair (HSP).* The original version of BLAST stretches a longer alignment between the query and the database sequence in the left and right directions, from the position where the exact match occurred. The extension does not stop until the accumulated total score of the HSP begins to decrease. To save more time, a newer version of BLAST, called BLAST2 or gapped BLAST, has been developed. BLAST2 adopts a lower neighborhood word score threshold to maintain the same level of sensitivity for detecting sequence similarity. Therefore, the list of possible matching words list in step 3 becomes longer. Next, exact matched regions that are within distance $A$ from each other on the same diagonal are joined as a longer new region. Finally, the new regions are then extended by the same method as in the original version of BLAST, and the scores for each HSP of the extended regions are created by using a substitution matrix as before.
 8.  *List all of the HSPs in the database whose score is high enough to be considered.* All the HSPs whose scores are greater than the empirically determined cutoff score $S$ are listed. By examining the distribution of the alignment scores modeled by comparing random sequences, a cutoff score $S$ can be determined such that its value is large enough to guarantee the significance of the remaining HSPs.
-9.  *Evaluate the significance of the HSP score.* [It has been shown](doi:10.1073/pnas.87.6.2264) that the distribution of Smith-Waterman local alignment scores between two random sequences is
+9.  *Evaluate the significance of the HSP score.* [](doi:10.1073/pnas.87.6.2264) showed that the distribution of Smith-Waterman local alignment scores between two random sequences is
 $$p\left( S\ge x \right) =1-\exp \left( -KMN e^{-\lambda x } \right),$$
-where $M$ and $N$ are the length of the query and database sequences[^BLAST_MN], and the statistical parameters $\lambda$ and $K$ depend upon the substitution matrix, gap penalties, and sequence composition (the letter frequencies) and are estimated by fitting the distribution of the ungapped local alignment scores of the query sequence and of a lot (globally or locally) shuffled versions of a database sequence. Note that the validity of this distribution, known as the Gumbel extreme value distribution (EVD), has not been proven for local alignments containing gaps yet, but there is strong evidence that it works also for those cases. The expect score $E$ of a database match is the number of times that an unrelated database sequence would obtain a score $S$ higher than $x$ by chance. The expectation $E$ obtained in a search for a database of total length $N$
+where $M$ and $N$ are the length of the query and database sequences[^BLAST_MN], and the statistical parameters $\lambda$ and $K$ depend upon the substitution matrix, gap penalties, and sequence composition (the letter frequencies) and are estimated by fitting the distribution of the ungapped local alignment scores of the query sequence and of a lot of (globally or locally) shuffled versions of a database sequence. Note that the validity of this distribution, known as the Gumbel extreme value distribution (EVD), has not been proven for local alignments containing gaps yet, but there is strong evidence that it works also for those cases. The expect score $E$ of a database match is the number of times that an unrelated database sequence would obtain a score $S$ higher than $x$ by chance. The expectation $E$ obtained in a search for a database of total length $N$
 $$E = K M N e^{-\lambda S}$$
 This expectation or expect value $E$ (often called $E$-score, $E$-value or $e$-value) assessing the significance of the HSP score for ungapped local alignment is reported in the BLAST results. The relation above is different if individual HSPs are combined, such as when producing gapped alignments (described below), due to the variation of the statistical parameters.
 10. *Make two or more HSP regions into a longer alignment.* Sometimes, two or more HSP regions in one database sequence can be made into a longer alignment. This provides additional evidence of the relation between the query and database sequence. There are two methods, the Poisson method and the sum-of-scores method, to compare the significance of the newly combined HSP regions. Suppose that there are two combined HSP regions with the pairs of scores $(65, 40)$ and $(52, 45)$, respectively. The Poisson method gives more significance to the set with the maximal lower score $(45 > 40)$. However, the sum-of-scores method prefers the first set, because $65+40=105$ is greater than $52+45 = 97$. The original BLAST uses the Poisson method; BLAST2 uses the sum-of scores method.
@@ -834,7 +842,7 @@ This expectation or expect value $E$ (often called $E$-score, $E$-value or $e$-v
 
 The $E$-value is the single most important parameter to rate the quality of the alignments reported by BLAST. For instance, if $E = 10$ for a particular alignment with score $S$, it means that there are $10$ alignments with score $\geq S$ that can happen by chance between any query sequence and the database used for the search. Therefore, this particular alignment is most likely not very significant. By contrast, values much smaller than $1$ (*e.g* $10^{-3}$ or even smaller) are likely to signal that the sequences are homologous. On most webserver, it is possible to filter out all matches that have an $E$-value larger than some threshold. For instance, on the [NCBI webserver](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastp&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome), the "expect threshold" defaults to $0.05$.
 
-[^BLAST_wiki]: I took most of this description from [Wikipedia](https://en.wikipedia.org/wiki/BLAST_(biotechnology)#Algorithm), which in my opinion provides one the thorough explanation of the BLAST algorithm
+[^BLAST_wiki]: I took most of this description from [Wikipedia](https://en.wikipedia.org/wiki/BLAST_(biotechnology)#Algorithm), which in my opinion provides one of the thorough explanation of the BLAST algorithm
 [^DNA_BLAST_words]: For DNA words, common parameters are +5/-4 or +2/-3 for matches and mismatches.
 [^BLAST_MN]: It is possible to derive expressions that use effective rather than true sequence lengths, to compensate for edge effects (an alignment that starts near the end of the query or database sequence is likely not to have enough sequence to build an optimal alignment).
 
@@ -872,7 +880,15 @@ where the dynamic programming "table" is now three-dimensional, and $s = s(a, b,
 
 Unfortunately, better-performing exact methods, *i.e.* methods that provide the global optimal solution by construction, do not exist (yet). As a result, we have to rely on heuristic methods, which only find local minima. One commonly used approach for multiple sequence alignment is called progressive multiple alignment. Here the prerequisite is that we need to know the evolutionary tree, often called the *guide tree*, that connects the sequences we wish to align, which is usually built by using some low-resolution similarity measure, often based on (global) pairwise alignment. Then, we start by aligning the two most closely related sequences in a pairwise fashion, creating what is known as the seed alignment. Next, we align the third closest sequence to this seed, replacing the previous alignment with the new one. This process continues, sequentially adding and aligning each sequence based on its proximity in the tree, until we reach the final alignment. Note that this is done using a "once a gap, always a gap" rule: gaps in an alignment are not modified during subsequence alignments. These methods have a computational complexity of $\mathcal{O}(M^2)$, which makes it possible to align thousands of sequences.
 
-One of the most commonly used tools to perform MSAs is [Clustal Omega](doi:10.1038/msb.2011.75), which is a [command-line tool](http://www.clustal.org/omega/), but it is also available as a [webserver](https://www.ebi.ac.uk/jdispatcher/msa/clustalo). Clustal Omega builds the guide tree using an efficient algorithm (adapted from [](doi:10.1186/1748-7188-5-21)) which has an algorithmic complexity of $\mathcal{O}(M log M)$, making it possible to generate multiple alignments of hundreds of thousands sequences.
+```{figure} figures/MSA.gif
+:name: fig:MSA
+:align: center
+:width: 600px
+
+Representation of a protein multiple sequence alignment produced with ClustalW (which has been superseded by Clustal Omega). The sequences are instances of the acidic ribosomal protein P0 homolog (L10E) encoded by the Rplp0 gene from multiple organisms. The protein sequences were obtained from SwissProt searching with the gene name. Only the first 90 positions of the alignment are displayed. The colours represent the amino acid conservation according to the properties and distribution of amino acid frequencies in each column. Note the two completely conserved residues arginine (R) and lysine (K) marked with an asterisk at the top of the alignment. Credits to [Miguel Andrade via Wikipedia Commons](https://commons.wikimedia.org/wiki/File:RPLP0_90_ClustalW_aln.gif).
+```
+
+One of the most commonly used tools to perform MSAs is [Clustal Omega](doi:10.1038/msb.2011.75), which is a [command-line tool](http://www.clustal.org/omega/), but it is also available as a [webserver](https://www.ebi.ac.uk/jdispatcher/msa/clustalo). Clustal Omega builds the guide tree using an efficient algorithm (adapted from [](doi:10.1186/1748-7188-5-21)) which has an algorithmic complexity of $\mathcal{O}(M \log M)$, making it possible to generate multiple alignments of hundreds of thousands sequences. An example of MSA is shown in [](#fig:MSA).
 
 ## Threading
 

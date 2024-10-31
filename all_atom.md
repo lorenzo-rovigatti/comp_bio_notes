@@ -292,12 +292,77 @@ The extent of the fluctuations of the total energy, $\delta U$, for a Lennard-Jo
 
 ## Some observables
 
+Since, in principle, we have access to the whole phase space, in MD simulations we can compute averages of any (classical) observable. Here I present a short list of some useful (and common) quantities.
+
 (sec:compute_pressure)=
-### Pressure
+### Pressure[^pressure_source]
+
+In the canonical ensemble, for any observable $A$ and generalised coordinate or momentum $h_k$, integrating by parts (and assuming reasonable boundary conditions) one finds
+
+\begin{align}
+\left\langle \frac{\partial A}{\partial h_k} \right\rangle &= \frac{1}{Q} \int \frac{\partial A}{\partial h_k} \exp(-\beta H) d\lbrace h_k \rbrace = \frac{1}{Q} \int \beta A \frac{\partial H}{\partial h_k} \exp(-\beta H) d\lbrace h_k \rbrace\\
+&= \beta \left\langle A \frac{\partial H}{\partial h_k} \right\rangle,
+\end{align}
+
+which translates to the following generalised equipartition relation:
+
+$$
+\left\langle h_k \frac{\partial H}{\partial h_k} \right\rangle = k_B T.
+$$ (eq:generalised_equipartition)
+
+If we plug in a generalised momentum and sum over all momenta, Eq. [](#eq:generalised_equipartition) yields the usual equipartition principle:
+
+$$
+\left\langle \sum_{i=1}^N \frac{|\vec{p}_i|^2}{m_i} \right\rangle = 3 N k_B T,
+$$
+
+where $m_i$ is the mass of the $i$-th particle. By contrast, if we choose to use Cartesian coordinates as generalised coordinates in Eq. [](#eq:generalised_equipartition) and recall that the derivative of the Hamiltonian with respect to a particle coordinate is minus the total force acting on the particle along that coordinate, we find
+
+$$
+\left\langle \sum_{i=1}^N \vec{r}_i \cdot \vec{F}_i^{\rm tot} \right\rangle = -3 N k_B T,
+$$
+
+where $\vec{r}_i$ is the position of particle $i$. Note that here $\vec{F}_i^{\rm tot}$ is the sum of inter-molecular interactions, $\vec{F}_i^{\rm int}$, and external forces, $\vec{F}_i^{\rm ext}$. If the latter consist only of the forces exerted by the container walls (which keeps the system in a volume $V$ under a pressure $P$), we have
+
+$$
+\frac{1}{3} \left\langle \sum_{i=1}^N \vec{r}_i \cdot \vec{F}_i^{\rm ext} \right\rangle = -PV.
+$$
+
+Since $\vec{F}_i^{\rm tot} = \vec{F}_i^{\rm int} + \vec{F}_i^{\rm ext}$, we find
+
+$$
+P = \frac{N k_B T}{V} + \frac{1}{3V} \left\langle \sum_{i=1}^N \vec{F}_i^{\rm int} \cdot \vec{r}_i \right\rangle \equiv \langle P_{\rm inst} \rangle,
+$$ (eq:pressure)
+
+where I have defined the instantaneous pressure $P_{\rm inst}$. The second term in Eq. [](#eq:pressure) represents the contribution from interparticle forces, where $\vec{F}_i^{\rm int}$ is the force on particle $i$ due to all other particles. This is the way pressure is computed
+
+[^pressure_source]: Inspired by @allen2017computer.
 
 ### Radial distribution function
 
 ### Mean-squared displacement
+
+The mean squared displacement (MSD) quantifies the extent of particle diffusion within a system over time. It provides insights into the mobility of particles by tracking how far each particle moves from its original position. Formally, for a given particle $i$, the MSD at time $t$ is calculated as the average of the squared differences between its position $\vec r_i(t)$ at time $t$ and its initial position $\vec r_i(0)$, represented as $\text{MSD}_i(t) = \langle |\vec r_i(t) - \vec r_i(0)|^2 \rangle$, so that the overall MSD is
+
+$$
+\text{MSD}(t) = \frac{1}{N} \sum_{i=1}^N \langle |\vec r_i(t) - \vec r_i(0)|^2 \rangle
+$$
+
+In MD simulations, the MSD can be computed by first recording the position of each particle at each timestep, then calculating the squared displacement for each particle relative to its starting position, and finally averaging this value over all particles. If the system is ergodic, as it is often the case, we can also average over different time origins to decrease the statistical error. This is done by averaging contributions of the type $|\vec r_i(t_0 + t) - \vec r_i(t_0)|^2$ for multiple values of $t_0$.
+
+The MSD provides essential information on diffusive behavior, as its time dependence can help distinguish between different diffusion regimes, such as ballistic ($\text{MSD}(t) \sim t^2$), brownian ($\text{MSD}(t) \sim t$), or subdiffusive (*e.g.* $\text{MSD}(t) \sim t^\alpha$, with $\alpha$ < 1), which are characteristic of different types of material and dynamical properties.
+
+### Root mean-squared deviation
+
+The root mean-squared deviation (RMSD) is a measure commonly used to assess the structural deviation of a molecule or a set of particles from a reference structure, typically the initial or an experimentally determined structure. It quantifies the average distance between corresponding atoms in two structures, giving insight into conformational changes over time. The RMSD is particularly useful in studying the stability and flexibility of molecular structures, such as proteins, over the course of a simulation.
+
+Formally, for a system with $N$ atoms, the RMSD at time $t$ relative to a reference structure is given by:
+
+$$
+\text{RMSD}(t) = \sqrt{\frac{1}{N} \sum_{i=1}^{N} |r_i(t) - r_i^{\text{ref}}|^2}
+$$ (eq:rmsd)
+
+where $r_i^{\text{ref}}$ is the position of the $i$-th atom in the reference structure. To compute the RMSD in MD simulations Eq. [](#rmsd) is applied after that the structure at each time point is aligned with the reference structure (typically minimizing rotational and translational differences). The most common use of the RMSD is to plot it as a function of time to analyse the stability of the molecule: lower RMSD values indicate that the structure remains close to the reference, while higher values suggest significant conformational changes.
 
 ## Tricks of the trade
 

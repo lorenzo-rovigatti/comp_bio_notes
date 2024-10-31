@@ -1022,10 +1022,56 @@ Another interesting aspect is MSA masking, inspired by self-supervised learning 
 
 The single most useful output of AlphaFold is the 3D coordinates of each atom of the final predicted structure. However, another very important metric that is reported by the model is the predicted local-distance difference test (pLDDT), which provides a per-residue confidence score on a scale from 0 to 100, indicating how certain the model is about the position of each amino acid in the predicted 3D structure. A higher pLDDT score suggests greater accuracy, with scores above 90 being highly reliable, while scores below 70 indicate regions with lower confidence, possibly due to disorder or flexibility. Finally, AlphaFold also outputs a distogram, which is a histogram of pairwise distances.
 
+```{figure} figures/alphafold_AAV2.png
+:name: fig:alphafold_AAV2
+:align: center
+:width: 600px
+
+(a) The superposition between the experimental and Alphafold-predicted structures of the VP1 protein composing the capsid of a AAV2 virus. (b) The Alphafold-predicted structure, coloured according to the value of the pLDDT of each residue. Courtesy of Mouna Ouattara.
+```
+
+[](#fig:alphafold_AAV2) shows an example where Alphafold was used to predict the structure of a protein that makes up part of a viral capsid. Since the experimental structure is [available](https://www.rcsb.org/structure/1LP3), it is possible to superpose it to the predicted structure, which shows that a part of the latter has been hallucinated, *i.e.* made up, by Alphafold. Interestingly, a large part of the hallucinated portion is predicted to be coil and has a very low pLDDT, but part of it (the two helices) is structured and has a good pLDDT.
+
+```{figure} figures/alphafold_AAV2_7m8.png
+:name: fig:alphafold_AAV2_7m8
+:align: center
+:width: 600px
+
+Same as [](#fig:alphafold_AAV2), but for a mutant serotype (7m8, see [](doi:10.1126/scitranslmed.3005708)), which differs from the wildtype for a 10-amino acid peptide insertion in the VR-VIII loop, highlighted with a red ellipse in panel (a). Courtesy of Mouna Ouattara.
+```
+
+By contrast, [](#fig:alphafold_AAV2_7m8) shows the same comparisons for a closely related protein, which is obtained by adding a short peptide (10 amino acid long) to a loop that is far apart from the part of the protein that Alphafold hallucinates when predicting the structure of the wildtype protein. Nevertheless, in this case the predicted structure is very close to the experimental one.
+
 (sec:colabfold)=
 ### Using AlphaFold through ColabFold
 
 ColabFold, presented in [](doi:10.1038/s41592-022-01488-1), is an optimized implementation of AlphaFold that runs on Google Colab, providing a more accessible and user-friendly way to perform protein structure predictions. Unlike the "pure" AlphaFold, which can be downloaded [here](https://github.com/google-deepmind/alphafold) and requires extensive computational resources and a setup that may be challenging for individual users, ColabFold makes AlphaFold's capabilities more widely available by leveraging Google's cloud infrastructure. The ColabFold version is streamlined for easier use and has a faster input preprocessing, with the option to use precomputed databases for sequence searching, that significantly reduces both runtime and storage requirements. ColabFold provides an easy way to customise the most common options of the model, allowing users to adjust parameters, access multi-sequence alignments, and use additional input sequences to improve prediction accuracy. The code behind the notebook is open source (see [here](https://github.com/sokrypton/ColabFold)), and the notebook itself can be accessed [here](https://colab.research.google.com/github/sokrypton/ColabFold/blob/main/AlphaFold2.ipynb).
+
+:::{tip} Exercise
+Use ColabFold to predict the structure of the human ATPase GET3 (UniProt ID: [O43681](https://www.uniprot.org/uniprotkb/O43681/entry#function)). First of all, download the experimental PDB structure by clicking on the "Structure" item in the left toolbar, and then download the "8CQZ" entry, which contains the structure of a single chain[^ATPase_dimer].
+
+To predict the structure, copy the sequence ("Sequence" in the left toolbar, and then "Copy sequence"), paste it into the "query_sequence" field of the ColabFold notebook, and then click on "Runtime" $\to$ "Run all". At the end of the procedure (which should take 20-30 minutes) a zip file will be downloaded.
+
+Before opening it, familiarise with all the plots in the output part of the notebook. A few notes:
+
+* By default ColabFold will generate 5 models and rank them according to their average pLDDT.
+* The sequence coverage shows the MSA "at a glance". The plot shows the number of homolog sequences that overlap, at least partially, with the query.
+* The pLDDT plots provide an immediate visual estimation of the quality of the predictions.
+
+Now unzip the output archive and compare the experimental and predicted structures. In VMD this can be done in this way:
+
+* Open the two files: `vmd -m file1.pdb file2.pdb`
+* Change the representations to show the secondary structure of the two proteins
+  * Open "Graphics $\to$ Representations..." 
+  * Choose "Molecule" as Coloring Method and "NewCartoon" as Drawing Method
+  * In the top menu select the other file and repeat the previous step
+* Open the RMSD Tool: "Extensions $\to$ Analysis $\to$ RMSD Calculator"
+* In the top-left text field write "residue 1 to 340", since the two structures do not have the same number of residues
+* Click "Align" to superimpose one structure on top of the other. The different colours should make it possible to spot the differences at a glance
+* You can play with the text field to see what happens if you choose to align different subsections of the two structures.
+
+[^ATPase_dimer]: This ATPase is a homodimer.
+:::
 
 # Nucleic acids
 

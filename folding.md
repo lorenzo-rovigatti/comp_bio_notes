@@ -896,7 +896,7 @@ One of the most commonly used tools to perform MSAs is [Clustal Omega](doi:10.10
 Most of the text of this part has been adapted from [](doi:10.1385/1-59259-890-0:921) and @finkelstein2016protein.
 ```
 
-If pair alignment tools find that a given query sequence is found to share more than 30% of its sequence with another, then it is common to think that a reasonable model for that sequence can be built. By contrast, an alignment yielding a similarity of 20% - 25% could be purely coincidental. In reality, things are more complicated, as it has been shown that proteins with rather high sequence identity could be very differently from a structural point of view ([](doi:10.1073/pnas.95.11.6073)). This and other results show that a single quantity, such as sequence identity, is not enough to determine the 3D similarity between two proteins, and more numbers (such as the length of the chain or of the well-aligned regions) are required to build reliable models. For instance, it makes sense that for a short 50-residue protein a 40% sequence identity would be required to generate a good match, while 25% may be enough for 250 residues. However, note that these numbers have a purely statistical value.
+If pair alignment tools find that a given query sequence is found to share more than 30% of its sequence with another, then it is common to think that a reasonable model for that sequence can be built. By contrast, an alignment yielding a similarity of 20% - 25% could be purely coincidental. In reality, things are more complicated, as it has been shown that proteins with rather high sequence identity could be very different from a structural point of view ([](doi:10.1073/pnas.95.11.6073)). This and other results show that a single quantity, such as sequence identity, is not enough to determine the 3D similarity between two proteins, and more numbers (such as the length of the chain or of the well-aligned regions) are required to build reliable models. For instance, it makes sense that for a short 50-residue protein a 40% sequence identity would be required to generate a good match, while 25% may be enough for 250 residues. However, these numbers have a purely statistical value.
 
 A better approach is to go beyond pairwise alignments by using sequence database searching programs such as BLAST which, as we have seen, provide E-values or similar quantities that estimate the reliability of a sequence match by looking at it in the context of the whole library of sequence scores. In addition, more sophisticated BLAST versions (such as PSI-BLAST) make it possible to obtain good matches with less than 20% sequence identity.
 
@@ -914,7 +914,7 @@ Certainly, not all protein folding patterns have been collected in PDB yet; howe
 The basic idea of threading: a sequence is "threaded" through templates extracted from a database of known folds (*e.g.* the PDB), and the resulting structure is assigned an energy. The structure having the lowest energy is taken as the optimal candidate.
 ```
 
-To recognize the fold of a chain having no visible homology with already solved proteins, one can use various superimpositions of the chain in question onto all examined (taken from an a priori classification or from PDB) 3D folds in search of the lowest-energy chain-with-fold alignment, as sketched in [](#fig:threading). This is called the *threading method*. When a chain is aligned with the given fold, it is threaded onto the fold's backbone until its energy (or rather, free energy) is minimized, including both local interactions and interactions between remote chain regions. The threading alignment allows "gaps" in the chain and in the fold's backbone (the latter are often allowed for irregular backbone regions only). Many different algorithms have been proposed for finding the correct threading of a sequence onto a structure, though many make use of dynamic programming in some form. Indeed, in principle, threading is similar to a homology search; the difference is that only sequences are aligned in a homology search, while threading aligns a "new" sequence with "old" folds.
+To recognize the fold of a chain having no visible homology with already solved proteins, one can use various superpositions of the chain in question onto all examined (taken from an a priori classification or from PDB) 3D folds in search of the lowest-energy chain-with-fold alignment, as sketched in [](#fig:threading). This is called the *threading method*. When a chain is aligned with the given fold, it is threaded onto the fold's backbone until its energy (or rather, free energy) is minimized, including both local interactions and interactions between remote chain regions. The threading alignment allows "gaps" in the chain and in the fold's backbone (the latter are often allowed for irregular backbone regions only). Many different algorithms have been proposed for finding the correct threading of a sequence onto a structure, though many make use of dynamic programming in some form. Indeed, in principle, threading is similar to a homology search; the difference is that only sequences are aligned in a homology search, while threading aligns a "new" sequence with "old" folds.
 
 Being physics-inspired, threading can be a powerful tool for structural biologists and biophysicists. It uses mostly statistics-derived pseudopotentials rather than actual energies, which are based on the contact statistics between amino acids as found in known protein structures[^like_substitution_matrices].
 
@@ -951,7 +951,7 @@ The most technical part of this section has been taken/adapted from a [great blo
 :align: center
 :width: 500px
 
-The performance of CASP winners in the last eight contests. Taken from [](doi:10.1038/d41586-020-03348-4).
+The performance of CASP winners in the eight contests up to 2020. Taken from [](doi:10.1038/d41586-020-03348-4).
 ```
 
 The CASP (Critical Assessment of protein Structure Prediction) contest is a biennial competition established to evaluate the performance of computational methods for protein structure prediction. Since its inception in 1994, CASP has become a benchmark for assessing progress in the field, gathering researchers from across the globe to tackle one of the most complex challenges in computational biology. Participants receive amino acid sequences of proteins for which the 3D structure remains experimentally unknown to them but has been solved by researchers outside the competition. They then attempt to predict these structures using their algorithms, which are later evaluated against the experimentally determined ones. [](#fig:alphafold_CASP) shows the score of the winners of the last 8 contests. As can be seen in the figure, in 2020 there was a breakthrough that made it possible to predict the 3D structure of proteins with a precision close to the experimental one.
@@ -1014,13 +1014,13 @@ Finally, it is also worth noting that the Structure Module also generates a mode
 
 AlphaFold leverages a so-called "recycling mechanism": after generating a final structure, it takes all the information (*i.e.* the MSA and pair representations, as well as the predicted structure) and passes it back to the beginning of the Evoformer blocks. In the original paper the whole pipeline is executed three times.
 
-The quality of the training and of the final output of AlphaFold are determined by a specialized loss function called Frame Aligned Point Error (FAPE), a modified version of RMSD, to align atomic positions, which helps preventi incorrect protein chirality. However, this is only part of a more complex loss function, which is a weighted sum of various auxiliary losses. These include losses calculated from multiple iterations of the structure module and a distogram loss, which compares predicted 2D distance matrices with the true structure.
+The quality of the training and of the final output of AlphaFold are determined by a specialized loss function called Frame Aligned Point Error (FAPE), a modified version of RMSD, to align atomic positions, which helps prevent incorrect protein chirality. However, this is only part of a more complex loss function, which is a weighted sum of various auxiliary losses. These include losses calculated from multiple iterations of the structure module and a distogram loss, which compares predicted 2D distance matrices with the true structure.
 
 Another interesting aspect is MSA masking, inspired by self-supervised learning models, where some symbols in the MSA are masked and the model is asked to predict them. An additional trick employed is the so-called self-distillation: in this approach, they took a model trained exclusively on the PDB, and predicted the structures of ~300k diverse protein sequences. They then retrained the full model, incorporating a small random sample of these structures at every training cycle. The claim is that this operation allows the model to leverage the large amount of unlabelled data available in protein sequence repositories.
 
 ### Output
 
-The single most useful output of AlphaFold is the 3D coordinates of each atom of the final predicted structure. However, another very important metric that is reported by the model is the predicted local-distance difference test (pLDDT), which provides a per-residue confidence score on a scale from 0 to 100, indicating how certain the model is about the position of each amino acid in the predicted 3D structure. A higher pLDDT score suggests greater accuracy, with scores above 90 being highly reliable, while scores below 70 indicate regions with lower confidence, possibly due to disorder or flexibility. Finally, AlphaFold also outputs a distogram, which is a histogram of pairwise distances.
+The single most useful output of AlphaFold is the 3D coordinates of each atom of the final predicted structure. A very important metric that is reported by the model is the predicted local-distance difference test (pLDDT), which provides a per-residue confidence score on a scale from 0 to 100, indicating how certain the model is about the position of each amino acid in the predicted 3D structure. A higher pLDDT score suggests greater accuracy, with scores above 90 being highly reliable, while scores below 70 indicate regions with lower confidence, possibly due to disorder or flexibility. Finally, AlphaFold also outputs a distogram, which is a histogram of pairwise distances.
 
 ```{figure} figures/alphafold_AAV2.png
 :name: fig:alphafold_AAV2
@@ -1030,7 +1030,7 @@ The single most useful output of AlphaFold is the 3D coordinates of each atom of
 (a) The superposition between the experimental and Alphafold-predicted structures of the VP1 protein composing the capsid of a AAV2 virus. (b) The Alphafold-predicted structure, coloured according to the value of the pLDDT of each residue. Courtesy of Mouna Ouattara.
 ```
 
-[](#fig:alphafold_AAV2) shows an example where Alphafold was used to predict the structure of a protein that makes up part of a viral capsid. Since the experimental structure is [available](https://www.rcsb.org/structure/1LP3), it is possible to superpose it to the predicted structure, which shows that a part of the latter has been hallucinated, *i.e.* made up, by Alphafold. Interestingly, a large part of the hallucinated portion is predicted to be coil and has a very low pLDDT, but part of it (the two helices) is structured and has a good pLDDT.
+[](#fig:alphafold_AAV2) shows an example where Alphafold was used to predict the structure of a protein that makes up part of a viral capsid. Since the experimental structure is [available](https://www.rcsb.org/structure/1LP3), it is possible to superpose it to the predicted structure, which shows that a part of the latter has been hallucinated, *i.e.* made up, by Alphafold. Interestingly, a large part of the hallucinated portion is predicted to be a coil and has a very low pLDDT, but part of it (the two helices) is structured and has a good pLDDT.
 
 ```{figure} figures/alphafold_AAV2_7m8.png
 :name: fig:alphafold_AAV2_7m8
@@ -1077,7 +1077,7 @@ Now unzip the output archive and compare the experimental and predicted structur
 
 As for proteins, the structure of nucleic acids can be studied at different levels. The primary structure is the unidimensional list of nucleotides, which can be obtained fairly easily through sequencing. In DNA and RNA, the secondary structure is the list of base pairs that are formed between different parts of the strand(s), while the 3D structure is the description of how the polymer bends and twists. Here, contrary, to proteins, attractive interactions beyond base pairing (which includes stacking) are not very strong, and since nucleic acids are hydrophilic, there is no strong tendency of the nucleotides to tightly pack together. As a result, the free energy that stabilises a molecule's conformation mostly comes from the secondary (rather than tertiary, as in proteins) structure. Therefore, there are many useful things that we can learn about a certain RNA or DNA system by just knowing its secondary structure.
 
-Here I will present methods and algorithms that have been developed for single chains of RNA, but they are mostly valid for (or extendable to) multi-stranded and DNA systems. Formally, given a chain of length $N$, a secondary structure can be represented as a graph where each nucleotide $i$ is a vertex, and each base pair $(i, j)$ is an edge connecting two vertices. The connectivity can be represented  by an adjancency matrix $\hat A$, where each element of the matrix $A_{i,j}$ is equal to $1$ if $i$ and $j$ are linked (either through the backbone or by hydrogen bonds) and $0$ otherwise. In the case of the single chain, nucleotides are ordered and the backbone is continuous, thus $a_{i,i+1} = 1$. Moreover, since each nucleotide can be involved in most one base pair, for each $i$ there is at most one $j$ different from $i - 1$ and $i + 1$ for which $a_{i,j} = 1$.
+Here I will present methods and algorithms that have been developed for single chains of RNA, but they are mostly valid for (or extendable to) multi-stranded and DNA systems. Formally, given a chain of length $N$, a secondary structure can be represented as a graph where each nucleotide $i$ is a vertex, and each base pair $(i, j)$ is an edge connecting two vertices. The connectivity can be represented  by an adjancency matrix $\hat A$, where each element of the matrix $A_{i,j}$ is equal to $1$ if $i$ and $j$ are linked (either through the backbone or by hydrogen bonds) and $0$ otherwise. In the case of the single chain, nucleotides are ordered and the backbone is continuous, thus $A_{i,i+1} = 1$. Moreover, since each nucleotide can be involved in most one base pair, for each $i$ there is at most one $j$ different from $i - 1$ and $i + 1$ for which $A_{i,j} = 1$.
 
 ```{figure} figures/RNA_graph.png
 :name: fig:RNA_graph
@@ -1092,14 +1092,14 @@ Note that secondary structure prediction becomes much easier if we assume that n
 * if $i < k < j$ then $i < l < j$;
 * if $k < i < l$ then $k < j < l$.
 
-In the graph representation, pseudoknots are present if some edges intersect. Figure [](#fig:RNA_graph) shows the secondary structure (with and without knots) of a short RNA strand, represented as a graph.
+In the graph representation, pseudoknots are present if some edges intersect. [](#fig:RNA_graph) shows the secondary structure (with and without knots) of a short RNA strand, represented as a graph.
 
 Now we want to predict the secondary structure of the RNA, given its sequence. Since here we are dealing with one-dimensional sequences, I hope it will not be surprising to know that dynamic programming can be leveraged to find a solution to this problem, provided that
 
 1. we use a scoring scheme whereby the free-energy contribution that each base pair (or, more generally, "local" secondary structure motif) has on the overall stability of the molecule is additive;
 2. we assume that pseudoknots cannot form, so that the RNA can be split into two smaller ones which are independent.
 
-Indeed, under these conditions the solution to the full problem can be built by solving subproblems, which can be done efficiently by applying dynamic programming. The next two sections will describe two algorithms that can be used to obtain the optimal structure, *i.e. the one with the minimum free-energy (MFE).
+Indeed, under these conditions the solution to the full problem can be built by solving subproblems, which can be done efficiently by applying dynamic programming. The next two sections will describe two algorithms that can be used to obtain the optimal structure, *i.e.* the one with the minimum free-energy (MFE).
 
 ## Nussinov's algorithm
 
@@ -1110,7 +1110,7 @@ The first approach I will describe has been introduced by [](doi:10.1137/0135006
 :align: center
 :width: 600px
 
-The graph representation of Nussinov's recursion relation. Given a subsequence $S_{ij}$, $i$ is either unpaired (first term after the equal sign), or is paired to some other nucleotide $i < k \leq j$.
+The graph representation of Nussinov's recursive relation. Given a subsequence $S_{ij}$, $i$ is either unpaired (first term after the equal sign), or is paired to some other nucleotide $i < k \leq j$.
 ```
 
 The intuition behind Nussinov's algorithm, shown pictorially in [](#fig:nussinov), is the following: for any subsequence $[i, j]$, $S_{i,j}$, the $i$-th base can either remain unpaired or be paired with some $k$-th base where $i < k \leq j$. If the $i$-th base is unpaired, the (free) energy of $S_{i,j}$, denoted as $F_{i,j}$, simply reduces to the energy of the subsequence $S_{i+1,j}$, or $F_{i+1,j}$. This forms the first term of the Nussinov recurrence relation.
@@ -1129,7 +1129,7 @@ $$ (eq:nussinov)
 
 In this case the dynamic programming table $\hat F$ is of size $N \times N$, and is initialised so that its diagonal entries are set to zero, since a nucleotide cannot bind to itself. The other entries are set iteratively by starting from the bottom-right entry, where $i = j = N - 1$, so that the matrix is progressively filled up from left to right and bottom to top. The final score, representing the optimal solution for the entire sequence, is found in the upper right corner of the matrix, corresponding to the subsequence $S_{0,N-1}$. Since each $(i,j)$ entry requires an $\mathcal{O}(N)$ minimisation, and there are $\mathcal{O}(N^2)$ entries, the total algorithmic complexity is $\mathcal{O}(N^3)$.
 
-As always with dynamic programming methods, in addition to the optimal score we can obtain the secondary structure by using a traceback matrix $\hat K$, which is initialised during the fill-in phase. In particular, given the optimal secondary structure of the subsequence $S_{i,j}$, $K_{ij} = 0$ if $i$ is unpaired, while $K_{ij} = k$, where $k$ is the nucleotide that is paired to $i$, otherwise. A possible recursive traceback function is
+As always with dynamic programming methods, the secondary structure is obtained by using a traceback matrix $\hat K$, which is initialised during the fill-in phase. In particular, given the optimal secondary structure of the subsequence $S_{i,j}$, $K_{ij} = 0$ if $i$ is unpaired, while $K_{ij} = k$, where $k$ is the nucleotide that is paired to $i$, otherwise. A possible recursive traceback function is
 
 :::{code} plaintext
 DEFINE K as the traceback matrix K
@@ -1147,9 +1147,15 @@ FUNCTION traceback(i, j)
         traceback(k + 1, j)
 :::
 
+The recursion starts from the end, *i.e.* with `i = 0` and `j = N - 1`, and at the end of the procedure the list of base pairs is stored in `P`.
+
 Note that the complexity of the traceback algorithm is $O(N^2)$, since we move through a $N \times N$ matrix and perform a $\mathcal{O}(1)$ operation on each entry we visit.
 
 The Nussinov's algorithm is quite simplistic and comes with several limitations. In its naive implementation, the algorithm does not account for some important factors in RNA folding. Most notably, it does not take into account that, as we already know, stacking interactions between neighboring base pairs are crucial for RNA stability, at least as much as hydrogen bonding. To address this and other limitations, it is fundamental to incorporate biophysical factors into the prediction model. One improvement is to assign energies to structural elements rather than to individual base pairs, so that the total energy of the RNA structure becomes the sum of the energies of these substructures.
+
+:::{tip} Visualising the table, tracebacks and structures
+Head over [here](http://rna.informatik.uni-freiburg.de/Teaching/index.jsp?toolName=Nussinov) to try the algorithm. The webpage makes it possible to visualise the dynamic programming table, the traceback procedure and the optimal structure(s).
+:::
 
 (sec:zuker)=
 ## Zuker's algorithm
@@ -1164,7 +1170,7 @@ Most of the issues mentioned above can be overcome with the algorithm devised by
 Two schematic representations of the secondary structure of a simple RNA molecule. (a) The conventional representation. (b) The same structure, represented as an undirected graph with exterior and interior edges. The legend in the bottom right applies to both panels. Note that here "bifurcation loop" is used in place of multibranched loop. Taken from [](doi:10.1093/nar/9.1.133).
 ```
 
-The key idea can be fully appreciated by representing an RNA secondary structure as an [undirected graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)#Undirected_graph), drawn as a semicircle with chords connecting some edges. In the following description I borrow heavily from the original paper, which still is (after more than 40 years) one of the best resources on the subject[^read_original_papers]. Here are a few definitions:
+The key idea can be fully appreciated by representing an RNA secondary structure as an [undirected graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)#Undirected_graph), drawn as a semicircle with chords connecting some edges (see also [](#fig:RNA_graph)). In the following description I borrow heavily from the original paper, which still is (after more than 40 years) one of the best resources on the subject[^read_original_papers]. Here are a few definitions:
 
 * the $N$ nucleotides are the vertices of the graph;
 * the $N - 1$ arcs that connect each pair of $i$ and $i + 1$ nucleotides are the *exterior edges* and represent the backbone bonds;
@@ -1177,14 +1183,14 @@ These definitions are pictorially represented in [](#fig:zuker_graph). The diffe
 
 * A face bounded by a single interior edge is a hairpin loop, whose length is the number of exterior edges (the number of nucleotides composing the loop is this number minus one);
 * A face bounded by two interior edges is further classified into three groups:
-    1. if the interior edges are separated by two single exterior edges on both sides, the face is a stacking region (or loop);
+    1. if the interior edges are separated by two single exterior edges on both sides, the face is a stacking region (or stacking loop);
     2. if the face is bounded by a single exterior edge on one side, and multiple exterior edges on the other, the face is a bulge loop;
     3. if there are multiple exterior edges on both sides, the face is an interior loop;
 * A face that has $k$ ($k > 2$) interior edges is a $k$-multiloop (or a multibranched loop of order $k$).
 
 The energy of a given structure is the sum of the energies associated to each of its faces, $E_P = \sum_F E_F$. This is a powerful way of setting the statistical weight of each motif by using experimentally-determined values: for instance, since hairpins with loops shorter than $3$ are not possible, we can assign the energy $E_F = \infty$ to hairpin loops having fewer than four exterior edges. Any other specific effect (*e.g.* complicated sequence-dependent effect) can be naturally incorporated in this framework.
 
-Thanks to this decomposition, if we know (or can estimate) the energy contributions associated to each secondary structure motif, we can compute the total energy of any given structure. However, enumerating all possible structures to find the one with the lowest (free) energy would be computationally impossible even for rather small sequences. The problem can be overcome by using dynamic programming, with an approach similar (but different) to that of Nussinov.
+Thanks to this decomposition, if we know (or can estimate) the energy contributions associated to each secondary structure motif, we can compute the total energy of any given structure. However, enumerating all possible structures to find the one with the lowest (free) energy would be computationally impossible even for rather small sequences. The problem can be overcome by using dynamic programming, with an approach similar (but not equal) to that of Nussinov.
 
 As before, $S_{i,j}$ is the subsequence $[i, j]$. For each $S_{i,j}$ we define
 
@@ -1198,10 +1204,10 @@ The constraint on the minimum length of hairpin loops can be enforced by setting
 :align: center
 :width: 600px
 
-Possible substructures for the subsequence $S_{ij}$, constrained to the presence of a $(i, j)$ edge. Adapted from [](doi:10.1093/nar/9.1.133).
+Possible substructures for the subsequence $S_{ij}$, constrained to the presence of an $(i, j)$ edge. Adapted from [](doi:10.1093/nar/9.1.133).
 ```
 
-We start with $\hat V$. First of all, note that this matrix considers only those substructures that have $S_i$ and $S_j$ paired or, in other words, substructures whose graph representation has the $(i, j)$ interior edge. The presence of this additional edge means that the resulting optimal substructure also has an additional face compared to any other substructure we already evaluated. In particular, as shown in [](#fig:zuker_recursive_1),
+We start with $\hat V$. First of all, note that this matrix considers only those substructures that have $S_i$ and $S_j$ paired or, in other words, substructures whose graph representation has the $(i, j)$ interior edge. The presence of this additional edge means that the resulting optimal substructure also has an additional face compared to any other substructure that has been already evaluated. In particular, as shown in [](#fig:zuker_recursive_1),
 
 1. $(i, j)$ can close a hairpin, thus contributing with an energy $F_H(i, j)$;
 2. $(i, j)$ can close a face containing exactly two interior edges, with the other edge being $(k, l)$, with $i < k < l < j$. The face contributes an energy $F_L(i, j, k, l)$ that depends on the face which, as before, can be of three types:
@@ -1210,7 +1216,7 @@ We start with $\hat V$. First of all, note that this matrix considers only those
     3. $k > i + 1$ and $l < j - 1$: the face is an interior loop.
 3. $(i, j)$ can close a face containing $k$ interior edges, with the other $k - 1$ edges being $(i_1, j_1), \ldots , (i_{k - 1}, j_{k - 1})$. This is a $k$-multiloop, and its energy contribution is $F_M(i, j, i_1, j_1, \ldots, i_{k - 1}, j_{k - 1})$.
 
-In all these cases, the $F_H$, $F_L$ and $F_M$ penalty functions are model parameters, and can be estimated by experiment (see the section on [nearest-neighbour models](#sec:NN_models)). Of course, there are multiple substructures in which the $(i, j)$ edge is present. We make sure to select the one with the lowest free energy by first obtaining the optimal substructures corresponding to cases 2. and 3., and then to select the optimal substructure among the three possibilities listed above. This procedure translates to the following recursive relation:
+In all these cases, the $F_H$, $F_L$ and $F_M$ penalty functions are model parameters, and can be estimated by experiment (see the section on [nearest-neighbour models](#sec:NN_models)). Of course, there are multiple substructures in which the $(i, j)$ edge is present. We make sure to select the one with the lowest free energy by first obtaining the single optimal substructures that fall into cases 2. and 3., and then to select the optimal substructure among the three possibilities listed above. This procedure translates to the following recursive relation:
 
 $$
 V_{i,j} = \min \begin{cases}
@@ -1229,7 +1235,7 @@ where $F_S(i, j) \equiv F_L(i, j, i + 1, j - 1)$ is the energy associated to the
 :::{note} A simplified model
 Strangely enough, the [original paper](doi:10.1093/nar/9.1.133) contains an excellent description of the simplified model where the energy cost of multibranched loops is zero. However, the authors explicitly state that they use a version of the algorithm where this cost is different from zero, but do not describe it.
 
-In the simplified model described in [](doi:10.1093/nar/9.1.133), the contribution due to a multibranched loop is not given by a specific energy function $F_M$, but it is written in terms of the energy of two substructures (which is why Zuker et al use the term "bifurcation loop"). In particular, the contribution of a $k$-multiloop closed by the $(i, j)$ edge is written as
+In the simplified model described in [](doi:10.1093/nar/9.1.133), the contribution due to a multibranched loop is not given by a specific energy function $F_M$, but it is written in terms of the energy of two substructures (which is why Zuker *et al* use the term "bifurcation loop"). In particular, the contribution of a $k$-multiloop closed by the $(i, j)$ edge is written as
 
 $$
 W_{i + 1, k} + W_{k + 1, j - 1}
@@ -1245,6 +1251,8 @@ F_S(i, j) + V_{i + 1, j - 1}\\
 \min_{i + 1 < k < j - 2} \lbrace W_{i + 1, k} + W_{k + 1, j - 1} \rbrace
 \end{cases}
 $$ (eq:V_recursion_simplified)
+
+This is the version of the model I have implemented.
 :::
 
 ```{figure} figures/zuker_recursive_2.png
@@ -1323,11 +1331,11 @@ $$ (eq:V_recursion_M)
 
 The algorithmic complexity of the four cases are $\mathcal{O}(1)$, $\mathcal{O}(1)$, $\mathcal{O}(N^2)$ and $\mathcal{O}(N)$. Since there are $\sim N^2$ entries, the overall algorithmic complexity is $\mathcal{O}(N^4)$, and the required storage space is $\mathcal{O}(N^2)$, since only $N \times N$ matrices are required. The computational efficiency can be improved by limiting the size of a bulge or interior loop to some value (often taken to be $30$), which brings the complexity of the third case of Eq. [](#eq:V_recursion_M) down to $\mathcal{O}(N^2)$, and the overall algorithmic complexity down to $\mathcal{O}(N^3)$.
 
-A very nice open-source implementation of the Zuker's algorithm can be found [here](https://github.com/Lattice-Automation/seqfold).
+A very nice (but not necessarily easy to read) open-source implementation of the Zuker's algorithm can be found [here](https://github.com/Lattice-Automation/seqfold).
 
-## Beyond the MFE: the McCaskill algorithm
+## Beyond the MFE: the McCaskill algorithm[^mccaskill_derivation]
 
-The derivations in this section are taken from [](doi:10.1371/journal.pcbi.1006341).
+[^mccaskill_derivation]: The derivations in this section are taken from [](doi:10.1371/journal.pcbi.1006341).
 
 The Nussinov's and Zuker's algorithm find the optimal secondary structure of an RNA strand, defined as the structure that minimise the overall (free) energy. However, the conformations of macromolecules that are in thermal equilibrium with their environment are not fixed: in principle *any* allowed structure can be visited, given enough time (remember the concept of ergodicity and phase space?). In particular, if we define $\mathcal{P}$ as the *structural ensemble*, *i.e.* the ensemble of allowed structures, the probability that a macromolecule has a specific secondary structure $P$ is given by
 

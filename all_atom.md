@@ -350,7 +350,15 @@ $$
 
 In MD simulations, the MSD can be computed by first recording the position of each particle at each timestep, then calculating the squared displacement for each particle relative to its starting position, and finally averaging this value over all particles. If the system is ergodic, as it is often the case, we can also average over different time origins to decrease the statistical error. This is done by averaging contributions of the type $|\vec r_i(t_0 + t) - \vec r_i(t_0)|^2$ for multiple values of $t_0$.
 
-The MSD provides essential information on diffusive behavior, as its time dependence can help distinguish between different diffusion regimes, such as ballistic ($\text{MSD}(t) \sim t^2$), brownian ($\text{MSD}(t) \sim t$), or subdiffusive (*e.g.* $\text{MSD}(t) \sim t^\alpha$, with $\alpha$ < 1), which are characteristic of different types of material and dynamical properties.
+```{figure} figures/msd.png
+:name: fig:msd
+:align: center
+:width: 550px
+
+The mean-squared displacement of a coarse-grained system (a tetravalent [patchy particle](https://en.wikipedia.org/wiki/Patchy_particles) model) computed at fixed density and varying ratio between the attraction strength $\epsilon$ (kept constant) and the thermal energy, $k_B T$. Taken from [](doi:10.1063/5.0209151).
+```
+
+The MSD provides essential information on diffusive behavior, as its time dependence can help distinguish between different diffusion regimes, such as ballistic ($\text{MSD}(t) \sim t^2$), brownian ($\text{MSD}(t) \sim t$), or subdiffusive (*e.g.* $\text{MSD}(t) \sim t^\alpha$, with $\alpha$ < 1), which are characteristic of different types of material and dynamical properties. [](#fig:msd) provides an example of a system that, depending on temperature, experience all these regimes.
 
 ### Root mean-squared deviation
 
@@ -359,10 +367,26 @@ The root mean-squared deviation (RMSD) is a measure commonly used to assess the 
 Formally, for a system with $N$ atoms, the RMSD at time $t$ relative to a reference structure is given by:
 
 $$
-\text{RMSD}(t) = \sqrt{\frac{1}{N} \sum_{i=1}^{N} |r_i(t) - r_i^{\text{ref}}|^2}
+\text{RMSD}(t) = \sqrt{\frac{1}{N} \sum_{i=1}^{N} |\vec r_i(t) - \vec r_i^{\text{ref}}|^2}
 $$ (eq:rmsd)
 
-where $r_i^{\text{ref}}$ is the position of the $i$-th atom in the reference structure. To compute the RMSD in MD simulations Eq. [](#rmsd) is applied after that the structure at each time point is aligned with the reference structure (typically minimizing rotational and translational differences). The most common use of the RMSD is to plot it as a function of time to analyse the stability of the molecule: lower RMSD values indicate that the structure remains close to the reference, while higher values suggest significant conformational changes.
+where $\vec r_i^{\text{ref}}$ is the position of the $i$-th atom in the reference structure. To compute the RMSD in MD simulations Eq. [](#eq:rmsd) is applied after that the structure at each time point is aligned with the reference structure (typically minimizing rotational and translational differences). Formally, this can be written as
+
+$$
+\text{RMSD}(t) = \sqrt{\frac{1}{N} \sum_{i=1}^{N} |\hat R \cdot \vec r_i(t) + \vec t - \vec r_i^{\text{ref}}|^2},
+$$ (eq:aligned_rmsd)
+
+where $\hat R$ and $\vec t$ are the rotation matrix and translation vector that minimise the resulting RMSD, respectively. The most common use of the RMSD is to plot it as a function of time to analyse the stability of the molecule: lower RMSD values indicate that the structure remains close to the reference, while higher values suggest significant conformational changes.
+
+```{figure} figures/rmsd_amber.png
+:name: fig:rmsd_amber
+:align: center
+:width: 550px
+
+The RMSD of a Alanine dipeptide simulated with [Amber](https://ambermd.org/). Taken from [this Amber tutorial](https://ambermd.org/tutorials/basic/tutorial0/index.php).
+```
+
+[](#fig:rmsd_amber) shows the RMSD of a simulation of a small molecule (an Alanine dipeptide). In this example the small value of the RMSD throughout the trajectory shows that there is no significant conformational change in the positions of the atoms relative to the starting structure.
 
 ## Tricks of the trade
 
@@ -392,11 +416,10 @@ Verlet lists do not have to be updated at every step, or we would go back to che
 
 [^cubic_cells]: In principle, cells don't have to be cubic.
 
-### Long-range interactions
+(sec:ewald)=
+### Long-range interactions[^ewald_source]
 
-:::{tip}
-Most of the text of this part comes from @frenkel2023understanding.
-:::
+[^ewald_source]: Most of the text of this part comes from @frenkel2023understanding, while some bits have been adapted from @schlick2010molecular.
 
 In molecular simulations, long-range interactions refer to forces that decay slowly with distance. The definition of "long-range" can be made unambiguous if we consider the general form of a pairwise interaction potential $V(r)$ between two particles separated by a distance $r$. The energy contribution of these interactions beyond a certain cut-off distance $r_c$ is given by the "tail" correction of [](#eq:U_tail). For a potential that decays as $1/r^\alpha$, the tail correction is, asymptotically,
 
@@ -449,20 +472,33 @@ E_{\text{real}} = \frac{1}{2} \sum_{i=1}^N \sum_{j \neq i}^N \frac{q_i q_j \, \t
 $$
 where the sum is truncated at a cut-off distance $r_c$.
 
-* The reciprocal-space contribution $E_{\text{rec}}$ is computed using the Fourier transform of the charges and involves a sum over the reciprocal lattice vectors $\vec{k}$:
+* The reciprocal-space contribution $E_{\text{rec}}$ is computed using the Fourier transform of the charges and involves a sum over the reciprocal lattice vectors $\vec{k}$, which can be safely truncated at some cut-off wave vector $k_c$, since the exponential term ensures that the sum converges rapidly:
+
 $$
-E_{\text{rec}} = \frac{1}{2 V} \sum_{\vec{k} \neq 0} \frac{4 \pi}{k^2} \exp\left( -\frac{k^2}{4 \alpha^2} \right) \left| \sum_{j=1}^N q_j \exp(i \vec{k} \cdot \vec{r}_j) \right|^2,
-$$
-The exponential term ensures that the sum converges rapidly, and therefore the sum can be safely truncated at some cut-off wave vector $k_c$.
+E_{\text{rec}} = \frac{1}{2 V} \sum_{\vec{k} \neq 0} \frac{4 \pi}{k^2} \exp\left( -\frac{k^2}{4 \alpha^2} \right) \left| \sum_{j=1}^N q_j \exp(i \vec{k} \cdot \vec{r}_j) \right|^2.
+$$ (eq:ewald_reciprocal)
+
 
 * The self-interaction term, $E_{\text{self}}$, is:
 $$
 E_{\text{self}} = -\frac{\alpha}{\sqrt{\pi}} \sum_{i=1}^N q_i^2.
 $$
 
+Note that there are many subtleties that are linked to the boundary conditions that are applied to the system (even though the latter is infinite!). Have a look at @frenkel2023understanding and @schlick2010molecular (and references therein) for additional details.
+
 For fixed values of $k_c$ and $r_c$, the algorithmic time scales as $\mathcal{O}(N^2)$. However, this behaviour can be improved by realising that there are values of the cut-offs that minimise the error due to the truncations. Using these values, that depend on $N$, the complexity can be brought down to $\mathcal{O}(N^{3/2})$.
 
-Note that there are many subtleties that are linked to the boundary conditions that are applied to the system (even though the latter is infinite!). Have a look at @frenkel2023understanding and references therein for details.
+A further scaling improvement can be obtained by using the so-called Particle Mesh Ewald method ([](doi:10.1063/1.464397)). In the PME method, the reciprocal space contribution to electrostatic interactions is computed through the following series of steps that involve transforming particle charges into a charge density on a grid, applying Fourier transforms, and then transforming back to obtain the forces and energies:
+
+1. Assign each particle's charge to a regular 3D grid that spans the simulation box. This is achieved through an interpolation scheme, where each particle's charge is "spread" over multiple neighboring grid points. The most common method is B-spline interpolation (see [](doi:10.1063/1.470117) for details).
+2. Once the charges are mapped onto the grid, the Fourier transform of the grid-based charge density is computed. This is done by using the Fast Fourier Transform (FFT), an efficient algorithm for performing discrete Fourier transforms, with a computational complexity of $\mathcal{O}(N \log N)$.
+3. In Fourier space, the electrostatic potential for each grid point at wave vector is computed using the Ewald screening function (*i.e.* Eq. [](#eq:ewald_reciprocal)).
+4. Once the reciprocal-space potential has been calculated, an inverse Fourier transform is applied to convert the potential back to real space on the grid, yielding the electrostatic potential on each grid point in the simulation box.
+5. The final step is to interpolate the grid-based potential back to the positions of the actual particles, which allows the forces and energies to be computed for each particle based on the smoothed potential field. This is essentially the reverse of the initial charge assignment process, with each particle's force interpolated from the neighboring grid points.
+
+If the cut-off of the real-space contribution is chosen so that $E_\text{real}$ can be computed in $\mathcal{O}(N)$, the overall complexity of the PME method is $\mathcal{O}(N \log N)$, which is **much** better than $\mathcal{O}(N^{3/2})$. The method has some constant overhead that makes it slower than the original Ewald sums only for small systems, which is why PME is the *de-facto* standard of biomolecular simulations.
+
+Note that it is possible to achieve linear scaling ($\mathcal{O}(N)$) using sophisticated techniques such as the Fast Multipole Method (see *e.g.* [](doi:10.1016/0021-9991(87)90140-9), but those are rather difficult to implement, and not widely used yet.
 
 [^dipole_convergence]: Note that if $\alpha = 3$ (*e.g.* a dipole-dipole interaction), the tail correction is $U_\text{tail} \sim [\log r]_{r_c}^\infty$, which diverges.
 
@@ -676,13 +712,13 @@ TODO
 TODO
 ```
 
-# Classical force fields
+# Classical force fields[^source_FF]
 
-Classical (or empirical) force fields are foundational tools in computational chemistry and physics, providing a versatile and efficient framework for simulating the behavior of systems at the atomic and molecular scales. At their core, classical force fields describe the interactions between atoms using simplified mathematical models based on quantum mechanics calculations, empirical observations, and physical principles from classical mechanics. Unlike quantum methods, which rigorously account for the wave-like nature of particles and their interactions through principles like superposition and entanglement, classical force fields offer a pragmatic approach that balances computational feasibility with accuracy.
+[^source_FF]: the main references for this part are @schlick2010molecular and @leach2001molecular.
 
-The central concept behind classical force fields is the representation of interatomic interactions through potential energy functions, which quantify the energy associated with specific configurations of atoms and molecules. These potential energy functions typically consist of terms that describe various types of interactions, including covalent bonds, van der Waals (dispersion) forces and electrostatic interactions. By summing these contributions over all pairs or groups of atoms, classical force fields make it possible to evaluate the total potential energy of a system, as well its derivatives with respect to the system's degrees of freedom, which can be used to investigate its behaviour and dynamics.
+Now that we know the algorithms used to run MD codes, we shift our attention to the interaction potentials acting between the components that make up the system we want to simulate. We start from the so-called classical (or empirical) force fields, which describe the interactions between atoms using simplified mathematical models based on quantum mechanics calculations, empirical observations, and physical principles from classical mechanics. Unlike quantum methods (introduced in [](./quantum.md)), which rigorously account for the wave-like nature of particles and their interactions through principles like superposition and entanglement, classical force fields offer a pragmatic approach that balances computational feasibility with accuracy.
 
-One of the key advantages of classical force fields lies in their computational efficiency. Indeed, unlike quantum simulations, which require solving the Schrödinger equation or approximations thereof for each configuration of the system, classical force fields involve straightforward mathematical operations that scale linearly[^classical_scaling] with the number of particles. Despite their simplicity, classical force fields can exhibit remarkable predictive power and have been successfully applied across diverse scientific disciplines.
+The potential energy functions used in classical force fields typically consist of terms that describe various types of interactions, including covalent bonds, van der Waals (dispersion) forces and electrostatic interactions. Despite their simplicity, classical force fields can exhibit remarkable predictive power and have been successfully applied across diverse scientific disciplines.
 
 In a classical force field (FF from now on), the main assumption is that of *additivity*, which makes it possible to write down the total energy of a system as a sum of several contributions. These are classified into terms that account for atoms that are linked by covalent bonds (*bonded* or *local* terms), and terms that account for noncovalent interactions (*non-bonded* or *non-local* terms), so that the total energy of the system is written as
 
@@ -697,8 +733,6 @@ The separation of contributions into bonded and non-bonded terms is not only a c
 ```
 
 The functional forms of the functions (implicitly) defined in Eq. [](#eq:tot-energy) depend on the force field employed, and are parametrised so as to reproduce the experimental structure and dynamics of target molecular systems.
-
-[^classical_scaling]: As discussed below, linear scaling in systems interacting through *long-range interactions* such as the Coulomb potential require sophisticated techniques such as [Fast Multipole Method](https://doi.org/10.1016/0021-9991(87)90140-9). A more easy-to-achieve scaling is $\mathcal{O}(N \log N)$.
 
 ## Bonded interactions
 
@@ -723,11 +757,58 @@ Note that in writing Eq. [](#eq:bonded-energy) we have made an additional assump
 
 ### Bond stretching
 
-This interaction occurs when atoms connected by a covalent bond move closer together or farther apart, resulting in the stretching or compression of the bond. The energy associated with bond stretching is described by a potential energy function that typically resembles a harmonic oscillator potential, with the energy increasing quadratically with bond elongation or compression.
+This interaction occurs when atoms connected by a covalent bond move closer together or farther apart, resulting in the stretching or compression of the bond, and can be considered as "excitation" terms that accounts for small deviations from reference values, which are usually taken from experimental measurements.
+
+The simplest type of interaction that accounts for bond deformations is the harmonic potential, which is based on Hooke's law and takes a quadratic form:
+
+$$
+E_\text{harmonic}(r) = \frac{1}{2}k (r - r_\text{ref}),
+$$ (eq:harmonic_bond)
+
+where $k$ is the force constant (which can be estimated by the, possibly reduced, mass and frequency of a bond vibration through $k = m \omega^2$), and $r_\text{ref}$ is the reference value. Eq. [](#eq:harmonic_bond) works only for rather small deformations ($\approx 0.1 \angstrom$).
+
+Going beyond small deformations requires more complicated functional forms. An example is the Morse potential:
+
+$$
+E_\text{Morse}(r) = D [1 - \exp(-S_m(r - r_\text{ref})]^2,
+$$ (eq:morse)
+
+where the constants $S_m$ and $D$ controls the width and the depth of the potential well. This potential goes to infinity for $r \to 0$, while it tends to $D$ as $r \to \infty$, modelling the bond dissociation. Evaluating exponential functions is a rather slow business on a computer, which is why the Morse potential is often expanded in series, and only the first terms are retained. The expansion up to the fourth order reads
+
+$$
+E_\text{Morse}(r) \approx DS_m^2(r - r_\text{ref})^2 - DS_m^3(r - r_\text{ref})^3 + \frac{7}{12}DS_m^4(r - r_\text{ref})^4.
+$$ (eq:morse_expansion)
+
+I note in passing that the previous equation implies the force constant of Eq. [](#eq:harmonic_bond) can be related to the Morse parameters by $k = DS_m^2$.
+
+```{figure} figures/bond_stretching.png
+:name: fig:bond_stretching
+:align: center
+:width: 500px
+
+Morse, harmonic, cubic and two quartic bond potentials for H-Br. Taken from @schlick2010molecular.
+```
+
+A comparison between the Morse potential and its expansions at the second, third and fourth order is shown in [](#fig:bond_stretching). The change of curvature of the cubic potential yields unphysical behaviour for large deformations, but even the other approximated forms cannot model bond dissociation. Finally, some force fields use the following different (special) quartic form to avoid having to compute odd powers of $r$ (which require the computation of a square root, which is an expensive function to compute):
+
+$$
+E_\text{quartic} = S_q(r^2 - r_\text{ref}^2)^2,
+$$
+
+where the constant can be linked to the Morse parameters by matching the two second-order expansions, yielding $S_q = DS_m^2 / 4 r_\text{ref}^2$. This function is also shown in [](#fig:bond_stretching).
 
 ### Angle bending
 
-When three atoms are connected by two consecutive covalent bonds, the angle between these bonds can change, causing the atoms to deviate from a linear configuration. Angle bending interactions describe the energy associated with such deformations and are often modeled using harmonic potentials, where the energy increases quadratically with the deviation of the angle from its equilibrium value.
+When three atoms are connected by two consecutive covalent bonds, the angle between these bonds can change, causing the atoms to deviate from a linear configuration. Angle bending interactions describe the energy associated with such deformations and are often modeled using harmonic potentials, where the energy increases quadratically with the deviation of the angle from its equilibrium value. At first approximation, the reference (equilibrium) value is given by the type of orbital hybridisation due to the bonds (*e.g.* $180^\circ$ for *sp*, $120^\circ$ for *sp^2* and $109.47^\circ$ for *sp^3*). However, the orbitals are often deformed, and real values differ from ideal ones. For instance, in propane the $C-C-C$ and $H-C-H$ bond angles are $\approx 112.5^\circ$, and $\approx 107.5^\circ$, respectively.
+
+The most common potentials used have a harmonic form involving either angles or cosines:
+
+\begin{align}
+E^\theta_\text{harmonic}(\theta) & = K_h(\theta - \theta_\text{ref})^2\\
+E^\theta_\text{trig}(\theta) & = K_t(\cos \theta - \cos \theta_\text{ref})^2.
+\end{align}
+
+If $K_t = K_h \sin^2 \theta_\text{ref}$, then for small angle fluctuations the second form is very similar to the first one, while at the same time being more efficient from the computational point of view, since it does not require the computation of inverse trigonometric functions.
 
 ### Dihedral rotation
 
@@ -760,11 +841,11 @@ Van der Waals interactions are weak forces that arise due to fluctuations in the
 
 ### Electrostatic Interactions
 
-Electrostatic interactions arise from the attraction or repulsion between charged particles, such as ions or polar molecules. These interactions are governed by Coulomb's law, which states that the force between two charged particles is proportional to the product of their charges and inversely proportional to the square of the distance between them. In molecular systems, electrostatic interactions include interactions between charged atoms or molecules (ion-ion interactions), as well as interactions between charged and neutral atoms or molecules (ion-dipole interactions or dipole-dipole interactions).
+Electrostatic interactions arise from the attraction or repulsion between charged particles, such as ions or polar molecules. These interactions are governed by Coulomb's law, which states that the force between two charged particles is proportional to the product of their charges and inversely proportional to the square of the distance between them. In molecular systems, electrostatic interactions include interactions between charged atoms or molecules (ion-ion interactions), as well as interactions between charged and neutral atoms or molecules (ion-dipole interactions or dipole-dipole interactions). Since electrostatic interactions are long-ranged, they have to be handled with care, as discussed in [](#sec:ewald).
 
 ### Hydrogen Bonding
 
-Represents the specific type of non-covalent interaction between a hydrogen atom covalently bonded to an electronegative atom (e.g., nitrogen, oxygen, or fluorine) and a nearby electronegative atom. Hydrogen bonding interactions are often modeled using empirical potentials that account for the directionality and strength of hydrogen bonds.
+Represents the specific type of non-covalent interaction between a hydrogen atom covalently bonded to an electronegative atom (*e.g.*, nitrogen, oxygen, or fluorine) and a nearby electronegative atom. Hydrogen bonding interactions are often modeled using empirical potentials that account for the directionality and strength of hydrogen bonds.
 
 ## Transferability
 

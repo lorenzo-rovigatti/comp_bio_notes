@@ -1127,7 +1127,7 @@ $$
 F_{i,j} = \min \left\lbrace F_{i+1,j}, \min_{k} \lbrace F_{i+1,k-1} + F_{k+1, j} + s_{i,k} \rbrace  \right\rbrace.
 $$ (eq:nussinov)
 
-In this case the dynamic programming table $\hat F$ is of size $N \times N$, and is initialised so that its diagonal entries are set to zero, since a nucleotide cannot bind to itself. The other entries are set iteratively by starting from the bottom-right entry, where $i = j = N - 1$, so that the matrix is progressively filled up from left to right and bottom to top. The final score, representing the optimal solution for the entire sequence, is found in the upper right corner of the matrix, corresponding to the subsequence $S_{0,N-1}$. Since each $(i,j)$ entry requires an $\mathcal{O}(N)$ minimisation, and there are $\mathcal{O}(N^2)$ entries, the total algorithmic complexity is $\mathcal{O}(N^3)$.
+In this case the dynamic programming table $\hat F$ is of size $N \times N$, and is initialised so that its diagonal entries are set to zero, since a nucleotide cannot bind to itself. The other entries are set iteratively by starting from the bottom-right entry, where $i  = N - 2$ and $j = N - 1$, so that the matrix is progressively filled up from left to right and bottom to top. The final score, representing the optimal solution for the entire sequence, is found in the upper right corner of the matrix, corresponding to the subsequence $S_{0,N-1}$. Since each $(i,j)$ entry requires an $\mathcal{O}(N)$ minimisation, and there are $\mathcal{O}(N^2)$ entries, the total algorithmic complexity is $\mathcal{O}(N^3)$.
 
 As always with dynamic programming methods, the secondary structure is obtained by using a traceback matrix $\hat K$, which is initialised during the fill-in phase. In particular, given the optimal secondary structure of the subsequence $S_{i,j}$, $K_{ij} = 0$ if $i$ is unpaired, while $K_{ij} = k$, where $k$ is the nucleotide that is paired to $i$, otherwise. A possible recursive traceback function is
 
@@ -1329,7 +1329,7 @@ F_S(i, j) + V_{i + 1, j - 1}\\
 \end{cases}
 $$ (eq:V_recursion_M)
 
-The algorithmic complexity of the four cases are $\mathcal{O}(1)$, $\mathcal{O}(1)$, $\mathcal{O}(N^2)$ and $\mathcal{O}(N)$. Since there are $\sim N^2$ entries, the overall algorithmic complexity is $\mathcal{O}(N^4)$, and the required storage space is $\mathcal{O}(N^2)$, since only $N \times N$ matrices are required. The computational efficiency can be improved by limiting the size of a bulge or interior loop to some value (often taken to be $30$), which brings the complexity of the third case of Eq. [](#eq:V_recursion_M) down to $\mathcal{O}(N^2)$, and the overall algorithmic complexity down to $\mathcal{O}(N^3)$.
+The algorithmic complexity of the four cases are $\mathcal{O}(1)$, $\mathcal{O}(1)$, $\mathcal{O}(N^2)$ and $\mathcal{O}(N)$. Since there are $\sim N^2$ entries, the overall algorithmic complexity is $\mathcal{O}(N^4)$, and the required storage space is $\mathcal{O}(N^2)$, since only $N \times N$ matrices are used. The computational efficiency can be improved by limiting the size of a bulge or interior loop to some value (often taken to be $30$), which brings the complexity of the third case of Eq. [](#eq:V_recursion_M) down to $\mathcal{O}(N^2)$, and the overall algorithmic complexity down to $\mathcal{O}(N^3)$.
 
 A very nice (but not necessarily easy to read) open-source implementation of the Zuker's algorithm can be found [here](https://github.com/Lattice-Automation/seqfold).
 
@@ -1343,13 +1343,13 @@ $$
 p(P) = \frac{e^{-\beta F_P}}{\sum_{P' \in \mathcal{P}} e^{-\beta F_{P'}}} \equiv \frac{e^{-\beta F_P}}{Q},
 $$
 
-where $F_P$ is the energy of secondary structure $P$, and $Q$ is the partition function. We now look for a recursive relation to compute the partition function of a sequence $S$. Given a subsequence $S_{ij}$, $i$ is either unpaired, or it is paired with the $k$-th nucleotide, where $i < k \leq j$. For the first case, the partition function is that of the smaller subsequence $[i + 1, j]$, $Q_{i + 1, j}$. For the latter case, the $(i, k)$ edge splits the subsequence in two independent subproblems, and the overall partition function is given by the product of their partition functions, $Q_{k + 1, j}$ and $Q_{i + 1, k - 1} q_{i, k}$. Look at [](#fig:nussinov) and you will realise that it is the same splitting! The total partition function will be a sum over all these cases, *viz*
+where $F_P$ is the energy of secondary structure $P$, and $Q$ is the partition function. We now look for a recursive relation to compute the partition function of a sequence $S$. Given a subsequence $S_{ij}$, $i$ is either unpaired, or it is paired with the $k$-th nucleotide, where $i < k \leq j$. For the first case, the partition function is that of the smaller subsequence $[i + 1, j]$, $Q_{i + 1, j}$. For the latter case, the $(i, k)$ edge splits the subsequence in two independent subproblems, and the overall partition function is given by the product of their partition functions, $Q_{k + 1, j}$ and $Q_{i + 1, k - 1} q_{i, k}$, where $q_{i, k} \equiv e^{-\beta \Delta G_{i, k}}$ is the statistical weight of the base pair formed by $S_k$ and $S_j$. Look at [](#fig:nussinov) and you will realise that it is the same splitting! The total partition function will be a sum over all these cases, *viz*
 
 $$
-Q_{i,j} = Q_{i + 1, j} + \sum_{i < k \leq j} Q_{k + 1, j} Q_{i + 1, k - 1} q_{i, k},
+Q_{i,j} = Q_{i + 1, j} + \sum_{i < k \leq j} Q_{k + 1, j} Q_{i + 1, k - 1} q_{i, k}.
 $$ (eq:mccaskill)
 
-where $q_{kj} \equiv e^{-\beta \Delta G_{k,j}}$ is the statistical weight of the base pair formed by $S_k$ and $S_j$. This relation makes it possible to write down a dynamic programming code that fill the $\hat Q$ matrix with a complexity $\mathcal{O}(N^3)$. As before, the partition function of the sequence is found in the $Q_{0, N-1}$ entry.
+This relation makes it possible to write down a dynamic programming code that fill the $\hat Q$ matrix with a complexity $\mathcal{O}(N^3)$. As before, the partition function of the sequence is found in the $Q_{0, N-1}$ entry.
 
 :::{note} The connection with Nussinov's algorithm
 Here I'm implicitly using a simplified version of the McCaskill algorithm, where the overall energy is only due to base pairing. If you look closely, you will notice that there is a direct connection between Eq. [](#eq:mccaskill) and Eq. [](#eq:nussinov), which is summarised in the following table (adapted from the Appendix C of @finkelstein2016protein):

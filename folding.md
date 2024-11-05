@@ -1195,7 +1195,7 @@ Thanks to this decomposition, if we know (or can estimate) the energy contributi
 As before, $S_{i,j}$ is the subsequence $[i, j]$. For each $S_{i,j}$ we define
 
 * $W_{i,j}$ as the minimum free energy of the subsequence;
-* $V_{i,j}$ as the minimum free energy of all structures formed by $S_{i,j}$, in which $S_i$ and $S_j$ are paired with each other; if $S_i$ and $S_j$ cannot pair with each other, $V_{i,j} = \infty$.
+* $V_{i,j}$ as the minimum free energy of all structures formed by $S_{i,j}$, in which $S_i$ and $S_j$ are paired with each other; if $S_i$ and $S_j$ cannot pair with each other, $V_{i,j} = \infty$. 
 
 The constraint on the minimum length of hairpin loops can be enforced by setting $W_{i,j} = V_{i,j} = \infty$ if $j - i \leq 4$. By constrast, if $j - i = d > 4$, $W_{i,j}$ and $V_{i,j}$ can be written in terms of $W_{k,l}$ and $V_{k,l}$ for various pairs $(k, l)$ for which $l - k < d$, *i.e.* in terms of the minimum energies of smaller substructures. The recursive relations for the two matrices, $\hat V$ and $\hat W$, both of size $N \times N$, can be found by considering the possible structures formed by $S_{i,j}$.
 
@@ -1301,13 +1301,21 @@ First of all, note that, by construction, $j$ is always paired with $k$, so that
 
 The recursive relations for $\hat V$ and $\hat W$ can be used in a dynamic programming code to obtain the optimal secondary structure of the full sequence $S$. Since there is the constraint on the minimal loop length, after initialisation we start filling the matrices from the $(N - 5, N - 1)$ entry, and continue from bottom to top and from left to right. As in Nussinov's algorithm, the energy of the optimal structure of the entire sequence will be stored at the end of the fill-in phase in the $W_{N - 1, 0}$ entry, and the optimal secondary structure itself can be retrieved by using traceback matrices.
 
+```{figure} figures/multiloop.png
+:name: fig:multiloop
+:align: center
+:width: 300px
+
+An example of a multibranched loop with $k = 4$ and $k' = 4$. Interior edges are coloured in blue, while the interior edges that define the multiloop are drawn with dashed lines. Unpaired nucleotides within the loop are coloured in red.
+```
+
 What is the algorithmic complexity of the method? In the last case of Eq. [](#eq:V_recursion), we minimise on the order of the multiloop, and on all its interior edges. This operation has an exponential complexity, and therefore completely kills the computational efficiency. There exist several approximations that can be leveraged to obtain a polynomial complexity. The most extreme one is given by Eq. [](#eq:V_recursion_simplified), which completely neglects the energetic penalty of the multiloop. A more realistic approximation is the following:
 
 $$
 F_M(i, j, i_1, j_1, \ldots, i_{k - 1}, j_{k - 1}) \approx a + b k + c k',
 $$
 
-where $k'$ is the number of unpaired bases within the multiloop, and $a$, $b$ and $c$ are parameters, to be estimated experimentally. This approach makes use of another auxiliary matrix, $\hat M$, whose generic entry $M_{i,j}$ is the optimal energy of $S_{ij}$, with the constraint that $S_i$ and $S_j$ are part of a multiloop. The recursive relation takes into account the possibilities that $i$ and/or $j$ are unpaired, which contributes $c$, are paired with each other, which contributes $b$, or are part of two multi-loop substructures, and therefore
+where $k$ is the order of the loop, $k'$ is the number of unpaired bases within the loop (see [](#fig:multiloop)), and $a$, $b$ and $c$ are parameters, to be estimated experimentally. This approach makes use of another auxiliary matrix, $\hat M$, whose generic entry $M_{i,j}$ is the optimal energy of $S_{ij}$, with the constraint that $S_i$ and $S_j$ are part of a multiloop. The recursive relation takes into account the possibilities that $i$ and/or $j$ are unpaired, which contributes $c$, are paired with each other, which contributes $b$, or are part of two multi-loop substructures, and therefore
 
 $$
 M_{i,j} = \min \begin{cases}
@@ -1329,7 +1337,7 @@ F_S(i, j) + V_{i + 1, j - 1}\\
 \end{cases}
 $$ (eq:V_recursion_M)
 
-The algorithmic complexity of the four cases are $\mathcal{O}(1)$, $\mathcal{O}(1)$, $\mathcal{O}(N^2)$ and $\mathcal{O}(N)$. Since there are $\sim N^2$ entries, the overall algorithmic complexity is $\mathcal{O}(N^4)$, and the required storage space is $\mathcal{O}(N^2)$, since only $N \times N$ matrices are used. The computational efficiency can be improved by limiting the size of a bulge or interior loop to some value (often taken to be $30$), which brings the complexity of the third case of Eq. [](#eq:V_recursion_M) down to $\mathcal{O}(N^2)$, and the overall algorithmic complexity down to $\mathcal{O}(N^3)$.
+The algorithmic complexity of the four cases are $\mathcal{O}(1)$, $\mathcal{O}(1)$, $\mathcal{O}(N^2)$ and $\mathcal{O}(N)$. Since there are $\sim N^2$ entries, the overall algorithmic complexity is $\mathcal{O}(N^4)$, and the required storage space is $\mathcal{O}(N^2)$, since only $N \times N$ matrices are used. The computational efficiency can be improved by limiting the size of a bulge or interior loop to some value (often taken to be $30$), which brings the complexity of the third case of Eq. [](#eq:V_recursion_M) down to $\mathcal{O}(1)$, and the overall algorithmic complexity down to $\mathcal{O}(N^3)$.
 
 A very nice (but not necessarily easy to read) open-source implementation of the Zuker's algorithm can be found [here](https://github.com/Lattice-Automation/seqfold).
 
@@ -1340,10 +1348,10 @@ A very nice (but not necessarily easy to read) open-source implementation of the
 The Nussinov's and Zuker's algorithm find the optimal secondary structure of an RNA strand, defined as the structure that minimise the overall (free) energy. However, the conformations of macromolecules that are in thermal equilibrium with their environment are not fixed: in principle *any* allowed structure can be visited, given enough time (remember the concept of ergodicity and phase space?). In particular, if we define $\mathcal{P}$ as the *structural ensemble*, *i.e.* the ensemble of allowed structures, the probability that a macromolecule has a specific secondary structure $P$ is given by
 
 $$
-p(P) = \frac{e^{-\beta F_P}}{\sum_{P' \in \mathcal{P}} e^{-\beta F_{P'}}} \equiv \frac{e^{-\beta F_P}}{Q},
+p(P) = \frac{e^{-\beta E_P}}{\sum_{P' \in \mathcal{P}} e^{-\beta E_{P'}}} \equiv \frac{e^{-\beta E_P}}{Q},
 $$
 
-where $F_P$ is the energy of secondary structure $P$, and $Q$ is the partition function. We now look for a recursive relation to compute the partition function of a sequence $S$. Given a subsequence $S_{ij}$, $i$ is either unpaired, or it is paired with the $k$-th nucleotide, where $i < k \leq j$. For the first case, the partition function is that of the smaller subsequence $[i + 1, j]$, $Q_{i + 1, j}$. For the latter case, the $(i, k)$ edge splits the subsequence in two independent subproblems, and the overall partition function is given by the product of their partition functions, $Q_{k + 1, j}$ and $Q_{i + 1, k - 1} q_{i, k}$, where $q_{i, k} \equiv e^{-\beta \Delta G_{i, k}}$ is the statistical weight of the base pair formed by $S_k$ and $S_j$. Look at [](#fig:nussinov) and you will realise that it is the same splitting! The total partition function will be a sum over all these cases, *viz*
+where $E_P$ is the energy of secondary structure $P$, and $Q$ is the partition function. We now look for a recursive relation to compute the partition function of a sequence $S$. Given a subsequence $S_{ij}$, $i$ is either unpaired, or it is paired with the $k$-th nucleotide, where $i < k \leq j$. For the first case, the partition function is that of the smaller subsequence $[i + 1, j]$, $Q_{i + 1, j}$. For the latter case, the $(i, k)$ edge splits the subsequence in two independent subproblems, and the overall partition function is given by the product of their partition functions, $Q_{k + 1, j}$ and $Q_{i + 1, k - 1} q_{i, k}$, where $q_{i, k} \equiv e^{-\beta \Delta G_{i, k}}$ is the statistical weight of the base pair formed by $S_k$ and $S_j$. Look at [](#fig:nussinov) and you will realise that it is the same splitting! The total partition function will be a sum over all these cases, *viz*
 
 $$
 Q_{i,j} = Q_{i + 1, j} + \sum_{i < k \leq j} Q_{k + 1, j} Q_{i + 1, k - 1} q_{i, k}.
@@ -1380,9 +1388,17 @@ $$
 
 Note that with this formalism it is easier to employ more realistic energy functions by adding contributions (due to interior and multiloops, for instance) to Eq. [](#eq:mccaskill_bp), in analogy with the strategy devised by Zuker. See [here](doi:10.1186/1748-7188-6-3) for additional details.
 
-We can write down the probability $p(i, j)$ recursively, as the sum of two contributions:
+```{figure} figures/mccaskill_prob.png
+:name: fig:mccaskill_prob
+:align: center
+:width: 600px
 
-1. The probability that the $(i, j)$ edge exists and it is external, *i.e.* that there are no edges $(k, l)$ for which $k < i < j < l$. This is just
+A graph where the $(i,j)$ base pair is (a) external and (b) enclosed by an $(h, k)$ base pair.
+```
+
+We can write down the probability $p(i, j)$ recursively, as the sum of two contributions, shown graphically in [](#fig:mccaskill_prob):
+
+1. The probability that the $(i, j)$ edge exists and it is external, *i.e.* that there are no edges $(k, l)$ for which $k < i < j < l$. In this case the $(i, j)$ base pair split the graph into three independent parts, so that the total probability is just
 $$p_{\rm ext}(i, j) = \frac{Q_{0, i - 1} Q^{\rm bp}_{i,j} Q_{j + 1, N - 1}}{Q_{0, N-1}}.$$
 2. The probability that the $(i, j)$ edge exists and it is enclosed by other base pairs. This is a sum over all the possible enclosing base pairs $(h, k)$, with $h < i < j < k$, of the probability that the $(h, k)$ edge exists, $p(h, k)$, times the probability that the $(i, j)$ edge is the exterior edge of the $S_{h + 1, k - 1}$ subsequence, which is given by[^denominator_difference]
 $$\frac{Q_{h + 1, i - 1} Q^{\rm bp}_{i,j} Q_{j + 1, k - 1}}{Q_{h + 1, k - 1}}.$$

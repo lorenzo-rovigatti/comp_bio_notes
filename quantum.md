@@ -30,15 +30,15 @@ $$
 \langle \phi | \psi \rangle = \int \phi^*(\vec r) \psi(\vec r) d\vec r,
 $$
 
-where and $\phi^*(\vec{r})$ is the complex conjugate of $\phi(\vec r)$, and we also introduced the bra-ket notation.
+where $\phi^*(\vec{r})$ is the complex conjugate of $\phi(\vec r)$, and we also introduced the bra-ket notation.
 
-In quantum mechanics, physical quantities (observables) such as energy, momentum, and position are represented by operators that act on the wavefunction. For example, the position operator is $\hat{\vec{r}} = \vec{r}$, and the momentum operator, is $\hat{\vec{p}} = -i\hbar \nabla$. The expectation value of an observable over a wavefunction $\Psi$, which is the average value measured in an experiment, is given by:
+In quantum mechanics, physical quantities (observables) such as energy, momentum, and position are represented by operators that act on the wavefunction. For example, the position operator is $\hat{\vec{r}} = \vec{r}$, and the momentum operator, is $\hat{\vec{p}} = -i\hbar \nabla$, where $\hbar \equiv h / 2 \pi$ is the reduced Planck constant. The expectation value of an observable over a wavefunction $\Psi$, which is the average value measured in an experiment, is given by:
 
 $$
-\langle \hat{A} \rangle = \langle \Psi | \hat A | \Psi \rangle = \int \Psi^*(\vec{r}) \hat{A} \Psi(\vec{r}) d\vec{r}.
+\langle \hat{A} \rangle = \langle \Psi | \hat A | \Psi \rangle = \int \Psi^*(\vec{r}) \hat{A} \Psi(\vec{r}) d\vec{r},
 $$
 
-Here, $\hat{A}$ is the operator corresponding to the observable.
+where $\hat{A}$ is the operator corresponding to the observable.
 
 The *Hamiltonian operator*, or simply *Hamiltonian*, of a system, $\hat{H}$, represents the total energy of the system (kinetic and potential) and determines its evolution. The Hamiltonian typically takes the form:
 
@@ -46,7 +46,7 @@ $$
 \hat{H} = \frac{\hat p^2}{2m} + V(\vec{r}) = -\frac{\hbar^2}{2m} \nabla^2 + V(\vec{r})
 $$ (eq:hamiltonian)
 
-where $\hbar \equiv h / 2 \pi$ is the reduced Planck constant, $m$ is the mass of the particle, $\hat p =  -i\hbar \nabla$ is the particle's momentum, $\nabla^2$ is the Laplacian operator, representing the kinetic energy contribution, and $V(\vec{r})$ is the potential energy as a function of position. For a system of multiple particles, the Hamiltonian becomes more complex, accounting for the kinetic and potential energies of all particles as well as their interactions.
+where $m$ is the mass of the particle, $\hat p =  -i\hbar \nabla$ is the particle's momentum, $\nabla^2$ is the Laplacian operator, representing the kinetic energy contribution, and $V(\vec{r})$ is the potential energy as a function of position. For a system of multiple particles, the Hamiltonian becomes more complex, accounting for the kinetic and potential energies of all particles as well as their interactions.
 
 Given a Hamiltonian, the fundamental equation that determines how the wavefunction of a system evolves over time is the time-dependent Schrödinger equation:
 
@@ -70,13 +70,13 @@ This is a partial differential eigenvalue equation, where an operator acts on a 
 
 ## The many-body problem
 
-For systems with multiple interacting particles (*e.g.*, an atom, a molecule or larger objects), the Schrödinger equation becomes a many-body problem. The Hamiltonian for such a system includes terms for the kinetic energy of each particle, the potential energy due to external fields, and the interaction energy between the particles. For a system of $N$ particles, the many-body Hamiltonian can be written as:
+For systems with multiple interacting particles (*e.g.*, an atom, a molecule or larger objects), the Schrödinger equation becomes a many-body problem. The Hamiltonian for such a system includes terms for the kinetic energy of each particle, the potential energy due to external fields, and the interaction energy between the particles. For instance, for a system of $N$ charged particles, the many-body Hamiltonian can be written as:
 
 $$
-\hat{H} = \sum_{i=1}^{N} \left( -\frac{\hbar^2}{2m_e} \nabla_i^2 + V(\vec{r}_i) \right) + \frac{1}{2} \sum_{i} \sum_{i \neq j} \frac{e^2}{|\vec{r}_i - \vec{r}_j|}.
+\hat{H} = \sum_{i=1}^{N} \left( -\frac{\hbar^2}{2m_i} \nabla_i^2 + V(\vec{r}_i) \right) + \frac{1}{2} \sum_{i} \sum_{i \neq j} \frac{q_i q_j}{|\vec{r}_i - \vec{r}_j|},
 $$ (eq:many_body_H)
 
-Here the first term represents the kinetic energy of the electrons, the second term represents the potential energy due to an external field (*e.g.*, from atomic nuclei), and the third term represents the electron-electron Coulomb interaction. Here we set the Coulomb constant $1/4\pi\epsilon_0$ to 1 to simplify the notation.
+where $m_i$ and $q_i$ are the mass and charge of the $i$-th particle, respectively. Here the first term represents the kinetic energy of the particles, the second term represents the potential energy due to an external field (*e.g.*, from atomic nuclei if we are considering electrons), and the third term represents the Coulomb interaction. Here we set the Coulomb constant $1/4\pi\epsilon_0$ to 1 to simplify the notation.
 
 ```{note} Atomic units
 A common convention is to use atomic units (a.u.), where the reduced Planck constant $\hbar$, the electron charge $e$, the electron mass $m_e$, and the Coulomb constant are all set to 1. This simplifies many of the equations and is a common convention in computational quantum chemistry.
@@ -99,7 +99,7 @@ $$ (eq:full_H)
 
 where $\hat{T}_\text{nuc} = -\sum_{I=1}^{M} \frac{\hbar^2}{2M_I} \nabla_I^2$ and $\hat{T}_\text{el} = -\sum_{i=1}^{N} \frac{\hbar^2}{2m_e} \nabla_i^2$ are the kinetic energy operators for the nuclei and electrons, respectively, while $\hat{V}_\text{nuc-nuc}$, $\hat{V}_\text{nuc-el}$ and $\hat{V}_\text{el-el}$ represent the nucleus-nucleus, electron-nucleus, and electron-electron Coulomb interactions, respectively.
 
-The total wavefunction $\Psi(\{\vec{R}_I\}, \{\vec{r}_i\})$ depends on both the positions of the nuclei $\{\vec{R}_I\}$ and the electrons $\{\vec{r}_i\}$. Solving for the full wavefunction is complicated because the nuclear and electronic motions are coupled through the potential terms. However, the mass disparity between the nucleus and the electrons suggests that, on the timescale of nuclear motion, the electrons can adjust almost instantaneously to any change in nuclear positions. This allows us to decouple the nuclear and electronic motions by assuming that the electronic wavefunction can be solved for a fixed configuration of nuclei.
+The total wavefunction $\Psi(\{\vec{R}_I\}, \{\vec{r}_i\})$ depends on both the positions of the nuclei $\{\vec{R}_I\}$ and of the electrons $\{\vec{r}_i\}$. Solving for the full wavefunction is complicated because the nuclear and electronic motions are coupled through the potential terms. However, the mass disparity between the nucleus and the electrons suggests that, on the timescale of nuclear motion, the electrons can adjust almost instantaneously to any change in nuclear positions. This allows us to decouple the nuclear and electronic motions by assuming that the electronic wavefunction can be solved for a fixed configuration of nuclei.
 
 We assume that the total wavefunction $\Psi(\{\vec{R}_I\}, \{\vec{r}_i\})$ can be factored into a product of a nuclear wavefunction $\chi(\{\vec{R}_I\})$ and an electronic wavefunction $\psi(\{\vec{r}_i\}; \{\vec{R}_I\})$:
 
@@ -109,7 +109,7 @@ $$
 
 Here, the electronic wavefunction $\psi(\{\vec{r}_i\}; \{\vec{R}_I\})$ is parameterized by the fixed nuclear positions $\{\vec{R}_I\}$, while $\chi(\{\vec{R}_I\})$ describes the motion of the nuclei.
 
-## Solving the Electronic Schrödinger equation
+## Solving the Schrödinger equation
 
 With the nuclei fixed, we can solve the electronic Schrödinger equation for a given set of nuclear positions:
 
@@ -133,16 +133,12 @@ $$
 
 This equation governs the motion of the nuclei on the potential energy surface created by the electrons. In practice, depending on the temperature and energy scales, this motion can be treated either classically or quantum mechanically.
 
-In the BO approximation, we assume that the nuclear and electronic motions can be decoupled due to their vastly different timescales. This separation relies on the idea that the system evolves adiabatically, meaning that the electronic structure can adjust instantaneously to the motion of the nuclei, which move much more slowly.
-
 ```{note} Adiabaticity
 In quantum mechanics, a process is called *adiabatic* if the system remains in the same quantum state (or subspace) throughout the process, provided that the external conditions (like the positions of the nuclei) change sufficiently slowly. Specifically, for the BO approximation, this means that as the nuclei move, the electrons remain in their instantaneous ground state at all times. 
 
-More formally, if the nuclei evolve adiabatically, the system stays in the ground-state wavefunction of the electronic Hamiltonian corresponding to the instantaneous positions of the nuclei. 
+More formally, if the nuclei evolve adiabatically, the system stays in the ground-state wavefunction of the electronic Hamiltonian corresponding to the instantaneous positions of the nuclei: the nuclear motion is slow enough to allow the electrons to adjust without ever being excited to higher electronic states.
 
-The adiabaticity condition implies that the electrons are always in the ground state of the electronic Hamiltonian as the nuclei move, assuming that the nuclear motion is slow enough to allow the electrons to adjust without ever being excited to higher electronic states.
-
-The assumption of adiabaticity—and therefore the validity of the BO approximation—can break down in certain situations, leading to non-adiabatic effect*. These effects occur when the nuclear motion becomes fast enough that the electrons cannot adjust instantaneously. In such cases, the system may undergo transitions between different electronic states, leading to a mixing of electronic and nuclear dynamics.
+The assumption of adiabaticity—and therefore the validity of the BO approximation—can break down in certain situations, leading to non-adiabatic effects. These effects occur when the nuclear motion becomes fast enough that the electrons cannot adjust instantaneously. In such cases, the system may undergo transitions between different electronic states, leading to a mixing of electronic and nuclear dynamics.
 
 Situations where non-adiabatic effects are significant include:
 
@@ -171,7 +167,7 @@ $$
 \hat H_\text{el} = \sum_i \frac{p^2_i}{2 m_e} + \frac{1}{2} \sum_i \sum_{i \neq j} \frac{e^2}{|\vec r_i - \vec r_j|} + \sum_i V(\vec r_i),
 $$
 
-where the terms can be grouped to yield $\hat H_\text{el} = \hat F + \hat V$, where $F$ are the kinetic and electron-electron interaction energies, respectively, and $V$ is the "external" potential energy. The ground state $\Psi_0$ is uniquely determined by $N$ and $V(\{\vec r\})$, and we normalise it so that $\langle \Psi_0 | \Psi_0 \rangle = N$, its associated electron density is
+where the terms can be grouped to yield $\hat H_\text{el} = \hat F + \hat V$, where $F$ are the kinetic and electron-electron interaction energies, respectively, and $V$ is the "external" potential energy. The ground state $\Psi_0$ is uniquely determined by $N$ and $V(\{\vec r\})$, and we normalise it so that $\langle \Psi_0 | \Psi_0 \rangle = N$. Its associated electron density is
 
 $$
 n_0(\vec r) = \langle \Psi_0 | \rho(\vec r) | \Psi_0 \rangle = N \int |\Psi_0(\vec r, \vec r_2, \ldots, \vec r_N)|^2 d\vec r_2 \ldots d\vec r_N,
@@ -191,20 +187,19 @@ For any system of interacting electrons in an external potential $V(\vec{r})$, t
 :::
 
 :::{prf:proof}
-The theorem is proven by contradiction. Assume that two different external potentials, $V_1(\vec{r})$ and $V_2(\vec{r})$, and therefore two different Hamiltonians, $H_1 = F + V_1$ and $H_2 = F + V_2$, lead to the same ground-state electron density $n(\vec{r})$. The corresponding ground-state wavefunctions, $\Psi_1$ and $\Psi_2$, as they correspond to different potentials. Their associated energies, which should also be different, are
+The theorem is proven by contradiction. Assume that two different external potentials, $V_1(\vec{r})$ and $V_2(\vec{r})$, and therefore two different Hamiltonians, $\hat H_1 = \hat F + \hat V_1$ and $\hat H_2 = \hat F + \hat V_2$, lead to the same ground-state electron density $n_0(\vec{r})$. The corresponding ground-state wavefunctions, $\Psi_1$ and $\Psi_2$, as they correspond to different potentials. Their associated energies, which should also be different, are
 
 \begin{align}
-E_1 = \langle \Psi_1 | H_1 | \Psi_1 \rangle\\
-E_2 = \langle \Psi_2 | H_2 | \Psi_2 \rangle,
+E_1 = \langle \Psi_1 | \hat H_1 | \Psi_1 \rangle\\
+E_2 = \langle \Psi_2 | \hat H_2 | \Psi_2 \rangle,
 \end{align}
 
 Since both $\Psi_1$ and $\Psi_2$ are ground states, $E_1$ and $E_2$ are the lowest possible with the corresponding Hamiltonian. Therefore
 
 \begin{align}
-E_1 < \langle \Psi_2 | H_1 | \Psi_2 \rangle & = \langle \Psi_2 | H_2 | \Psi_2 \rangle + \langle \Psi_2 | (H_1 - H_2) | \Psi_2 \rangle =\\
+E_1 < \langle \Psi_2 | \hat H_1 | \Psi_2 \rangle & = \langle \Psi_2 | \hat H_2 | \Psi_2 \rangle + \langle \Psi_2 | (\hat H_1 - \hat H_2) | \Psi_2 \rangle =\\
 &= E_2 + \int n_0(\vec r) [V_1(\vec r) - V_2(\vec r)] d\vec r\\
-
-E_2 < \langle \Psi_1 | H_2 | \Psi_1 \rangle & = \langle \Psi_1 | H_1 | \Psi_1 \rangle + \langle \Psi_1 | (H_2 - H_1) | \Psi_1 \rangle =\\
+E_2 < \langle \Psi_1 | \hat H_2 | \Psi_1 \rangle & = \langle \Psi_1 | \hat H_1 | \Psi_1 \rangle + \langle \Psi_1 | (\hat H_2 - \hat H_1) | \Psi_1 \rangle =\\
 &= E_1 + \int n_0(\vec r) [V_2(\vec r) - V_1(\vec r)] d\vec r.
 \end{align}
 
@@ -257,7 +252,7 @@ $$
 \langle \psi | \hat H | \psi \rangle = E_0 + \sum_{j > 0} |c_j|^2 (E_j - E_0) > E_0,
 $$
 
-since $|c_j|^2 \geq 0$ and $E_j - E_0 > 0$.
+since $|c_j|^2 \geq 0$ and $E_j - E_0 > 0$ $\forall j > 0$.
 
 Back to the Hohenberg-Kohn theorem, we know that the electron density $n(\vec r)$ fully determines the potential $V(\vec r)$ and the ground state $\Psi_0$. Consider a trial electron density $n'(\vec{r})$ that is not the true ground-state density $n_0(\vec{r})$. This will be associated to an external potential $V'$ and to a wave function $\Psi'$. By applying the variational principle, we find that the expectation value of the true Hamiltonian on this wave function is
 
@@ -287,7 +282,7 @@ The Kohn-Sham (KS) approximation, introduced by [Walter Kohn and Lu Jeu Sham in 
 
 ## The Kohn-Sham equations
 
-The central idea of the Kohn-Sham approach is to introduce a fictitious system of non-interacting electrons that reproduces the exact ground-state electron density of the real, interacting system. For this non-interacting system, the kinetic energy can be computed exactly in terms of the of single-particle orbitals, which in this context are called the Kohn-Sham orbitals, $\psi_i$. The electron density is also constructed from the Kohn-Sham orbitals as:
+The central idea of the Kohn-Sham approach is to introduce a fictitious system of non-interacting electrons that reproduces the exact ground-state electron density of the real, interacting system. For this non-interacting system, the kinetic energy can be computed exactly in terms of single-particle orbitals, which in this context are called the Kohn-Sham orbitals, $\psi_i$. The electron density is also constructed from the Kohn-Sham orbitals as:
 
 $$
 n(\vec{r}) = \sum_{i=1}^{N} |\psi_i(\vec{r})|^2.
@@ -296,10 +291,10 @@ $$
 Instead of attempting to directly approximate the total energy functional $E[n]$ for the interacting system, we decompose it into parts that can be computed exactly and parts that require approximations. The total energy functional in the Kohn-Sham formalism is written as:
 
 $$
-E[n] = T_s[n] + \int v(\vec{r}) n(\vec{r}) \, d\vec{r} + U[n] + E_{\text{xc}}[n],
+E[n] = T_s[n] + \int V(\vec{r}) n(\vec{r}) \, d\vec{r} + U[n] + E_{\text{xc}}[n],
 $$ (eq:kohn-sham_functional)
 
-where $T_s[n]$ is the kinetic energy of the non-interacting electrons, $U[n]$ is the Hartree (Coulomb) energy, representing the classical electrostatic interaction between electrons, and $E_{\text{xc}}[n]$ is the exchange-correlation energy, which includes all the many-body effects not captured by the other terms.
+where $T_s[n]$ is the kinetic energy of the non-interacting electrons, $U[n]$ is the Hartree (Coulomb) energy, representing the classical electrostatic interaction between electrons, and $E_{\text{xc}}[n]$ is the exchange-correlation energy, which includes all the many-body effects not captured by the other terms (*e.g* the electron-electron effective repulsion due to the Pauli exclusion principle).
 
 To find the ground-state density, the Kohn-Sham approach involves solving a set of single-particle equations, known as the Kohn-Sham equations. These equations describe the motion of non-interacting electrons in an effective potential $v_{\text{eff}}(\vec{r})$, and can be obtained by using the fact that the functional in Eq. [](#eq:kohn-sham_functional) is minimised by the ground-state electron density. Therefore, $\delta E / \delta n = 0$. If we carry out the functional derivative with the constraint that the Kohn-Sham orbitals are orthonormal, we obtain (see Appendix B of @giustino2014materials for the full derivation)
 
@@ -310,7 +305,7 @@ $$ (eq:kohn-sham)
 $\epsilon_i$ is the single-particle energy corresponding to $\psi_i$, and the effective potential, which includes the effects of the external potential, the Hartree potential, and the exchange-correlation potential, is given by
 
 $$
-v_{\text{eff}}(\vec{r}) = v(\vec{r}) + \int \frac{n(\vec{r'})}{|\vec{r} - \vec{r'}|} d\vec{r'} + v_{\text{xc}}(\vec{r})
+v_{\text{eff}}(\vec{r}) = V(\vec{r}) + \int \frac{n(\vec{r'})}{|\vec{r} - \vec{r'}|} d\vec{r'} + v_{\text{xc}}(\vec{r})
 $$
 
 The Kohn-Sham equations must be solved self-consistently:
@@ -342,7 +337,7 @@ The LDA is based on the exchange-correlation energy of a homogeneous electron ga
 The Generalized Gradient Approximation (GGA) improves upon the LDA by incorporating not only the local electron density but also its gradient $\nabla n(\vec{r})$:
 
 $$
-E_{\text{xc}}^{\text{GGA}}[n] = \int f(n(\vec{r}), \nabla n(\vec{r})) d\vec{r}.
+E_{\text{xc}}^{\text{GGA}}[n] = \int \epsilon_{\text{xc}}(n(\vec{r}), \nabla n(\vec{r})) n(\vec r) d\vec{r}.
 $$
 
 GGA functionals, such as the [Perdew-Burke-Ernzerhof](doi:10.1103/PhysRevLett.77.3865) functional, are more accurate for systems with significant density variations, such as molecules, surfaces, and low-dimensional materials. They are widely used in practical DFT calculations.
@@ -353,19 +348,19 @@ Hybrid functionals go beyond the local and semi-local approximations by mixing a
 
 ## Implications and limitations
 
-The Kohn-Sham approximation is a powerful and practical method for implementing Density Functional Theory. By mapping the interacting electron problem onto a non-interacting system with the same electron density, it makes DFT calculations computationally tractable. In fact, DFT with the Kohn-Sham approximation can be applied to systems with hundreds or even thousands of atoms, from molecules to solids, and can provide a good balance between computational cost and accuracy, particularly with carefully chosen exchange-correlation functionals. 
+The Kohn-Sham approximation is a powerful and practical method for implementing Density Functional Theory. By mapping the interacting electron problem onto a non-interacting system with the same electron density, it makes DFT calculations computationally tractable. In fact, DFT with the Kohn-Sham approximation can be applied to systems with hundreds or even thousands of atoms, from molecules to solids, and can provide a good balance between computational cost and accuracy, particularly with carefully chosen exchange-correlation functionals. Unfortunately, the choice of the functional greatly impacts the accuracy of the DFT calculations, and no single functional is universally accurate. 
 
-However, the accuracy of DFT calculations depends heavily on the choice of exchange-correlation functional. No single functional is universally accurate, and for some systems (*e.g.*, strongly correlated materials), DFT may fail to provide reliable results. For instance, the most approximate functionals (*e.g.*, LDA and GGA) suffer from self-interaction errors, where an electron incorrectly interacts with itself. This can lead to inaccuracies, particularly in systems with localized states, such as transition metal oxides and open-shell molecules. Moreover, DFT is primarily a ground-state theory, and its application to excited states is limited. [Time-dependent DFT](https://en.wikipedia.org/wiki/Time-dependent_density_functional_theory) extends DFT to excited states, but it also inherits the limitations of the exchange-correlation functionals used.
+Moreover, for some systems (*e.g.*, strongly correlated materials), DFT may fail to provide reliable results. For instance, the most approximate functionals (*e.g.*, LDA and GGA) suffer from self-interaction errors, where an electron incorrectly interacts with itself. This can lead to inaccuracies, particularly in systems with localized states, such as transition metal oxides and open-shell molecules. Moreover, DFT is primarily a ground-state theory, and its application to excited states is limited. [Time-dependent DFT](https://en.wikipedia.org/wiki/Time-dependent_density_functional_theory) extends DFT to excited states, but it also inherits the limitations of the exchange-correlation functionals used.
 
 # The Hellmann-Feynman Theorem
 
 In the sections above I have sketched a way of solving the electronic problem and obtain the ground-state electron density. However, in *ab initio* simulations we have to also evolve the positions of the nuclei. How do we connect $n(r)$ to the forces acting on the nuclear degrees of freedom? The Hellmann-Feynman theorem provides a convenient and efficient way to compute these forces within the framework of quantum mechanics, without requiring the explicit calculation of the derivatives of the wavefunction.
 
-The theorem states that when a system is in an eigenstate of its Hamiltonian, the force on a nucleus can be calculated directly from the electron density and the external potential. This result greatly simplifies force calculations in Density Functional Theory (DFT) and other quantum mechanical methods, making it possible to efficiently perform simulations of atomic motion.
+The theorem states that when a system is in an eigenstate of its Hamiltonian, the forces acting on a nucleus can be calculated directly from the electron density and the external potential. This result greatly simplifies force calculations in Density Functional Theory (DFT) and other quantum mechanical methods, making it possible to efficiently perform simulations of atomic motion.
 
 :::{prf:theorem} The Hellmann-Feynman Theorem
 
-Consider a quantum system described by a Hamiltonian $\hat{H}(\lambda)$, which depends on a parameter $\lambda$ (*e.g.*, the position of a nucleus in a molecule or solid). Then, if $\psi(\lambda)$ is an eigenstate of the Hamiltonian with eigenvalue $E(\lambda)$, then the derivative of the eigenvalue with respect to the parameter $\lambda$ is given by the expectation value of the derivative of the Hamiltonian:
+Consider a quantum system described by a Hamiltonian $\hat{H}(\lambda)$, which depends on a parameter $\lambda$ (*e.g.*, the position of a nucleus in a molecule or solid). If $\psi(\lambda)$ is an eigenstate of the Hamiltonian with eigenvalue $E(\lambda)$, then the derivative of the eigenvalue with respect to the parameter $\lambda$ is given by the expectation value of the derivative of the Hamiltonian:
 
 $$
 \frac{dE(\lambda)}{d\lambda} = \left\langle \psi(\lambda) \left| \frac{d\hat{H}(\lambda)}{d\lambda} \right| \psi(\lambda) \right\rangle.
@@ -380,35 +375,31 @@ $$
 \hat{H}(\lambda) \psi(\lambda) = E(\lambda) \psi(\lambda)
 $$
 
-Taking the derivative of both sides of this equation with respect to $\lambda$ we obtain
+Taking the derivative of both sides of this equation with respect to $\lambda$ we obtain[^no_lambda]
 
 $$
-\frac{d\hat{H}(\lambda)}{d\lambda} \psi(\lambda) + \hat{H}(\lambda) \frac{d\psi(\lambda)}{d\lambda} = \frac{dE(\lambda)}{d\lambda} \psi(\lambda) + E(\lambda) \frac{d\psi(\lambda)}{d\lambda}.
+\frac{d\hat{H}}{d\lambda} \psi + \hat{H} \frac{d\psi}{d\lambda} = \frac{dE}{d\lambda} \psi + E \frac{d\psi}{d\lambda}.
 $$
 
-If we multiply both sides by $\psi^*(\lambda)$ and integrate over all space we get
+If we multiply both sides by $\psi^*$ and integrate over all space we get
 
 $$
-\left\langle \psi(\lambda) \left| \frac{d\hat{H}(\lambda)}{d\lambda} \right| \psi(\lambda) \right\rangle + \left\langle \psi(\lambda) \left| \hat{H}(\lambda) \right| \frac{d\psi(\lambda)}{d\lambda} \right\rangle = \frac{dE(\lambda)}{d\lambda}.
+\left\langle \psi \left| \frac{d\hat{H}}{d\lambda} \right| \psi \right\rangle + \left\langle \psi \left| \hat{H} \right| \frac{d\psi}{d\lambda} \right\rangle = \frac{dE}{d\lambda} + E \left\langle \psi \left| \frac{d\psi}{d\lambda} \right. \right\rangle.
 $$
 
-Since $\psi(\lambda)$ is an eigenstate of $\hat{H}(\lambda)$, $\hat{H}(\lambda)\psi(\lambda) = E(\lambda)\psi(\lambda)$, so that the second term can be simplified:
+Since $\psi$ is an eigenstate of $\hat{H}$, $\hat{H}\psi = E\psi$, so that the second term can be simplified:
 
 $$
-\left\langle \psi(\lambda) \left| \frac{d\hat{H}(\lambda)}{d\lambda} \right| \psi(\lambda) \right\rangle + E(\lambda) \left\langle \psi(\lambda) \middle| \frac{d\psi(\lambda)}{d\lambda} \right\rangle = \frac{dE(\lambda)}{d\lambda}.
+\left\langle \psi \left| \frac{d\hat{H}}{d\lambda} \right| \psi \right\rangle + E \left\langle \psi \middle| \frac{d\psi}{d\lambda} \right\rangle = \frac{dE}{d\lambda} + E \left\langle \psi \left| \frac{d\psi}{d\lambda} \right. \right\rangle.
 $$
 
-Now, recall that the wavefunction $\psi(\lambda)$ is normalized, so $\left\langle \psi(\lambda) \middle| \psi(\lambda)  \right\rangle = 1$. Taking the derivative of this normalisation condition with respect to $\lambda$ gives:
-
-$$
-\left\langle \frac{d\psi(\lambda)}{d\lambda} \middle| \psi(\lambda)  \right\rangle + \left\langle \psi(\lambda) \left| \frac{d\psi(\lambda)}{d\lambda} \right| \right\rangle = 0,
-$$
-
-which implies that the term involving the derivative of the wavefunction vanishes, so the final result is:
+The terms involving the derivative of the wavefunction cancel out, yielding
 
 $$
 \frac{dE(\lambda)}{d\lambda} = \left\langle \psi(\lambda) \left| \frac{d\hat{H}(\lambda)}{d\lambda} \right| \psi(\lambda) \right\rangle.
 $$
+
+[^no_lambda]: In the derivation I drop the explicit dependence on $\lambda$ for clarity.
 :::
 
 In the context of DFT, the Hellmann-Feynman theorem is particularly useful for calculating the forces on nuclei during molecular dynamics or geometry optimization. The force $\vec{F}_I$ on nucleus $I$ is given by the negative gradient of the total energy with respect to the position of that nucleus:
@@ -461,16 +452,14 @@ When does this term vanish? There are two possibilities:
 
 1. The derivatives $df_i/dR_1$ are all zero, *i.e.* if the basis functions are independent of atomic positions, *e.g.* plane waves.
 2. If the derivatives $\frac{df_1}{dR_1}$ and $\frac{df_2}{dR_1}$ are themselves basis functions or can be exactly represented by the basis. In this case,
-$$
-\frac{df_i}{dR_1} = \sum_j k_{ij} f_i
-$$
+$$\frac{df_i}{dR_1} = \sum_j k_{ij} f_i$$
 for some values of $k_{ij}$. Now the Pulay term can be rewritten by leveraging Eq. [](#eq:pulay-variational) as
 \begin{align}
 \left\langle \Psi \middle| H \middle| \left( \sum_i c_i \frac{df_i}{dR_1} \right)\right\rangle & = \left\langle \Psi \middle| H \middle| \left( \sum_{i,j} c_i k_{ij} f_j \right)\right\rangle = \\
 & = \sum_{i,j} c_i k_{ij} \langle \Psi | H | f_j \rangle = 0.
 \end{align}
 
-# The Car-Parrinello Method
+# The Car-Parrinello method
 
 The Car-Parrinello method, introduced by [Roberto Car and Michele Parrinello in 1985](doi:10.1103/PhysRevLett.55.2471), revolutionized the field of *ab initio* molecular dynamics (AIMD) by combining classical molecular dynamics with electronic structure calculations based on DFT. The key innovation of this method is its ability to simultaneously evolve both nuclear and electronic degrees of freedom within a unified framework.
 
@@ -494,10 +483,10 @@ From this Lagrangian, one can derive the equations of motion for both the nuclei
 
 \begin{align}
 M_I \ddot{\vec{R}}_I & = -\frac{\partial E_\text{tot}[\{\psi_i\}, \{\vec{R}_I\}]}{\partial \vec{R}_I} + \sum_{i,j} \lambda_{ij} \frac{\partial}{\partial \vec R_I} \langle \psi_i | \psi_j \rangle\\
-\mu \ddot{\psi}_i(\vec{r}) & = -\frac{\delta E_\text{tot}[\{\psi_i\}, \{\vec{R}_I\}]}{\delta \psi_i^*(\vec{r})} + \sum_{j} \lambda_{ij} \phi_j
+\mu \ddot{\psi}_i(\vec{r}) & = -\frac{\delta E_\text{tot}[\{\psi_i\}, \{\vec{R}_I\}]}{\delta \psi_i^*(\vec{r})} + \sum_{j} \lambda_{ij} \psi_j
 \end{align}
 
-Here, the fictitious mass parameter $\mu$ controls the dynamics of the electronic wavefunctions. This equation ensures that the electronic wavefunctions follow the nuclear motion, remaining close to the instantaneous ground state of the electronic structure, without the need for explicit SCF iterations at each time step. Note that in the functional derivative that appears in the electronic equations of motions, only the terms of the non-interacting (Kohn-Sham) Hamiltonian survives, since the nuclear-nuclear interaction does not depend on the $\phi_i$ orbitals.
+Here, the fictitious mass parameter $\mu$ controls the dynamics of the electronic wavefunctions. These equations ensure that the electronic wavefunctions follow the nuclear motion, remaining close to the instantaneous ground state of the electronic structure, without the need for explicit SCF iterations at each time step. Note that in the functional derivative that appears in the electronic equations of motions, only the terms of the non-interacting (Kohn-Sham) Hamiltonian survives, since the nuclear-nuclear interaction does not depend on the $\psi_i$ orbitals.
 
 The constant of motion (*i.e.* the quantity that is conserved) corresponding to the time-independence of the Car-Parrinello Langrangian is
 

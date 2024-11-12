@@ -291,12 +291,12 @@ $$
 Instead of attempting to directly approximate the total energy functional $E[n]$ for the interacting system, we decompose it into parts that can be computed exactly and parts that require approximations. The total energy functional in the Kohn-Sham formalism is written as:
 
 $$
-E[n] = T_s[n] + \int V(\vec{r}) n(\vec{r}) \, d\vec{r} + U[n] + E_{\text{xc}}[n],
+E[n] = T_s[n] + \int V(\vec{r}) n(\vec{r}) \, d\vec{r} + U_\text{el-el}[n] + E_{\text{xc}}[n],
 $$ (eq:kohn-sham_functional)
 
-where $T_s[n]$ is the kinetic energy of the non-interacting electrons, $U[n]$ is the Hartree (Coulomb) energy, representing the classical electrostatic interaction between electrons, and $E_{\text{xc}}[n]$ is the exchange-correlation energy, which includes all the many-body effects not captured by the other terms (*e.g* the electron-electron effective repulsion due to the Pauli exclusion principle).
+where $T_s[n]$ is the kinetic energy of the non-interacting electrons, $U_\text{el-el}[n]$ is the Coulomb energy, representing the classical electrostatic interaction between electrons, and $E_{\text{xc}}[n]$ is the exchange-correlation energy, which includes all the many-body effects not captured by the other terms (*e.g* the electron-electron effective repulsion due to the Pauli exclusion principle).
 
-To find the ground-state density, the Kohn-Sham approach involves solving a set of single-particle equations, known as the Kohn-Sham equations. These equations describe the motion of non-interacting electrons in an effective potential $v_{\text{eff}}(\vec{r})$, and can be obtained by using the fact that the functional in Eq. [](#eq:kohn-sham_functional) is minimised by the ground-state electron density. Therefore, $\delta E / \delta n = 0$. If we carry out the functional derivative with the constraint that the Kohn-Sham orbitals are orthonormal, we obtain (see Appendix B of @giustino2014materials for the full derivation)
+To find the ground-state density, the Kohn-Sham approach involves solving a set of single-particle equations, known as the Kohn-Sham equations. These equations describe the motion of non-interacting electrons in an effective potential $v_{\text{eff}}(\vec{r})$, and can be obtained by using the fact that the functional in Eq. [](#eq:kohn-sham_functional) is minimised by the ground-state electron density. Therefore, $\delta E / \delta n|_{n(\vec r) = n_0(\vec r)} = 0$. If we carry out the functional derivative with the constraint that the Kohn-Sham orbitals are orthonormal, we obtain (see Appendix B of @giustino2014materials for the full derivation)
 
 $$
 \left( -\frac{\hbar^2}{2m} \nabla^2 + v_{\text{eff}}(\vec{r}) \right) \psi_i(\vec{r}) = \epsilon_i \psi_i(\vec{r}),
@@ -411,7 +411,7 @@ $$
 Consider the full Hamiltonian of a molecular system, Eq. [](#eq:full_H): the only two terms that depend on the positions of nuclei $\{\vec{R}_I\}$ are the nuclear-nuclear and nuclear-electron interactions. Using the Hellmann-Feynman theorem, these two contributions can be explicitly calculated:
 
 $$
-\vec{F}_I =  -\int n(\vec{r}) \nabla_{\vec{R}_I} v(\vec{r}; \{\vec{R}\}) \, d\vec{r} - \nabla_{\vec{R}_I} V_\text{nuc-nuc}(\{\vec{R}\}),
+\vec{F}_I =  -\int n(\vec{r}) \nabla_{\vec{R}_I} V(\vec{r}; \{\vec{R}\}) \, d\vec{r} - \nabla_{\vec{R}_I} V_\text{nuc-nuc}(\{\vec{R}\}),
 $$
 
 where we used the expression of the electron-nucleus interaction in terms of the electron density $n(r)$ (see Eq. [](#eq:hohenberg_kohn_2)).
@@ -472,10 +472,10 @@ In contrast, the Car-Parrinello molecular dynamics (CPMD) method evolves both th
 The Car-Parrinello method is based on a Lagrangian formulation that includes both the nuclear and electronic degrees of freedom. The total Lagrangian $L$ for the system is given by:
 
 $$
-L = \frac{1}{2} \sum_I M_I \dot{\vec{R}}_I^2 + \frac{\mu}{2} \sum_i \langle \dot{\psi}_i | \dot{\psi}_i \rangle - E_\text{tot}[\{\psi\}, \{\vec{R}\}] + \sum_{ij} \lambda_{ij} (\langle \psi_i | \psi_j \rangle - \delta_{ij}),
+L = \frac{1}{2} \sum_I M_I \dot{\vec{R}}_I^2 + \frac{\mu}{2} \sum_i \langle \dot{\psi}_i | \dot{\psi}_i \rangle - E_\text{tot}[\{\psi_i\}, \{\vec{R}_I\}] + \sum_{ij} \lambda_{ij} (\langle \psi_i | \psi_j \rangle - \delta_{ij}),
 $$ (eq:cp_lagrangian)
 
-where $\vec{R}_I$ are the nuclear positions, $M_I$ are the nuclear masses, $\dot{\vec{R}}_I$ are the nuclear velocities, $\psi_i$ are the Kohn-Sham orbitals, $\mu$ is a fictitious mass-like parameter associated with the electronic degrees of freedom, $\dot{\psi}_i$ are the time derivatives ("velocities") of the Kohn-Sham orbitals, and $E_\text{tot}[\{\psi\}, \{\vec{R}\}] = E[\{\psi\}, \{\vec{R}\}] + E_\text{nuc,nuc}(\{\vec{R}\})$ is the sum of the DFT (Kohn-Sham) energy functional and of the nuclear-nuclear interaction potential.
+where $\vec{R}_I$ are the nuclear positions, $M_I$ are the nuclear masses, $\dot{\vec{R}}_I$ are the nuclear velocities, $\psi_i$ are the Kohn-Sham orbitals, $\mu$ is a fictitious mass-like parameter associated with the electronic degrees of freedom, $\dot{\psi}_i$ are the time derivatives ("velocities") of the Kohn-Sham orbitals, and $E_\text{tot}[\{\psi_i\}, \{\vec{R}_I\}] = E[\{\psi_i\}, \{\vec{R}_I\}] + E_\text{nuc,nuc}(\{\vec{R}_I\})$ is the sum of the DFT (Kohn-Sham) energy functional and of the nuclear-nuclear interaction potential.
 
 The first term in Eq. [](#eq:cp_lagrangian) represents the kinetic energy of the nuclei, the second term represents the kinetic energy of the fictitious electronic degrees of freedom, the third term $E_\text{tot}[\{\psi_i\}, \{\vec{R}_I\}]$ is the total potential energy, which includes contributions from the nuclear-nuclear, nuclear-electronic, and electron-electron interactions, while the fourth term enforces the orthonormality of the Kohn-Sham orbitals.
 

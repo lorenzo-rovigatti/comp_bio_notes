@@ -8,18 +8,19 @@ Remember to read the [homeworks](#sec:homeworks) section to understand what you 
 
 # The main assignment
 
-Molecular dynamics code integrate Newton's equations to follow the dynamics of a systems made of components interacting with each other through a well-defined set of potentials. The mandatory part of this assignment is to write a molecular dynamics code that can be used to simulate a 3D Lennard-Jones system at a given temperature $T$ and density $\rho = N / V$, where $N$ is the number of particles and $V = L^3$ is the volume of the simulation box. The code should 
+Molecular dynamics code integrate Newton's equations to follow the dynamics of a systems made of components interacting with each other through a well-defined set of potentials. The mandatory part of this assignment is to write a molecular dynamics code that can be used to simulate a 3D Lennard-Jones system at a given temperature $T$ and density $\rho = N / V$, where $N$ is the number of particles and $V = L^3$ is the volume of the simulation box. Use the algorithms [discussed in class](../all_atom.md) and [implemented here](../notebooks/MD.ipynb). The code should
 
-1. Take as input at least the number of particles, temperature, density and the integration time step, $\delta t$.
+1. Take as input at least the number of particles, temperature, density and the integration time step, $\Delta t$.
+2. Initialise the system, for instance by using a function that places the particles on a cubic lattice, as done in the notebook linked above.
 2. Use the Velocity-Verlet integrator for the equations of motion.
 3. Take into account periodic boundary conditions (see [below](#sec:pbc) for details).
 4. Make it possible to optionally couple a thermostat to the system. The simplest to implement is the [Andersen thermostat](#sec:andersen_thermostat).
 
 Make use of reduced units: the particle diameter is $\sigma$, the depth of the LJ well is $\epsilon$, and the mass of a particle is $m$, so that time is measured in units of $t_0 = \sigma \sqrt{m / \epsilon}$.
 
-The documentation accompanying the code should contain a plot that shows that the fluctuations of the total energy is proportional to $\delta t$[^range_dt].
+The documentation accompanying the code should contain a plot that shows that the fluctuations of the total energy is proportional to $\Delta t^2$[^range_dt].
 
-[^range_dt]: This will be true only if $\delta t$ is not too large: be careful.
+[^range_dt]: This will be true only if $\Delta t$ is not too large: be careful.
 
 # Possible extensions
 
@@ -53,7 +54,7 @@ $$ (eq:P_correction)
 
 With this in mind, you can try to evaluate the pressure, correct it by applying the shift of Eq. [](#eq:P_correction), and compare the results with those reported in [](doi:10.1080/00268979300100411). However, note that in the paper a large cut-off ($r_c = 4.0\, \sigma$) was used. 
 
-If you feel that your code is not fast enough, you can use the following values, obtained with $\rho\sigma^3 = 0.60$, $r_c = 2.5 \, \sigma$, $\delta t = 0.001 \, t_0$ and simulations of $10^6$ time steps:
+If you feel that your code is not fast enough, you can use the following values, obtained with $\rho\sigma^3 = 0.60$, $r_c = 2.5 \, \sigma$, $\Delta t = 0.001 \, t_0$ and simulations of $10^6$ time steps:
 
 | $T$ [$\epsilon / k_B$] | $P$ [$k_B T / \sigma^3$] | $P_{\rm corr}$[^P_corrected] [$k_B T / \sigma^3$]|
 | :---: | :---:| :---:|

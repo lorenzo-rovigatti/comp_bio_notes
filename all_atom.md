@@ -14,6 +14,10 @@ One of the fundamental distinctions between quantum and classical approaches lie
 
 In contrast, classical force fields adopt a simplified approach where the contributions of electrons are averaged out. Instead of explicitly modeling individual electron behaviors, classical force fields approximate the interactions between atoms using simplified mathematical models based on classical mechanics. Note that there exist also "mixed" methods, where some degrees of freedom are accounted for by using a quantum-mechanical treatment, while others are treated classically, *e.g.* the nuclear degrees of freedom in the CPMD approach.
 
+:::{seealso} Python implementation
+Some of the algorithms presented in this section have been implemented in this [Jupyter notebook](./notebooks/MD.ipynb).
+:::
+
 [^scaling]: The complexity ranges from $\mathcal{O}(e^N)$ for brute-force implementations, to $\mathcal{N^3}$ for many DFT codes, but can be linear in some cases (see *e.g.* [](doi:10.1088/0034-4885/75/3/036503)).
 
 # Molecular dynamics
@@ -253,7 +257,7 @@ This velocity update equation accounts for the change in acceleration over the t
 1. Update the velocity, first step, $v(t + \Delta t / 2) = v(t) + \frac{1}{2} a(t) \Delta t$.
 2. Update the position, $r(t + \Delta t) = r(t) + v(t + \Delta t / 2)\Delta t = r(t) + v(t) \Delta t + \frac{1}{2} a(t) \Delta t^2$ (*e.g.* Eq. [](#eq:velocity_verlet_x)).
 3. Calculate the force (and therefore the acceleration) using the new position, $r(t + \Delta t) \to a(t + \Delta t) = F(t + \Delta t) / m$.
-4. Update the velocity, second step, $v(t + \Delta t) = v(t + \Delta t / 2) + \frac{1}{2} a(t + \Delta t) = v(t) + \frac{1}{2} \left[ a(t) + a(t + \Delta t) \right] \Delta t$ (*e.g.* Eq. [](#eq:velocity_verlet_v)).
+4. Update the velocity, second step, $v(t + \Delta t) = v(t + \Delta t / 2) + \frac{1}{2} a(t + \Delta t)\Delta t = v(t) + \frac{1}{2} \left[ a(t) + a(t + \Delta t) \right] \Delta t$ (*e.g.* Eq. [](#eq:velocity_verlet_v)).
 
 An MD implementation based on [](#code:MD_simple) that implements a Velocity Verlet algorithm is
 
@@ -339,6 +343,10 @@ where I have defined the instantaneous pressure $P_{\rm inst}$. The second term 
 [^pressure_source]: Inspired by @allen2017computer.
 
 ### Radial distribution function
+
+```{warning}
+TODO
+```
 
 ### Mean-squared displacement
 
@@ -714,11 +722,11 @@ TODO
 
 # Classical force fields[^source_FF]
 
-[^source_FF]: the main references for this part are @schlick2010molecular and @leach2001molecular.
+[^source_FF]: The main references for this part are @schlick2010molecular and @leach2001molecular.
 
 Now that we know the algorithms used to run MD codes, we shift our attention to the interaction potentials acting between the components that make up the system we want to simulate. We start from the so-called classical (or empirical) force fields, which describe the interactions between atoms using simplified mathematical models based on quantum mechanics calculations, empirical observations, and physical principles from classical mechanics. Unlike quantum methods (introduced in [](./quantum.md)), which rigorously account for the wave-like nature of particles and their interactions through principles like superposition and entanglement, classical force fields offer a pragmatic approach that balances computational feasibility with accuracy.
 
-The potential energy functions used in classical force fields typically consist of terms that describe various types of interactions, including covalent bonds, van der Waals (dispersion) forces and electrostatic interactions. Despite their simplicity, classical force fields can exhibit remarkable predictive power and have been successfully applied across diverse scientific disciplines.
+The potential energy functions used in classical force fields typically consist of terms that describe various types of interactions, including covalent bonds, van der Waals (dispersion) forces and electrostatic interactions. Despite their simplicity, classical force fields can exhibit remarkable predictive power and have been successfully applied across diverse scientific disciplines. Common force fields used in biomolecular simulations are [AMBER](https://ambermd.org/AmberModels.php) and [CHARMM](https://mackerell.umaryland.edu/charmm_ff.shtml).
 
 In a classical force field (FF from now on), the main assumption is that of *additivity*, which makes it possible to write down the total energy of a system as a sum of several contributions. These are classified into terms that account for atoms that are linked by covalent bonds (*bonded* or *local* terms), and terms that account for noncovalent interactions (*non-bonded* or *non-local* terms), so that the total energy of the system is written as
 
@@ -733,6 +741,18 @@ The separation of contributions into bonded and non-bonded terms is not only a c
 ```
 
 The functional forms of the functions (implicitly) defined in Eq. [](#eq:tot-energy) depend on the force field employed, and are parametrised so as to reproduce the experimental structure and dynamics of target molecular systems.
+
+```{figure} figures/ff_spectra.png
+:name: fig:ff_spectra
+:align: center
+:width: 700px
+
+Characteristic (left) stretching and (right) bending and torsional vibrational frequencies extracted from experimental spectra. Taken from @schlick2010molecular.
+```
+
+The traditional sources of parameters are provided by vibrational spectra (see [](#fig:ff_spectra) for examples), which have been routinely used to derive the force constants of many of the functional forms discussed below. The idea is that the frequencies extracted from experimental spectra can be compared with the characteristic frequencies of the normal modes as evaluated in simulations in order to find the values of the force constants that minimise the differences. 
+
+It is also possible to parametrise classical force fields with results from *ab initio* calculations, which are often used to complement the experimental results.
 
 ## Bonded interactions
 
@@ -755,6 +775,7 @@ Note that in writing Eq. [](#eq:bonded-energy) we have made an additional assump
 [^bond_angle]: A bond angle is the angle between two bonds that include a common atom.
 [^dihedral]: Angles defined by groups of four atoms that are connected by covalent bonds.
 
+(sec:bond_stretching)=
 ### Bond stretching
 
 This interaction occurs when atoms connected by a covalent bond move closer together or farther apart, resulting in the stretching or compression of the bond, and can be considered as "excitation" terms that accounts for small deviations from reference values, which are usually taken from experimental measurements.
@@ -803,12 +824,27 @@ When three atoms are connected by two consecutive covalent bonds, the angle betw
 
 The most common potentials used have a harmonic form involving either angles or cosines:
 
+(eq:bond_angle)=
 \begin{align}
 E^\theta_\text{harmonic}(\theta) & = K_h(\theta - \theta_\text{ref})^2\\
 E^\theta_\text{trig}(\theta) & = K_t(\cos \theta - \cos \theta_\text{ref})^2.
 \end{align}
 
-If $K_t = K_h \sin^2 \theta_\text{ref}$, then for small angle fluctuations the second form is very similar to the first one, while at the same time being more efficient from the computational point of view, since it does not require the computation of inverse trigonometric functions.
+If the second equation is expanded in series around $\theta_\text{ref}$ and compared to the first equation, it is possible to obtain the following relation, which connects $K_h$ and $K_t$ so that the small-angle fluctuations of the two forms are similar:
+
+$$
+K_t = K_h \sin^2 \theta_\text{ref}.
+$$ (eq:bond_angle_constants)
+
+Since it does not require the computation of inverse trigonometric functions, the trigonometric form is more efficient from the computational point of view. [](#fig:bond_angle) shows the two forms defined in Eq. [](#eq:bond_angle), where the value $K_t$ has been chosen according to Eq. [](#eq:bond_angle_constants).
+
+```{figure} figures/bond_angle.png
+:name: fig:bond_angle
+:align: center
+:width: 500px
+
+Harmonic bond-angle potentials of the forms given in Eq. [](#eq:bond_angle) for an aromatic $C-C-C$ bond angle ($CA-CA-CA$ atomic sequence in CHARMM) with parameters $K_h = 40$ kcal/(mol rad$^2$) and $\theta_\text{ref} = 2.1$ rad ($120^\circ$). The $K_t$ force constant is evaluated by using Eq. [](#eq:bond_angle_constants). Taken from @schlick2010molecular.
+```
 
 ### Dihedral rotation
 
@@ -820,24 +856,70 @@ Dihedral interactions are typically described using periodic potentials that cap
 
 $$
 E_t(\varphi) = \sum_{n} \frac{V_n}{2}[1 + \cos(n\varphi - \varphi_0)],
-$$
+$$ (eq:dihedral_potential)
 
 where $n$ is an integer that determines the periodicity of the barrier of height $V_n$, and $\varphi_0$ is a reference angle, which is often set to $0$ or $\pi$.
 
+```{figure} figures/ff_dihedrals.png
+:name: fig:dihedral_potential
+:align: center
+:width: 700px
+
+Twofold and threefold torsion-angle potentials and their sums for an $O-C-C-O$ rotational sequence in nucleic-acid riboses ($V_2 = 1.0$ and $V_3 = 2.8$ kcal/mol) and a rotation about the phosphodiester ($P-O$) bond in nucleic acids ($V_2 = 1.9$ and $V_3 = 1.0$ kcal/mol).  Taken from @schlick2010molecular.
+```
+
+The most common potentials of the form of [](#eq:dihedral_potential)) are those comprising twofold and threefold terms, which are enough to reproduce common energy differences (*e.g.* cis/trans and trans/gauce). Two examples from the CHARMM force field are presented in [](#fig:dihedral_potential):
+
+* The rotational interaction in the $O-C-C-O$ sequence in nucleic acids (*e.g.*, $O3'-C3'-C2'-O2'$ in ribose) shows a minimum at the trans state.
+* The rotation about the phosphodiester bond ($P-O$) in nucleic acids shows a very shallow minimum at the trans state. 
+
+For smaller molecules is often necessary to include higher-order terms ($n = 1, 2, 3, 4$ and $6$) to reproduce the experimental torsional frequencies accurately.
+
 ### Improper rotation
 
-Improper torsion interactions occur when four atoms are bonded in a way that one atom is not directly in line with the other three. This configuration is often necessary to maintain the correct geometry or chirality of a molecule. Improper torsions are used to model the energy associated with deviations from the ideal geometry. The potential energy associated with improper torsions is typically described by a harmonic potential or a cosine function, depending on the force field parameters and the desired behavior of the molecule.
+Improper torsion interactions occur when four atoms are bonded in a way that one atom is not directly in line with the other three. This configuration is often necessary to maintain the correct geometry or chirality of a molecule. Improper torsions are used to model the energy associated with deviations from the ideal geometry. The potential energy associated with improper torsions is typically described by a harmonic potential or a cosine function, depending on the force field parameters and the desired behavior of the molecule. A common form is
+
+$$
+E_\text{imp}(\chi) = \frac{V_\text{imp}}{2} \chi^2,
+$$
+
+where $\chi$ is the improper Wilson angle, which has the following definition: given four atoms $i, j, k$ and $l$, where $j$ is bonded to the other three, $\chi$ is the angle between bond $j-l$ and the plane defined by $i, j$ and $k$, as shown in [](#fig:improper).
+
+```{figure} figures/improper.png
+:name: fig:improper
+:align: center
+:width: 500px
+
+The definition of the Wilson angle $\chi$, as seen (left) from the top and (right) from the side.
+```
 
 (sec:cross_terms)=
 ### Cross terms
 
+```{figure} figures/ff_crossterms.png
+:name: fig:ff_crossterms
+:align: center
+:width: 500px
+
+Schematic illustrations for various cross terms involving bond stretching, angle bending, and torsional rotations. Here UB stands for Urey-Bradley, which is a way of modelling the stretch/bend coupling by taking into account only the distance between the "far" atoms in the triplet. Taken from @schlick2010molecular.
+```
+
+It is sometimes necessary to include terms that couple different degrees of freedom in order to improve the accuracy, especially in force fields used to model small molecules. These *cross terms* are usually simple (quadratic) functions of the quantities in play (*e.g.* atom-atom distances or bond angles) and are fitted to the experimental vibrational spectra. [](#fig:ff_crossterms) pictorially shows some of these contributions.
+
 ## Non-bonded interactions
 
-*Non-bonded interactions* refer to the energy contributions that arise between atoms or molecules that are not directly connected by chemical bonds, and are typically categorized into two main types:
+*Non-bonded interactions* refer to the energy contributions that arise between atoms or molecules that are not directly connected by chemical bonds, and comprise several terms. Here I present the most common ones. Note that non-electrostatic non-bonded interactions are usually short-ranged and therefore are cut-off at some distance to improve performance, as discussed in [](#sec:cut-off).
 
 ### Van der Waals Interactions
 
-Van der Waals interactions are weak forces that arise due to fluctuations in the electron density of atoms or molecules. These interactions include both attractive forces, arising from dipole-dipole interactions and induced dipole-induced dipole interactions (van der Waals dispersion forces, see @israelachvili2011intermolecular for a derivation of these terms), and repulsive forces, resulting from the overlap of electron clouds at close distances. Van der Waals interactions are described by empirical potential energy functions, such as the Lennard-Jones potential, which accounts for both attractive and repulsive components.
+Van der Waals interactions are weak forces that arise due to fluctuations in the electron density of atoms or molecules. These interactions include both attractive forces, arising from dipole-dipole interactions and induced dipole-induced dipole interactions (van der Waals dispersion forces, see @israelachvili2011intermolecular for a derivation of these terms), and repulsive forces, resulting from the overlap of electron clouds at close distances. Van der Waals interactions are described by empirical potential energy functions. The most common forms are the Lennard-Jones and Morse potentials, which we have already encountered when discussing [interactions in proteins](#sec:van-der-waals) and [](#sec:bond_stretching), respectively. Here I report their functional forms, both of which account for attractive and repulsive components, for your convenience:
+
+\begin{align}
+V_\text{LJ}(r) &= 4 \epsilon \left( \left( \frac{\sigma}{r} \right)^{12} - \left( \frac{\sigma}{r} \right)^{6} \right)\\
+V_\text{Morse}(r) &= \epsilon [1 - \exp(-a(r - r_0)]^2,
+\end{align}
+
+where $\epsilon$ sets the depth of the attractive well, $\sigma$ is the LJ diameter, $r_0$ is the position of the minimum of the Morse potential, and $a$ is linked to the curvature close to such a minimum.
 
 ### Electrostatic Interactions
 
@@ -845,13 +927,7 @@ Electrostatic interactions arise from the attraction or repulsion between charge
 
 ### Hydrogen Bonding
 
-Represents the specific type of non-covalent interaction between a hydrogen atom covalently bonded to an electronegative atom (*e.g.*, nitrogen, oxygen, or fluorine) and a nearby electronegative atom. Hydrogen bonding interactions are often modeled using empirical potentials that account for the directionality and strength of hydrogen bonds.
-
-## Transferability
-
-```{warning}
-TODO
-```
+While sometimes hydrogen bonding interactions are modeled using empirical *ad-hoc* potentials that account for the directionality and strength of hydrogen bonds, in modern force fields they arise spontaneously as a result of the combination of the Van der Waals and electrostatic interactions acting between the atoms.
 
 ## GROMACS
 

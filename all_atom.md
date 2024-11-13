@@ -14,6 +14,14 @@ One of the fundamental distinctions between quantum and classical approaches lie
 
 In contrast, classical force fields adopt a simplified approach where the contributions of electrons are averaged out. Instead of explicitly modeling individual electron behaviors, classical force fields approximate the interactions between atoms using simplified mathematical models based on classical mechanics. Note that there exist also "mixed" methods, where some degrees of freedom are accounted for by using a quantum-mechanical treatment, while others are treated classically, *e.g.* the nuclear degrees of freedom in the CPMD approach.
 
+In the rest of the Chapter (unless stated otherwise), we consider systems composed of $N$ interacting point particles following Newton's equations of motion set by a classical Hamiltonian:
+
+$$
+H = \sum_{i=1}^N \frac{p_i^2}{2m_i} + V(\{ \vec r_i \}),
+$$
+
+where $\vec p_i$ and $\vec r_i$ are the momentum and coordinates of particle $i$, $m_i$ is its mass and $V(\{ \vec r_i \})$ is the total potential energy. 
+
 :::{seealso} Python implementation
 Some of the algorithms presented in this section have been implemented in this [Jupyter notebook](./notebooks/MD.ipynb).
 :::
@@ -541,7 +549,7 @@ The Nosé-Hoover thermostat is a more sophisticated method for controlling tempe
 The extended Lagrangian formalism starts by introducing a scaling factor, $s$, that modifies the velocities of particles in the system ([](doi:10.1080/00268978400101201)). The extended Lagrangian for the Nosé-Hoover thermostat is expressed as:
 
 $$
-L = \sum_{i=1}^{N} \frac{m_i}{2} \left( \frac{ \dot{\vec r}_i }{s} \right)^2 - V(\mathbf{r}) - g k_B T \log s,
+L = \sum_{i=1}^{N} \frac{m_i}{2} \left( \frac{ \dot{\vec r}_i }{s} \right)^2 - V(\{ \vec{r}_i \}) - g k_B T \log s,
 $$
 
 where $m_i$ and $\dot{\vec r}_i = \vec v_i$ are the mass and velocity particle $i$, $V(\{r\})$ is the potential energy of the system, and the term $ g k_B T \ln(s) $, where $ g $ is the number of degrees of freedom, introduces the necessary coupling between the system and the heat bath. The auxiliary variable $s$ is responsible for controlling the temperature by scaling the velocities of the particles so that the system's kinetic energy corresponds to the target temperature.
@@ -710,9 +718,44 @@ Note that equations [](#eq:nose-hoover_barostat) also contain a coupling to a No
 
 ### Parrinello-Rahman
 
-```{warning}
-TODO
-```
+The Parrinello-Rahman barostat introduces an extended Hamiltonian to account for both particle motions and cell shape fluctuations, enabling the simulation of anisotropic pressure conditions, which is very common, for instance, when dealing with crystalline structures. This Hamiltonian includes original Hamiltonian of the system, which accounts for the kinetic and potential energy of the particles, plus additional terms that describe the kinetic and potential contributions of the simulation box itself.
+
+The additional terms can be written in terms of the matrix
+
+$$
+\hat H = \begin{bmatrix}\vec a & \vec b & \vec c\end{bmatrix} = \begin{bmatrix} a_x & b_x & c_x \\ a_y & b_y & c_y \\ a_z & b_z & c_z \end{bmatrix},
+$$
+
+where $\vec a$, $\vec b$ and $\vec c$ are the basis vectors of a generic (possibly anisotropic) simulation box, and coincide with its edges. The position of particle $i$ in the box is just
+
+$$
+\vec r_i = \hat H \vec s_i = x_i \vec a + y_i \vec b + z_i \vec c,
+$$
+
+where $0 < x_i, y_i, z_i < 1$ are the scaled (fractional) coordinates of particle $i$. With this formalism, the distance between particles $i$ and $j$ is
+
+$$
+r^2_{ij} = \vec s_{ij} \hat H^T \hat H \vec s_{ij} = \vec s_{ij} \hat G \vec s_{ij},
+$$
+
+where $G \equiv \hat H^T \hat H$.
+
+We can now write down the expression for the extended Hamiltonian:
+
+$$
+H = \sum_{i=1}^N \frac{1}{2} m_i \dot{\vec{s}}_i^T \hat G \dot{\vec{s}}_i + V(\{ \vec r_i \}) + \frac{1}{2} W \text{Tr}(\dot{\hat H}^T \cdot \dot{\hat H}) + P(t) \det(\hat H),
+$$ (eq:H_parrinello_rahman)
+
+where $\det(\hat H) = V$ is the box volume, $P(t)$ is the istantaneous pressure, and the parameter $W$ is the strength of the barostat coupling, and can be interpreted as the mass of the fictitious piston exerting the external pressure on the system.
+
+By deriving Eq. [](#eq:H_parrinello_rahman), the following equations of motion are obtained:
+
+\begin{align}
+m_i \ddot{s}_i &= \hat H^{-1} \vec f_i - m_i \hat G^{-1} \dot{\hat G} \dot{\vec s}_i\\
+W \ddot{\hat H} & = (P(t) - P)V(\hat H^{-1})^T,
+\end{align}
+
+where $\vec f_i = - \vec \nabla_{\vec r_i} V(\{ \vec r_j \})$ is the force acting on particle $i$.
 
 ### Stochastic cell rescaling
 
@@ -929,11 +972,23 @@ Electrostatic interactions arise from the attraction or repulsion between charge
 
 While sometimes hydrogen bonding interactions are modeled using empirical *ad-hoc* potentials that account for the directionality and strength of hydrogen bonds, in modern force fields they arise spontaneously as a result of the combination of the Van der Waals and electrostatic interactions acting between the atoms.
 
+## More on force fields
+
+Modern force fields contain tens, hundreds or even more parameters, depending on what they have been designed to model. The value of every single parameter has been optimised to reproduce some target quantity, either generated with higher-fidelity numerical methods, or measured experimentally, or a mixture of both. However, no force field is perfect, as each FF has its own advantaged and disadvantages.
+
+The force field should be chosen carefully, based on the problem at hand. For proteins and nucleic acids, common FFs are [AMBER](https://ambermd.org/AmberModels.php) and [CHARMM](https://mackerell.umaryland.edu/charmm_ff.shtml), but there are other possibilities. Note that it is often necessary to simulate molecules or functional groups that are not supported by the specific FF we wish to use. In this case, it is possible to use multiple force fields, provided the two FFs are compatible, *i.e.* someone has parametrised the "cross interactions" between the atoms or molecules modelled with distinct force fields. As a golden rule, you should **never** mix parameters from different force fields.
+
+In general, you should always follow the advice and good-practices given in the documentation of the FF(s) you are using, unless you **really** know what you are doing. For instance, the CHARMM force field recommends to use the TIP3P model for water rather than more sophisticated and realistic ones, since it has been parametrised using that particular model. Using another model can, in principle, be made to work, but would also make your results somehow questionable, which is **not** what you want from a scientific point of view.
+
 ## GROMACS
 
 GROMACS, an acronym for Groningen Machine for Chemical Simulations, is an open-source software package designed primarily for molecular dynamics simulations of biomolecular systems, providing insights into the structural dynamics of proteins, lipids, nucleic acids, and other complex molecular assemblies. GROMACS can run simulations efficiently on a wide range of hardware platforms, from single processors to large parallel computing clusters, and implements advanced algorithms and techniques, such as domain decomposition, particle-mesh Ewald summation for long-range electrostatics, and multiple time-stepping schemes. 
 
 Interestingly (and differently from other simulation engines) GROMACS also offers a comprehensive suite of analysis tools, making it possible to perform tasks such as trajectory analysis, free energy calculations, and visualization of simulation results.
+
+:::{warning} 
+The text that follows is just a collection of notes. It will be updated in the future.
+:::
 
 * Use `mdp` files to create a `tpr` (which is a binary, non-human-readable file): at this step we need a topology file (`topol.top`)[^topol_file]
 * Index files (`.ndx`) are used to assign atoms to categories that can be used to easily find them. Use `gmx make_ndx -f file.tpr -o output` to make a new index file.
@@ -944,4 +999,4 @@ Interestingly (and differently from other simulation engines) GROMACS also offer
 On newer versions, Gromacs will spit out a warning if you use the Berendsen thermostat (`tcoupl = berendsen`). However, by default `gmx grompp` considers a single warning as a fatal error. Use the `-maxwarn` flag to raise the number of acceptable warnings (*e.g.* `-maxwarn `).
 ```
 
-[^topol_file]: in Gromacs lingo, a topology file contains the details about the force field
+[^topol_file]: in Gromacs lingo, a topology file contains the details of the force field

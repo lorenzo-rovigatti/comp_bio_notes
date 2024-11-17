@@ -39,7 +39,7 @@ In a molecular dynamics simulation, the atoms, or particles, follow Newton's equ
    2. The positions and velocities are updated according to Newton's equations.
 4. The simulation stops when some condition is met (*e.g.* number of steps run).
 
-The following snippet shows a pseudo-code implementation of foregoing algorithm:
+The following snippet shows a pseudo-code implementation of the foregoing algorithm:
 
 :::{code} pseudocode
 :label: code:MD_simple
@@ -53,6 +53,10 @@ WHILE t is smaller than t_max
    CALL integrate()
    t += delta_t
    CALL sample_observables()
+:::
+
+:::{important}
+Nowadays there are sophisticated codes that can be used, in principle, to run MD simulations with no knowledge any of the algorithms employed. This is **very** dangerous, as it is very easy to produce wrongs results that appear correct if one does not know what they are doing. Therefore, I urge you to try to understand how (and why) these algorithms work.
 :::
 
 ## Initialisation
@@ -77,7 +81,7 @@ $$ (eq:equipartition)
 where $v_{i,\alpha}$ is the $\alpha$-th component of the velocity of particle $i$. We can then define the instantaneous temperature of a system of $N$ particles[^only_velocities] as
 
 $$
-k_B T(t) = \sum_{i}^N \frac{m v_{i,\alpha}^2}{d N},
+k_B T(t) = \sum_{i, \alpha}^N \frac{m v_{i,\alpha}^2}{d N},
 $$ (eq:instantaneous_T)
 
 where $d$ is the dimensionality of the system. We now use this relation in the following initialisation procedure:
@@ -92,7 +96,7 @@ $$
 P(v) = \left(\frac{\beta}{2 \pi m}\right)^{3/2} \exp\left(-\frac{\beta m v^2}{2}\right).
 $$ (eq:maxwell-boltzmann)
 
-However, since the initial configuration is most likely *not* an equilibrium configuration, the subsequence equilibration will change the average temperature, so that $\langle T(t) \rangle \neq T$. We will see later on how to couple the system to a [thermostat](#sec:thermostats) to restore thermal equilibrium at the desired temperature.
+However, since the initial configuration is most likely *not* an equilibrium configuration, the subsequence equilibration will change the average temperature, so that $\langle T(t) \rangle \neq T$. We will see later on how to couple the system to a [thermostat](#sec:thermostats) to enforce thermal equilibrium at the desired temperature.
 
 [^only_velocities]: here I assume that we are dealing with point-like objects.
 
@@ -171,7 +175,7 @@ This is especially important in constant-energy MD simulations (*i.e.* simulatio
 
 The number of particles in a modern-day simulation ranges from hundreds to millions, thus being very far from the thermodynamic limit. Therefore, it is not surprising that finite-size effects are always present (at least to some extent). In particular, the smaller the system, the larger boundary effects are: since in 3D the volume scales as $N^3$ and the surface as $N^2$, the fraction of particles that are at the surface scales as $N^{-1/3}$, which is a rather slowly decreasing function of $N$. For instance, if $N = 1000$, in a cubic box of volume $V = L^3$ more than half of the particles are at the surface. One would have to simulate $\approx 10^6$ particles to see this fraction decrease below $10\%$!
 
-Those pesky boundary effect can be decreased by using periodic boundary conditions (PBCs): we get rid of the surface by considering the volume containing the system, which is often but not always a cubic box, one of cell of an infinite periodic lattice made of identical cells. Then, each particle $i$ iteracts with any other particle: not only with those in the original cell, but also with their "images", including its own images, contained in all the other cells. For instance, the total energy of a (pairwise interacting) cubic system of side length $L$ simulated with PBCs would be
+Those pesky boundary effects can be decreased by using periodic boundary conditions (PBCs): we get rid of the surface by considering the volume containing the system, which is often but not always a cubic box, one cell of an infinite periodic lattice made of identical cells. Then, each particle $i$ iteracts with any other particle: not only with those in the original cell, but also with their "images", including its own images, contained in all the other cells. For instance, the total energy of a (pairwise interacting) cubic system of side length $L$ simulated with PBCs would be
 
 $$
 U_\text{tot} = \frac{1}{2} \sum_{i,j,\vec{n}}\phantom{}^{'} V(|\vec{r}_{ij} + \vec{n}L|),
@@ -186,7 +190,7 @@ y_{ij} & = y_j - y_i - \text{round}\left(\frac{y_j - y_i}{L_y}\right) L_y\\
 z_{ij} & = z_j - z_i - \text{round}\left(\frac{z_j - z_i}{L_z}\right) L_z,
 \end{align}
 
-where, for the sake of completeness, I'm considering a non-cubic box of side lengths $L_x$, $L_y$ and $L_z$, and $\text{round}(\cdot)$ is the function that rounds its argument to its closest integer. Figure [](#fig:PBC) shows a 2D schematic of periodic-boundary conditions and of the minimum-image construction.
+where, for the sake of completeness, I'm considering a non-cubic box of side lengths $L_x$, $L_y$ and $L_z$, and $\text{round}(\cdot)$ is the function that rounds its argument to its closest integer. [](#fig:PBC) shows a 2D schematic of periodic-boundary conditions and of the minimum-image construction.
 
 ```{figure} figures/PBC.png
 :name: fig:PBC
@@ -307,7 +311,11 @@ The extent of the fluctuations of the total energy, $\delta U$, for a Lennard-Jo
 Since, in principle, we have access to the whole phase space, in MD simulations we can compute averages of any (classical) observable. Here I present a short list of some useful (and common) quantities.
 
 (sec:compute_pressure)=
-### Pressure[^pressure_source]
+### Pressure
+
+:::{tip}
+The main source for this part is @allen2017computer.
+:::
 
 In the canonical ensemble, for any observable $A$ and generalised coordinate or momentum $h_k$, integrating by parts (and assuming reasonable boundary conditions) one finds
 
@@ -347,8 +355,6 @@ P = \frac{N k_B T}{V} + \frac{1}{3V} \left\langle \sum_{i=1}^N \vec{F}_i^{\rm in
 $$ (eq:pressure)
 
 where I have defined the instantaneous pressure $P_{\rm inst}$. The second term in Eq. [](#eq:pressure) represents the contribution from interparticle forces, where $\vec{F}_i^{\rm int}$ is the force on particle $i$ due to all other particles. This is the way pressure is computed
-
-[^pressure_source]: Inspired by @allen2017computer.
 
 ### Radial distribution function
 
@@ -433,9 +439,11 @@ Verlet lists do not have to be updated at every step, or we would go back to che
 [^cubic_cells]: In principle, cells don't have to be cubic.
 
 (sec:ewald)=
-### Long-range interactions[^ewald_source]
+### Long-range interactions
 
-[^ewald_source]: Most of the text of this part comes from @frenkel2023understanding, while some bits have been adapted from @schlick2010molecular.
+:::{tip}
+Most of the text of this part comes from @frenkel2023understanding, while some bits have been adapted from @schlick2010molecular.
+:::
 
 In molecular simulations, long-range interactions refer to forces that decay slowly with distance. The definition of "long-range" can be made unambiguous if we consider the general form of a pairwise interaction potential $V(r)$ between two particles separated by a distance $r$. The energy contribution of these interactions beyond a certain cut-off distance $r_c$ is given by the "tail" correction of [](#eq:U_tail). For a potential that decays as $1/r^\alpha$, the tail correction is, asymptotically,
 
@@ -483,10 +491,12 @@ E_{\text{tot}} = E_{\text{real}} + E_{\text{rec}} + E_{\text{self}}.
 $$
 
 * The real-space contribution to the total energy, $E_{\text{real}}$ is given by:
-$$
-E_{\text{real}} = \frac{1}{2} \sum_{i=1}^N \sum_{j \neq i}^N \frac{q_i q_j \, \text{erfc}(\alpha |\vec{r}_i - \vec{r}_j|)}{|\vec{r}_i - \vec{r}_j|},
-$$
-where the sum is truncated at a cut-off distance $r_c$.
+
+  $$
+  E_{\text{real}} = \frac{1}{2} \sum_{i=1}^N \sum_{j \neq i}^N \frac{q_i q_j \, \text{erfc}(\alpha |\vec{r}_i - \vec{r}_j|)}{|\vec{r}_i - \vec{r}_j|},
+  $$
+
+  where the sum is truncated at a cut-off distance $r_c$.
 
 * The reciprocal-space contribution $E_{\text{rec}}$ is computed using the Fourier transform of the charges and involves a sum over the reciprocal lattice vectors $\vec{k}$, which can be safely truncated at some cut-off wave vector $k_c$, since the exponential term ensures that the sum converges rapidly:
 
@@ -496,6 +506,7 @@ $$ (eq:ewald_reciprocal)
 
 
 * The self-interaction term, $E_{\text{self}}$, is:
+
 $$
 E_{\text{self}} = -\frac{\alpha}{\sqrt{\pi}} \sum_{i=1}^N q_i^2.
 $$
@@ -718,7 +729,7 @@ Note that equations [](#eq:nose-hoover_barostat) also contain a coupling to a No
 
 ### Parrinello-Rahman
 
-The Parrinello-Rahman barostat introduces an extended Hamiltonian to account for both particle motions and cell shape fluctuations, enabling the simulation of anisotropic pressure conditions, which is very common, for instance, when dealing with crystalline structures. This Hamiltonian includes original Hamiltonian of the system, which accounts for the kinetic and potential energy of the particles, plus additional terms that describe the kinetic and potential contributions of the simulation box itself.
+The Parrinello-Rahman barostat, introduced in [](doi:10.1103/PhysRevLett.45.1196), uses an extended Hamiltonian to account for both particle motions and cell shape fluctuations, enabling the simulation of anisotropic pressure conditions, which is very common, for instance, when dealing with crystalline structures. This Hamiltonian includes original Hamiltonian of the system, which accounts for the kinetic and potential energy of the particles, plus additional terms that describe the kinetic and potential contributions of the simulation box itself.
 
 The additional terms can be written in terms of the matrix
 
@@ -763,9 +774,11 @@ where $\vec f_i = - \vec \nabla_{\vec r_i} V(\{ \vec r_j \})$ is the force actin
 TODO
 ```
 
-# Classical force fields[^source_FF]
+# Classical force fields
 
-[^source_FF]: The main references for this part are @schlick2010molecular and @leach2001molecular.
+:::{tip}
+The main references for this part are @schlick2010molecular and @leach2001molecular.
+:::
 
 Now that we know the algorithms used to run MD codes, we shift our attention to the interaction potentials acting between the components that make up the system we want to simulate. We start from the so-called classical (or empirical) force fields, which describe the interactions between atoms using simplified mathematical models based on quantum mechanics calculations, empirical observations, and physical principles from classical mechanics. Unlike quantum methods (introduced in [](./quantum.md)), which rigorously account for the wave-like nature of particles and their interactions through principles like superposition and entanglement, classical force fields offer a pragmatic approach that balances computational feasibility with accuracy.
 
@@ -783,7 +796,7 @@ where I made explicit the fact that the energy (and its contributions) are funct
 The separation of contributions into bonded and non-bonded terms is not only a conceptual one, but it has also practical implications. For instance, bonded interactions act on pairs or groups of atoms that do not change during the course of the simulation, and therefore the data structures that keep track of these interacting atoms do not need to be updated. Moreover, non-bonded interactions are usually much less steep than bonded ones, which makes it possible to implement multiple-timestep protocols to speed-up simulations (see *e.g.* Chapter 14 of @schlick2010molecular).
 ```
 
-The functional forms of the functions (implicitly) defined in Eq. [](#eq:tot-energy) depend on the force field employed, and are parametrised so as to reproduce the experimental structure and dynamics of target molecular systems.
+The functional forms of the functions (implicitly) defined in Eq. [](#eq:tot-energy) depend on the force field employed, and are parametrised so as to reproduce the experimental structure and dynamics of target molecular systems, but also leveraging *ab initio* calculations, which are often used to complement the experimental results.
 
 ```{figure} figures/ff_spectra.png
 :name: fig:ff_spectra
@@ -794,8 +807,6 @@ Characteristic (left) stretching and (right) bending and torsional vibrational f
 ```
 
 The traditional sources of parameters are provided by vibrational spectra (see [](#fig:ff_spectra) for examples), which have been routinely used to derive the force constants of many of the functional forms discussed below. The idea is that the frequencies extracted from experimental spectra can be compared with the characteristic frequencies of the normal modes as evaluated in simulations in order to find the values of the force constants that minimise the differences. 
-
-It is also possible to parametrise classical force fields with results from *ab initio* calculations, which are often used to complement the experimental results.
 
 ## Bonded interactions
 

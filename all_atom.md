@@ -96,7 +96,7 @@ $$
 P(v) = \left(\frac{\beta}{2 \pi m}\right)^{3/2} \exp\left(-\frac{\beta m v^2}{2}\right).
 $$ (eq:maxwell-boltzmann)
 
-However, since the initial configuration is most likely *not* an equilibrium configuration, the subsequence equilibration will change the average temperature, so that $\langle T(t) \rangle \neq T$. We will see later on how to couple the system to a [thermostat](#sec:thermostats) to enforce thermal equilibrium at the desired temperature.
+However, since the initial configuration is most likely *not* an equilibrium configuration, the subsequent equilibration will change the average temperature, so that $\langle T(t) \rangle \neq T$. We will see later on how to couple the system to a [thermostat](#sec:thermostats) to enforce thermal equilibrium at the desired temperature.
 
 [^only_velocities]: here I assume that we are dealing with point-like objects.
 
@@ -155,7 +155,7 @@ $$
 \Delta P_\text{tail} = 2 \pi \rho^2 \int_{r_c}^\infty \vec{r} \cdot \vec{f}(r) r^2 dr = \frac{16}{3} \pi \rho^2 \epsilon \sigma^3 \left[ \frac{2}{3}\left(\frac{\sigma}{r_c} \right)^9 - \left(\frac{\sigma}{r_c} \right)^3 \right].
 $$
 
-Note that this is the contribution that should be added to $P$ if one wishes to estimate the pressure of the true (untruncated) potential, rather than the true pressure of the truncated potential[^true_pressure].
+Note that this is the contribution that should be added to $P$ if one wishes to estimate the pressure of the true (untruncated) potential, rather than the true pressure of the truncated potential[^true_pressure]. This is a specific example of a more general lesson: one should always be aware of the consequences of any approximation that is introduced in the model, weighing in advantages and disadvantages and, if possible, finding a way to correct the results *a posteriori*, as in this case.
 
 A common way of removing the divergence in Eq. [](#eq:truncation) is to truncate and shift the potential:
 
@@ -168,12 +168,16 @@ V_\text{tr,sh}(r) = \begin{cases}
 
 This is especially important in constant-energy MD simulations (*i.e.* simulations in the NVE ensemble), since the discontinuity of the truncated (but not shifted) potential would greatly deteriorate the energy conservation. In this case the pressure tail correction remains the same, while the energy requires an additional correction on top of Eq. [](#eq:U_tail_LJ), which accounts for the average number of particles that are closer than $r_c$ from a given particle, multiplied by $\frac{1}{2} V(r_c)$.
 
+:::{warning} TODO
+Add part about smoothing
+:::
+
 [^long-range_interactions]: But Coulomb and dipolar interactions are not, and has to be treated differently, as we will see later on.
 [^true_pressure]: Check @frenkel2023understanding if you want an expression for the latter.
 
 ### Minimum image convention and periodic boundary conditions
 
-The number of particles in a modern-day simulation ranges from hundreds to millions, thus being very far from the thermodynamic limit. Therefore, it is not surprising that finite-size effects are always present (at least to some extent). In particular, the smaller the system, the larger boundary effects are: since in 3D the volume scales as $N^3$ and the surface as $N^2$, the fraction of particles that are at the surface scales as $N^{-1/3}$, which is a rather slowly decreasing function of $N$. For instance, if $N = 1000$, in a cubic box of volume $V = L^3$ more than half of the particles are at the surface. One would have to simulate $\approx 10^6$ particles to see this fraction decrease below $10\%$!
+The number of particles in a modern-day simulation ranges from hundreds to millions, thus being very far from the thermodynamic limit. Therefore, it is not surprising that finite-size effects are always present (at least to some extent). In particular, the smaller the system, the larger boundary effects are: since in 3D the volume scales as $N^3$ and the surface as $N^2$, the fraction of particles that are on the surface scales as $N^{-1/3}$, which is a rather slowly decreasing function of $N$. For instance, if $N = 1000$, in a cubic box of volume $V = L^3$ more than half of the particles are on the surface. One would have to simulate $\approx 10^6$ particles to see this fraction decrease below $10\%$!
 
 Those pesky boundary effects can be decreased by using periodic boundary conditions (PBCs): we get rid of the surface by considering the volume containing the system, which is often but not always a cubic box, one cell of an infinite periodic lattice made of identical cells. Then, each particle $i$ iteracts with any other particle: not only with those in the original cell, but also with their "images", including its own images, contained in all the other cells. For instance, the total energy of a (pairwise interacting) cubic system of side length $L$ simulated with PBCs would be
 
@@ -181,7 +185,7 @@ $$
 U_\text{tot} = \frac{1}{2} \sum_{i,j,\vec{n}}\phantom{}^{'} V(|\vec{r}_{ij} + \vec{n}L|),
 $$ (eq:PBC_sum)
 
-where $\vec r_{ij}$ is the distance between particles $i$ and $j$, $\vec{n}$ is a vector of three integer numbers $\in [-\infty, +\infty]$, and the prime over the sum indicates that the $i = j$ term should be excluded if $\vec n = (0, 0, 0)$. How do we handle such an infinite sum in a simulation? Keeping the focus on short-range interactions, it is clear that all terms with $|\vec{r}_{ij} + \vec{n}L| > r_c$ vanish, leaving only a finite number of non-zero interactions. In practice, Eq. [](#eq:PBC_sum) is carried out by making sure that $r_c < L / 2$, so that each particle can interact **at most** with a single periodic image of another particle. Then, given any two particles $i$ and $j$, the vector distance $\vec r_{ij} = (x_{ij}, y_{ij}, z_{ij})$ between the closest pair of images is
+where $\vec r_{ij}$ is the distance between particles $i$ and $j$, $\vec{n}$ is a vector of three integer numbers $\in [-\infty, +\infty]$, and the prime over the sum indicates that the $i = j$ term should be excluded if $\vec n = (0, 0, 0)$. How do we handle such an infinite sum in a simulation? Keeping the focus on short-range interactions, it is clear that all terms with $|\vec{r}_{ij} + \vec{n}L| > r_c$ vanish, leaving only a finite number of non-zero interactions. In practice, Eq. [](#eq:PBC_sum) is evaluated by making sure that $r_c < L / 2$, so that each particle can interact **at most** with a single periodic image of another particle. Then, given any two particles $i$ and $j$, the vector distance $\vec r_{ij} = (x_{ij}, y_{ij}, z_{ij})$ between the closest pair of images is
 
 (eq:minimum_image)=
 \begin{align}
@@ -209,6 +213,7 @@ The use of periodic boundary conditions gets rid of surface effects altogether, 
    * If one wishes to simulate equilibrium crystals, the shape of the box and the length of its sides should be compatible with the lattice's unit cell.
    * Fluctuations with wavelengths longer than the box size are suppressed. This makes it hard to study critical phenomena, which have diverging correlation lengths.
 3. Angular momentum is not conserved, since the system is **not** rotationally invariant (even if the Hamiltonian is).
+4. When particles cross the box boundary to, for instance, exit the central cell, one of its images will enter it. It is important to keep track of the "original" particle to correctly compute the value of some observables (*e.g.* the mean-squared displacements, see below, or a chain connectivity).
 
 ## Integrating the equations of motion
 
@@ -238,13 +243,13 @@ $$
 x(t + \Delta t) = 2x(t) - x(t - \Delta t) + a(t) \Delta t^2.
 $$
 
-This is the Verlet algorithm, which allows us to calculate the position $x(t + \Delta t)$ at the next time step using the current position $x(t)$, the previous position $ x(t - \Delta t)$, and the current acceleration $a(t)$. Although this basic Verlet method does not explicitly involve velocity, we can compute it as
+This is the Verlet algorithm, which allows us to calculate the position $x(t + \Delta t)$ at the next time step using the current position $x(t)$, the previous position $ x(t - \Delta t)$, and the current acceleration $a(t)$. Although this basic Verlet method does not explicitly involve velocity, if we consider the expansion up to the second order it can be written as
 
 $$
 v(t) = \frac{x(t + \Delta t) - x(t - \Delta t)}{2\Delta t} + \mathcal{O}(\Delta t^2).
 $$
 
-Note that this is accurate only up to order $\Delta t^2$. We can modify the basic Verlet approach to include an explicit update for the velocity, leading to the Velocity Verlet method. Instead of relying on the positions from the previous and current time steps, the Velocity Verlet algorithm updates the position and velocity in a two-step process.
+Note the lower order of accuracy with respect to $x(t)$. We can modify the basic Verlet approach to include an explicit update for the velocity, leading to the Velocity Verlet method. Instead of relying on the positions from the previous and current time steps, the Velocity Verlet algorithm updates the position and velocity in a two-step process.
 
 First, we use the current velocity and acceleration to update the position at time $ t + \Delta t $. This is done similarly to the basic Verlet method but with the velocity term explicitly included:
 
@@ -267,8 +272,8 @@ $$ (eq:velocity_verlet_v)
 This velocity update equation accounts for the change in acceleration over the time step, providing a more accurate velocity update than simply using the current acceleration. The Velocity Verlet method is the *de-facto* standard for MD codes. The common way to implement it is to split the velocity integration step in two, so that a full MD interation becomes
 
 1. Update the velocity, first step, $v(t + \Delta t / 2) = v(t) + \frac{1}{2} a(t) \Delta t$.
-2. Update the position, $r(t + \Delta t) = r(t) + v(t + \Delta t / 2)\Delta t = r(t) + v(t) \Delta t + \frac{1}{2} a(t) \Delta t^2$ (*e.g.* Eq. [](#eq:velocity_verlet_x)).
-3. Calculate the force (and therefore the acceleration) using the new position, $r(t + \Delta t) \to a(t + \Delta t) = F(t + \Delta t) / m$.
+2. Update the position, $x(t + \Delta t) = x(t) + v(t + \Delta t / 2)\Delta t = x(t) + v(t) \Delta t + \frac{1}{2} a(t) \Delta t^2$ (*e.g.* Eq. [](#eq:velocity_verlet_x)).
+3. Calculate the force (and therefore the acceleration) using the new position, $x(t + \Delta t) \to a(t + \Delta t) = F(t + \Delta t) / m$.
 4. Update the velocity, second step, $v(t + \Delta t) = v(t + \Delta t / 2) + \frac{1}{2} a(t + \Delta t)\Delta t = v(t) + \frac{1}{2} \left[ a(t) + a(t + \Delta t) \right] \Delta t$ (*e.g.* Eq. [](#eq:velocity_verlet_v)).
 
 An MD implementation based on [](#code:MD_simple) that implements a Velocity Verlet algorithm is
@@ -354,13 +359,39 @@ $$
 P = \frac{N k_B T}{V} + \frac{1}{3V} \left\langle \sum_{i=1}^N \vec{F}_i^{\rm int} \cdot \vec{r}_i \right\rangle \equiv \langle P_{\rm inst} \rangle,
 $$ (eq:pressure)
 
-where I have defined the instantaneous pressure $P_{\rm inst}$. The second term in Eq. [](#eq:pressure) represents the contribution from interparticle forces, where $\vec{F}_i^{\rm int}$ is the force on particle $i$ due to all other particles. This is the way pressure is computed
+where I have defined the instantaneous pressure $P_{\rm inst}$. The second term in Eq. [](#eq:pressure) represents the contribution from interparticle forces, where $\vec{F}_i^{\rm int}$ is the force on particle $i$ due to all other particles. Applying Eq. [](#eq:pressure) makes it possible to evaluate the pressure in computer simulations.
 
 ### Radial distribution function
 
-```{warning}
-TODO
+Let us start by defining a function $n(r)$ such that $n(r)dr$ represents the number of particles found between $r$ and $r+dr$, assuming the origin is placed at a random particle. With this definition, the total number of particles contained within a sphere of radius $R$ centered on a random particle is:
+
+$$
+N(R) = \int_0^R n(r)dr.
+$$
+
+For an ideal gas, $n(r) = 4\pi r^2 \rho$, where $\rho$ is the number density $(N-1)/V$.
+
+The function $g(r)$ is defined as:
+
+$$
+g(r) \equiv \frac{n(r)}{4\pi r^2 \rho},
+$$
+
+and it indicates how much denser the system is at a distance $r$ compared to an ideal gas. The function $g(r)$ is always positive and, for large values of $r$, $g(r) \to 1$.
+
+```{figure} figures/rdf.png
+:name: fig:rdf
+:align: center
+:width: 550px
+
+The radial distribution function of a Lennard-Jones fluid at $k_B T / \epsilon = 0.71$ and $\rho \sigma^3 = 0.844$. Superimposed on the plot is a cartoon that shows the interpretation of the features of the $g(r)$, highlighting the first and second shells around the central particle (coloured in red). Adapted from [Wikipedia](https://en.wikipedia.org/wiki/Radial_distribution_function).
 ```
+
+The figure shows a typical shape of $g(r)$, together with a 2D cartoon that gives an idea of how the structural features of the system affects the resulting radial distribution function. Near the origin, $g(r) = 0$ due to the excluded volume. This is always observed in simple liquids and, more generally, in systems with short-range repulsions (such as atom-based systems). For soft (or ultrasoft) potentials, which are typically effective, $g(r)$ may not be zero even at the origin.
+
+The figure also conveys a second message: the packing of objects with excluded volume inevitably generates oscillations in the $g(r)$ function, with a periodicity determined by the diameter of the particles themselves.
+
+In a system composed by atoms (or particles) of different types, it is possible to define radial distribution functions between pairs of atom types. For instance, when simulating water it is common to define $G_{OO}(r)$, $G_{HH}(r)$, and $G_{HO}(r)$, which provide information on the oxygen-oxygen, hydrogen-hydrogen and hydrogen-oxygen pair correlations, respectively.
 
 ### Mean-squared displacement
 

@@ -23,7 +23,7 @@ The following instructions apply to the second code:
 The two codes should
 
 1. Evaluate the enthalpic and entropic contributions to the given secondary structure $\Delta H^\circ$ and $\Delta S^\circ$, according to the SantaLucia model.
-2. Apply the two-state model to plot the melting temperature of the secondary structure. **Nota Bene:** for complicated examples the main assumption behind the two-state model[^two_state] will not hold, but for the sake of this assignment we will pretend that this is never the case.
+2. Apply the two-state model to predict the melting temperature of the secondary structure. **Nota Bene:** for complicated examples the main assumption behind the two-state model[^two_state] will not hold, but for the sake of this assignment we will pretend that this is never the case.
 
 :::{important} Choose and document the supported features
 A fully-fledged NN model has many parameters that take into account all possible secondary structures (internal mismatches, internal loops, bulges, hairpins, coaxial stacking, *etc.*). You do not have to necessarily to write a code that supports all these motifs, but:
@@ -84,7 +84,7 @@ For the hairpin code, the free-energy cost of a loop of length $L$ in kcal / mol
 &gt;9 | $\Delta G^\circ_{37^\circ}(L = 9) + 1.75 R T \log(L / 9)$ |5.00|
 :::
 
-Just to give you some numbers you can use to test your code, consider the following secondary structure (which is a duplex made of 6 base pairs):
+Just to give you some numbers you can use to test your code, consider the following double strand, that forms a duplex made of 6 base pairs:
 
 ```
 5'-CGTTGA-3'

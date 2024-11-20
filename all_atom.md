@@ -363,6 +363,8 @@ where I have defined the instantaneous pressure $P_{\rm inst}$. The second term 
 
 ### Radial distribution function
 
+There are many ways to obtain structural information from simulation output. The simplest, and most straightforward, piece of such information is encoded in the pair correlation function, also known as the radial distribution function, $g(r)$.
+
 Let us start by defining a function $n(r)$ such that $n(r)dr$ represents the number of particles found between $r$ and $r+dr$, assuming the origin is placed at a random particle. With this definition, the total number of particles contained within a sphere of radius $R$ centered on a random particle is:
 
 $$
@@ -377,7 +379,7 @@ $$
 g(r) \equiv \frac{n(r)}{4\pi r^2 \rho},
 $$
 
-and it indicates how much denser the system is at a distance $r$ compared to an ideal gas. The function $g(r)$ is always positive and, for large values of $r$, $g(r) \to 1$.
+and it indicates how much denser the system is at a distance $r$ compared to an ideal gas. The function $g(r)$ is always positive and, for large values of $r$, $g(r) \to 1$. The $g(r)$ is a central observable in molecular simulations, and can be used to estimate many other observables (see *e.g.* @hansen2013theory).
 
 ```{figure} figures/rdf.png
 :name: fig:rdf
@@ -387,11 +389,20 @@ and it indicates how much denser the system is at a distance $r$ compared to an 
 The radial distribution function of a Lennard-Jones fluid at $k_B T / \epsilon = 0.71$ and $\rho \sigma^3 = 0.844$. Superimposed on the plot is a cartoon that shows the interpretation of the features of the $g(r)$, highlighting the first and second shells around the central particle (coloured in red). Adapted from [Wikipedia](https://en.wikipedia.org/wiki/Radial_distribution_function).
 ```
 
-The figure shows a typical shape of $g(r)$, together with a 2D cartoon that gives an idea of how the structural features of the system affects the resulting radial distribution function. Near the origin, $g(r) = 0$ due to the excluded volume. This is always observed in simple liquids and, more generally, in systems with short-range repulsions (such as atom-based systems). For soft (or ultrasoft) potentials, which are typically effective, $g(r)$ may not be zero even at the origin.
+[](#fig:rdf) shows a typical shape of $g(r)$, together with a 2D cartoon that gives an idea of how the structural features of the system affects the resulting radial distribution function. Near the origin, $g(r) = 0$ due to the excluded volume. This is always observed in simple liquids and, more generally, in systems with short-range repulsions (such as atom-based systems). For soft (or ultrasoft) potentials, which are typically effective, $g(r)$ may not be zero even at the origin.
 
-The figure also conveys a second message: the packing of objects with excluded volume inevitably generates oscillations in the $g(r)$ function, with a periodicity determined by the diameter of the particles themselves.
+[](#fig:rdf) also conveys a second message: the packing of objects with excluded volume inevitably generates oscillations in the $g(r)$ function, with a periodicity determined by the diameter of the particles themselves.
 
-In a system composed by atoms (or particles) of different types, it is possible to define radial distribution functions between pairs of atom types. For instance, when simulating water it is common to define $G_{OO}(r)$, $G_{HH}(r)$, and $G_{HO}(r)$, which provide information on the oxygen-oxygen, hydrogen-hydrogen and hydrogen-oxygen pair correlations, respectively.
+```{figure} figures/rdf_water.png
+:name: fig:rdf_water
+:align: center
+:width: 400px
+
+The (a) $O-O$ and (b) $O-H$ radial distribution functions of SPC/E liquid water at $-10^\circ$ C. Taken from [](doi:10.1063/1.465158
+).
+```
+
+In a system composed by atoms (or particles) of different types, it is possible to define radial distribution functions between pairs of atom types. For instance, when simulating water it is common to define $g_{OO}(r)$, $g_{HH}(r)$, and $g_{HO}(r)$, which provide information on the oxygen-oxygen, hydrogen-hydrogen and hydrogen-oxygen pair correlations, respectively. See [](#fig:rdf_water) for an example.
 
 ### Mean-squared displacement
 

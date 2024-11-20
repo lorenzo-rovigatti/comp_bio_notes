@@ -44,6 +44,37 @@ project:
     numbering: true
     settings:
         output_matplotlib_strings: remove
+    toc:
+        - file: index.md
+        - title: Lectures
+          children:
+            - file: introduction.md
+            - file: proteins.md
+            - file: nucleic_acids.md
+            - file: folding.md
+            - file: quantum.md
+            - file: all_atom.md
+            - file: coarse_grained.md
+            - file: enhanced.md
+        - title: Exercises
+          children:
+            - file: exercises/SantaLucia.md
+            - file: exercises/zimm_bragg.md
+            - file: exercises/HP_model.md
+            - file: exercises/Zuker.md
+            - file: exercises/molecular_dynamics.md
+        - title: Hands-on notebooks
+          children:
+            - file: notebooks/Python_crash_course.ipynb
+            - file: notebooks/coin_change.ipynb
+            - file: notebooks/PDB.ipynb
+            - file: notebooks/zimm_bragg.ipynb
+            - file: notebooks/HP_model.ipynb
+            - file: notebooks/sequence_alignment.ipynb
+            - file: notebooks/BLAST.ipynb
+            - file: notebooks/RNA_folding.ipynb
+            - file: notebooks/NUPACK.ipynb
+            - file: notebooks/MD.ipynb
 site:
     template: book-theme
     options:

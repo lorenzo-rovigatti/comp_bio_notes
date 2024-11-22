@@ -325,7 +325,7 @@ The main source for this part is @allen2017computer.
 In the canonical ensemble, for any observable $A$ and generalised coordinate or momentum $h_k$, integrating by parts (and assuming reasonable boundary conditions) one finds
 
 \begin{align}
-\left\langle \frac{\partial A}{\partial h_k} \right\rangle &= \frac{1}{Q} \int \frac{\partial A}{\partial h_k} \exp(-\beta H) d\lbrace h_k \rbrace = \frac{1}{Q} \int \beta A \frac{\partial H}{\partial h_k} \exp(-\beta H) d\lbrace h_k \rbrace\\
+\left\langle \frac{\partial A}{\partial h_k} \right\rangle &= \frac{1}{Q} \int \frac{\partial A}{\partial h_k} \exp(-\beta H) d\lbrace h_i \rbrace = \frac{1}{Q} \int \beta A \frac{\partial H}{\partial h_k} \exp(-\beta H) d\lbrace h_i \rbrace\\
 &= \beta \left\langle A \frac{\partial H}{\partial h_k} \right\rangle,
 \end{align}
 
@@ -338,10 +338,10 @@ $$ (eq:generalised_equipartition)
 If we plug in a generalised momentum and sum over all momenta, Eq. [](#eq:generalised_equipartition) yields the usual equipartition principle:
 
 $$
-\left\langle \sum_{i=1}^N \frac{|\vec{p}_i|^2}{m_i} \right\rangle = 3 N k_B T,
+\left\langle \sum_{i=1}^N \frac{|\vec{p}_i|^2}{m_i} \right\rangle = 3 N k_B T.
 $$
 
-where $m_i$ is the mass of the $i$-th particle. By contrast, if we choose to use Cartesian coordinates as generalised coordinates in Eq. [](#eq:generalised_equipartition) and recall that the derivative of the Hamiltonian with respect to a particle coordinate is minus the total force acting on the particle along that coordinate, we find
+By contrast, if we choose to use Cartesian coordinates as generalised coordinates in Eq. [](#eq:generalised_equipartition) and recall that the derivative of the Hamiltonian with respect to a particle coordinate is minus the total force acting on the particle along that coordinate, we find
 
 $$
 \left\langle \sum_{i=1}^N \vec{r}_i \cdot \vec{F}_i^{\rm tot} \right\rangle = -3 N k_B T,
@@ -363,7 +363,7 @@ where I have defined the instantaneous pressure $P_{\rm inst}$. The second term 
 
 ### Radial distribution function
 
-There are many ways to obtain structural information from simulation output. The simplest, and most straightforward, piece of such information is encoded in the pair correlation function, also known as the radial distribution function, $g(r)$.
+The simplest, and most straightforward, piece of structural information that can be extracted from simulation output is encoded in the pair correlation function, also known as the radial distribution function, $g(r)$.
 
 Let us start by defining a function $n(r)$ such that $n(r)dr$ represents the number of particles found between $r$ and $r+dr$, assuming the origin is placed at a random particle. With this definition, the total number of particles contained within a sphere of radius $R$ centered on a random particle is:
 
@@ -379,7 +379,7 @@ $$
 g(r) \equiv \frac{n(r)}{4\pi r^2 \rho},
 $$
 
-and it indicates how much denser the system is at a distance $r$ compared to an ideal gas. The function $g(r)$ is always positive and, for large values of $r$, $g(r) \to 1$. The $g(r)$ is a central observable in molecular simulations, and can be used to estimate many other observables (see *e.g.* @hansen2013theory).
+and it indicates how much denser the system is at a distance $r$ compared to an ideal gas. The function $g(r)$ is always positive and, for large values of $r$, $g(r) \to 1$. The $g(r)$ is a central observable in molecular simulations, as it can be used to estimate many other quantities (see *e.g.* @hansen2013theory).
 
 ```{figure} figures/rdf.png
 :name: fig:rdf
@@ -389,7 +389,7 @@ and it indicates how much denser the system is at a distance $r$ compared to an 
 The radial distribution function of a Lennard-Jones fluid at $k_B T / \epsilon = 0.71$ and $\rho \sigma^3 = 0.844$. Superimposed on the plot is a cartoon that shows the interpretation of the features of the $g(r)$, highlighting the first and second shells around the central particle (coloured in red). Adapted from [Wikipedia](https://en.wikipedia.org/wiki/Radial_distribution_function).
 ```
 
-[](#fig:rdf) shows a typical shape of $g(r)$, together with a 2D cartoon that gives an idea of how the structural features of the system affects the resulting radial distribution function. Near the origin, $g(r) = 0$ due to the excluded volume. This is always observed in simple liquids and, more generally, in systems with short-range repulsions (such as atom-based systems). For soft (or ultrasoft) potentials, which are typically effective, $g(r)$ may not be zero even at the origin.
+[](#fig:rdf) shows a typical shape of $g(r)$, together with a 2D cartoon that gives an idea of how the structural features of the system determine the resulting radial distribution function. Near the origin, $g(r) = 0$ due to the excluded volume. This is always observed in simple liquids and, more generally, in systems with short-range repulsions (such as atom-based systems). For soft (or ultrasoft) potentials, which are typically effective, $g(r)$ may not be zero even at the origin.
 
 [](#fig:rdf) also conveys a second message: the packing of objects with excluded volume inevitably generates oscillations in the $g(r)$ function, with a periodicity determined by the diameter of the particles themselves.
 
@@ -406,7 +406,7 @@ In a system composed by atoms (or particles) of different types, it is possible 
 
 ### Mean-squared displacement
 
-The mean squared displacement (MSD) quantifies the extent of particle diffusion within a system over time. It provides insights into the mobility of particles by tracking how far each particle moves from its original position. Formally, for a given particle $i$, the MSD at time $t$ is calculated as the average of the squared differences between its position $\vec r_i(t)$ at time $t$ and its initial position $\vec r_i(0)$, represented as $\text{MSD}_i(t) = \langle |\vec r_i(t) - \vec r_i(0)|^2 \rangle$, so that the overall MSD is
+The mean squared displacement (MSD) quantifies the extent of particle diffusion within a system over time. It provides insights into the mobility of particles by tracking how far each particle moves from its original position. Formally, for a given particle $i$, the MSD at time $t$ is calculated as the average of the squared differences between its position $\vec r_i(t)$ at that time and its initial position $\vec r_i(0)$, represented as $\text{MSD}_i(t) = \langle |\vec r_i(t) - \vec r_i(0)|^2 \rangle$, so that the overall MSD is
 
 $$
 \text{MSD}(t) = \frac{1}{N} \sum_{i=1}^N \langle |\vec r_i(t) - \vec r_i(0)|^2 \rangle
@@ -424,6 +424,10 @@ The mean-squared displacement of a coarse-grained system (a tetravalent [patchy 
 
 The MSD provides essential information on diffusive behavior, as its time dependence can help distinguish between different diffusion regimes, such as ballistic ($\text{MSD}(t) \sim t^2$), brownian ($\text{MSD}(t) \sim t$), or subdiffusive (*e.g.* $\text{MSD}(t) \sim t^\alpha$, with $\alpha$ < 1), which are characteristic of different types of material and dynamical properties. [](#fig:msd) provides an example of a system that, depending on temperature, experience all these regimes.
 
+:::{warning}
+In order to correctly compute the MSD in simulations with periodic-boundary conditions, particles have to be allowed to seamlessly move across the box boundaries. However, for highly-diffusing systems, this means that the coordinates of particles can grow to very large values, which would decrease the overall numerical stability, since arithmetic operations are less accurate the larger the operands are. A common solution is to keep the particles in the central box by applying PBC, while at the same time keeping track of the number of times they cross each box boundary.
+:::
+
 ### Root mean-squared deviation
 
 The root mean-squared deviation (RMSD) is a measure commonly used to assess the structural deviation of a molecule or a set of particles from a reference structure, typically the initial or an experimentally determined structure. It quantifies the average distance between corresponding atoms in two structures, giving insight into conformational changes over time. The RMSD is particularly useful in studying the stability and flexibility of molecular structures, such as proteins, over the course of a simulation.
@@ -434,13 +438,13 @@ $$
 \text{RMSD}(t) = \sqrt{\frac{1}{N} \sum_{i=1}^{N} |\vec r_i(t) - \vec r_i^{\text{ref}}|^2}
 $$ (eq:rmsd)
 
-where $\vec r_i^{\text{ref}}$ is the position of the $i$-th atom in the reference structure. To compute the RMSD in MD simulations Eq. [](#eq:rmsd) is applied after that the structure at each time point is aligned with the reference structure (typically minimizing rotational and translational differences). Formally, this can be written as
+where $\vec r_i^{\text{ref}}$ is the position of the $i$-th atom in the reference structure. To compute the RMSD in MD simulations, Eq. [](#eq:rmsd) is evaluated after the configuration at time $t$ is aligned with the reference structure (typically minimizing rotational and translational differences). Formally, this can be written as
 
 $$
 \text{RMSD}(t) = \sqrt{\frac{1}{N} \sum_{i=1}^{N} |\hat R \cdot \vec r_i(t) + \vec t - \vec r_i^{\text{ref}}|^2},
 $$ (eq:aligned_rmsd)
 
-where $\hat R$ and $\vec t$ are the rotation matrix and translation vector that minimise the resulting RMSD, respectively. The most common use of the RMSD is to plot it as a function of time to analyse the stability of the molecule: lower RMSD values indicate that the structure remains close to the reference, while higher values suggest significant conformational changes.
+where $\hat R$ and $\vec t$ are the rotation matrix and translation vector that minimise the resulting RMSD, respectively. The most common use of the RMSD is to plot it as a function of time to analyse the stability of the molecule: lower RMSD values indicate that the structure remains close to the reference, while higher values suggest significant conformational changes. It is rather common to only use a subset of atoms to compute the RMSD (*e.g.* to compare the structure of two polypeptides with different sequences, only backbone atoms are used).
 
 ```{figure} figures/rmsd_amber.png
 :name: fig:rmsd_amber
@@ -460,9 +464,9 @@ The RMSD of a Alanine dipeptide simulated with [Amber](https://ambermd.org/). Ta
 If the interaction potential is short-ranged, in the sense that it goes to zero at some distance $r_c$, it is clear that particles that are further away than $r_c$ will not feel any reciprocal force. If this is the case, calculating distances between all pairs of particles would be wasteful, as only a
 fraction of pairs will feel a mutual interaction. There are several techniques that can be used to optimise the force calculation step (and therefore the simulation performance) by performing some kind of bookkeeping that makes it possible to evaluate only those contributions due to pairs that are "close enough" to each other. Here I will present the most common ones: cells and Verlet lists.
 
-The idea behind cell lists is to partition the simulation box into smaller boxes, called cells, with side lengths $\geq r_c$[^cubic_cells]. This partitioning is done by using a data structure that, for each cell, stores the list of particles that are inside it. Then, during the force calculation loop, we consider that particle $i$, which is in cell $c$, can interact only with particles that are either inside $c$ or in one of its neighbouring cells (8 in 2D and 26 in 3D). The cell data structure can either be built every step, or updated after each integration step. In this latter case, the code checks whether a particle has crossed a cell boundary, and in this case it removes the particle from the old cell and adds it to the new one. This can be done efficiently with [linked lists](https://en.wikipedia.org/wiki/Linked_list). With this technique, each particle has a number of possibly-interacting neighbours that depends only on particle density and cell size, and therefore is independent on $N$. As a result, the algorithmic complexity of the simulation is $\mathcal{O}(N)$ rather than $\mathcal{O}(N^2)$. 
+The idea behind cell lists is to partition the simulation box into smaller boxes, called cells, with side lengths $\geq r_c$[^cubic_cells]. This partitioning is done by using a data structure that, for each cell, stores the list of particles that are inside it. Then, during the force calculation loop, we consider that particle $i$, which is in cell $c$, can interact only with particles that are either inside $c$ or in one of its neighbouring cells (8 in 2D and 26 in 3D). The cell data structure can either be built from scratch every step, or updated after each integration step. In this latter case, the code checks whether a particle has crossed a cell boundary, and in this case it removes the particle from the old cell and adds it to the new one. This can be done efficiently with [linked lists](https://en.wikipedia.org/wiki/Linked_list). With this technique, each particle has a number of possibly-interacting neighbours that depends only on particle density and cell size, and therefore is independent on $N$. As a result, the algorithmic complexity of the simulation is $\mathcal{O}(N)$ rather than $\mathcal{O}(N^2)$. 
 
-Differently from cell lists, in Verlet lists for each particle the code stores a list of particles that are within a certain distance $r_v = r_c + r_s$, where $r_s$ is a free parameter called "Verlet skin". Every time the lists are updated, the current position of each particle $i$, $\vec r_{i, 0}$ is also stored. During the force calculation step of particle $i$, only those particles that are in $i$'s Verlet list are considered. For a homogeneous system of density $\rho$, the average number if neighbours is
+Differently from cell lists, with Verlet lists the code stores, for each particle, a list of particles that are within a certain distance $r_v = r_c + r_s$, where $r_s$ is a free parameter called "Verlet skin". Every time the lists are updated, the current position of each particle $i$, $\vec r_{i, 0}$ is also stored. During the force calculation step of particle $i$, only those particles that are in $i$'s Verlet list are considered. For a homogeneous system of density $\rho$, the average number of neighbours is
 
 $$
 N_v = \frac{4}{3} \pi r_v^3 \rho,
@@ -474,7 +478,7 @@ $$
 N_c = 27 r_c^3 \rho.
 $$
 
-In the limit $r_s \ll r_c$, which is rather common, $r_v \approx r_c$, so that $N_c / N_v = 81 / 4 \pi \approx 6$, which means that if Verlet lists are used, the number of distances to be checked is six times smaller than with cell lists.
+In the limit $r_s \ll r_c$, which is rather common, $r_v \approx r_c$, so that $N_c / N_v = 81 / 4 \pi \approx 6$: with Verlet lists, the number of distances to be checked is six times smaller than with cell lists.
 
 Verlet lists do not have to be updated at every step, or we would go back to checking all pairs, but only when when any particle has moved a distance larger than $r_s / 2$ from its original position $\vec r_{i, 0}$. Note that the overall performance will depend on the value of $r_s$, as small values will result in very frequent updates, while large values will generate large lists, which means useless distance checks on particles that are too far away to interact. Although the average number of neighbours of each particle $i$ is independent on $N$ and therefore the actual force calculation is $\mathcal{O}(N)$, the overall algorithmic complexity is still $\mathcal{O}(N^2)$, since list updating, even if not done at each time step, requires looping over all pairs. To overcome this problem it is common to use cell lists to build Verlet lists, bringing the complexity of the list update step, and therefore of the whole simulation, down to $\mathcal{O}(N)$, while at the same time retaining the smaller average number of neighbours of Verlet lists.
 
@@ -487,14 +491,13 @@ Verlet lists do not have to be updated at every step, or we would go back to che
 Most of the text of this part comes from @frenkel2023understanding, while some bits have been adapted from @schlick2010molecular.
 :::
 
-In molecular simulations, long-range interactions refer to forces that decay slowly with distance. The definition of "long-range" can be made unambiguous if we consider the general form of a pairwise interaction potential $V(r)$ between two particles separated by a distance $r$. The energy contribution of these interactions beyond a certain cut-off distance $r_c$ is given by the "tail" correction of [](#eq:U_tail). For a potential that decays as $1/r^\alpha$, the tail correction is, asymptotically,
+In molecular simulations, long-range interactions refer to forces that decay slowly with distance. The definition of "long-range" can be made unambiguous if we consider the general form of a pairwise interaction potential $V(r)$ between two particles separated by a distance $r$. The energy contribution of these interactions beyond a certain cut-off distance $r_c$ is given by the "tail" correction defined in Eq. [](#eq:U_tail). For a potential that decays as $1/r^\alpha$, the tail correction in 3D is, asymptotically,
 
 $$
 U_{\text{tail}} \sim \int_{r_c}^\infty \frac{r^2}{r^\alpha} \, dr = \int_{r_c}^\infty \frac{1}{r^{\alpha - 2}} \, dr \sim \left. \frac{1}{r_c^{\alpha - 3}}\right|_{r_c}^\infty
 $$
 
-which converges for any $r_c$ as long as $\alpha > 3$ (*e.g.* the Lennard-Jones potential, for which $\alpha = 6$)[^dipole_convergence]. By contrast, if $\alpha < 3$, the integral diverges, indicating that the energy contribution from the interaction tail remains significant when any cut-off is applied: 
-the tail of the interaction potential beyond $r_c$ contributes non-negligibly to the total energy of the system, making a direct cut-off inaccurate.
+which converges for any $r_c$ as long as $\alpha > 3$ (*e.g.* the Lennard-Jones potential, for which $\alpha = 6$)[^dipole_convergence]. By contrast, if $\alpha < 3$, the integral diverges, indicating that the tail of the interaction potential beyond $r_c$ contributes non-negligibly to the total energy of the system regardless of the value of $r_c$, making a direct cut-off inaccurate.
 
 I'll now quickly introduce the most popular methods used to handle long-range interactions, together with two techniques used to improve its efficiency. First, we start by considering a system consisting of $N$ charged particles in a box of volume $V = L^3$ and periodic boundary conditions. We assume that particles cannot overlap (*i.e.* that there is at least an additional short-range repulsion), and that the system is electrically neutral, *e.g.* that $\sum_i q_i = 0$. The total electrostatic energy of the system (in Gaussian units, which make the notation lighter) is
 
@@ -504,7 +507,7 @@ $$ (eq:U_el)
 
 where the prime on the summation indicates that the sum is over all periodic images $\vec n$ and over all particle pairs $(i, j)$, except $i = j$ if $\vec n = (0, 0, 0)$, *i.e.* particle $i$ interacts with all its periodic images but not with itself. Unfortunately, Eq. [](#eq:U_el) cannot be used to compute the electrostatic energy in a simulation because it contains a conditionally convergent sum.
 
-To improve the convergence of the expression for the electrostatic potential energy, we follow [](doi:10.1002/andp.19213690304) and rewrite the expression for the charge density. In equation [](#eq:U_el) we have represented the charge density as a sum of $\delta$-functions. The contribution to the electrostatic potential due to these point charges decays as $1 / r$. Now consider what happens if we assume that every particle $i$ with charge $q_i$ is surrounded by a diffuse charge distribution of the opposite sign, such that the total charge of this cloud exactly cancels $q_i$ . In that case only the fraction of $q_i$ that is not screened contributed to the electrostatic potential due to particle $i$. At large distances, this fraction goes to $0$ in a way that depends on the functional form of the screening charge distribution, which we will take as Gaussian in the following.
+To improve the convergence of the expression for the electrostatic potential energy, we follow [](doi:10.1002/andp.19213690304) and rewrite the expression for the charge density. In equation [](#eq:U_el) the charge density is represented as a sum of $\delta$-functions. The contribution to the electrostatic potential due to these point charges decays as $1 / r$. Now consider what happens if we assume that every particle $i$ with charge $q_i$ is surrounded by a diffuse charge distribution of the opposite sign, such that the total charge of this cloud exactly cancels $q_i$ . In that case only the fraction of $q_i$ that is not screened contributes to the electrostatic potential due to particle $i$. At large distances, this fraction goes to $0$ in a way that depends on the functional form of the screening charge distribution, which we will take as Gaussian in the following.
 
 ```{figure} figures/ewald.png
 :name: fig:ewald
@@ -516,7 +519,7 @@ The elecrostatic effect due to point charges can be seen as a sum of screend cha
 
 The contribution to the electrostatic potential at a point $r$ due to a set of screened charges can be easily computed by direct summation, because the
 electrostatic potential due to a screened charge is a rapidly decaying function of $r$. However, it was not our aim to evaluate the potential due to a
-set of screened charges but due to point charges. Hence, we must correct for the fact that we have added a screening charge cloud to every particle. This is shown schematically in [](#fig:ewald). This compensating charge density varies smoothly in space (because the screening charge distribution is a smoothly varying function!). We wish to compute the electrostatic energy at the site of ion $i$. Of course, we should exclude the electrostatic interaction of the ion with itself. We have three contributions to the electrostatic potential: first of all, the one due to the point charge $q_i$, secondly, the one due to the Gaussian screening charge cloud with charge $-q_i$ , and finally the one due to the compensating charge cloud with charge $q_i$. In order to exclude Coulomb self-interactions, we should not include any of these three contributions to the electrostatic potential at the position of ion $i$. However, it turns out that it is convenient to retain the contribution due to the compensating charge distribution and correct for the resulting spurious interaction afterwards. The reason we retain the compensating charge cloud for ion $i$ is that, if we do so, the compensating charge distribution is not only a smoothly varying function, but it is also periodic. Such a function can be represented by a (rapidly converging) Fourier series, and this turns out to be essential for the numerical implementation. Of course, in the end we should correct for the inclusion of a spurious "self" interaction between ion and the compensating charge cloud.
+set of screened charges but due to point charges. Hence, we must correct for the fact that we have added a screening charge cloud to every particle. This is shown schematically in [](#fig:ewald). This compensating charge density varies smoothly in space (because the screening charge distribution is a smoothly varying function!). We wish to compute the electrostatic energy at the site of ion $i$. Of course, we should exclude the electrostatic interaction of the ion with itself. We have three contributions to the electrostatic potential: first of all, the one due to the point charge $q_i$, secondly, the one due to the Gaussian screening charge cloud with charge $-q_i$ , and finally the one due to the compensating charge cloud with charge $q_i$. In order to exclude Coulomb self-interactions, we should not include any of these three contributions to the electrostatic potential at the position of ion $i$. However, it turns out that it is convenient to retain the contribution due to the compensating charge distribution and correct for the resulting spurious interaction afterwards. The reason we retain the compensating charge cloud for ion $i$ is that, if we do so, the compensating charge distribution is not only a smoothly varying function, but it is also periodic. Such a function can be represented by a (rapidly converging) Fourier series, and this turns out to be essential for the numerical implementation. Of course, in the end we should correct for the inclusion of a spurious "self" interaction between the ion and the compensating charge cloud.
 
 Considering screening Gaussians with width $\sqrt{2/\alpha}$, the splitting can be written as follows:
 
@@ -561,7 +564,7 @@ A further scaling improvement can be obtained by using the so-called Particle Me
 
 1. Assign each particle's charge to a regular 3D grid that spans the simulation box. This is achieved through an interpolation scheme, where each particle's charge is "spread" over multiple neighboring grid points. The most common method is B-spline interpolation (see [](doi:10.1063/1.470117) for details).
 2. Once the charges are mapped onto the grid, the Fourier transform of the grid-based charge density is computed. This is done by using the Fast Fourier Transform (FFT), an efficient algorithm for performing discrete Fourier transforms, with a computational complexity of $\mathcal{O}(N \log N)$.
-3. In Fourier space, the electrostatic potential for each grid point at wave vector is computed using the Ewald screening function (*i.e.* Eq. [](#eq:ewald_reciprocal)).
+3. In Fourier space, the electrostatic potential for each grid point at wave vector is computed by first applying the Ewald screening function (*i.e.* Eq. [](#eq:ewald_reciprocal)) to obtain the charge density, and then solving the Poisson equation.
 4. Once the reciprocal-space potential has been calculated, an inverse Fourier transform is applied to convert the potential back to real space on the grid, yielding the electrostatic potential on each grid point in the simulation box.
 5. The final step is to interpolate the grid-based potential back to the positions of the actual particles, which allows the forces and energies to be computed for each particle based on the smoothed potential field. This is essentially the reverse of the initial charge assignment process, with each particle's force interpolated from the neighboring grid points.
 
@@ -767,7 +770,7 @@ $$ (eq:pressure_NPT)
 
 which is the virial pressure of a system with a non-constant volume. Note that the second term in [](#eq:pressure_NPT) is non-zero if the energy depends explicitly on volume, which is always the case for interaction potentials that are long-range, or for which long-range corrections due to cut-offs have to be evaluated.
 
-Note that equations [](#eq:nose-hoover_barostat) also contain a coupling to a Nosé-Hoover thermostat, which can be generalised to a chain thermostat if $Q \to Q_1$, $p_\zeta \to p_{\zeta_1}$ the equations of motions of the other $M - 1$ links are added.
+Note that equations [](#eq:nose-hoover_barostat) also contain a coupling to a Nosé-Hoover thermostat, which can be generalised to a chain thermostat if $Q \to Q_1$, $p_\zeta \to p_{\zeta_1}$, and the equations of motions of the other $M - 1$ links are added.
 
 ### Parrinello-Rahman
 

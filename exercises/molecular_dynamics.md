@@ -11,7 +11,7 @@ Remember to read the [homeworks](#sec:homeworks) section to understand what you 
 Molecular dynamics code integrate Newton's equations to follow the dynamics of a systems made of components interacting with each other through a well-defined set of potentials. The mandatory part of this assignment is to write a molecular dynamics code that can be used to simulate a 3D Lennard-Jones system at a given temperature $T$ and density $\rho = N / V$, where $N$ is the number of particles and $V = L^3$ is the volume of the simulation box. Use the algorithms [discussed in class](../all_atom.md) and [implemented here](../notebooks/MD.ipynb). The code should
 
 1. Take as input at least the number of particles, temperature, density and the integration time step, $\Delta t$.
-2. Initialise the system, for instance by using a function that places the particles on a cubic lattice, as done in the notebook linked above.
+2. Initialise the system, for instance by using a function that places the particles on a cubic lattice, as done in the notebook linked above. Do not forget to also initialise the velocities as discussed during the lectures.
 2. Use the Velocity-Verlet integrator for the equations of motion.
 3. Take into account periodic boundary conditions (see [below](#sec:LJ_pbc) for details).
 4. Make it possible to optionally couple a thermostat to the system. The simplest to implement is the [Andersen thermostat](#sec:andersen_thermostat).
@@ -22,7 +22,7 @@ $$
 V^{LJ}(r_{ij}) = 4 \epsilon \left[ \left( \frac{\sigma}{r_{ij}} \right)^{12} - \left( \frac{\sigma}{r_{ij}} \right)^{6} \right],
 $$ (eq:LJ_exercise)
 
-where $\sigma$ is the particle diameter, $\epsilon$ is the depth of the attractive well, and $r_{ij} = |\vec r_{ij}| = |\vec r_i - \vec r_j|$ is the distance between $i$ and $j$. As discussed in class, non-bonded interactions such as this one are cut off at some distance for performance reasons. A common choice for the LJ potential is $r_c = 2.5 \sigma$. When computing the energy (for instance to compare yours results with the values reported below to test your code) don't forget to also shift the potential: the interaction energy for the $(i, j)$ pair should be:
+where $\sigma$ is the particle diameter, $\epsilon$ is the depth of the attractive well, and $r_{ij} = |\vec r_{ij}| = |\vec r_i - \vec r_j|$ is the distance between $i$ and $j$. As discussed in class, non-bonded interactions such as this one are cut off at some distance for performance reasons. A common choice for the LJ potential is $r_c = 2.5 \sigma$, but you should use a **larger** value (*e.g.* $r_c = 3.5 \sigma$ to ensure that the correct scaling of the energy fluctuations is observed). When computing the energy (for instance to compare yours results with the values reported below to test your code) don't forget to also shift the potential: the interaction energy for the $(i, j)$ pair should be:
 
 $$
 E_{ij} = V^{LJ}(r_{ij}) - V^{LJ}(r_c).
@@ -44,7 +44,7 @@ My advice is to make use of reduced units: the particle diameter is $\sigma$, th
 
 The documentation accompanying the code should contain a plot that shows that the fluctuations of the total energy is proportional to $\Delta t^2$[^range_dt].
 
-[^range_dt]: This will be true only if $\Delta t$ is not too large: be careful.
+[^range_dt]: This will be true only if $r_c$ is sufficiently large (*e.g.* $3.5 \sigma$), and $\Delta t$ is not too large: be careful.
 
 # Possible extensions
 

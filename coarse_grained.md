@@ -3,31 +3,180 @@ title: Coarse-grained models
 exports:
    - format: pdf
 ---
+
+```{tip}
+The whole chapter (if not stated otherwise) is a summary of [](doi:10.1063/1.4818908).
+```
  
-# Accuracy
+# Top-down models
 
-:::{tip}
-This part has been adapted (taken almost verbatim in some parts) from [](doi:10.1021/acs.jctc.2c00643). However, in that review accuracy is discussed only in the context of bottom-up CG models. Here I have tried to provide a more inclusive discussion.
-:::
+Top-down coarse-grained (CG) models derive their interactions from experimental observables or generic physical principles rather than atomistic-level details. Unlike bottom-up approaches, which aim to approximate the many-body potential of mean force (PMF) from a more detailed model, top-down models focus on reproducing emergent properties or large-scale behavior observed in experiments. These models are particularly useful for systems where fine-grained details are not critical, or when computational efficiency is a priority.
 
-How accurate a particular CG model is? Answering this question is hard not because it requires costly calculations, but because there are no metrics that makes it possible to provide an unambiguous answer. What do we mean with "accurate"? Following [](doi:10.1021/acs.jctc.2c00643), I define three separate yet related measures of CG model fidelity: consistency, representability, and transferability. The use and importance of each of these measures are dependent upon the scientific question of interest. It is therefore worthwhile to discuss each of these metrics with the understanding that all three contribute to the overall accuracy of a CG model. Although the original review discussing this topic focusses on bottom-up coarse-graining, I think that some of these metrics can, at least to some extent, extended to top-down models. Indeed, while it is true that top-down models are, by definition, not consistent with statistical mechanics, in the sense that they do not provide a direct connection between the FG and CG worlds but are instead primarily models in the larger sense of the word, they can nevertheless reproduce, sometimes quantitatively, some "macroscopic" properties of the coarse-grained system (*e.g.* thermodynamics).
+The philosophy behind top-down CG modeling can be categorized into two main types: generic and chemically specific. Generic models aim to capture universal physical principles without explicitly addressing the chemical identity of the system. They often use low-resolution representations and simplified potentials to explore broad phenomena, such as the role of hydrophobic interactions in protein folding or the impact of chain stiffness in DNA condensation. In contrast, chemically specific models target the properties of a specific system, such as a lipid bilayer or a particular protein, and are parameterized using experimental data. These models aim to reproduce observed structural or thermodynamic features, such as density, bilayer rigidity, or melting temperatures, by carefully tuning interaction potentials.
 
-# Bottom-up
+The derivation of top-down CG models begins with the selection of a coarse-grained representation, where "sites" are defined to represent groups of atoms or molecules. The choice of resolution depends on the phenomenon of interest—for example, treating entire proteins as single particles versus focusing on the behavior of individual amino acids. Once the representation is established, the interactions between these sites are parameterized. In generic models, this process is guided by physical intuition, with potentials chosen to explore specific features of the system, such as peptide secondary structure preferences. For chemically specific models, the parameterization process incorporates experimental data. The Martini model, for instance, assigns interaction strengths based on the partitioning behavior of compounds between aqueous and hydrophobic phases.
 
-Bottom-up coarse-graining is a robust strategy in molecular modeling that allows detailed atomistic information to be condensed into simplified representations. This approach systematically derives effective potentials and interaction parameters from molecular-level data, reducing complex systems to manageable models while retaining critical physical characteristics. By representing groups of atoms or molecules as single units, bottom-up coarse-graining enables the study of larger systems or longer timescales than would be feasible with fully atomistic simulations, making it especially valuable for exploring mesoscale phenomena.
+After the parameterization, the performance of a top-down CG model is validated by comparing its predictions to experimental data. This validation step ensures that the model captures key properties, such as bilayer rigidity or DNA persistence length, at the desired resolution. While these models are computationally efficient and provide valuable insights into emergent phenomena, they come with limitations. The under-constrained nature of top-down models can lead to ambiguities in parameterization, and it may be challenging to systematically improve or validate their underlying assumptions. Nonetheless, when used judiciously, top-down CG models offer a powerful tool for exploring complex systems at reduced computational cost.
 
-In practice, bottom-up coarse-graining methods often use information from all-atom simulations to inform the development of coarse-grained potentials. One widely used approach is the iterative Boltzmann inversion, which uses distributions from high-resolution simulations to create effective potentials for coarse-grained models. Other techniques, like the force-matching or multiscale coarse-graining methods, involve more direct optimization to match forces and structural correlations between atomistic and coarse-grained representations. The goal is to achieve a model that can replicate the thermodynamic and structural properties of the original system accurately.
+## Some examples
 
-Bottom-up coarse-graining procedures often retain the molecular specificity and accuracy needed for a range of applications, from materials science to biomolecular simulations. However, this accuracy comes at a computational cost, as it requires initial high-resolution data and complex optimization procedures. Nonetheless, by sacrificing only unnecessary degrees of freedom, bottom-up coarse-graining enables researchers to strike a balance between simulation speed and model fidelity, making it an invaluable approach for studying mesoscale phenomena while staying rooted in molecular detail.
+### oxDNA/oxRNA
 
-A key challenge in bottom-up coarse-graining is that while the coarse-grained model allows for efficient simulation of broader-scale dynamics, it inherently sacrifices fine-grained structural detail. This is where backmapping becomes essential. Backmapping is the process of reconstructing detailed atomic configurations from a coarse-grained representation, effectively transforming a simplified model back into a high-resolution form. This procedure is crucial for bridging scales, as it enables researchers to interpret coarse-grained simulations in terms of atomistic detail when necessary, such as when making predictions about properties that depend on atomic-scale structures.
+```{tip}
+This section has been adapted from [](doi:10.3389/fmolb.2021.693710).
+```
 
-To achieve accurate backmapping, algorithms often combine statistical inference with additional energetic minimization to produce atomistic configurations that are consistent with the original coarse-grained trajectory. By leveraging data from the coarse-grained simulation as initial constraints, these methods reconstruct missing details in a way that reflects the system's underlying physical behavior. Backmapping is essential for applications where final atomic-scale configurations are needed, such as in the prediction of molecular interactions or the preparation of input structures for further atomistic simulations. Through bottom-up coarse-graining and efficient backmapping, researchers can navigate seamlessly between scales, balancing computational efficiency with molecular accuracy.
+The oxDNA model was originally developed to study the self-assembly, structure and mechanical properties of DNA nanostructures, and the action of DNA nanodevices - although it has since been applied more broadly. To describe such systems, a model needs to capture the structural, mechanical and thermodynamic properties of single-stranded DNA, double-stranded DNA, and the transition between the two states. It must also be feasible to simulate large enough systems for long enough to sample the key phenomena. Mesoscopic models, in which multiple atoms are represented by a single interaction site, are the appropriate resolution for these goals.
 
-# Top-down
+Here I will outline the key features of the oxDNA model. First of all, note that there are effectively three versions of the oxDNA potential that are publicly available. The original model, oxDNA1.0 ([](doi:10.1063/1.3552946)), lacks sequence-specific interaction strengths, electrostatic effects and major/minor grooving. oxDNA1.5 adds sequence-dependent interaction strengths to oxDNA1.0 ([](doi:10.1063/1.4754132)), and oxDNA2.0 ([](doi:10.1063/1.4921957)) also includes a more accurate structural model, alongside an explicit term in the potential for screened electrostatic interactions between negatively charged sites on the nucleic acid backbone. In addition to these three versions of the DNA model, an RNA parameterisation, oxRNA, has also been introduced ([](doi:10.1063/1.4881424)).
 
-## oxDNA/oxRNA
+It is worth noting that the three versions of oxDNA are very similar; most of the changes involve small adjustments of the geometry and strength of interactions. Structurally, the most significant change is the addition of a screened electrostatic interaction in oxDNA 2.0, which is typically small unless low salt concentrations are used. Moreover, subsequent versions of the model have been explicitly designed to preserve aspects of earlier versions that performed well. So oxDNA 1.5 and oxDNA 1.0 are very similar, except that oxDNA predicts sequence-dependent thermodynamic effects that are absent in oxDNA 1.0. oxDNA 2.0 is designed to preserve the thermodynamic and mechanical properties of oxDNA 1.5 at high salt as far as possible, but improves the structural description of duplexes (and structures built from duplexes) and allows for accurate thermodynamics at lower salt concentrations.
 
-## Vertex models
+As a result, therefore, the discussion provided here for simulation of one version of the model largely applies to all. Moreover, it is worth noting that, even given the improved accuracy of oxDNA 2.0 in certain contexts, simulations of earlier versions of the model are still potentially valuable. oxDNA 2.0 comes into its own when it is essential to incorporate longer-range electrostatics at low salt concentrations, or when the detailed geometry of the helices are particularly important. A good example would be when simulating densely packed helices connected by crossover junctions in DNA origami. In other contexts, the reduced complexity of oxDNA 1.5 and hence its improved computational efficiency (along with slightly greater focus on basic thermodynamics and mechanics) may be beneficial. Further, it is often helpful to use oxDNA 1.0 in these contexts, as the comparison of versions 1.0 and 1.5 can help to distinguish sequence-dependent and generic effects.
 
-## A hybrid approach: the Martini force field
+```{figure} figures/oxDNA_structure.png
+:name: fig:oxDNA_structure
+:align: center
+:width: 500px
+
+Structure and interactions of the oxDNA model. a) Three strands forming a nicked duplex as represented by oxDNA2.0, with the central section of the complex illustrating key interactions from Eq. [](#eq:oxDNA) highlighted. Individual nucleotides have an orientation described by a vector normal to the plane of the base (labelled n), and a vector indicating the direction of the hydrogen bonding interface (labelled b). b) Comparison of structure in oxDNA1.0 and oxDNA1.5 vs oxDNA2.0.  In the earlier version of the model, all interaction sites are co-linear; in oxDNA2.0, offsetting the backbone site allows for major and minor grooving. Taken from [](doi:10.3389/fmolb.2021.693710).
+```
+
+In all three parameterisations, oxDNA represents each nucleotide as a rigid body with several interaction sites, namely the backbone, base repulsion, stacking and hydrogen-bonding sites, as shown in [](#fig:oxDNA_structure). In oxDNA1.0 and oxDNA1.5, these sites are co-linear; the more realisic geometry of oxDNA2.0 offsets the backbone to allow for major and minor grooving.
+
+Interactions between nucleotides depend on the orientation of the nucleotides as a whole, rather than just the position of the interaction sites. In particular, there is a vector that is perpendicular to the notional plane of the base, and a vector that indicates the direction of the hydrogen bonding interface. These vectors are used to modulate the orientational dependence of the interactions, which allows the model to represent the coplanar base stacking, the linearity of hydrogen bonding and the edge-to-edge character of the Watson–Crick base pairing.  Furthermore, this representation  allows the encoding of more detailed structural features of DNA, for example, the right-handed character of the double helix and the anti-parallel nature of the strands in the helix.
+
+The potential energy of the system is calculated as:
+
+$$
+V_{0}=\sum_{\langle ij \rangle}(V_{b.b.}+V_{stack}+V_{exc}^{\prime})  +  \sum_{i,j \not\in \langle ij \rangle}(V_{HB}+V_{cr.st.}+V_{exc}+V_{coax}),
+$$ (eq:oxDNA)
+
+with an additional screened electrostatic repulsion term for oxDNA 2.0. In Eq. [](#eq:oxDNA), the first sum is taken over all pairs of nucleotides that are nearest neighbors on the same strand and the second sum comprises all remaining pairs. The terms represent backbone connectivity ($V_{b.b.}$), excluded volume ($V_{exc}$ and $V_{exc}^{\prime}$), hydrogen bonding between complementary bases ($V_{HB}$), stacking between adjacent bases on a strand ($V_{stack}$), cross-stacking ($V_{cr.st.}$) across the duplex axis and coaxial stacking ($V_{coax}$) across a nicked backbone. The excluded volume and backbone interactions are a function of the distance between repulsion sites. The backbone potential is a spring potential mimicking the covalent bonds along the strand. All other interactions depend on the relative orientations of the nucleotides and the distance between the hydrogen-bonding and stacking interaction sites. The model was deliberately constructed with all interactions pairwise (*i.e.*, only involving two nucleotides, which are taken as rigid bodies).
+
+A crucial feature of the oxDNA model is that the double helical structure is driven by the interplay between the hydrogen-bonding, stacking and backbone  connectivity bonds. The stacking interaction tends to encourage the nucleotides to form co-planar stacks; the fact that this stacking distance is shorter than the backbone bond length results in a tendency to form helical stacked structures. In the single-stranded state, these stacks can easily break, allowing the single strands to be flexible. The geometry of base pairing with a complementary strand locks the nucleotides into a much more stable double helical structure.
+
+It is convenient to use reduced units to describe lengths, energies and times in the system. Here is a summary of the conversion of these "oxDNA units" to SI units:
+
+* One unit of length $\sigma$ corresponds to $8.518$ $\angstrom$. This value was chosen to give a rise per bp of approximately 3.4 $\angstrom$ and equates roughly to the diameter $d$ of a nucleotide.
+* One unit of energy is equal to $\epsilon$ = 4.142$\times 10^{-20}$ J (or equivalently, $k_BT$ at $T$ = 300 K corresponds to 0.1$\epsilon$).
+* The cutoff for treating two bases as "stacked" or "base-paired" is conventionally taken to be when the relevant interaction term is more negative than $-0.1$ in simulation units ($4.142\times 10^{-21}$ J).
+* The units of energy and length imply a simulation unit of force equal to  $4.863 \times 10^{-11}$ N.
+
+# Bottom-up models
+
+Bottom-up coarse-grained (CG) models are constructed by systematically deriving interaction potentials from more detailed models, such as atomistic simulations, using principles of statistical mechanics. These models aim to approximate the many-body potential of mean force (PMF), which represents the effective interactions between coarse-grained sites after averaging over atomistic degrees of freedom. By doing so, bottom-up CG models strive to reproduce the structural, thermodynamic, and sometimes even dynamic properties of the underlying detailed models. They are particularly well-suited for cases where high accuracy is required at the coarse-grained resolution.
+
+The derivation of a bottom-up CG model begins with defining the coarse-grained mapping, where specific groups of atoms are represented as single interaction sites. This mapping determines the resolution of the model and sets the foundation for determining the interaction potentials. The core idea of bottom-up modeling is to ensure that the coarse-grained system reproduces specific properties of the detailed atomistic model. For instance, radial distribution functions or other correlation functions generated by the atomistic model often serve as target properties for parameterizing the coarse-grained potentials.
+
+Bottom-up models are particularly effective because they rely on rigorous physical principles, ensuring consistency with the underlying detailed data. They are capable of making predictions for systems or conditions not explicitly included in the parameterization, provided the underlying atomistic data is accurate. However, this approach comes with its challenges. The computational cost of deriving the potentials can be significant, especially when iterative methods are required. Additionally, the accuracy of bottom-up models is heavily dependent on the quality of the atomistic simulations used for parameterization. Furthermore, as these models are designed to reflect specific atomistic-level data, they may lack transferability to systems that differ significantly from the original detailed model.
+
+Despite these challenges, bottom-up CG models are a powerful tool for studying molecular systems, providing a systematic and predictive framework for coarse-grained simulations. They are particularly valuable for investigating systems where detailed data is available and high accuracy is required at the coarse-grained level, such as in protein-ligand interactions, lipid membranes, and polymer systems.
+
+## Correlation Function Approaches
+
+The correlation function approaches aim to parameterize coarse-grained (CG) potentials to reproduce specific structural properties, such as radial distribution functions (RDFs), obtained from atomistic simulations. These methods often employ iterative techniques to refine the CG potential so that the CG model accurately represents the structural correlations of the atomistic system.
+
+### Direct Boltzmann Inversion (DBI)
+
+Direct Boltzmann Inversion is the simplest approach to derive CG potentials directly from atomistic distribution functions. For a pair interaction, the CG potential $U_\zeta(r)$ is given by:
+
+$$
+U_\zeta(r) = -k_B T \ln g_\zeta(r),
+$$
+
+where $g_\zeta(r)$ is the radial distribution function (RDF).
+
+This potential corresponds to the pair potential of mean force (PMF), which effectively accounts for interactions mediated by the surrounding environment. However, DBI assumes that interactions are uncorrelated. This works well in "dilute" systems or for specific interactions but fails in systems where interactions are strongly coupled.
+
+### Iterative Boltzmann Inversion (IBI)
+
+To address the limitations of DBI, Iterative Boltzmann Inversion refines the potential iteratively. The goal is to adjust the CG potential until the RDF of the CG model matches the atomistic RDF. The iterative update for the potential is:
+
+$$
+U_\zeta^{(n+1)}(r) = U_\zeta^{(n)}(r) + k_B T \ln \frac{g_\zeta^\text{CG}(r)}{g_\zeta^\text{atomistic}(r)},
+$$
+
+where $g_\zeta^\text{CG}(r)$ is the RDF from the CG simulation, and $g_\zeta^\text{atomistic}(r)$ is the target RDF.
+
+This process continues until $g_\zeta^\text{CG}(r)$ converges to $g_\zeta^\text{atomistic}(r)$. IBI implicitly accounts for correlations between different interactions through iteration, but it may face convergence issues in complex systems.
+
+### Inverse Monte Carlo (IMC)
+
+Inverse Monte Carlo further improves upon IBI by explicitly incorporating the coupling between different degrees of freedom. It introduces a susceptibility matrix $K_{\zeta\zeta'}(x, x' | U)$, which quantifies the sensitivity of the CG distribution $P_\zeta(x | U)$ to changes in the potential $U_{\zeta'}(x')$:
+
+$$
+K_{\zeta\zeta'}(x, x' | U) = \frac{\delta P_\zeta(x | U)}{\delta U_{\zeta'}(x')}.
+$$
+
+The potential is refined by solving a set of linear equations:
+$$
+p_\zeta(x) - P_\zeta(x | U) = \sum_{\zeta'} \int dx' \, K_{\zeta\zeta'}(x, x' | U) \, \delta U_{\zeta'}(x'),
+$$
+where $p_\zeta(x)$ is the target atomistic distribution, and $P_\zeta(x | U)$ is the CG distribution.
+
+IMC iteratively adjusts $U_\zeta(x)$ by recalculating the susceptibility matrix and refining the potentials until convergence. This method is computationally demanding but robust, especially for systems with strong coupling between interactions.
+
+## Variational approaches
+
+Variational approaches focus on systematically deriving the CG interaction potentials by minimizing the difference between the atomistic and coarse-grained representations of a system. These methods provide a rigorous statistical mechanical framework to determine CG potentials that approximate the many-body potential of mean force (PMF). By doing so, they ensure that the CG model reproduces specific properties of the underlying atomistic model as closely as possible.
+
+The primary goal of variational approaches is to determine a CG potential, $U(R)$, such that the resulting CG model reproduces the configurational probability distribution, $P(R)$, of the atomistic model:
+
+$$
+P(R) = \int \mathrm{d}r \, p(r) \, \delta(M(r) - R),
+$$
+
+where $r$ are the atomistic coordinates, $R$ are the CG coordinates, $p(r)$ is the atomistic probability distribution, and $M(r)$ is the mapping function relating the atomistic and CG systems.
+
+The exact CG potential, $W(R)$, is given by the many-body potential of mean force:
+
+$$
+W(R) = -k_B T \ln \int \mathrm{d}r \, e^{-u(r)/k_B T} \, \delta(M(r) - R),
+$$
+
+where $u(r)$ is the atomistic potential energy, $k_B$ is the Boltzmann constant, and $T$ is the temperature. $W(R)$ includes both entropic and energetic contributions but is generally too complex to calculate directly.
+
+### Force-Matching
+
+One of the most common variational approaches is force-matching, where the CG potential is parameterized to reproduce the forces observed in atomistic simulations. The CG force, $F(R)$, is defined as the conditional average of atomistic forces:
+
+$$
+F(R) = \langle f(r) \rangle_{r | R},
+$$
+
+where $f(r)$ are the atomistic forces. To determine the CG potential, the force-matching approach minimizes the following error function:
+
+$$
+\mathcal{E} = \int \mathrm{d}R \, P(R) \left| F_\text{atomistic}(R) - F_\text{CG}(R) \right|^2,
+$$
+
+where $F_\text{atomistic}(R)$ are the forces computed from atomistic simulations and $F_\text{CG}(R)$ are the forces derived from the CG potential:
+
+$$
+F_\text{CG}(R) = -\nabla U(R).
+$$
+
+The CG potential is expanded in a chosen basis set, $\{ \phi_i(R) \}$:
+
+$$
+U(R) = \sum_i c_i \phi_i(R),
+$$
+
+where $c_i$ are the coefficients to be determined. The minimization of $\mathcal{E}$ with respect to $c_i$ yields a linear system of equations, allowing the determination of the CG potential.
+
+### Relative Entropy Minimization
+
+An alternative variational approach minimizes the relative entropy, $S_\text{rel}$, between the atomistic and CG probability distributions:
+
+$$
+S_\text{rel} = \int \mathrm{d}R \, P_\text{atomistic}(R) \ln \frac{P_\text{atomistic}(R)}{P_\text{CG}(R)},
+$$
+
+where $P_\text{atomistic}(R)$ is the atomistic distribution and $P_\text{CG}(R)$ is the CG distribution:
+
+$$
+P_\text{CG}(R) = \frac{e^{-U(R)/k_B T}}{Z_\text{CG}}, \quad Z_\text{CG} = \int \mathrm{d}R \, e^{-U(R)/k_B T}.
+$$
+
+The relative entropy minimization ensures that the CG potential generates a probability distribution that best matches the atomistic distribution. The gradient of $S_\text{rel}$ with respect to the potential parameters, $c_i$, can be used to iteratively refine $U(R)$.

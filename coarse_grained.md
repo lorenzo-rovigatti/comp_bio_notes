@@ -5,63 +5,29 @@ exports:
 ---
 
 ```{tip}
-The whole chapter (if not stated otherwise) is a summary of [](doi:10.1063/1.4818908).
-```
- 
-# Top-down models
-
-Top-down coarse-grained (CG) models derive their interactions from experimental observables or generic physical principles rather than atomistic-level details. Unlike bottom-up approaches, which aim to approximate the many-body potential of mean force (PMF) from a more detailed model, top-down models focus on reproducing emergent properties or large-scale behavior observed in experiments. These models are particularly useful for systems where fine-grained details are not critical, or when computational efficiency is a priority.
-
-The philosophy behind top-down CG modeling can be categorized into two main types: generic and chemically specific. Generic models aim to capture universal physical principles without explicitly addressing the chemical identity of the system. They often use low-resolution representations and simplified potentials to explore broad phenomena, such as the role of hydrophobic interactions in protein folding or the impact of chain stiffness in DNA condensation. In contrast, chemically specific models target the properties of a specific system, such as a lipid bilayer or a particular protein, and are parameterized using experimental data. These models aim to reproduce observed structural or thermodynamic features, such as density, bilayer rigidity, or melting temperatures, by carefully tuning interaction potentials.
-
-The derivation of top-down CG models begins with the selection of a coarse-grained representation, where "sites" are defined to represent groups of atoms or molecules. The choice of resolution depends on the phenomenon of interest—for example, treating entire proteins as single particles versus focusing on the behavior of individual amino acids. Once the representation is established, the interactions between these sites are parameterized. In generic models, this process is guided by physical intuition, with potentials chosen to explore specific features of the system, such as peptide secondary structure preferences. For chemically specific models, the parameterization process incorporates experimental data. The Martini model, for instance, assigns interaction strengths based on the partitioning behavior of compounds between aqueous and hydrophobic phases.
-
-After the parameterization, the performance of a top-down CG model is validated by comparing its predictions to experimental data. This validation step ensures that the model captures key properties, such as bilayer rigidity or DNA persistence length, at the desired resolution. While these models are computationally efficient and provide valuable insights into emergent phenomena, they come with limitations. The under-constrained nature of top-down models can lead to ambiguities in parameterization, and it may be challenging to systematically improve or validate their underlying assumptions. Nonetheless, when used judiciously, top-down CG models offer a powerful tool for exploring complex systems at reduced computational cost.
-
-## Some examples
-
-### oxDNA/oxRNA
-
-```{tip}
-This section has been adapted from [](doi:10.3389/fmolb.2021.693710).
+Much of the material discussed here has been adapted from [](doi:10.1063/1.4818908).
 ```
 
-The oxDNA model was originally developed to study the self-assembly, structure and mechanical properties of DNA nanostructures, and the action of DNA nanodevices - although it has since been applied more broadly. To describe such systems, a model needs to capture the structural, mechanical and thermodynamic properties of single-stranded DNA, double-stranded DNA, and the transition between the two states. It must also be feasible to simulate large enough systems for long enough to sample the key phenomena. Mesoscopic models, in which multiple atoms are represented by a single interaction site, are the appropriate resolution for these goals.
+The idea behind coarse-graining is to simplify complex systems by reducing the level of detail while retaining the physical and chemical properties of interest. There are both practical and conceptual advantages of CG models.
 
-Here I will outline the key features of the oxDNA model. First of all, note that there are effectively three versions of the oxDNA potential that are publicly available. The original model, oxDNA1.0 ([](doi:10.1063/1.3552946)), lacks sequence-specific interaction strengths, electrostatic effects and major/minor grooving. oxDNA1.5 adds sequence-dependent interaction strengths to oxDNA1.0 ([](doi:10.1063/1.4754132)), and oxDNA2.0 ([](doi:10.1063/1.4921957)) also includes a more accurate structural model, alongside an explicit term in the potential for screened electrostatic interactions between negatively charged sites on the nucleic acid backbone. In addition to these three versions of the DNA model, an RNA parameterisation, oxRNA, has also been introduced ([](doi:10.1063/1.4881424)).
+From the practical standpoint, by grouping atoms or molecules into larger units, coarse-graining enables the study of systems that would otherwise be computationally intractable at full atomistic resolution. The speed-up of CG models is due to several contributions:
 
-It is worth noting that the three versions of oxDNA are very similar; most of the changes involve small adjustments of the geometry and strength of interactions. Structurally, the most significant change is the addition of a screened electrostatic interaction in oxDNA 2.0, which is typically small unless low salt concentrations are used. Moreover, subsequent versions of the model have been explicitly designed to preserve aspects of earlier versions that performed well. So oxDNA 1.5 and oxDNA 1.0 are very similar, except that oxDNA predicts sequence-dependent thermodynamic effects that are absent in oxDNA 1.0. oxDNA 2.0 is designed to preserve the thermodynamic and mechanical properties of oxDNA 1.5 at high salt as far as possible, but improves the structural description of duplexes (and structures built from duplexes) and allows for accurate thermodynamics at lower salt concentrations.
+* The reduction of the number of degrees of freedom (*e.g.* $N$ atoms become $M$ CG sites, with $N > M$).
+* The smoothing of the potential energy function, which stems from the space averaging that is inherent to CG procedures and makes it possible to use (often much) larger time steps.
+* The forms of the interactions used in CG models, which are often simpler (*e.g.* no long-range interactions).
+* Implicit-solvent GC models have much less friction, leading to faster diffusion, and therefore a much more efficient sampling.
 
-As a result, therefore, the discussion provided here for simulation of one version of the model largely applies to all. Moreover, it is worth noting that, even given the improved accuracy of oxDNA 2.0 in certain contexts, simulations of earlier versions of the model are still potentially valuable. oxDNA 2.0 comes into its own when it is essential to incorporate longer-range electrostatics at low salt concentrations, or when the detailed geometry of the helices are particularly important. A good example would be when simulating densely packed helices connected by crossover junctions in DNA origami. In other contexts, the reduced complexity of oxDNA 1.5 and hence its improved computational efficiency (along with slightly greater focus on basic thermodynamics and mechanics) may be beneficial. Further, it is often helpful to use oxDNA 1.0 in these contexts, as the comparison of versions 1.0 and 1.5 can help to distinguish sequence-dependent and generic effects.
+On a more conceptual level, reducing the number of degrees of freedom of a system can teach us something about the system itself. Indeed, CG models containing minimal sets of ingredients can be used to understand what are the ingredients underlying the phenomena of interest ([](doi:10.1021/acs.jpcb.2c08731)), which in many-body systems are often emergent properties, as famously discussed in the "More is different" paper by P. W. Anderson ([](doi:10.1126/science.177.4047.393)).
 
-```{figure} figures/oxDNA_structure.png
-:name: fig:oxDNA_structure
+```{figure} figures/CG_cartoon.png
+:name: fig:CG_cartoon
 :align: center
-:width: 500px
+:width: 600px
 
-Structure and interactions of the oxDNA model. a) Three strands forming a nicked duplex as represented by oxDNA2.0, with the central section of the complex illustrating key interactions from Eq. [](#eq:oxDNA) highlighted. Individual nucleotides have an orientation described by a vector normal to the plane of the base (labelled n), and a vector indicating the direction of the hydrogen bonding interface (labelled b). b) Comparison of structure in oxDNA1.0 and oxDNA1.5 vs oxDNA2.0.  In the earlier version of the model, all interaction sites are co-linear; in oxDNA2.0, offsetting the backbone site allows for major and minor grooving. Taken from [](doi:10.3389/fmolb.2021.693710).
+Models (here of DNA) with different levels of detail can be used to explore phenomena at different time and length scales. Taken from [](doi:10.1016/j.sbi.2015.11.011).
 ```
 
-In all three parameterisations, oxDNA represents each nucleotide as a rigid body with several interaction sites, namely the backbone, base repulsion, stacking and hydrogen-bonding sites, as shown in [](#fig:oxDNA_structure). In oxDNA1.0 and oxDNA1.5, these sites are co-linear; the more realisic geometry of oxDNA2.0 offsets the backbone to allow for major and minor grooving.
-
-Interactions between nucleotides depend on the orientation of the nucleotides as a whole, rather than just the position of the interaction sites. In particular, there is a vector that is perpendicular to the notional plane of the base, and a vector that indicates the direction of the hydrogen bonding interface. These vectors are used to modulate the orientational dependence of the interactions, which allows the model to represent the coplanar base stacking, the linearity of hydrogen bonding and the edge-to-edge character of the Watson–Crick base pairing.  Furthermore, this representation  allows the encoding of more detailed structural features of DNA, for example, the right-handed character of the double helix and the anti-parallel nature of the strands in the helix.
-
-The potential energy of the system is calculated as:
-
-$$
-V_{0}=\sum_{\langle ij \rangle}(V_{b.b.}+V_{stack}+V_{exc}^{\prime})  +  \sum_{i,j \not\in \langle ij \rangle}(V_{HB}+V_{cr.st.}+V_{exc}+V_{coax}),
-$$ (eq:oxDNA)
-
-with an additional screened electrostatic repulsion term for oxDNA 2.0. In Eq. [](#eq:oxDNA), the first sum is taken over all pairs of nucleotides that are nearest neighbors on the same strand and the second sum comprises all remaining pairs. The terms represent backbone connectivity ($V_{b.b.}$), excluded volume ($V_{exc}$ and $V_{exc}^{\prime}$), hydrogen bonding between complementary bases ($V_{HB}$), stacking between adjacent bases on a strand ($V_{stack}$), cross-stacking ($V_{cr.st.}$) across the duplex axis and coaxial stacking ($V_{coax}$) across a nicked backbone. The excluded volume and backbone interactions are a function of the distance between repulsion sites. The backbone potential is a spring potential mimicking the covalent bonds along the strand. All other interactions depend on the relative orientations of the nucleotides and the distance between the hydrogen-bonding and stacking interaction sites. The model was deliberately constructed with all interactions pairwise (*i.e.*, only involving two nucleotides, which are taken as rigid bodies).
-
-A crucial feature of the oxDNA model is that the double helical structure is driven by the interplay between the hydrogen-bonding, stacking and backbone  connectivity bonds. The stacking interaction tends to encourage the nucleotides to form co-planar stacks; the fact that this stacking distance is shorter than the backbone bond length results in a tendency to form helical stacked structures. In the single-stranded state, these stacks can easily break, allowing the single strands to be flexible. The geometry of base pairing with a complementary strand locks the nucleotides into a much more stable double helical structure.
-
-It is convenient to use reduced units to describe lengths, energies and times in the system. Here is a summary of the conversion of these "oxDNA units" to SI units:
-
-* One unit of length $\sigma$ corresponds to $8.518$ $\angstrom$. This value was chosen to give a rise per bp of approximately 3.4 $\angstrom$ and equates roughly to the diameter $d$ of a nucleotide.
-* One unit of energy is equal to $\epsilon$ = 4.142$\times 10^{-20}$ J (or equivalently, $k_BT$ at $T$ = 300 K corresponds to 0.1$\epsilon$).
-* The cutoff for treating two bases as "stacked" or "base-paired" is conventionally taken to be when the relevant interaction term is more negative than $-0.1$ in simulation units ($4.142\times 10^{-21}$ J).
-* The units of energy and length imply a simulation unit of force equal to  $4.863 \times 10^{-11}$ N.
+[](#fig:CG_cartoon) shows examples of DNA models at different resolution, and the time and length scales that they can access in computer simulations.
 
 # Bottom-up models
 
@@ -75,7 +41,7 @@ Despite these challenges, bottom-up CG models are a powerful tool for studying m
 
 ## Correlation Function Approaches
 
-The correlation function approaches aim to parameterize coarse-grained (CG) potentials to reproduce specific structural properties, such as radial distribution functions (RDFs), obtained from atomistic simulations. These methods often employ iterative techniques to refine the CG potential so that the CG model accurately represents the structural correlations of the atomistic system.
+The correlation function approaches aim to parameterize coarse-grained (CG) potentials to reproduce specific structural properties, such as radial distribution functions, obtained from atomistic simulations. These methods often employ iterative techniques to refine the CG potential so that the CG model accurately represents the structural correlations of the atomistic system.
 
 ### Direct Boltzmann Inversion (DBI)
 
@@ -85,13 +51,11 @@ $$
 U_\zeta(r) = -k_B T \ln g_\zeta(r),
 $$
 
-where $g_\zeta(r)$ is the radial distribution function (RDF).
-
-This potential corresponds to the pair potential of mean force (PMF), which effectively accounts for interactions mediated by the surrounding environment. However, DBI assumes that interactions are uncorrelated. This works well in "dilute" systems or for specific interactions but fails in systems where interactions are strongly coupled.
+where $g_\zeta(r)$ is the radial distribution function. This potential corresponds to the pair potential of mean force (PMF), which effectively accounts for interactions mediated by the surrounding environment. However, DBI assumes that interactions are uncorrelated. This works well in "dilute" systems or for specific interactions but fails in systems where interactions are strongly coupled.
 
 ### Iterative Boltzmann Inversion (IBI)
 
-To address the limitations of DBI, Iterative Boltzmann Inversion refines the potential iteratively. The goal is to adjust the CG potential until the RDF of the CG model matches the atomistic RDF. The iterative update for the potential is:
+To address the limitations of DBI, Iterative Boltzmann Inversion refines the potential iteratively. The goal is to adjust the CG potential until the radial distribution function of the CG model matches the atomistic $g(r)$. The iterative update for the potential is:
 
 $$
 U_\zeta^{(n+1)}(r) = U_\zeta^{(n)}(r) + k_B T \ln \frac{g_\zeta^\text{CG}(r)}{g_\zeta^\text{atomistic}(r)},
@@ -180,3 +144,58 @@ P_\text{CG}(R) = \frac{e^{-U(R)/k_B T}}{Z_\text{CG}}, \quad Z_\text{CG} = \int \
 $$
 
 The relative entropy minimization ensures that the CG potential generates a probability distribution that best matches the atomistic distribution. The gradient of $S_\text{rel}$ with respect to the potential parameters, $c_i$, can be used to iteratively refine $U(R)$.
+
+# Top-down models
+
+Top-down coarse-grained (CG) models derive their interactions from experimental observables or generic physical principles rather than atomistic-level details. Unlike bottom-up approaches, which aim to approximate the many-body potential of mean force (PMF) from a more detailed model, top-down models focus on reproducing emergent properties or large-scale behavior observed in experiments. These models are particularly useful for systems where fine-grained details are not critical, or when computational efficiency is a priority.
+
+The philosophy behind top-down CG modeling can be categorized into two main types: generic and chemically specific. Generic models aim to capture universal physical principles without explicitly addressing the chemical identity of the system. They often use low-resolution representations and simplified potentials to explore broad phenomena, such as the role of hydrophobic interactions in protein folding or the impact of chain stiffness in DNA condensation. In contrast, chemically specific models target the properties of a specific system, such as a lipid bilayer or a particular protein, and are parameterized using experimental data. These models aim to reproduce observed structural or thermodynamic features, such as density, bilayer rigidity, or melting temperatures, by carefully tuning interaction potentials.
+
+The derivation of top-down CG models begins with the selection of a coarse-grained representation, where "sites" are defined to represent groups of atoms or molecules. The choice of resolution depends on the phenomenon of interest—for example, treating entire proteins as single particles versus focusing on the behavior of individual amino acids. Once the representation is established, the interactions between these sites are parameterized. In generic models, this process is guided by physical intuition, with potentials chosen to explore specific features of the system, such as peptide secondary structure preferences. For chemically specific models, the parameterization process incorporates experimental data. The Martini model, for instance, assigns interaction strengths based on the partitioning behavior of compounds between aqueous and hydrophobic phases.
+
+After the parameterization, the performance of a top-down CG model is validated by comparing its predictions to experimental data. This validation step ensures that the model captures key properties, such as bilayer rigidity or DNA persistence length, at the desired resolution. While these models are computationally efficient and provide valuable insights into emergent phenomena, they come with limitations. The under-constrained nature of top-down models can lead to ambiguities in parameterization, and it may be challenging to systematically improve or validate their underlying assumptions. Nonetheless, when used judiciously, top-down CG models offer a powerful tool for exploring complex systems at reduced computational cost.
+
+## Some examples
+
+### oxDNA/oxRNA
+
+```{tip}
+This section has been adapted from [](doi:10.3389/fmolb.2021.693710).
+```
+
+The oxDNA model was originally developed to study the self-assembly, structure and mechanical properties of DNA nanostructures, and the action of DNA nanodevices - although it has since been applied more broadly. To describe such systems, a model needs to capture the structural, mechanical and thermodynamic properties of single-stranded DNA, double-stranded DNA, and the transition between the two states. It must also be feasible to simulate large enough systems for long enough to sample the key phenomena. Mesoscopic models, in which multiple atoms are represented by a single interaction site, are the appropriate resolution for these goals.
+
+Here I will outline the key features of the oxDNA model. First of all, note that there are effectively three versions of the oxDNA potential that are publicly available. The original model, oxDNA1.0 ([](doi:10.1063/1.3552946)), lacks sequence-specific interaction strengths, electrostatic effects and major/minor grooving. oxDNA1.5 adds sequence-dependent interaction strengths to oxDNA1.0 ([](doi:10.1063/1.4754132)), and oxDNA2.0 ([](doi:10.1063/1.4921957)) also includes a more accurate structural model, alongside an explicit term in the potential for screened electrostatic interactions between negatively charged sites on the nucleic acid backbone. In addition to these three versions of the DNA model, an RNA parameterisation, oxRNA, has also been introduced ([](doi:10.1063/1.4881424)).
+
+It is worth noting that the three versions of oxDNA are very similar; most of the changes involve small adjustments of the geometry and strength of interactions. Structurally, the most significant change is the addition of a screened electrostatic interaction in oxDNA 2.0, which is typically small unless low salt concentrations are used. Moreover, subsequent versions of the model have been explicitly designed to preserve aspects of earlier versions that performed well. So oxDNA 1.5 and oxDNA 1.0 are very similar, except that oxDNA predicts sequence-dependent thermodynamic effects that are absent in oxDNA 1.0. oxDNA 2.0 is designed to preserve the thermodynamic and mechanical properties of oxDNA 1.5 at high salt as far as possible, but improves the structural description of duplexes (and structures built from duplexes) and allows for accurate thermodynamics at lower salt concentrations.
+
+As a result, therefore, the discussion provided here for simulation of one version of the model largely applies to all. Moreover, it is worth noting that, even given the improved accuracy of oxDNA 2.0 in certain contexts, simulations of earlier versions of the model are still potentially valuable. oxDNA 2.0 comes into its own when it is essential to incorporate longer-range electrostatics at low salt concentrations, or when the detailed geometry of the helices are particularly important. A good example would be when simulating densely packed helices connected by crossover junctions in DNA origami. In other contexts, the reduced complexity of oxDNA 1.5 and hence its improved computational efficiency (along with slightly greater focus on basic thermodynamics and mechanics) may be beneficial. Further, it is often helpful to use oxDNA 1.0 in these contexts, as the comparison of versions 1.0 and 1.5 can help to distinguish sequence-dependent and generic effects.
+
+```{figure} figures/oxDNA_structure.png
+:name: fig:oxDNA_structure
+:align: center
+:width: 500px
+
+Structure and interactions of the oxDNA model. a) Three strands forming a nicked duplex as represented by oxDNA2.0, with the central section of the complex illustrating key interactions from Eq. [](#eq:oxDNA) highlighted. Individual nucleotides have an orientation described by a vector normal to the plane of the base (labelled n), and a vector indicating the direction of the hydrogen bonding interface (labelled b). b) Comparison of structure in oxDNA1.0 and oxDNA1.5 vs oxDNA2.0.  In the earlier version of the model, all interaction sites are co-linear; in oxDNA2.0, offsetting the backbone site allows for major and minor grooving. Taken from [](doi:10.3389/fmolb.2021.693710).
+```
+
+In all three parameterisations, oxDNA represents each nucleotide as a rigid body with several interaction sites, namely the backbone, base repulsion, stacking and hydrogen-bonding sites, as shown in [](#fig:oxDNA_structure). In oxDNA1.0 and oxDNA1.5, these sites are co-linear; the more realisic geometry of oxDNA2.0 offsets the backbone to allow for major and minor grooving.
+
+Interactions between nucleotides depend on the orientation of the nucleotides as a whole, rather than just the position of the interaction sites. In particular, there is a vector that is perpendicular to the notional plane of the base, and a vector that indicates the direction of the hydrogen bonding interface. These vectors are used to modulate the orientational dependence of the interactions, which allows the model to represent the coplanar base stacking, the linearity of hydrogen bonding and the edge-to-edge character of the Watson–Crick base pairing.  Furthermore, this representation  allows the encoding of more detailed structural features of DNA, for example, the right-handed character of the double helix and the anti-parallel nature of the strands in the helix.
+
+The potential energy of the system is calculated as:
+
+$$
+V_{0}=\sum_{\langle ij \rangle}(V_{b.b.}+V_{stack}+V_{exc}^{\prime})  +  \sum_{i,j \not\in \langle ij \rangle}(V_{HB}+V_{cr.st.}+V_{exc}+V_{coax}),
+$$ (eq:oxDNA)
+
+with an additional screened electrostatic repulsion term for oxDNA 2.0. In Eq. [](#eq:oxDNA), the first sum is taken over all pairs of nucleotides that are nearest neighbors on the same strand and the second sum comprises all remaining pairs. The terms represent backbone connectivity ($V_{b.b.}$), excluded volume ($V_{exc}$ and $V_{exc}^{\prime}$), hydrogen bonding between complementary bases ($V_{HB}$), stacking between adjacent bases on a strand ($V_{stack}$), cross-stacking ($V_{cr.st.}$) across the duplex axis and coaxial stacking ($V_{coax}$) across a nicked backbone. The excluded volume and backbone interactions are a function of the distance between repulsion sites. The backbone potential is a spring potential mimicking the covalent bonds along the strand. All other interactions depend on the relative orientations of the nucleotides and the distance between the hydrogen-bonding and stacking interaction sites. The model was deliberately constructed with all interactions pairwise (*i.e.*, only involving two nucleotides, which are taken as rigid bodies).
+
+A crucial feature of the oxDNA model is that the double helical structure is driven by the interplay between the hydrogen-bonding, stacking and backbone  connectivity bonds. The stacking interaction tends to encourage the nucleotides to form co-planar stacks; the fact that this stacking distance is shorter than the backbone bond length results in a tendency to form helical stacked structures. In the single-stranded state, these stacks can easily break, allowing the single strands to be flexible. The geometry of base pairing with a complementary strand locks the nucleotides into a much more stable double helical structure.
+
+It is convenient to use reduced units to describe lengths, energies and times in the system. Here is a summary of the conversion of these "oxDNA units" to SI units:
+
+* One unit of length $\sigma$ corresponds to $8.518$ $\angstrom$. This value was chosen to give a rise per bp of approximately 3.4 $\angstrom$ and equates roughly to the diameter $d$ of a nucleotide.
+* One unit of energy is equal to $\epsilon$ = 4.142$\times 10^{-20}$ J (or equivalently, $k_BT$ at $T$ = 300 K corresponds to 0.1$\epsilon$).
+* The cutoff for treating two bases as "stacked" or "base-paired" is conventionally taken to be when the relevant interaction term is more negative than $-0.1$ in simulation units ($4.142\times 10^{-21}$ J).
+* The units of energy and length imply a simulation unit of force equal to  $4.863 \times 10^{-11}$ N.

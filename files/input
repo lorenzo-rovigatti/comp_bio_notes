@@ -1,0 +1,29 @@
+backend = CPU
+debug = false
+
+sim_type = MD
+thermostat = brownian
+newtonian_steps = 53
+diff_coeff = 0.1
+
+steps = 10000
+
+T = 1.5
+dt = 0.001
+verlet_skin = 0.2
+
+interaction_type = LJ
+
+topology = topology.dat
+conf_file = init_conf.dat
+trajectory_file = trajectory.dat
+refresh_vel = true
+log_file = log.dat
+no_stdout_energy = true
+restart_step_counter = true
+energy_file = energy.dat
+conf_output_dir = confs
+print_conf_interval = 5000000
+print_energy_every = 1000
+time_scale = linear
+max_io = 10

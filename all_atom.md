@@ -482,6 +482,16 @@ In the limit $r_s \ll r_c$, which is rather common, $r_v \approx r_c$, so that $
 
 Verlet lists do not have to be updated at every step, or we would go back to checking all pairs, but only when when any particle has moved a distance larger than $r_s / 2$ from its original position $\vec r_{i, 0}$. Note that the overall performance will depend on the value of $r_s$, as small values will result in very frequent updates, while large values will generate large lists, which means useless distance checks on particles that are too far away to interact. Although the average number of neighbours of each particle $i$ is independent on $N$ and therefore the actual force calculation is $\mathcal{O}(N)$, the overall algorithmic complexity is still $\mathcal{O}(N^2)$, since list updating, even if not done at each time step, requires looping over all pairs. To overcome this problem it is common to use cell lists to build Verlet lists, bringing the complexity of the list update step, and therefore of the whole simulation, down to $\mathcal{O}(N)$, while at the same time retaining the smaller average number of neighbours of Verlet lists.
 
+```{figure} figures/benchmark_oxDNA.png
+:name: fig:benchmark_oxDNA
+:align: center
+:width: 500px
+
+The time taken to run 10000 MD steps of LJ systems with $\rho \sigma^3 = 0.1$ and varying number of particles with and without neighbouring lists. These simulations have been run with [oxDNA](https://github.com/lorenzo-rovigatti/oxDNA).
+```
+
+[](#fig:benchmark_oxDNA) shows that, as soon as the number of particles is great enough ($\approx 100$ for most MD codes), the overhead due to the additional bookkeeping required to implement neighbour lists is dwarfed by the $\mathcal{O}(N^2)$ scaling of the trivial approach. The figure also shows the $\approx 6x$ speed-up that can be achieved with Verlet lists.
+
 [^cubic_cells]: In principle, cells don't have to be cubic.
 
 (sec:ewald)=
@@ -494,7 +504,7 @@ Most of the text of this part comes from @frenkel2023understanding, while some b
 In molecular simulations, long-range interactions refer to forces that decay slowly with distance. The definition of "long-range" can be made unambiguous if we consider the general form of a pairwise interaction potential $V(r)$ between two particles separated by a distance $r$. The energy contribution of these interactions beyond a certain cut-off distance $r_c$ is given by the "tail" correction defined in Eq. [](#eq:U_tail). For a potential that decays as $1/r^\alpha$, the tail correction in 3D is, asymptotically,
 
 $$
-U_{\text{tail}} \sim \int_{r_c}^\infty \frac{r^2}{r^\alpha} \, dr = \int_{r_c}^\infty \frac{1}{r^{\alpha - 2}} \, dr \sim \left. \frac{1}{r_c^{\alpha - 3}}\right|_{r_c}^\infty
+U_{\text{tail}} \sim \int_{r_c}^\infty \frac{r^2}{r^\alpha} \, dr = \int_{r_c}^\infty \frac{1}{r^{\alpha - 2}} \, dr \sim \left. \frac{1}{r^{\alpha - 3}}\right|_{r_c}^\infty
 $$
 
 which converges for any $r_c$ as long as $\alpha > 3$ (*e.g.* the Lennard-Jones potential, for which $\alpha = 6$)[^dipole_convergence]. By contrast, if $\alpha < 3$, the integral diverges, indicating that the tail of the interaction potential beyond $r_c$ contributes non-negligibly to the total energy of the system regardless of the value of $r_c$, making a direct cut-off inaccurate.
@@ -518,16 +528,15 @@ The elecrostatic effect due to point charges can be seen as a sum of screend cha
 ```
 
 The contribution to the electrostatic potential at a point $r$ due to a set of screened charges can be easily computed by direct summation, because the
-electrostatic potential due to a screened charge is a rapidly decaying function of $r$. However, it was not our aim to evaluate the potential due to a
-set of screened charges but due to point charges. Hence, we must correct for the fact that we have added a screening charge cloud to every particle. This is shown schematically in [](#fig:ewald). This compensating charge density varies smoothly in space (because the screening charge distribution is a smoothly varying function!). We wish to compute the electrostatic energy at the site of ion $i$. Of course, we should exclude the electrostatic interaction of the ion with itself. We have three contributions to the electrostatic potential: first of all, the one due to the point charge $q_i$, secondly, the one due to the Gaussian screening charge cloud with charge $-q_i$ , and finally the one due to the compensating charge cloud with charge $q_i$. In order to exclude Coulomb self-interactions, we should not include any of these three contributions to the electrostatic potential at the position of ion $i$. However, it turns out that it is convenient to retain the contribution due to the compensating charge distribution and correct for the resulting spurious interaction afterwards. The reason we retain the compensating charge cloud for ion $i$ is that, if we do so, the compensating charge distribution is not only a smoothly varying function, but it is also periodic. Such a function can be represented by a (rapidly converging) Fourier series, and this turns out to be essential for the numerical implementation. Of course, in the end we should correct for the inclusion of a spurious "self" interaction between the ion and the compensating charge cloud.
+electrostatic potential due to a screened charge is a rapidly decaying function of $r$. However, we must correct for the fact that we have added a screening charge cloud to every particle. This is shown schematically in [](#fig:ewald). This compensating charge density varies smoothly in space (because the screening charge distribution is a smoothly varying function!). We now wish to compute the electrostatic energy at the site of ion $i$. Of course, we should exclude the electrostatic interaction of the ion with itself. We have three contributions to the electrostatic potential: first of all, the one due to the point charges $\{q_j\}$, secondly, the one due to the Gaussian screening charge clouds with charge $-\{q_j\}$ , and finally the one due to the compensating charge clouds with charge $\{q_j\}$. In order to exclude Coulomb self-interactions, we should not include  these three contributions with $j = i$ to the electrostatic potential at the position of ion $i$. However, it turns out that it is convenient to retain the contribution due to the compensating charge distribution and correct for the resulting spurious interaction afterwards. The reason we retain the compensating charge cloud for ion $i$ is that, if we do so, the compensating charge distribution is not only a smoothly varying function, but it is also periodic. Such a function can be represented by a (rapidly converging) Fourier series, and this turns out to be essential for the numerical implementation. Of course, in the end we should correct for the inclusion of a spurious "self" interaction between the ion and the compensating charge cloud.
 
 Considering screening Gaussians with width $\sqrt{2/\alpha}$, the splitting can be written as follows:
 
 $$
-\frac{1}{|\vec{r}_i - \vec{r}_j|} = \frac{\text{erfc}(\alpha |\vec{r}_i - \vec{r}_j|)}{|\vec{r}_i - \vec{r}_j|} + \frac{\text{erf}(\alpha |\vec{r}_i - \vec{r}_j|)}{|\vec{r}_i - \vec{r}_j|},
+\frac{1}{r_{ij}} = \frac{\text{erfc}(\alpha r_{ij})}{r_{ij}} + \frac{\text{erf}(\alpha r_{ij})}{r_{ij}},
 $$ (eq:ewald)
 
-where $\alpha$ is a parameter that controls the width of the Gaussian distribution used to split the potential, and $\text{erfc}(x)$ and $\text{erf}(x)$ are the complementary error function and error function, respectively, and they come out from integrating the Gaussian screening function. In Eq. [](#eq:ewald), the first term decays quickly as $|\vec{r}_i - \vec{r}_j|$ increases, so it is computed only for nearby particles within a cut-off $ r_c$. By contrast, the second term decays slowly in real space, but can be computed efficiently in Fourier space, using a sum over reciprocal lattice vectors $\vec{k}$.
+where $\alpha$ is a parameter that controls the width of the Gaussian distribution used to split the potential, and $\text{erfc}(x)$ and $\text{erf}(x)$ are the complementary error function and error function, respectively, and they come out from integrating the Gaussian screening function. In Eq. [](#eq:ewald), the first term decays quickly as $r_{ij}$ increases, so it is computed only for nearby particles within a cut-off $ r_c$. By contrast, the second term decays slowly in real space, but can be computed efficiently in Fourier space, using a sum over reciprocal lattice vectors $\vec{k}$, which can be again truncated beyond a cut-off wavevector $k_c$.
 
 The total electrostatic energy using Ewald summation is the sum of the real-space term, the reciprocal-space term, and the self-interaction correction:
 
@@ -538,17 +547,18 @@ $$
 * The real-space contribution to the total energy, $E_{\text{real}}$ is given by:
 
   $$
-  E_{\text{real}} = \frac{1}{2} \sum_{i=1}^N \sum_{j \neq i}^N \frac{q_i q_j \, \text{erfc}(\alpha |\vec{r}_i - \vec{r}_j|)}{|\vec{r}_i - \vec{r}_j|},
+  E_{\text{real}} = \sum_{i=1}^N \sum_{j \neq i}^N \frac{q_i q_j \, \text{erfc}(\alpha r_{ij})}{r_{ij}},
   $$
 
-  where the sum is truncated at a cut-off distance $r_c$.
+  where the sum is truncated at the cut-off distance $r_c$.
 
-* The reciprocal-space contribution $E_{\text{rec}}$ is computed using the Fourier transform of the charges and involves a sum over the reciprocal lattice vectors $\vec{k}$, which can be safely truncated at some cut-off wave vector $k_c$, since the exponential term ensures that the sum converges rapidly:
+* The reciprocal-space contribution $E_{\text{rec}}$ is computed using the Fourier transform of the charges and involves a sum over the reciprocal lattice vectors $\vec{k}$:
 
-$$
-E_{\text{rec}} = \frac{1}{2 V} \sum_{\vec{k} \neq 0} \frac{4 \pi}{k^2} \exp\left( -\frac{k^2}{4 \alpha^2} \right) \left| \sum_{j=1}^N q_j \exp(i \vec{k} \cdot \vec{r}_j) \right|^2.
-$$ (eq:ewald_reciprocal)
-
+  $$
+  E_{\text{rec}} = \frac{1}{2 V} \sum_{\vec{k} \neq 0} \frac{4 \pi}{k^2} \exp\left( -\frac{k^2}{4 \alpha^2} \right) \left| \sum_{j=1}^N q_j \exp(i \vec{k} \cdot \vec{r}_j) \right|^2,
+  $$ (eq:ewald_reciprocal)
+  
+  where the sum can be safely truncated at some cut-off wavevector $k_c$, since the exponential term ensures that the sum converges rapidly.
 
 * The self-interaction term, $E_{\text{self}}$, is:
 
@@ -560,7 +570,13 @@ Note that there are many subtleties that are linked to the boundary conditions t
 
 For fixed values of $k_c$ and $r_c$, the algorithmic time scales as $\mathcal{O}(N^2)$. However, this behaviour can be improved by realising that there are values of the cut-offs that minimise the error due to the truncations. Using these values, that depend on $N$, the complexity can be brought down to $\mathcal{O}(N^{3/2})$.
 
-A further scaling improvement can be obtained by using the so-called Particle Mesh Ewald method ([](doi:10.1063/1.464397)). In the PME method, the reciprocal space contribution to electrostatic interactions is computed through the following series of steps that involve transforming particle charges into a charge density on a grid, applying Fourier transforms, and then transforming back to obtain the forces and energies:
+A further scaling improvement can be obtained by using the so-called Particle Mesh Ewald method ([](doi:10.1063/1.464397)). In the PME method, the basic idea is to use Poisson's equation to compute the potential. Indeed, Poisson's equation $\nabla^2 V(\vec r) = -\frac{\rho(\vec r)}{\epsilon_0}$ can be easily solved in Fourier space, where it takes the form
+
+$$
+k^2 \tilde \phi(\vec k) = \frac{\tilde \rho(\vec k)}{\epsilon_0},
+$$ (eq:poisson_fourier)
+
+where $\tilde A(\vec k)$ is the Fourier transform of $A(\vec r)$. Leveraging Eq. [](#eq:poisson_fourier), in the PME method the reciprocal space contribution to electrostatic interactions is computed through the following series of steps that involve transforming particle charges into a charge density on a grid, applying Fourier transforms, and then transforming back to obtain the forces and energies:
 
 1. Assign each particle's charge to a regular 3D grid that spans the simulation box. This is achieved through an interpolation scheme, where each particle's charge is "spread" over multiple neighboring grid points. The most common method is B-spline interpolation (see [](doi:10.1063/1.470117) for details).
 2. Once the charges are mapped onto the grid, the Fourier transform of the grid-based charge density is computed. This is done by using the Fast Fourier Transform (FFT), an efficient algorithm for performing discrete Fourier transforms, with a computational complexity of $\mathcal{O}(N \log N)$.
@@ -592,7 +608,7 @@ As soon as a thermostat is coupled to the system, the energy will not be conserv
 (sec:andersen_thermostat)=
 ### Andersen
 
-The Andersen thermostat is a widely used method in molecular dynamics simulations for controlling temperature, introduced by [Hans C. Andersen in 1980](doi:10.1063/1.439486). Its fundamental idea is to maintain a system's temperature by coupling the particles to an external heat bath through random collisions. In this approach, particles in the simulation periodically undergo stochastic collisions with a fictitious heat bath, resulting in velocity reassignment according to a Maxwell-Boltzmann distribution that corresponds to the desired temperature. This random reassignment of velocities, which can be considered as a Monte Carlo move that transports the system from one constant-energy shell to another, mimics the effect of a thermal reservoir, ensuring that the system reaches and maintains thermal equilibrium.
+The Andersen thermostat is a widely used method in molecular dynamics simulations for controlling temperature, introduced by [Hans C. Andersen in 1980](doi:10.1063/1.439486). Its fundamental idea is to maintain a system's temperature by coupling the particles to an external heat bath through random collisions. In this approach, particles in the simulation periodically undergo stochastic collisions with a fictitious heat bath, resulting in velocity reassignment according to a Maxwell-Boltzmann distribution that corresponds to the desired temperature. This random reassignment of velocities, which can be considered as a Monte Carlo move that transports the system from one constant-energy shell to another, mimicking the effect of a thermal reservoir, ensuring that the system reaches and maintains thermal equilibrium.
 
 The thermostat has a parameter $\nu$ that is the frequency of stochastic collisions, which represents the strength of the coupling to the heat bath: by adjusting this collision frequency, the user can control how frequently the system interacts with the heat bath, thus influencing the rate at which the system equilibrates. In practice, at each time step each particle has a probability $\nu \Delta t$ of undergoing a collision, *i.e.* of being reassigned a velocity from a Maxwell-Boltzmann distribution corresponding to the target temperature. This scheme reproduced the canonical ensemble, since temperature fluctuations align with those expected from statistical mechanics. 
 
@@ -605,10 +621,10 @@ The Nosé-Hoover thermostat is a more sophisticated method for controlling tempe
 The extended Lagrangian formalism starts by introducing a scaling factor, $s$, that modifies the velocities of particles in the system ([](doi:10.1080/00268978400101201)). The extended Lagrangian for the Nosé-Hoover thermostat is expressed as:
 
 $$
-L = \sum_{i=1}^{N} \frac{m_i}{2} \left( \frac{ \dot{\vec r}_i }{s} \right)^2 - V(\{ \vec{r}_i \}) - g k_B T \log s,
+L = \sum_{i=1}^{N} \frac{m_i}{2} \left( \frac{ \dot{\vec r}_i }{s} \right)^2 - V(\{ \vec{r}_i \}) - N_f k_B T \log s,
 $$
 
-where $m_i$ and $\dot{\vec r}_i = \vec v_i$ are the mass and velocity particle $i$, $V(\{r\})$ is the potential energy of the system, and the term $ g k_B T \ln(s) $, where $ g $ is the number of degrees of freedom, introduces the necessary coupling between the system and the heat bath. The auxiliary variable $s$ is responsible for controlling the temperature by scaling the velocities of the particles so that the system's kinetic energy corresponds to the target temperature.
+where $m_i$ and $\dot{\vec r}_i = \vec v_i$ are the mass and velocity particle $i$, $V(\{r\})$ is the potential energy of the system, and the term $N_f k_B T \ln(s)$, where $N_f$ is the number of degrees of freedom, introduces the necessary coupling between the system and the heat bath. The auxiliary variable $s$ is responsible for controlling the temperature by scaling the velocities of the particles so that the system's kinetic energy corresponds to the target temperature.
 
 The dynamics of the system are then derived from this Lagrangian. The equations of motion for the positions and velocities of the particles are modified by the thermostat, resulting in:
 
@@ -619,23 +635,23 @@ $$
 where $\vec F_i$ is the force acting on particle $i$, and the term $\zeta \equiv \dot{s} / s$ is a friction-like coefficient that emerges from the thermostat variable. This friction term adjusts the particle velocities in response to deviations from the target temperature, ensuring that the system remains at the correct thermal equilibrium, and evolves according to:
 
 $$
-\dot{\zeta} = \frac{1}{Q} \left( \sum_{i=1}^{N} \frac{\vec p_i^2}{m_i} - g k_B T \right),
+\dot{\zeta} = \frac{1}{Q} \left( \sum_{i=1}^{N} \frac{\vec p_i^2}{m_i} - N_f k_B T \right),
 $$
 
-where $Q$ is a parameter that controls the strength of the coupling between the system and the thermostat, $\vec p_i = m \vec r_i$ is the momentum conjugate to $\vec r_i$, so that $\sum_{i=1}^{N} \frac{\vec p_i^2}{m_i}$ is the total kinetic energy of the system, and $g k_B T$ represents the target thermal energy. If the system's kinetic energy exceeds the desired value, the variable $\zeta$ increases, effectively damping the particle velocities to bring the temperature back in line. Conversely, if the kinetic energy is too low, $\zeta$ decreases, allowing the velocities to rise and the temperature to stabilize at the target value. The "inertia" of this process is controlled by the value of $Q$, which therefore plays the role of a fictitious mass. This deterministic feedback mechanism distinguishes the Nosé-Hoover thermostat from stochastic approaches. By continuously adjusting the velocities of all particles, this method preserves the natural evolution of the system’s dynamics while still achieving temperature control. The benefit of using this extended Lagrangian framework is that it allows for smooth, continuous temperature regulation without disrupting important dynamical properties, such as diffusion coefficients or time-dependent correlations.
+where $Q$ is a parameter that controls the strength of the coupling between the system and the thermostat, $\vec p_i = m \vec r_i$ is the momentum conjugate to $\vec r_i$, so that $\sum_{i=1}^{N} \frac{\vec p_i^2}{m_i}$ is the total kinetic energy of the system, and $N_f k_B T$ represents the target thermal energy. If the system's kinetic energy exceeds the desired value, the variable $\zeta$ increases, effectively damping the particle velocities to bring the temperature back in line. Conversely, if the kinetic energy is too low, $\zeta$ decreases, allowing the velocities to rise and the temperature to stabilize at the target value. The "inertia" of this process is controlled by the value of $Q$, which therefore plays the role of a fictitious mass. This deterministic feedback mechanism distinguishes the Nosé-Hoover thermostat from stochastic approaches. By continuously adjusting the velocities of all particles, this method preserves the natural evolution of the system’s dynamics while still achieving temperature control. The benefit of using this extended Lagrangian framework is that it allows for smooth, continuous temperature regulation without disrupting important dynamical properties, such as diffusion coefficients or time-dependent correlations.
 
 Note that the above equations of motion conserve the following quantity
 
 $$
-U_\text{NH} = \sum_{i=1}^N \frac{\vec p_i^2}{m_i} + V(\{ r \}) + \frac{\zeta^2 Q}{2} + g k_B T \log s,
+U_\text{NH} = \sum_{i=1}^N \frac{\vec p_i^2}{m_i} + V(\{ r \}) + \frac{\zeta^2 Q}{2} + N_f k_B T \log s,
 $$
 
-which can be used as a check when implementing the thermostat, or when testing the simulation parameters (*e.g.* the time step). [](doi:10.1103/PhysRevA.34.2499) demonstrated that the above equations of motion are unique, in the sense that are different equations of the same form (*i.e.* containing an additional friction-like parameter) cannot lead to a canonical distribution. However, the simulation samples from the canonical distribution *only* if there is a single non-zero constant of motion, the energy. If there are more conservation laws, which can happen, for instance, if there are no external forces and the total momentum of the system is different from zero, than the Nosé-Hoover method does not work any more.
+which can be used as a check when implementing the thermostat, or when testing the simulation parameters (*e.g.* the time step). [](doi:10.1103/PhysRevA.34.2499) demonstrated that the above equations of motion are unique, in the sense that different equations of the same form (*i.e.* containing an additional friction-like parameter) cannot lead to a canonical distribution. However, the simulation samples from the canonical distribution *only* if there is a single non-zero constant of motion, the energy. If there are more conservation laws, which can happen, for instance, if there are no external forces and the total momentum of the system is different from zero, than the Nosé-Hoover method does not work any more.
 
 ```{figure} figures/nose_hoover.png
 :name: fig:nose_hoover
 :align: center
-:width: 800px
+:width: 700px
 
 The trajectory of the harmonic oscillator for a single initial condition simulated (from left to right) without a thermostat, with the Andersen thermostat, with the Nosé-Hoover thermostat. Adapted from @frenkel2023understanding.
 ```
@@ -670,12 +686,12 @@ $$
 T(t) = \frac{2 K(t)}{3 N k_B}.
 $$
 
-Since on a computer we always have a discrete dynamics, in the following I will slightly abuse the notation by using $A(k)$ to mean $A(k \Delta t)$, where $k$ is an index that keeps track of the time step and $A$ is a time-dependent function.
+Since on a computer we always have a discrete dynamics, in the following I will slightly abuse the notation by using $A(m)$ to mean $A(m \Delta t)$, where $m$ is an index that keeps track of the time step and $A$ is a time-dependent function.
 
-The simplest way of fixing the temperature is to scale the velocities to achieve the target temperature instantaneously: the new velocities $\vec{v}_i(k + 1) $ are obtained from the old velocities $ \vec{v}_i(k) $ by multiplying them by a scaling factor $\alpha$, *e.g.* $\vec{v}_i(k + 1) = \alpha \vec{v}_i(k)$, where $\alpha$ is given by
+The simplest way of fixing the temperature is to scale the velocities to achieve the target temperature instantaneously: the new velocities $\vec{v}_i(m + 1) $ are obtained from the old velocities $ \vec{v}_i(m) $ by multiplying them by a scaling factor $\alpha$, *e.g.* $\vec{v}_i(k + 1) = \alpha \vec{v}_i(m)$, where $\alpha$ is given by
 
 $$
-\alpha = \sqrt{\frac{T}{T(k)}} = \sqrt{\frac{K}{K(k)}}
+\alpha = \sqrt{\frac{T}{T(m)}} = \sqrt{\frac{K}{K(m)}}
 $$ (eq:v_rescaling)
 
 where $T$ and $K$ are the target temperature and kinetic energy. This method has two drawbacks:
@@ -686,12 +702,12 @@ where $T$ and $K$ are the target temperature and kinetic energy. This method has
 The second issue can be mitigated by weakly coupling the system to a heat bath with a characteristic relaxation time $\tau$. With this method, called the [Berendsen thermostat](doi:10.1063/1.448118), the velocities are gradually adjusted to bring the temperature toward the target value. The velocity scaling factor in the Berendsen thermostat is given by:
 
 $$
-\alpha = \sqrt{1 + \frac{\Delta t}{\tau} \left( \frac{K}{K(k)} - 1 \right)}.
+\alpha = \sqrt{1 + \frac{\Delta t}{\tau} \left( \frac{K}{K(m)} - 1 \right)}.
 $$ (eq:berendsen)
 
 This factor ensures that the system's temperature approaches $T$ over time, with the relaxation time $\tau$ controlling the speed of this adjustment. The Berendsen thermostat achieves smooth temperature control, but it still suppresses the natural energy fluctuations required for proper sampling of the canonical ensemble.
 
-[](doi:10.1063/1.2408420) introduced a thermostat that is based on the idea of velocity rescaling, but it samples the canonical ensemble. Note that in the continous limit, *i.e.* for $\Delta t \to 0$, Eq. [](#eq:berendsen) becomes
+[](doi:10.1063/1.2408420) introduced a thermostat that is based on the idea of velocity rescaling, but it samples the canonical ensemble. Note that in the continuous limit, *i.e.* for $\Delta t \to 0$, Eq. [](#eq:berendsen) becomes[^continuous_berendsen]
 
 $$
 dK = (K - K(t)) \frac{dt}{\tau}.
@@ -707,14 +723,14 @@ where $N_f$ is the number of degrees of freedom in the system. Since the total m
 
 $$
 \begin{align}
-\alpha^2 &= e^{-\Delta t / \tau} + \frac{K}{N_f K(k)} \left( 1 - e^{-\Delta t / \tau} \right) \left( R_1^2 + \sum_{i = 2}^{N_f} R_i^2 \right)\\
-& + 2 R_1 e^{-\Delta t / \tau} \sqrt{\frac{K}{N_f K(k)} \left( 1 - e^{-\Delta t / \tau} \right) },
+\alpha^2 &= e^{-\Delta t / \tau} + \frac{K}{N_f K(m)} \left( 1 - e^{-\Delta t / \tau} \right) \left( R_1^2 + \sum_{i = 2}^{N_f} R_i^2 \right)\\
+& + 2 R_1 e^{-\Delta t / \tau} \sqrt{\frac{K}{N_f K(m)} \left( 1 - e^{-\Delta t / \tau} \right) },
 \end{align}
 $$
 
 where the $\{ R_i \}$ are independent random numbers extracted from a Gaussian distribution with zero mean and unit variance.
 
-The interpretation of [](#eq:bussi) is that, in order to sample the canonical ensemble by rescaling the velocities, the target kinetic energy (*i.e.* the target temperature) should be chosen randomly from the associated canonical probability distribution function[^kinetic_PDF]:
+The interpretation of Eq. [](#eq:bussi) is that, in order to sample the canonical ensemble by rescaling the velocities, the target kinetic energy (*i.e.* the target temperature) should be chosen randomly from the associated canonical probability distribution function[^kinetic_PDF]:
 
 $$
 P(K(t)) \propto K(t)^{N_f / 2 - 1} e^{-\beta K(t)}.
@@ -725,9 +741,10 @@ One way of doing this would be to randomly extract a value $\bar K$ from Eq. [](
 As for the Nosé-Hoover thermostat, this thermostat, which is sometimes called the stochastic velocity rescaling thermostat, has an associated conserved quantity that can be used to check the choice of the time step and of the other simulation parameters:
 
 $$
-U_\text{BDP} = \sum_{i=1}^N \frac{\vec p_i^2}{m_i} + V(\{ r \}) - \int_0^t (K - K(t')) \frac{dt'}{\tau} - 2 \int_0^t \sqrt{ \frac{K(t')K}{N_f}}. \frac{dW(t')}{\sqrt{\tau}}
+U_\text{BDP} = \sum_{i=1}^N \frac{\vec p_i^2}{m_i} + V(\{ r \}) - \int_0^t (K - K(t')) \frac{dt'}{\tau} - 2 \int_0^t \sqrt{ \frac{K(t')K}{N_f}} \frac{dW(t')}{\sqrt{\tau}}
 $$
 
+[^continuous_berendsen]: Square both sides, then multiply everything by $K(t)$ and note that $\alpha^2 K(t) - K(t) = dK$.
 [^wiener_factor]: It turns out that there is some freedom in choosing this factor, but only if we don't want to keep the Berendsen part untouched.
 [^kinetic_PDF]: This is a chi-squared PDF, which appears when dealing with sums of the squares of independent Gaussian random variables. Since the kinetic energy is the sum of squared velocities, each of which is distributed normally, its PDF is a chi-square.
 
@@ -819,7 +836,7 @@ where $\vec f_i = - \vec \nabla_{\vec r_i} V(\{ \vec r_j \})$ is the force actin
 TODO
 ```
 
-# Classical force fields
+# All-atom force fields
 
 :::{tip}
 The main references for this part are @schlick2010molecular and @leach2001molecular.

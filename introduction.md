@@ -65,16 +65,16 @@ More or less every couple of weeks I will ask you to do a homework assignment in
 The output of each assignment should be:
 
 1. A code, written in any (sensible) language (*e.g.* C, C++, Python, Fortran, Java, but other languages may be also fine, just let me know beforehand).
-2. A short (but not too short!) document containing the documentation of your code, and a presentation of the results asked in the assignment.
+2. A short (but not too short: 1-3 pages) document containing the documentation of your code, and a presentation of the results asked in the assignment.
 3. Each assignment has a mandatory part and a few "possible extensions". The "possible extensions" can be implemented to improve the rate of the assignment, or can be used as suggestions for the final project: you are free to extend your code or your analysis in any way you like it, provided it makes sense from the computational and biophysical points of view.
 
 The code documentation should be clear and concise, but also list features, limitations, and known bugs of your code. In addition, it should present a comprehensive guide about how to you use the code (*e.g.* how to call it, how to specify the input, how to read the output, *etc.*). I will provide examples of "good" documentation during the course.
 
 :::{warning} Using AI tools
-You are welcome to use ChatGPT, GitHub Copilot or similar tools during the course. However, harsh penalties will be handed out to students who use AI-assisted tools without actually understanding their answers[^AI_penalty]. This applies to both code and text submitted for the homework assignments and for the final project.
+You are welcome to use ChatGPT, GitHub Copilot or similar tools during the course. However, harsh penalties will be handed out to students who use AI-assisted tools without actually understanding their answers[^AI_penalty]. This applies to code and text submitted for the homework assignments and for the final project.
 :::
 
-[^AI_penalty]: Penalties will be given if I realise a student does not understand what they did, or why.
+[^AI_penalty]: Penalties will be given if I realise a student does not understand what they did, or why, during the oral exam.
 
 (sec:intro_biophys)=
 # Introduction to biophysics

@@ -63,6 +63,7 @@ project:
             - file: exercises/HP_model.md
             - file: exercises/Zuker.md
             - file: exercises/molecular_dynamics.md
+            - file: exercises/GROMACS.md
         - title: Hands-on notebooks
           children:
             - file: notebooks/Python_crash_course.ipynb

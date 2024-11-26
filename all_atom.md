@@ -766,16 +766,18 @@ Experiments are usually performed at constant pressure (*e.g.* ambient pressure)
 
 As for thermostats, there exist many barostats, each having its own unique advantages and disadvantages. Here I briefly present three barostats, two based on the extended-Lagrangian formalism and a stochastic one.
 
-### Nosè-Hoover barostat
+### Nosè-Hoover (MTTK) barostat
 
-The Nosè-Hoover formalism can be extended to fix the pressure. In this case the Equations of motion, as presented in [](doi:10.1063/1.467468), which improves the original scheme by [Hoover](doi:10.1103/PhysRevA.34.2499) that only yields approximated constant-$P$ distributions, are:
+The Nosè-Hoover formalism can be extended to fix the pressure in addition to temperature. In this case the equations of motion for a system coupled to a barostat and to a single Nosé-Hoover thermostat, as presented in [](doi:10.1063/1.467468), which improves the original scheme by [Hoover](doi:10.1103/PhysRevA.34.2499) that only yields approximated constant-$P$ distributions, are:
 
 $$
 \begin{align}
 \dot{\vec r_i} &= \frac{\vec p_i}{m_i} + \frac{p_\epsilon}{W} \vec r_i\\
-\dot{\vec p_i} &= \vec F_i - \left( 1 + \frac{d}{dN} \right) \frac{p_\epsilon}{W} \vec p_i - \frac{p_\zeta}{Q} \vec p_i\\
+\dot{\vec p_i} &= \vec F_i - \left( 1 + \frac{d}{N_f} \right) \frac{p_\epsilon}{W} \vec p_i - \frac{p_\zeta}{Q} \vec p_i\\
 \dot{V} &= \frac{dVp_\epsilon}{W}\\
-\dot{p_\epsilon} &= dV (P(t) - P) + \frac{1}{N} \sum_{i=1}^N \frac{\vec p_i^2}{m_i} - \frac{p_\zeta}{Q}\vec p_\epsilon,
+\dot{p_\epsilon} &= dV (P(t) - P) + \frac{1}{N} \sum_{i=1}^N \frac{\vec p_i^2}{m_i} - \frac{p_\zeta}{Q}\vec p_\epsilon\\
+\dot{\zeta} &= \frac{p_\zeta}{Q}\\
+\dot{p_\zeta} &= \sum_{i=1}^N \frac{\vec p^2_i}{m_i} + \frac{p_\epsilon}{W} - (N_f + 1) k_B T,
 \end{align}
 $$ (eq:nose-hoover_barostat)
 
@@ -791,7 +793,7 @@ Note that equations [](#eq:nose-hoover_barostat) also contain a coupling to a No
 
 ### Parrinello-Rahman
 
-The Parrinello-Rahman barostat, introduced in [](doi:10.1103/PhysRevLett.45.1196), uses an extended Hamiltonian to account for both particle motions and cell shape fluctuations, enabling the simulation of anisotropic pressure conditions, which is very common, for instance, when dealing with crystalline structures. This Hamiltonian includes original Hamiltonian of the system, which accounts for the kinetic and potential energy of the particles, plus additional terms that describe the kinetic and potential contributions of the simulation box itself.
+The Parrinello-Rahman barostat, introduced in [](doi:10.1103/PhysRevLett.45.1196), uses an extended Lagrangian to account for both particle motions and cell shape fluctuations, enabling the simulation of anisotropic pressure conditions, which is very common, for instance, when dealing with crystalline structures. This Lagrangian includes the original Lagrangian of the system, which accounts for the kinetic and potential energy of the particles, plus additional terms that describe the kinetic and potential contributions of the simulation box itself.
 
 The additional terms can be written in terms of the matrix
 
@@ -813,22 +815,20 @@ $$
 
 where $G \equiv \hat H^T \hat H$.
 
-We can now write down the expression for the extended Hamiltonian:
+We can now write down the expression for the extended Lagrangian:
 
 $$
-H = \sum_{i=1}^N \frac{1}{2} m_i \dot{\vec{s}}_i^T \hat G \dot{\vec{s}}_i + V(\{ \vec r_i \}) + \frac{1}{2} W \text{Tr}(\dot{\hat H}^T \cdot \dot{\hat H}) + P(t) \det(\hat H),
+L = \sum_{i=1}^N \frac{1}{2} m_i \dot{\vec{s}}_i^T \hat G \dot{\vec{s}}_i - V(\{ \vec r_i \}) + \frac{1}{2} W \text{Tr}(\dot{\hat H}^T \cdot \dot{\hat H}) - P \det(\hat H),
 $$ (eq:H_parrinello_rahman)
 
-where $\det(\hat H) = V$ is the box volume, $P(t)$ is the istantaneous pressure, and the parameter $W$ is the strength of the barostat coupling, and can be interpreted as the mass of the fictitious piston exerting the external pressure on the system.
+where $\det(\hat H) = V$ is the box volume, $P$ is the target pressure, and the parameter $W$ is the strength of the barostat coupling, which can be interpreted as the mass of the fictitious piston exerting the external pressure on the system.
 
 By deriving Eq. [](#eq:H_parrinello_rahman), the following equations of motion are obtained:
 
 \begin{align}
-m_i \ddot{s}_i &= \hat H^{-1} \vec f_i - m_i \hat G^{-1} \dot{\hat G} \dot{\vec s}_i\\
+m_i \ddot{\vec s}_i &= \hat H^{-1} \vec F_i - m_i \hat G^{-1} \dot{\hat G} \dot{\vec s}_i\\
 W \ddot{\hat H} & = (P(t) - P)V(\hat H^{-1})^T,
 \end{align}
-
-where $\vec f_i = - \vec \nabla_{\vec r_i} V(\{ \vec r_j \})$ is the force acting on particle $i$.
 
 ### Stochastic cell rescaling
 
@@ -899,7 +899,7 @@ This interaction occurs when atoms connected by a covalent bond move closer toge
 The simplest type of interaction that accounts for bond deformations is the harmonic potential, which is based on Hooke's law and takes a quadratic form:
 
 $$
-E_\text{harmonic}(r) = \frac{1}{2}k (r - r_\text{ref}),
+E_\text{harmonic}(r) = \frac{1}{2}k (r - r_\text{ref})^2,
 $$ (eq:harmonic_bond)
 
 where $k$ is the force constant (which can be estimated by the, possibly reduced, mass and frequency of a bond vibration through $k = m \omega^2$), and $r_\text{ref}$ is the reference value. Eq. [](#eq:harmonic_bond) works only for rather small deformations ($\approx 0.1 \angstrom$).
@@ -907,7 +907,7 @@ where $k$ is the force constant (which can be estimated by the, possibly reduced
 Going beyond small deformations requires more complicated functional forms. An example is the Morse potential:
 
 $$
-E_\text{Morse}(r) = D [1 - \exp(-S_m(r - r_\text{ref})]^2,
+E_\text{Morse}(r) = D [1 - \exp(-S_m(r - r_\text{ref}))]^2,
 $$ (eq:morse)
 
 where the constants $S_m$ and $D$ controls the width and the depth of the potential well. This potential goes to infinity for $r \to 0$, while it tends to $D$ as $r \to \infty$, modelling the bond dissociation. Evaluating exponential functions is a rather slow business on a computer, which is why the Morse potential is often expanded in series, and only the first terms are retained. The expansion up to the fourth order reads
@@ -916,7 +916,7 @@ $$
 E_\text{Morse}(r) \approx DS_m^2(r - r_\text{ref})^2 - DS_m^3(r - r_\text{ref})^3 + \frac{7}{12}DS_m^4(r - r_\text{ref})^4.
 $$ (eq:morse_expansion)
 
-I note in passing that the previous equation implies the force constant of Eq. [](#eq:harmonic_bond) can be related to the Morse parameters by $k = DS_m^2$.
+I note in passing that the previous equation implies that the force constant of Eq. [](#eq:harmonic_bond) can be related to the Morse parameters by $k = DS_m^2$.
 
 ```{figure} figures/bond_stretching.png
 :name: fig:bond_stretching
@@ -926,7 +926,7 @@ I note in passing that the previous equation implies the force constant of Eq. [
 Morse, harmonic, cubic and two quartic bond potentials for H-Br. Taken from @schlick2010molecular.
 ```
 
-A comparison between the Morse potential and its expansions at the second, third and fourth order is shown in [](#fig:bond_stretching). The change of curvature of the cubic potential yields unphysical behaviour for large deformations, but even the other approximated forms cannot model bond dissociation. Finally, some force fields use the following different (special) quartic form to avoid having to compute odd powers of $r$ (which require the computation of a square root, which is an expensive function to compute):
+A comparison between the Morse potential and its expansions at the second, third and fourth order is shown in [](#fig:bond_stretching). The change of curvature of the cubic potential yields unphysical behaviour for large deformations, but even the other approximated forms cannot model bond dissociation. Finally, some force fields use the following different (special) quartic form to avoid having to compute odd powers of $r$ (which require the computation of a square root, which is an expensive operation):
 
 $$
 E_\text{quartic} = S_q(r^2 - r_\text{ref}^2)^2,
@@ -936,7 +936,7 @@ where the constant can be linked to the Morse parameters by matching the two sec
 
 ### Angle bending
 
-When three atoms are connected by two consecutive covalent bonds, the angle between these bonds can change, causing the atoms to deviate from a linear configuration. Angle bending interactions describe the energy associated with such deformations and are often modeled using harmonic potentials, where the energy increases quadratically with the deviation of the angle from its equilibrium value. At first approximation, the reference (equilibrium) value is given by the type of orbital hybridisation due to the bonds (*e.g.* $180^\circ$ for *sp*, $120^\circ$ for *sp^2* and $109.47^\circ$ for *sp^3*). However, the orbitals are often deformed, and real values differ from ideal ones. For instance, in propane the $C-C-C$ and $H-C-H$ bond angles are $\approx 112.5^\circ$, and $\approx 107.5^\circ$, respectively.
+When three atoms are connected by two consecutive covalent bonds, the angle between these bonds can change, causing the atoms to deviate from a linear configuration. Angle bending interactions describe the energy associated with such deformations and are often modeled using harmonic potentials, where the energy increases quadratically with the deviation of the angle from its equilibrium value. At first approximation, the reference (equilibrium) value is given by the type of orbital hybridisation due to the bonds (*e.g.* $180^\circ$ for sp, $120^\circ$ for sp$^2$ and $109.47^\circ$ for sp$^3$). However, the orbitals are often deformed, and real values differ from ideal ones. For instance, in propane the $C-C-C$ and $H-C-H$ bond angles are $\approx 112.5^\circ$, and $\approx 107.5^\circ$, respectively.
 
 The most common potentials used have a harmonic form involving either angles or cosines:
 
@@ -952,7 +952,7 @@ $$
 K_t = K_h \sin^2 \theta_\text{ref}.
 $$ (eq:bond_angle_constants)
 
-Since it does not require the computation of inverse trigonometric functions, the trigonometric form is more efficient from the computational point of view. [](#fig:bond_angle) shows the two forms defined in Eq. [](#eq:bond_angle), where the value $K_t$ has been chosen according to Eq. [](#eq:bond_angle_constants).
+Since it does not require the computation of inverse trigonometric functions, the trigonometric form is more efficient from the computational point of view. [](#fig:bond_angle) shows the two forms defined in Eq. [](#eq:bond_angle), where the value $K_t$ has been set according to Eq. [](#eq:bond_angle_constants).
 
 ```{figure} figures/bond_angle.png
 :name: fig:bond_angle
@@ -966,7 +966,7 @@ Harmonic bond-angle potentials of the forms given in Eq. [](#eq:bond_angle) for 
 
 Dihedral or torsional interactions arise when four atoms are connected by three consecutive covalent bonds, forming a torsion angle or dihedral angle. Rotating one group of atoms around the axis defined by the central bond changes the conformation of the molecule, leading to different energy minima corresponding to different dihedral angles.
 
-As noted [before](./proteins.md#sec:molecular_vibrations), in proteins the most important dihedral (torsional) angles are those associated to rotations around the $N - C^\alpha$ and $C^\alpha - C$ bonds, $\phi$ and $\psi$, which feature free-energy barriers of the order of the thermal energy. However, rotations around the peptide bond (dihedral $\omega$) and around sp$^3$-sp$^3$ bonds such as those found in aliphatic said chains (dihedral $\chi$) can also play a role in dictating the flexibility of proteins.
+As noted [before](./proteins.md#sec:molecular_vibrations), in proteins the most important dihedral (torsional) angles are those associated to rotations around the $N - C^\alpha$ and $C^\alpha - C$ bonds, $\phi$ and $\psi$, which feature free-energy barriers of the order of the thermal energy. However, rotations around the peptide bond (dihedral $\omega$) and around sp$^3$-sp$^3$ bonds such as those found in aliphatic side chains (dihedral $\chi$) can also play a role in dictating the flexibility of proteins.
 
 Dihedral interactions are typically described using periodic potentials that capture the periodicity of the energy as a function of the dihedral angle. A generic torsional interaction associated to a dihedral angle $\varphi$ takes the form
 
@@ -984,7 +984,7 @@ where $n$ is an integer that determines the periodicity of the barrier of height
 Twofold and threefold torsion-angle potentials and their sums for an $O-C-C-O$ rotational sequence in nucleic-acid riboses ($V_2 = 1.0$ and $V_3 = 2.8$ kcal/mol) and a rotation about the phosphodiester ($P-O$) bond in nucleic acids ($V_2 = 1.9$ and $V_3 = 1.0$ kcal/mol).  Taken from @schlick2010molecular.
 ```
 
-The most common potentials of the form of [](#eq:dihedral_potential)) are those comprising twofold and threefold terms, which are enough to reproduce common energy differences (*e.g.* cis/trans and trans/gauce). Two examples from the CHARMM force field are presented in [](#fig:dihedral_potential):
+The most common potentials of the form of Eq. [](#eq:dihedral_potential) are those comprising twofold and threefold terms, which are enough to reproduce common energy differences (*e.g.* cis/trans and trans/gauce). Two examples from the CHARMM force field are presented in [](#fig:dihedral_potential):
 
 * The rotational interaction in the $O-C-C-O$ sequence in nucleic acids (*e.g.*, $O3'-C3'-C2'-O2'$ in ribose) shows a minimum at the trans state.
 * The rotation about the phosphodiester bond ($P-O$) in nucleic acids shows a very shallow minimum at the trans state. 

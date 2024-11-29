@@ -41,6 +41,7 @@ project:
         PDF: probability distribution function
         CG: coarse-grained
         FG: fine-grained
+        PMF: potential of mean force
     numbering: true
     settings:
         output_matplotlib_strings: remove

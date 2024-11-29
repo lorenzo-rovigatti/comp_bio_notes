@@ -578,6 +578,8 @@ DNA turns into its A form when dyhdrated, which can happen as a result of human 
 
 [](#fig:adna) shows a perfect A-DNA helix made of the same number of base pairs as the one shown in [](#fig:bdna). Compared to B-DNA, it is evident that A-DNA is shorter and thicker, and the base pairs are inclined by $\approx 20^\circ$ with respect to the helical axis.
 
+[^A-DNA]: In both cases the A form [is thought to protect the genetic material from extreme conditions](https://en.wikipedia.org/wiki/A-DNA#Biological_function).
+
 ### Z-DNA
 
 ```{figure} figures/zdna.png
@@ -592,20 +594,20 @@ Another important DNA conformation is Z-DNA, which is a less common and structur
 
 [](#fig:zdna) shows a perfect Z-DNA helix made of 24 base pairs (12 repeating GC steps) which shows the main features of Z-DNA: the left handedness of the helix, the zig-zag pattern that gives this conformation its name, and the small BP inclination.
 
-[^A-DNA]: In both cases the A form [is thought to protect the genetic material from extreme conditions](https://en.wikipedia.org/wiki/A-DNA#Biological_function).
+A comparison between the average properties of the three main helical conformations is shown in [](#tbl:helices).
 
 :::{table} The main (average) properties of the three canonical forms of DNA and RNA.
 :label: tbl:helices
 :align: center
 
-| Form | Handedness | BPs per turn | Diameter ($\angstrom$) | Pitch ($\angstrom$) | BP inclination | Sugar pucker
+| Form | Handedness | BPs per turn | Diameter ($\angstrom$) | Pitch ($\angstrom$) | BP inclination | Sugar pucker |
 | :--- | :--- | :---: | :---: | :---: | :---: | :--- |
 | B-DNA | Right | 10 | 20 | 34 | 0$^\circ$ | C2'-endo |
-| A-DNA/A-RNA | Right | 11 | 26 | 28 | 20$^\circ$ | C3'-endo
-| Z-DNA | Left | 12 | 18 | 45 | -7$^\circ$ | alternating[^Z-DNA_pucker]
+| A-DNA/A-RNA | Right | 11 | 26 | 28 | 20$^\circ$ | C3'-endo |
+| Z-DNA | Left | 12 | 18 | 45 | -7$^\circ$ | alternating[^Z-DNA_pucker] |
 :::
 
-A comparison between the average properties of the three main helical conformations is shown in [](#tbl:helices).
+[^Z-DNA_pucker]: The alternating pyrimidines and purines take the C2'-endo and C3'-endo conformations, respectively.
 
 ## Other tertiary motifs
 
@@ -614,5 +616,3 @@ Other important tertiary motifs are those that can connect more than two strands
 Hoogsteen base pairings can also lead to the formation of quadruplexes, which can occur in a variety of patterns, including intramolecular (within a single strand), intermolecular (between different strands), and hybrid types. A strand (or multiple strands) with a high number of consecutive guanine bases folds back on itself (or aligns with other strands) to bring the G bases into proximity. Four guanine bases form a planar structure known as a G-tetrad through Hoogsteen hydrogen bonding, and multiple G-tetrads stack on top of each other, stabilized by the $\pi-\pi$interactions between the aromatic rings of the guanine bases.
 
 Finally, as mentioned earlier, pseudoknots and coaxial stacking interactions can also seen as mechanisms the can lead to the formation of particular tertiary structures, since they can stabilise multi-strand (or multi-loop) structures.
-
-[^Z-DNA_pucker]: The alternating pyrimidines and purines take the C2'-endo and C3'-endo conformations, respectively.

@@ -14,7 +14,7 @@ The idea behind coarse-graining is to simplify complex systems by reducing the l
 
 From the practical standpoint, by grouping atoms or molecules into larger units, coarse-graining enables the study of systems that would otherwise be computationally intractable at full atomistic resolution. The speed-up of CG models is due to several contributions:
 
-* The reduction of the number of degrees of freedom (*e.g.* $N$ atoms become $M$ CG sites, with $N > M$).
+* The reduction of the number of degrees of freedom (*e.g.* $N$ atoms become $n$ CG sites, with $N > n$).
 * The smoothing of the potential energy function, which stems from the space averaging that is inherent to CG procedures and makes it possible to use (often much) larger time steps.
 * The forms of the interactions used in CG models, which are often simpler (*e.g.* no long-range interactions).
 * Implicit-solvent GC models have much less friction, leading to faster diffusion, and therefore a much more efficient sampling.
@@ -103,7 +103,7 @@ The correlation function approaches aim to parameterize coarse-grained effective
 Direct Boltzmann Inversion is the simplest approach to derive CG potentials directly from atomistic distribution functions. For a pair interaction, the CG potential is given by:
 
 $$
-V_text{CG}(R) = -k_B T \ln g(M(\{\vec r_j\})),
+V_\text{CG}(R) = -k_B T \ln g(M(\{\vec r_j\})),
 $$
 
 where $g(M(\{\vec r_j\}))$ is the radial distribution function of the CG variables evaluated in the FG system. This potential corresponds to the pair potential of mean force, which effectively accounts for interactions mediated by the surrounding environment, and is exact only in the dilute limit, where many-body interactions are unlikely. Therefore, this method does not work well in dense systems, or systems where interactions are strongly coupled.
@@ -113,7 +113,7 @@ where $g(M(\{\vec r_j\}))$ is the radial distribution function of the CG variabl
 To address the limitations of DBI, Iterative Boltzmann Inversion refines the potential iteratively. The goal is to adjust the CG potential until the radial distribution function of the CG model matches the atomistic one, so that the final pair PMF takes implicitly into account at least some of the many-body correlations that are present in the system. The iterative update for the potential is:
 
 $$
-V_\text{CG}^{(n+1)}(R) = V_\text{CG}^{(n)}(R) + k_B T \ln \frac{g^{(n)}_\text{CG}(R)}{g(M(\{\vec r_j\})},
+V_\text{CG}^{(n+1)}(R) = V_\text{CG}^{(n)}(R) + k_B T \ln \frac{g^{(n)}_\text{CG}(R)}{g(M(\{\vec r_j\}))},
 $$
 
 where $g^{(n)}_\text{CG}(R)$ is the RDF obtained by simulating the CG model interacting through $V_\text{CG}^{(n)}(R)$, and $g(M(\{\vec r_j\})$ is the target RDF.
@@ -132,16 +132,16 @@ To conclude this part, I will mention that there exist other, often more refined
 
 ## Variational approaches
 
-Variational approaches focus on systematically deriving a CG interaction potential by minimising a specific functional. In general, the approaches introduced here are very flexible, since the functionals to be minimised are independent of the specific form used to model the potential, and therefore there is great freedom in choosing the procedure used to optimise the PMF.
+Variational approaches focus on systematically deriving a CG interaction potential by minimising a specific functional. In general, the approaches introduced here are very flexible, since the functionals to be minimised are independent of the specific form used to model the potential, and therefore there is great freedom in choosing how to optimise the PMF.
 
 ### Force-Matching
 
-One of the most common variational approaches is force-matching, where the CG potential is parameterized to reproduce the forces observed in atomistic simulations. To determine the CG potential, the force-matching approach minimizes the sum of the squared differences between the FG force acting on each CG bead $\vec f_I(\{\vec r_j\})$[^FG_force] and the force as computed by deriving the FG energy with respect to the position of bead $I$, $\vec F_I(\{ \vec R_J \}) = -\frac{\partial V_\text{CG}}{\partial \vec R_I}$:
+One of the most common variational approaches is force-matching, where the CG potential is parameterized to reproduce the forces observed in atomistic simulations. To determine the CG potential, the force-matching approach minimizes the sum of the squared differences between the FG force acting on each CG bead $\vec f_I(\{\vec r_j\})$[^FG_force] and the force as computed by deriving the CG energy with respect to the position of bead $I$, $\vec F_I(\{ \vec R_J \}) = -\frac{\partial V_\text{CG}}{\partial \vec R_I}$:
 
 $$
 \begin{split}
-\chi^2[V_\text{trial}] & = \frac{1}{3N} \left\langle \sum_{I=1}^N |  \vec f_I(\{\vec r_j\}) - F_I(\vec M(\{ \vec r_j \})|^2 \right\rangle\\
-&= \chi^2[V_\text{CG}] + \int d\{\vec R_J\} p_R(\{ \vec R_J \}) \frac{1}{3N} \sum_{I=1}^N |\vec f^\text{avg}_I(\{ \vec R_J \}) - \vec F_J(\{ \vec R_J \})|^2 \\
+\chi^2[V_\text{trial}] & = \frac{1}{3N} \left\langle \sum_{I=1}^n |  \vec f_I(\{\vec r_j\}) - F_I(\vec M(\{ \vec r_j \})|^2 \right\rangle\\
+&= \chi^2[V_\text{CG}] + \int d\{\vec R_J\} p_R(\{ \vec R_J \}) \frac{1}{3N} \sum_{I=1}^N |\vec f^\text{avg}_I(\{ \vec R_J \}) - \vec F_I(\{ \vec R_J \})|^2 \\
 &\geq \chi^2[V_\text{CG}],
 \end{split}
 $$ (eq:force-matching)
@@ -161,8 +161,9 @@ However, recently, machine-learning approaches have been employed to directly ob
 ```{figure} figures/force_matching.png
 :name: fig:force_matching
 :align: center
+:width: 700px
 
-Machine-learned coarse-graining of dynamics in a rugged 2D potential. (a) Two-dimensional potential used as a toy system. (b) Exact free energy along x. (c) Instantaneous forces and the learned mean forces compared to the exact forces. Here "feature regression" is a least-square fitting function, and regularized and unregularized CGnet models refer to NN models that treat the portions of the that are outside of the training data in different ways. The unit of the force is kBT, with the unit of length equal to 1. (d) Free energy (PMF) along $x$ predicted using feature regression, and CGnet models compared to the exact free energy. Free energies are also computed from histogramming simulation data directly, using the underlying 2D
+Machine-learned coarse-graining of dynamics in a rugged 2D potential. (a) Two-dimensional potential used as a toy system. (b) Exact free energy along $x$. (c) Instantaneous forces and the learned mean forces compared to the exact forces. Here "feature regression" is a least-square fitting function, and regularized and unregularized CGnet models refer to NN models that treat the portions that are outside of the training data in different ways. The unit of force is $k_BT$, with the unit of length set to 1. (d) Free energy (PMF) along $x$ predicted using feature regression, and CGnet models compared to the exact free energy. Free energies are also computed from histogramming simulation data directly, using the underlying 2D
 trajectory, or simulations run with the feature regression and CGnet models (dashed lines). Taken from [](doi:10.1021/acscentsci.8b00913).
 ```
 
@@ -171,8 +172,9 @@ trajectory, or simulations run with the feature regression and CGnet models (das
 ```{figure} figures/force_matching_proteins.png
 :name: fig:force_matching_proteins
 :align: center
+:width: 700px
 
-Structures obtained from CG simulations of the protein-specific model (orange) and the multi-protein model (blue), compared to their respective experimental structures (gray). Taken from [](doi:10.1038/s41467-023-41343-1).
+Structures obtained from CG simulations of the protein-specific model (orange) and the multi-protein model (blue), compared to their respective experimental structures (gray). Here the CG description retains only the position of the $C^\alpha$ atoms. Taken from [](doi:10.1038/s41467-023-41343-1).
 ```
 
 [^FG_force]: $\vec f_I(\{\vec r_j\}) = \sum_{i \in I} \vec f_i(\{ \vec r_j\})$ if the mapping is linear.
@@ -182,7 +184,7 @@ Structures obtained from CG simulations of the protein-specific model (orange) a
 An alternative variational approach minimizes the relative entropy, $S_\text{rel}$, between the atomistic and CG probability distributions, which is given by the so-called Kullback-Leibler (KL) divergence (introduced in [](doi:10.1214/aoms/1177729694)):
 
 $$
-S_\text{rel}[V_\text{trial}] = \int d \{ \vec R_J \} p_R(\{ \vec R_J \}) \ln \frac{p_R(\{ \vec R_J \})}{P_R(\{ \vec R_J \}; V_\text{trial})} \geq S_\text{rel}[V_\text{CG}] = 0,
+S_\text{rel}[V_\text{trial}] = k_B \int d \{ \vec R_J \} p_R(\{ \vec R_J \}) \ln \frac{p_R(\{ \vec R_J \})}{P_R(\{ \vec R_J \}; V_\text{trial})} \geq S_\text{rel}[V_\text{CG}] = 0,
 $$ (eq:KL)
 
 where $p_R(\{ \vec R_J \}))$ and $P_R(\{ \vec R_J \}; V_\text{trial})$ are the FG and (trial) CG distributions, respectively. $S_\text{rel}[V_\text{trial}]$ vanishes only if $V_\text{trial} = V_\text{CG}$ (up to a constant). Interestingly, this approach has been shown to be equivalent to many of the methods that make use of correlation functions (such as IBI and IMC), in some sense providing a unified framework, as well as a theoretical justification, for these techniques (see [](doi:10.1063/1.4818908) and references therein).

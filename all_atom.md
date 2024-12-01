@@ -810,7 +810,7 @@ $$
 where $0 < x_i, y_i, z_i < 1$ are the scaled (fractional) coordinates of particle $i$. With this formalism, the distance between particles $i$ and $j$ is
 
 $$
-r^2_{ij} = \vec s_{ij} \hat H^T \hat H \vec s_{ij} = \vec s_{ij} \hat G \vec s_{ij},
+r^2_{ij} = \vec s_{ij}^T \hat H^T \hat H \vec s_{ij} = \vec s_{ij}^T \hat G \vec s_{ij},
 $$
 
 where $G \equiv \hat H^T \hat H$.

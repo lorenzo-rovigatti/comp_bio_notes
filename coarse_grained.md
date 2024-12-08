@@ -14,7 +14,7 @@ The idea behind coarse-graining is to simplify complex systems by reducing the l
 
 From the practical standpoint, by grouping atoms or molecules into larger units, coarse-graining enables the study of systems that would otherwise be computationally intractable at full atomistic resolution. The speed-up of CG models is due to several contributions:
 
-* The reduction of the number of degrees of freedom (*e.g.* $N$ atoms become $n$ CG sites, with $N > n$).
+* The reduction of the number of degrees of freedom (*e.g.* $n$ atoms become $N$ CG sites, with $n > N$).
 * The smoothing of the potential energy function, which stems from the space averaging that is inherent to CG procedures and makes it possible to use (often much) larger time steps.
 * The forms of the interactions used in CG models, which are often simpler (*e.g.* no long-range interactions).
 * Implicit-solvent GC models have much less friction, leading to faster diffusion, and therefore a much more efficient sampling.
@@ -56,6 +56,10 @@ P_R(\{ \vec R_J \}) = \int d\{\vec r_j\} p_r(\{\vec r_j\}) \prod_I \delta(\vec M
 $$ (eq:CG_P)
 
 where the integration over the microscopic degrees of freedom is made explicit.
+
+:::{warning} TODO
+Add a figure to show the idea behind Eq. [](#eq:CG_P) (*e.g.* that there are $M$ FG configurations that map to the same CG configuration, which therefore has a statistical weight that is given by the sum of the FG statistical weights).
+:::
 
 Once the mapping has been chosen (traditionally by intuition, but there are modern machine-learning approaches that try to automatise or assist this choice), the formal interaction between the new (CG) degrees of freedom is the many-body potential of mean force (PMF), also known as effective interaction, which can be formally written as
 
@@ -189,7 +193,7 @@ $$ (eq:KL)
 
 where $p_R(\{ \vec R_J \}))$ and $P_R(\{ \vec R_J \}; V_\text{trial})$ are the FG and (trial) CG distributions, respectively. $S_\text{rel}[V_\text{trial}]$ vanishes only if $V_\text{trial} = V_\text{CG}$ (up to a constant). Interestingly, this approach has been shown to be equivalent to many of the methods that make use of correlation functions (such as IBI and IMC), in some sense providing a unified framework, as well as a theoretical justification, for these techniques (see [](doi:10.1063/1.4818908) and references therein).
 
-From an information theory point of view, the KL divergence can also be applied to estimate the loss of information associated to the coarse-graining procedure in itself. Indeed, by using the equilibrium distributions $p(\{ \vec r_i \})$ and $p(\vec M(\{ \vec r_i \}))$ in Eq. [](#eq:KL), it is possible to obtain a quantity that is function of the mapping operator only, $S_\text{rel} = S_\text{rel}(\vec M)$. As suggested in [](doi:10.1021/acs.jctc.0c00676), this quantity is a measure of the information content retained by the CG description. By minimising it, it is possible to find the optimal mapping that, given the chosen resolution, retains the maximum amount of information on the statistical properties of the FG system, or, in other words, the FG degrees of freedom (or the combinations thereof) that are more important in the determination of the behaviour of the original system.
+From an information theory point of view, the KL divergence can also be applied to estimate the loss of information associated to the coarse-graining procedure in itself. Indeed, by using the equilibrium distributions $p(\{ \vec r_i \})$ and $p(\{ \vec M_I(\{ \vec r_i \}) \})$ in Eq. [](#eq:KL), it is possible to obtain a quantity that is function of the mapping operator only, $S_\text{rel} = S_\text{rel}(\vec M)$. As suggested in [](doi:10.1021/acs.jctc.0c00676), this quantity is a measure of the information content retained by the CG description. By minimising it, it is possible to find the optimal mapping that, given the chosen resolution, retains the maximum amount of information on the statistical properties of the FG system, or, in other words, the FG degrees of freedom (or the combinations thereof) that are more important in the determination of the behaviour of the original system.
 
 # Top-down models
 
@@ -230,12 +234,31 @@ Interactions between nucleotides depend on the orientation of the nucleotides as
 The potential energy of the system is calculated as:
 
 $$
-V_{0}=\sum_{\langle ij \rangle}(V_{b.b.}+V_{stack}+V_{exc}^{\prime})  +  \sum_{i,j \not\in \langle ij \rangle}(V_{HB}+V_{cr.st.}+V_{exc}+V_{coax}),
+V_{0}=\sum_{\langle ij \rangle}(V_{\rm b.b.}+V_{\rm stack}+V_{\rm exc}^{\prime})  +  \sum_{i,j \not\in \langle ij \rangle}(V_{HB}+V_{\rm cr.st.}+V_{\rm exc}+V_{\rm coax}),
 $$ (eq:oxDNA)
 
 with an additional screened electrostatic repulsion term for oxDNA 2.0. In Eq. [](#eq:oxDNA), the first sum is taken over all pairs of nucleotides that are nearest neighbors on the same strand and the second sum comprises all remaining pairs. The terms represent backbone connectivity ($V_{b.b.}$), excluded volume ($V_{exc}$ and $V_{exc}^{\prime}$), hydrogen bonding between complementary bases ($V_{HB}$), stacking between adjacent bases on a strand ($V_{stack}$), cross-stacking ($V_{cr.st.}$) across the duplex axis and coaxial stacking ($V_{coax}$) across a nicked backbone. The excluded volume and backbone interactions are a function of the distance between repulsion sites. The backbone potential is a spring potential mimicking the covalent bonds along the strand. All other interactions depend on the relative orientations of the nucleotides and the distance between the hydrogen-bonding and stacking interaction sites. The model was deliberately constructed with all interactions pairwise (*i.e.*, only involving two nucleotides, which are taken as rigid bodies).
 
-A crucial feature of the oxDNA model is that the double helical structure is driven by the interplay between the hydrogen-bonding, stacking and backbone  connectivity bonds. The stacking interaction tends to encourage the nucleotides to form co-planar stacks; the fact that this stacking distance is shorter than the backbone bond length results in a tendency to form helical stacked structures. In the single-stranded state, these stacks can easily break, allowing the single strands to be flexible. The geometry of base pairing with a complementary strand locks the nucleotides into a much more stable double helical structure. Note that oxDNA and oxRNA have been parametrised to reproduce the thermodynamics of [nearest-neighbour models](#sec:NN_models), as well as the experimental flexibility of the molecules in their single- and double-stranded forms.
+
+```{figure} figures/DNA_melting_comparison.png
+:name: fig:oxDNA_params
+:align: center
+:width: 250px
+
+
+The yield of a 10-bp duplex as predicted by SantaLucia (red line), compared with results from oxDNA and oxDNA2. Adapted from [](doi:10.1063/1.4921957).
+```
+
+```{figure} figures/oxDNA_mechanics.png
+:name: fig:oxDNA_mechanics
+:align: center
+:width: 500px
+
+
+(a) The persistence length and (b) the torsional stiffness of duplex DNA in oxDNA2 as a function of salt concentration. These values are consistent with experiments. Taken from [](doi:10.1063/1.4921957).
+```
+
+A crucial feature of the oxDNA model is that the double helical structure is driven by the interplay between the hydrogen-bonding, stacking and backbone  connectivity bonds. The stacking interaction tends to encourage the nucleotides to form co-planar stacks; the fact that this stacking distance is shorter than the backbone bond length results in a tendency to form helical stacked structures. In the single-stranded state, these stacks can easily break, allowing the single strands to be flexible. The geometry of base pairing with a complementary strand locks the nucleotides into a much more stable double helical structure. Note that oxDNA and oxRNA have been parametrised to reproduce the thermodynamics of [nearest-neighbour models](#sec:NN_models), see [](#fig:oxDNA_params), as well as the experimental bending and torsional flexibility of the molecules, see [](#fig:oxDNA_mechanics).
 
 It is convenient to use reduced units to describe lengths, energies and times in the system. Here is a summary of the conversion of these "oxDNA units" to SI units:
 
@@ -254,3 +277,7 @@ Snapshots of configurations of the RNA2 fragment of the CCMV virus, squeezed by 
 ```
 
 As a recent example, oxRNA has been used to study the conformational ensemble of a viral RNA comprising almost 3000 nucleotides. Thanks to lengthy simulations, in [](doi:10.1002/marc.202400639) it was possible to test some theoretical predictions, as well as to see the effect of the confinement due to the viral capsid. [](#fig:oxDNA_CCMV] shows some representative simulation snapshots.
+
+:::{seealso} Using oxDNA from Jupyter
+oxDNA simulations can be run, analysed and visualised directly from Python, as shown [here](./notebooks/oxDNA.ipynb).
+:::

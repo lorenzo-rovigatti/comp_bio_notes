@@ -77,6 +77,7 @@ project:
             - file: notebooks/RNA_folding.ipynb
             - file: notebooks/NUPACK.ipynb
             - file: notebooks/MD.ipynb
+            - file: notebooks/oxDNA.ipynb
 site:
     template: book-theme
     options:

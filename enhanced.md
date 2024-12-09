@@ -519,17 +519,20 @@ For one-component systems, common thermodynamic variables are temperature $T$, p
 * Integration along isotherms: $T$ is constant, $\rho$ varies. The Helmholtz free energy difference is given by
 $$
 F(\rho_2, T) - F(\rho_1, T) = N\int_{\rho_1}^{\rho_2} \frac{P(\rho)}{\rho^2} d\rho,
-$$ (eq:HI_isotherms)
+\label{eq:HI_isotherms}
+$$
 where the integrand can be obtained *e.g.* with canonical simulations.
 * Integration along isobars: $P$ is constant, $T$ varies. The Gibbs free energy difference is given by
 $$
 \frac{G(T_2, P)}{k_B T_2} - \frac{G(T_1, P)}{k_B T_1} = - \int_{T_1}^{T_2} \frac{H(T)}{k_B T^2}dT,
-$$ (eq:HI_isobars)
+\label{eq:HI_isobars}
+$$
 where $H(T)$ is the enthalpy, which can be evaluated with isobaric-isothermal ($NPT$) simulations.
 * Integration along isochores: $\rho$ is constant, $T$ varies. The Helmholtz free energy difference is given by
 $$
 \frac{F(\rho, T_2)}{k_B T_2} - \frac{F(\rho, T_1)}{k_B T_1} = - \int_{T_1}^{T_2} \frac{U(T)}{k_B T^2} dT,
-$$ (eq:HI_isochores)
+\label{eq:HI_isochores}
+$$
 where the integrand can be obtained with canonical simulations.
 
 [^reversible]: by definition, the free energy difference between two states do not depend on the path connecting them, as long as such transformation is reversible.
@@ -587,7 +590,7 @@ In order to demonstrate that the liquid state has a lower free energy than the c
 
 [^ground_state]: Here ground state is to be meant classically as the equilibrium state of the system as $T \to 0$.
 
-## Alchemical free-energy calculations
+# Alchemical free-energy calculations
 
 ```{tip}
 The main references for this part is [](doi:10.1021/acsphyschemau.3c00033).
@@ -607,11 +610,11 @@ One common application is shown in [](#fig:alchemical_free_energy). In the figur
 
 There are three principal methodologies underpin AFE calculations, each offering distinct approaches to determining free energy differences. Here I want to introduce them very briefly, so that the reader is aware of their existence
 
-### Hamiltonian integration
+## Hamiltonian integration
 
 As discussed [above](#sec:HI), free energy changes are obtained by integrating the thermodynamic derivative $\partial U / \partial \lambda$ along the alchemical pathway. This approach requires simulations at several discrete $\lambda$ points, where the average derivative is computed. Numerical integration over these points yields the total free energy difference. HI is known for its robustness and straightforward implementation but can be computationally intensive due to the need for dense sampling along the $\lambda$ coordinate.
 
-### Free Energy Perturbation (FEP)
+## Free Energy Perturbation (FEP)
 
 FEP directly estimates the free energy difference between states based on the overlap of their phase spaces. The idea is to run simulations at $N$ values of $\{ \lambda_i \}$, so that the total free energy change is
 
@@ -621,15 +624,17 @@ $$
 
 The free-energy difference between neighboring states is estimated using the exponential averaging of the energy difference (the so-called Zwanzig equation), where the average can be performed in the $\lambda_k$, $\lambda_{k+1}$ or in both systems, so that there are three possible ways of computing $\Delta F_{\lambda_i \to \lambda_{i + 1}}$:
 
-\begin{align}
+$$
+\begin{aligned}
 \Delta F_{\lambda_i \to \lambda_{i + 1}} &= - k_B T \log \left\langle e^{-\beta \Delta H_{i, i+1}} \right\rangle_{\lambda_i}\\
 \Delta F_{\lambda_i \to \lambda_{i + 1}} &= - k_B T \log \left\langle e^{\beta \Delta H_{i, i+1}} \right\rangle_{\lambda_{i+1}}\\
 \Delta F_{\lambda_i \to \lambda_{i + 1}} &= - k_B T \log \left[ \frac{\left\langle f(\beta(\Delta H_{i, i+1} - C)) \right\rangle_i}{\left\langle f(\beta(C - \Delta H_{i, i+1})) \right\rangle_{i+1}} \right] + C,
-\end{align}
+\end{aligned}
+$$
 
 where $\Delta H_{i, i+1} = H(\lambda_{i + 1}) - H(\lambda_i)$, $f = 1 / (1 + e^x)$ is the Fermi function, and $C$ is an arbitrary constant. In principle, FEP can calculate free energy changes by sampling only the end states, $A$ and $B$. However, if the sampled configurations from $A$ poorly represent those of $B$, the ensemble average $\left\langle e^{-\beta \Delta H} \right\rangle_{A}$​ becomes dominated by rare, poorly sampled configurations, leading to large statistical errors. Therefore, in practice, a number of intermediate $\lambda$ windows are often required to ensure adequate phase space overlap and convergence, making the computational cost of the method comparable to that of HI.
 
-### Nonequilibrium Work (NEW) methods
+## Nonequilibrium Work (NEW) methods
 
 Nonequilibrium Work (NEW) methods provide a distinct approach to alchemical free energy calculations, departing from traditional equilibrium-based techniques. These methods calculate free energy differences by performing rapid transformations between thermodynamic states, where the system is intentionally driven out of equilibrium. At the heart of these calculations lies the [Jarzynski equality](https://en.wikipedia.org/wiki/Jarzynski_equality), a foundational equation in nonequilibrium statistical mechanics. The Jarzynski equality is expressed as:
 

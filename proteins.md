@@ -303,10 +303,10 @@ where $\sigma = r_0$ is also known as the "diameter" of the atom.
 Typical values for $\epsilon$, $r_0$ and $r_{\rm min}$ for the main self interactions, *i.e.* interactions between atoms of the same type, are listed in [](#tbl:vdW). Note that the interaction strengths are always smaller than $k_BT$ at ambient temperature. In the case of mixed interactions between atoms of type $i$ and $j$, there exist several [combining rules](https://en.wikipedia.org/wiki/Combining_rules) to estimate the values of the van der Waals parameters (see @leach2001molecular for a discussion). The most common are the Lorentz-Berthelot rules, which amount to taking the arithmetic mean for the radii and the geometric mean for the energy strengths:
 
 $$
-\begin{align}
+\begin{aligned}
 r_{\rm min}^{ij} &= \frac{r_{\rm min}^{ii} + r_{\rm min}^{jj}}{2}\\
 \epsilon_{ij} & = \sqrt{\epsilon_{ii}\epsilon{jj}}.
-\end{align}
+\end{aligned}
 $$
 
 ```{figure} figures/steric.png

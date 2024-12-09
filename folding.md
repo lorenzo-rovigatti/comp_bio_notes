@@ -171,10 +171,10 @@ $$
 whence
 
 $$
-\begin{align}
+\begin{aligned}
 \lambda_1 &= 1 + \frac{s - 1}{2} + \sqrt{\left( \frac{s - 1}{2} \right)^2 + \sigma s}\\
 \lambda_2 &= 1 + \frac{s - 1}{2} - \sqrt{\left( \frac{s - 1}{2} \right)^2 + \sigma s}.
-\end{align}
+\end{aligned}
 $$
 
 Note that the two eigenvalues are linked by the relation $\lambda_1 + \lambda_2 = 1 + s$. 
@@ -208,7 +208,7 @@ $$
 We can now write Eq. [](#eq:zimm_bragg_Q) explicitly in terms of $\lambda_1$ and $\lambda_2$:
 
 $$
-\begin{align}
+\begin{aligned}
 Q_N & = (1, 0) \matr{A}
 \begin{pmatrix}
 \lambda_1^N & 0\\
@@ -219,7 +219,7 @@ Q_N & = (1, 0) \matr{A}
 1\\1
 \end{pmatrix} =\\
 &= \frac{1}{\lambda_1 - \lambda_2} \left[ (1 - \lambda_2)\lambda_1^{N + 1} - (1 - \lambda_1) \lambda_2^{N + 1} \right].
-\end{align}
+\end{aligned}
 $$ (eq:zimm_bragg_Q_lambda)
 
 From the partition function we can compute any observable we need. The most interesting quantity is the average fraction of residues that are in the helical state h, which can be compared to experiments. First of all, we note from the $C_i$ and $H_i$ we explicitly calculated and from Eq. [](#eq:zimm_bragg_recursive) that the partition function is a polynomial in $s$, and therefore can be written as 
@@ -398,10 +398,10 @@ $$
 and its averages over all and native conformations can be computed as
 
 $$
-\begin{align}
+\begin{aligned}
 \langle x \rangle & = \frac{1}{Q} \sum_{i = 0}^{\Omega_N} x e^{(m^{\rm max} - m_i) \epsilon}\\
 \langle x \rangle_{ns} & = \frac{1}{g(m^{\rm max})} \sum_{i = 1}^{g(m^{\rm max})} x.
-\end{align}
+\end{aligned}
 $$
 
 ```{figure} figures/HP_model_dill_1.png
@@ -698,7 +698,8 @@ where $o$ and $e$ are the opening and extension penalties, respectively, and $o 
 
 In this setup, each entry in the $\hat I$ table, denoted by $i_{i,j}$, stores the best alignment score when the last column includes an insertion (*i.e.* a gap in the first sequence), and each entry in the $\hat D $ table, $ d_{i,j} $, captures the best score for alignments ending in a deletion (*i.e.* a gap in the second sequence). As before, $F_{i,j} $ records the overall score. The recursive update rules of the three tables are
 
-\begin{align}
+$$
+\begin{aligned}
 I_{i,j} &= \max \begin{cases}
 F_{i-1,j} + o\\
 I_{i-1,j} + e
@@ -712,7 +713,8 @@ F_{i-1,j-1} + s(S_i, T_j)\\
 I_{i, j}\\
 D_{i,j}.
 \end{cases}
-\end{align}
+\end{aligned}
+$$
 
 Note that with this algorithm each cell update is $\mathcal{O}(1)$, and therefore the overall complexity remains the same ($\mathcal{O}(NM)$ or $\mathcal{O}(N^2)$ for same-length sequences).
 
@@ -741,10 +743,12 @@ However, we can be more quantitative by taking a probabilistic approach. Here I 
 
 Under the rather strict assumption ("biologically dubious, but mathematically convenient", as aptly put in [](doi:10.1038/nbt0804-1035)) that pairs of aligned residues are statistically independent of each other, so that the likelihoods associated to the two hypotheses, $P(S, T|R)$ and $P(S, T|U)$, can be expressed as products of probabilities, *viz.*
 
-\begin{align}
+$$
+\begin{aligned}
 P(S, T|R) & \propto \prod_i p_{S_iT_i}\\
 P(S, T|U) & \propto \prod_i q_{S_i} q_{T_i}
-\end{align}
+\end{aligned}
+$$
 
 where $p_{xy}$ is the likelihood that residues $x$ and $y$ are aligned because correlated, while the product $q_x q_y$ is the likelihood that the two residues are there by chance: their occurrence is unrelated and therefore the likelihood factorises in two terms that account for the average probability of observing those two residues in any protein.
 

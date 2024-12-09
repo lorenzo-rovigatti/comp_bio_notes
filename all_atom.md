@@ -135,13 +135,15 @@ where $\rho$ is the number density of the system, and $d\vec{r} = 4 \pi r^2 dr$ 
 
 Given the definition above, the LJ potential is short ranged[^long-range_interactions]. As a result, the total potential energy of a particle is dominated by the contributions of those particles that are closer than some cut-off distance $r_c$. Therefore, in order to save some computing time, it is common to truncate the interaction at $r_c$, so that the potential reads
 
-(eq:truncation)=
-\begin{align}
+$$
+\begin{aligned}
 V_\text{tr}(r) = \begin{cases}
 4 \epsilon \left( \left( \frac{\sigma}{r} \right)^{12} - \left( \frac{\sigma}{r} \right)^{6} \right) & \; \text{if} \; r \leq r_c\\
 0 & \; \text{otherwise.}
 \end{cases}
-\end{align}
+\label{eq:truncation}
+\end{aligned}
+$$
 
 In this way, only pairs of particles closer than $r_c$ feel a mutual interaction. However, the potential has a discontinuity, and therefore the force diverges, at $r = r_c$. The discontinuity introduces errors in the estimates of several quantities. For instance, the potential energy will lack the contributions of distance atoms, which can be estimated through Eq. [](#eq:U_tail) and for a 3D LJ potential is
 
@@ -159,12 +161,14 @@ Note that this is the contribution that should be added to $P$ if one wishes to 
 
 A common way of removing the divergence in Eq. [](#eq:truncation) is to truncate and shift the potential:
 
-\begin{align}
+$$
+\begin{aligned}
 V_\text{tr,sh}(r) = \begin{cases}
 4 \epsilon \left( \left( \frac{\sigma}{r} \right)^{12} - \left( \frac{\sigma}{r} \right)^{6} \right) - V(r_c) & \; \text{if} \; r \leq r_c\\
 0 & \; \text{otherwise.}
 \end{cases}
-\end{align}
+\end{aligned}
+$$
 
 This is especially important in constant-energy MD simulations (*i.e.* simulations in the NVE ensemble), since the discontinuity of the truncated (but not shifted) potential would greatly deteriorate the energy conservation. In this case the pressure tail correction remains the same, while the energy requires an additional correction on top of Eq. [](#eq:U_tail_LJ), which accounts for the average number of particles that are closer than $r_c$ from a given particle, multiplied by $\frac{1}{2} V(r_c)$.
 
@@ -187,12 +191,14 @@ $$ (eq:PBC_sum)
 
 where $\vec r_{ij}$ is the distance between particles $i$ and $j$, $\vec{n}$ is a vector of three integer numbers $\in [-\infty, +\infty]$, and the prime over the sum indicates that the $i = j$ term should be excluded if $\vec n = (0, 0, 0)$. How do we handle such an infinite sum in a simulation? Keeping the focus on short-range interactions, it is clear that all terms with $|\vec{r}_{ij} + \vec{n}L| > r_c$ vanish, leaving only a finite number of non-zero interactions. In practice, Eq. [](#eq:PBC_sum) is evaluated by making sure that $r_c < L / 2$, so that each particle can interact **at most** with a single periodic image of another particle. Then, given any two particles $i$ and $j$, the vector distance $\vec r_{ij} = (x_{ij}, y_{ij}, z_{ij})$ between the closest pair of images is
 
-(eq:minimum_image)=
-\begin{align}
+$$
+\begin{aligned}
 x_{ij} & = x_j - x_i - \text{round}\left(\frac{x_j - x_i}{L_x}\right) L_x\\
 y_{ij} & = y_j - y_i - \text{round}\left(\frac{y_j - y_i}{L_y}\right) L_y\\
 z_{ij} & = z_j - z_i - \text{round}\left(\frac{z_j - z_i}{L_z}\right) L_z,
-\end{align}
+\label{eq:minimum_image}
+\end{aligned}
+$$
 
 where, for the sake of completeness, I'm considering a non-cubic box of side lengths $L_x$, $L_y$ and $L_z$, and $\text{round}(\cdot)$ is the function that rounds its argument to its closest integer. [](#fig:PBC) shows a 2D schematic of periodic-boundary conditions and of the minimum-image construction.
 
@@ -226,10 +232,12 @@ $, so that the acceleration $ a(t) $ is $a(t) = \frac{F(t)}{m}$
 
 Expanding the position $ x(t) $ around the time $t$ using a Taylor series we obtain
 
-\begin{align}
+$$
+\begin{aligned}
 x(t + \Delta t) = x(t) + v(t) \Delta t + \frac{1}{2} a(t) \Delta t^2 + \frac{1}{6} \frac{da(t)}{dt} \Delta t^3 + \mathcal{O}(\Delta t^4)\\
 x(t - \Delta t) = x(t) - v(t) \Delta t + \frac{1}{2} a(t) \Delta t^2 - \frac{1}{6} \frac{da(t)}{dt} \Delta t^3 + \mathcal{O}(\Delta t^4)
-\end{align}
+\end{aligned}
+$$
 
 Adding the two Taylor expansions yields
 
@@ -324,10 +332,12 @@ The main source for this part is @allen2017computer.
 
 In the canonical ensemble, for any observable $A$ and generalised coordinate or momentum $h_k$, integrating by parts (and assuming reasonable boundary conditions) one finds
 
-\begin{align}
+$$
+\begin{aligned}
 \left\langle \frac{\partial A}{\partial h_k} \right\rangle &= \frac{1}{Q} \int \frac{\partial A}{\partial h_k} \exp(-\beta H) d\lbrace h_i \rbrace = \frac{1}{Q} \int \beta A \frac{\partial H}{\partial h_k} \exp(-\beta H) d\lbrace h_i \rbrace\\
 &= \beta \left\langle A \frac{\partial H}{\partial h_k} \right\rangle,
-\end{align}
+\end{aligned}
+$$
 
 which translates to the following generalised equipartition relation:
 
@@ -661,13 +671,13 @@ The trajectory of the harmonic oscillator for a single initial condition simulat
 As demonstrated in [](doi:10.1063/1.463940), this issue can be overcome by coupling the Nosé-Hoover thermostat to another thermostat or, if necessary, to a whole chain of thermostats, which take into account additional conservation laws. Here I provide the equations of motion for a system coupled to an $M$-link thermostat chain, where each link $i$ is an additional degree of freedom associated to a "mass" $Q_i$:
 
 $$
-\begin{align}
+\begin{aligned}
 \ddot{\vec r}_i &= \frac{\vec F_i}{m_i} - \zeta \dot{\vec r}_i\\
 \dot \zeta_k & = \frac{p_{\zeta_k}}{Q_k}\\
 \dot p_{\zeta_1} &= \left( \sum_{i=1}^{N} \frac{\vec p_i^2}{m_i} - g k_B T \right) -  \frac{p_{\zeta_2}}{Q_2} p_{\zeta_1}\\
 \dot p_{\zeta_k} &= \left[ \frac{p^2_{\zeta_{k-1}}}{Q_{k-1}} - k_BT \right] - \frac{p_{\zeta_{k+1}}}{Q_{k+1}} p_{\zeta_k}\\
 \dot p_{\zeta_M} &= \left[ \frac{p^2_{\zeta_{M-1}}}{Q_{M-1}} - k_BT \right].
-\end{align}
+\end{aligned}
 $$
 
 As discussed in @frenkel2023understanding (where all these arguments are presented more in depth) of the $M$ additional degrees of freedom only two (the first link and the thermostat "centre", $\zeta_c \equiv \sum_{k=2}^M \zeta_k$) are independently coupled to the dynamics, which is what is needed when there are two conservation laws.
@@ -722,10 +732,10 @@ $$ (eq:bussi)
 where $N_f$ is the number of degrees of freedom in the system. Since the total momentum is conserved, $N_f = 3N - 1$ in a 3D simulation. With some non-trivial math [](doi:10.1063/1.2408420) demonstrated that Eq. [](#eq:bussi) yields the following scaling factor:
 
 $$
-\begin{align}
+\begin{aligned}
 \alpha^2 &= e^{-\Delta t / \tau} + \frac{K}{N_f K(m)} \left( 1 - e^{-\Delta t / \tau} \right) \left( R_1^2 + \sum_{i = 2}^{N_f} R_i^2 \right)\\
 & + 2 R_1 e^{-\Delta t / \tau} \sqrt{\frac{K}{N_f K(m)} \left( 1 - e^{-\Delta t / \tau} \right) },
-\end{align}
+\end{aligned}
 $$
 
 where the $\{ R_i \}$ are independent random numbers extracted from a Gaussian distribution with zero mean and unit variance.
@@ -771,15 +781,16 @@ As for thermostats, there exist many barostats, each having its own unique advan
 The Nosè-Hoover formalism can be extended to fix the pressure in addition to temperature. In this case the equations of motion for a system coupled to a barostat and to a single Nosé-Hoover thermostat, as presented in [](doi:10.1063/1.467468), which improves the original scheme by [Hoover](doi:10.1103/PhysRevA.34.2499) that only yields approximated constant-$P$ distributions, are:
 
 $$
-\begin{align}
+\begin{aligned}
 \dot{\vec r_i} &= \frac{\vec p_i}{m_i} + \frac{p_\epsilon}{W} \vec r_i\\
 \dot{\vec p_i} &= \vec F_i - \left( 1 + \frac{d}{N_f} \right) \frac{p_\epsilon}{W} \vec p_i - \frac{p_\zeta}{Q} \vec p_i\\
 \dot{V} &= \frac{dVp_\epsilon}{W}\\
 \dot{p_\epsilon} &= dV (P(t) - P) + \frac{1}{N} \sum_{i=1}^N \frac{\vec p_i^2}{m_i} - \frac{p_\zeta}{Q}\vec p_\epsilon\\
 \dot{\zeta} &= \frac{p_\zeta}{Q}\\
 \dot{p_\zeta} &= \sum_{i=1}^N \frac{\vec p^2_i}{m_i} + \frac{p_\epsilon}{W} - (N_f + 1) k_B T,
-\end{align}
-$$ (eq:nose-hoover_barostat)
+\label{eq:nose-hoover_barostat}
+\end{aligned}
+$$
 
 where $d$ is the space dimensionality, $\epsilon = \log(V / V(0)$, where $V(0)$ is the volume at $t = 0$, $W$ is the inertia parameter associated to $\epsilon$, $p_\epsilon$ is the conjugate momenum of $\epsilon$ (here I'm using the same notation as @frenkel2023understanding), and $P$ and $P(t)$ are the target and instantaneous pressures, respectively. In particular, the instantaneous pressure is
 
@@ -825,10 +836,12 @@ where $\det(\hat H) = V$ is the box volume, $P$ is the target pressure, and the 
 
 By deriving Eq. [](#eq:H_parrinello_rahman), the following equations of motion are obtained:
 
-\begin{align}
+$$
+\begin{aligned}
 m_i \ddot{\vec s}_i &= \hat H^{-1} \vec F_i - m_i \hat G^{-1} \dot{\hat G} \dot{\vec s}_i\\
 W \ddot{\hat H} & = (P(t) - P)V(\hat H^{-1})^T,
-\end{align}
+\end{aligned}
+$$
 
 ### Stochastic cell rescaling
 
@@ -940,11 +953,13 @@ When three atoms are connected by two consecutive covalent bonds, the angle betw
 
 The most common potentials used have a harmonic form involving either angles or cosines:
 
-(eq:bond_angle)=
-\begin{align}
+$$
+\begin{aligned}
 E^\theta_\text{harmonic}(\theta) & = K_h(\theta - \theta_\text{ref})^2\\
 E^\theta_\text{trig}(\theta) & = K_t(\cos \theta - \cos \theta_\text{ref})^2.
-\end{align}
+\label{eq:bond_angle}
+\end{aligned}
+$$
 
 If the second equation is expanded in series around $\theta_\text{ref}$ and compared to the first equation, it is possible to obtain the following relation, which connects $K_h$ and $K_t$ so that the small-angle fluctuations of the two forms are similar:
 
@@ -1030,10 +1045,12 @@ It is sometimes necessary to include terms that couple different degrees of free
 
 Van der Waals interactions are weak forces that arise due to fluctuations in the electron density of atoms or molecules. These interactions include both attractive forces, arising from dipole-dipole interactions and induced dipole-induced dipole interactions (van der Waals dispersion forces, see @israelachvili2011intermolecular for a derivation of these terms), and repulsive forces, resulting from the overlap of electron clouds at close distances. Van der Waals interactions are described by empirical potential energy functions. The most common forms are the Lennard-Jones and Morse potentials, which we have already encountered when discussing [interactions in proteins](#sec:van-der-waals) and [](#sec:bond_stretching), respectively. Here I report their functional forms, both of which account for attractive and repulsive components, for your convenience:
 
-\begin{align}
+$$
+\begin{aligned}
 V_\text{LJ}(r) &= 4 \epsilon \left( \left( \frac{\sigma}{r} \right)^{12} - \left( \frac{\sigma}{r} \right)^{6} \right)\\
 V_\text{Morse}(r) &= \epsilon [1 - \exp(-a(r - r_0)]^2,
-\end{align}
+\end{aligned}
+$$
 
 where $\epsilon$ sets the depth of the attractive well, $\sigma$ is the LJ diameter, $r_0$ is the position of the minimum of the Morse potential, and $a$ is linked to the curvature close to such a minimum.
 

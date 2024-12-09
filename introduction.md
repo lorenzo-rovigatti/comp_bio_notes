@@ -215,17 +215,21 @@ $$
 
 Flexible polymers have many universal properties that are independent of the local chemical structure, and they can all be described in terms of equivalent freely-jointed chains. The equivalent chain has the same mean-squared end-to-end distance and contour length, but a different number of effective beads $N$ of length $b$, chosen to match the values of $\langle \vec R^2_{ee} \rangle$ and $R_\text{max}$:
 
-\begin{align}
+$$
+\begin{aligned}
 R_\text{max} &= N b\\
 \langle \vec R^2_{ee} \rangle &= C_\infty n l^2 = N b^2,
-\end{align}
+\end{aligned}
+$$
 
 so that 
 
-\begin{align}
+$$
+\begin{aligned}
 b &= \frac{\langle \vec R^2_{ee} \rangle}{R_\text{max}}\\
 N &= \frac{R_\text{max}}{b}.
-\end{align}
+\end{aligned}
+$$
 
 The effective bond length $b$ is known as *Kuhn's length*, and it represents the size of a segment that behaves as a freely-jointed monomer in the equivalent chain.
 
@@ -237,10 +241,12 @@ $$ (eq:Rg_cm)
 
 where $\vec R_\text{cm} = \frac{1}{N} \sum_{j = 1}^N \vec R_j$ is the position of the centre of mass of the polymer. Sometimes (also in simulations), it is not convenient, or possible, to compute the centre of mass. For these cases, Eq. [](#eq:Rg_cm) can be rewritten in another form by substituting the definition of $\vec R_\text{cm}$, obtaining
 
-\begin{align}
+$$
+\begin{aligned}
 \vec R_g^2 & = \frac{1}{N^2} \sum_{i = 1}^N \sum_{j = 1}^N (\vec R_i^2 - \vec R_i \cdot \vec R_j) = \frac{1}{2N}  \sum_{i = 1}^N \sum_{j = 1}^N (\vec R_i - \vec R_j)^2 \\
 & = \frac{1}{N}  \sum_{i = 1}^N \sum_{j > i}^N (\vec R_i - \vec R_j)^2,
-\end{align}
+\end{aligned}
+$$
 
 where we have first completed the square of the binomial by duplicating the double sum (hence the factor of 2 at the denominator), and then run the inner sum on monomers having index $j > i$, so that each pair of monomers only enters once in the double sum. The associated ensemble average is then
 
@@ -259,10 +265,10 @@ which means that the two quantities scale with $n$ in the same way. This proport
 In general, for large enough degrees of polymerisation (*i.e.* for $n \gg 1$), polymers are scale-free objects, which means that most of their properties can be expressed as power laws in $n$. A special role is played by the exponent that connects $n$ to the polymer size (*i.e.* its gyration radius or end-to-end distance), which is called $\nu$:
 
 $$
-\begin{align}
+\begin{aligned}
 R_{ee} & \equiv \sqrt{\langle \vec R^2_{ee} \rangle} \propto n^\nu\\
 R_{g} & \equiv \sqrt{\langle \vec R^2_{g} \rangle} \propto n^\nu
-\end{align}
+\end{aligned}
 $$
 
 where $\nu = 0.5$ for an ideal chain. Self-avoiding polymers, *i.e.* polymers whose only interaction is repulsive, have $\nu \approx 0.588$, which means that they are *swollen* with respect to ideal polymers: their linear size is larger than it would be if there was no repulsion. Compare it with the scaling of the linear size of a dense object, for which $\nu = 0.33$.

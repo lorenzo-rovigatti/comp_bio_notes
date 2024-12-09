@@ -175,11 +175,13 @@ $$
 
 where $\rho(\vec r) = \sum_i \delta(\vec r - \vec r_i)$ is the particle density operator. By using this definition, we can write the total potential energy as
 
-\begin{align}
+$$
+\begin{aligned}
 \langle \Psi_0 | \hat V | \Psi_0 \rangle &= \int \sum_i V(\vec r_i) |\Psi_0(\vec r_1, \vec r_2, \ldots, \vec r_N)|^2 d\vec r_1 d\vec r_2 \ldots d\vec r_N \\
 & = N \int V(\vec r) |\Psi_0(\vec r, \vec r_2, \ldots, \vec r_N)|^2 d\vec r d\vec r_2 \ldots d\vec r_N \\
 & = \int n_0(\vec r) V(\vec r) d\vec r.
-\end{align}
+\end{aligned}
+$$
 
 
 :::{prf:theorem} The First Hohenberg-Kohn Theorem: Existence Theorem
@@ -189,21 +191,25 @@ For any system of interacting electrons in an external potential $V(\vec{r})$, t
 :::{prf:proof}
 The theorem is proven by contradiction. Assume that two different external potentials, $V_1(\vec{r})$ and $V_2(\vec{r})$, and therefore two different Hamiltonians, $\hat H_1 = \hat F + \hat V_1$ and $\hat H_2 = \hat F + \hat V_2$, lead to the same ground-state electron density $n_0(\vec{r})$. The corresponding ground-state wavefunctions, $\Psi_1$ and $\Psi_2$, as they correspond to different potentials. Their associated energies, which should also be different, are
 
-\begin{align}
+$$
+\begin{aligned}
 E_1 = \langle \Psi_1 | \hat H_1 | \Psi_1 \rangle\\
 E_2 = \langle \Psi_2 | \hat H_2 | \Psi_2 \rangle,
-\end{align}
+\end{aligned}
+$$
 
 Since both $\Psi_1$ and $\Psi_2$ are ground states, $E_1$ and $E_2$ are the lowest possible with the corresponding Hamiltonian. Therefore
 
-\begin{align}
+$$
+\begin{aligned}
 E_1 < \langle \Psi_2 | \hat H_1 | \Psi_2 \rangle & = \langle \Psi_2 | \hat H_2 | \Psi_2 \rangle + \langle \Psi_2 | (\hat H_1 - \hat H_2) | \Psi_2 \rangle =\\
 &= E_2 + \int n_0(\vec r) [V_1(\vec r) - V_2(\vec r)] d\vec r\\
 E_2 < \langle \Psi_1 | \hat H_2 | \Psi_1 \rangle & = \langle \Psi_1 | \hat H_1 | \Psi_1 \rangle + \langle \Psi_1 | (\hat H_2 - \hat H_1) | \Psi_1 \rangle =\\
 &= E_1 + \int n_0(\vec r) [V_2(\vec r) - V_1(\vec r)] d\vec r.
-\end{align}
+\end{aligned}
+$$
 
-Adding the two inequalities yeilds
+Adding the two inequalities yields
 
 $$
 E_1 + E_2 < E_2 + E_1,
@@ -241,10 +247,12 @@ $$ (eq:variational_coeff)
 
 The expectation value of the Hamiltonian on $\psi$ is
 
-\begin{align}
+$$
+\begin{aligned}
 \langle \psi | \hat H | \psi \rangle & = \langle \sum_i c_i \psi_i | \hat H | \sum_j c_j \psi_j \rangle = \sum_{i,j} c_i^* c_j \langle \psi_i | \hat H | \psi_j \rangle = \\
 & = \sum_{i,j} c_i^* c_j E_j \langle \psi_i | \psi_j \rangle = \sum_j |c_j|^2 E_j = |c_0|^2 E_0 + \sum_{j > 0} |c_j|^2 E_j,
-\end{align}
+\end{aligned}
+$$
 
 which, by applying Eq. [](#eq:variational_coeff), becomes
 
@@ -437,10 +445,10 @@ $$ (eq:pulay-variational)
 
 Since we are interested in forces, instead of taking the derivative of the energy with respect to a generic parameter $\lambda$, we derive the energy with respect to the nuclear positions:
 
-\begin{equation}
+$$
 \frac{dE}{d\vec{R}}=\left\langle\Psi \middle|\frac{dH}{d\vec{R}} \middle| \Psi\right\rangle
 + 2 \left\langle \Psi \middle| H \middle| \frac{d\Psi}{d\vec{R}} \right\rangle.
-\end{equation}
+$$
 
 As we have seen in [](#prf:hellman-feynman), the second ("Pulay") term vanishes if $\Psi$ is an eigenstate. Let's see what happens in this case. Consider as an example the derivative with respect to $R_1$. Its Pulay term is
 
@@ -454,10 +462,12 @@ When does this term vanish? There are two possibilities:
 2. If the derivatives $\frac{df_1}{dR_1}$ and $\frac{df_2}{dR_1}$ are themselves basis functions or can be exactly represented by the basis. In this case,
 $$\frac{df_i}{dR_1} = \sum_j k_{ij} f_i$$
 for some values of $k_{ij}$. Now the Pulay term can be rewritten by leveraging Eq. [](#eq:pulay-variational) as
-\begin{align}
+$$
+\begin{aligned}
 \left\langle \Psi \middle| H \middle| \left( \sum_i c_i \frac{df_i}{dR_1} \right)\right\rangle & = \left\langle \Psi \middle| H \middle| \left( \sum_{i,j} c_i k_{ij} f_j \right)\right\rangle = \\
 & = \sum_{i,j} c_i k_{ij} \langle \Psi | H | f_j \rangle = 0.
-\end{align}
+\end{aligned}
+$$
 
 # The Car-Parrinello method
 
@@ -481,10 +491,12 @@ The first term in Eq. [](#eq:cp_lagrangian) represents the kinetic energy of the
 
 From this Lagrangian, one can derive the equations of motion for both the nuclei and the electronic wavefunctions using the Euler-Lagrange formalism:
 
-\begin{align}
+$$
+\begin{aligned}
 M_I \ddot{\vec{R}}_I & = -\frac{\partial E_\text{tot}[\{\psi_i\}, \{\vec{R}_I\}]}{\partial \vec{R}_I} + \sum_{i,j} \lambda_{ij} \frac{\partial}{\partial \vec R_I} \langle \psi_i | \psi_j \rangle\\
 \mu \ddot{\psi}_i(\vec{r}) & = -\frac{\delta E_\text{tot}[\{\psi_i\}, \{\vec{R}_I\}]}{\delta \psi_i^*(\vec{r})} + \sum_{j} \lambda_{ij} \psi_j
-\end{align}
+\end{aligned}
+$$
 
 Here, the fictitious mass parameter $\mu$ controls the dynamics of the electronic wavefunctions. These equations ensure that the electronic wavefunctions follow the nuclear motion, remaining close to the instantaneous ground state of the electronic structure, without the need for explicit SCF iterations at each time step. Note that in the functional derivative that appears in the electronic equations of motions, only the terms of the non-interacting (Kohn-Sham) Hamiltonian survives, since the nuclear-nuclear interaction does not depend on the $\psi_i$ orbitals.
 

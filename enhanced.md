@@ -431,7 +431,7 @@ This simple example illustrates the main features of metadynamics:
 After a transient, the bias potential $V^\text{bias}$ and the underlying free energy are formally connected by the following relationship
 
 $$
-V^\text{bias}(\xi, t \to \infty) = -F(\xi) + C,
+\lim_{t \to \infty} V_t^\text{bias}(\xi) = -F(\xi) + C,
 \label{eq:V_F_metad}
 $$
 
@@ -446,7 +446,7 @@ $$
 where $\Delta T$, which has the dimension of a temperature, controls the rate at which the height decreases, which is always inversely proportional to the time spent by the simulation in the CV point where the Gaussian is to be deposited. This inverse relationship guarantees that the bias potential converges. However, in this case the relationship between the long-time potential bias and the free energy, which is given by Eq. [](#eq:V_F_metad) in ordinary metadynamics, becomes
 
 $$
-V^\text{bias}(\xi, t \to \infty) = -\frac{\Delta T}{T + \Delta T} F(\xi) + C,
+\lim_{t \to \infty} V_t^\text{bias}(\xi) = -\frac{\Delta T}{T + \Delta T} F(\xi) + C,
 $$ (eq:V_F_welltempered)
 
 which suggests that $\Delta T$ has a double role: it decreases the height of the deposited Gaussians, therefore damping the sampling fluctuations, but it also controls the effective temperature at which the CV is sampled. Ordinary metadynamics is recovered in the $\Delta T \to \infty$ limit, while the $\Delta T \to 0$ limit corresponds to ordinary MD simulations.
@@ -478,7 +478,7 @@ $$ (eq:welltempered_F)
 where the fact that we are dealing with histograms is made explicit by the $\alpha$ subscript. The error on the free energy of bin $\alpha$ is the standard error associated to the histogram block average converted to the error on the free-energy which, following [](doi:10.1038/s42254-020-0153-0), can be written as
 
 $$
-\frac{1}{\sqrt{N_b}} \sqrt{\Var_\alpha\left[ \log \left( e^{\frac{V_{i + 1}\text{bias}(\xi_\alpha)}{\Delta T}} - e^{\frac{V_{i}\text{bias}(\xi_\alpha)}{\Delta T}} \right) \right]},
+\frac{1}{\sqrt{N_b}} \sqrt{\Var_\alpha\left[ \log \left( e^{\frac{V_{i + 1}^\text{bias}(\xi_\alpha)}{k_B \Delta T}} - e^{\frac{V_{i}^\text{bias}(\xi_\alpha)}{k_B \Delta T}} \right) \right]},
 $$
 
 where $i$ is the block index and the variance is computed across all blocks. This procedure is presented in the bottom part of [](#fig:metadynamics_comparison).
@@ -501,8 +501,10 @@ Here I will give a brief introduction to numerical techniques that address this 
 Given two distinct states $A$ and $B$ differing for their thermodynamic conditions (temperature, pressure, *etc.*), the thermodynamic integration (TI) method makes it possible to compute their free energy difference, $F_B - F_A$. The idea is to define a reversible path in the space of the thermodynamic variables that connects $A$ and $B$[^reversible], and then run simulations along this path to estimate the derivatives of the free energy that can be integrated to yield the free energy difference, since
 
 $$
-F(\xi_2) - F(\xi_1) = \int_{\xi_1}^{\xi_2} \frac{\partial F}{\partial \xi} d\xi.
+F(x_2) - F(x_1) = \int_{x_1}^{x_2} \frac{\partial F}{\partial x} dx,
 $$
+
+where $x$ is the thermodynamic variable that varies along the path.
 
 ```{figure} figures/TI.png
 :name: fig:TI
@@ -619,7 +621,7 @@ As discussed [above](#sec:HI), free energy changes are obtained by integrating t
 FEP directly estimates the free energy difference between states based on the overlap of their phase spaces. The idea is to run simulations at $N$ values of $\{ \lambda_i \}$, so that the total free energy change is
 
 $$
-\Delta F_{A \to B} = \sum_{i=1}^N \Delta F_{\lambda_i \to \lambda_{i + 1}}.
+\Delta F_{A \to B} = \sum_{i=1}^{N - 1} \Delta F_{\lambda_i \to \lambda_{i + 1}}.
 $$
 
 The free-energy difference between neighboring states is estimated using the exponential averaging of the energy difference (the so-called Zwanzig equation), where the average can be performed in the $\lambda_k$, $\lambda_{k+1}$ or in both systems, so that there are three possible ways of computing $\Delta F_{\lambda_i \to \lambda_{i + 1}}$:
@@ -642,7 +644,13 @@ $$
 e^{-\beta \Delta F} = \overline{e^{-\beta W}}
 $$
 
-where $W$ is the work done during the transformation, and the overline denotes an ensemble average over multiple realizations of the nonequilibrium process. This equality reveals that the free energy difference between two states can be computed from an ensemble of nonequilibrium work measurements, even if the system does not equilibrate during the transformation.
+where $W$ is the work done during the transformation, and the overline denotes an ensemble average over multiple realizations of the nonequilibrium process. Using the chain rule,
+
+$$
+W = \int_0^\tau \frac{\partial H(\lambda)}{\partial \lambda} \frac{d \lambda}{dt}dt,
+$$
+
+where $\tau$ is the duration of the transformation. The Jarzynski equality equality reveals that the free energy difference between two states can be computed from an ensemble of nonequilibrium work measurements, even if the system does not equilibrate during the transformation.
 
 In practice, the transformation is performed by smoothly varying the coupling parameter $\lambda$ from 0 to 1 over a finite time $\tau$, which generates a trajectory where the work $W$ done on the system is recorded. A series of such trajectories is then used to compute the exponential average of $W$, providing an estimate of $\Delta F$.
 

@@ -792,7 +792,7 @@ $$
 \end{aligned}
 $$
 
-where $d$ is the space dimensionality, $\epsilon = \log(V / V(0)$, where $V(0)$ is the volume at $t = 0$, $W$ is the inertia parameter associated to $\epsilon$, $p_\epsilon$ is the conjugate momenum of $\epsilon$ (here I'm using the same notation as @frenkel2023understanding), and $P$ and $P(t)$ are the target and instantaneous pressures, respectively. In particular, the instantaneous pressure is
+where $d$ is the space dimensionality, $\epsilon = \log(V / V(0)$, where $V(0)$ is the volume at $t = 0$, $W$ is the inertia parameter associated to $\epsilon$, $p_\epsilon$ is the conjugate momentum of $\epsilon$ (here I'm using the same notation as @frenkel2023understanding), and $P$ and $P(t)$ are the target and instantaneous pressures, respectively. In particular, the instantaneous pressure is
 
 $$
 P(t) = \frac{1}{dV} \left[ \sum_{i=1}^N \left( \frac{\vec p_i^2}{m_i} + \vec r_i \cdot \vec F_i \right) - dV \frac{\partial U(V)}{\partial V} \right],

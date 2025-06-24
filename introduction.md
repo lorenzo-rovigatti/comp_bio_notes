@@ -260,7 +260,7 @@ $$
 \langle \vec R_g^2 \rangle = \frac{\langle \vec R^2_{ee} \rangle}{6},
 $$
 
-which means that the two quantities scale with $n$ in the same way. This proportionality holds also for other (more complicated models).
+which means that the two quantities scale with $n$ in the same way. This proportionality holds also for other (more complicated) models.
 
 In general, for large enough degrees of polymerisation (*i.e.* for $n \gg 1$), polymers are scale-free objects, which means that most of their properties can be expressed as power laws in $n$. A special role is played by the exponent that connects $n$ to the polymer size (*i.e.* its gyration radius or end-to-end distance), which is called $\nu$:
 

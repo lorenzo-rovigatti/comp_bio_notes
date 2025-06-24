@@ -327,7 +327,7 @@ $$
 P(m) = e^{-Mp} \frac{(Mp)^m}{m!},
 $$
 
-whose mean and variance are both equal to $mp$. We connect this result with our derivation by noting that the probability $p$ for bin $\zeta$ and simulation $i$ is the *biased* probability $q^b_{i,\zeta} = u_{i,\zeta} p^\circ_\zeta f_i$, and therefore
+whose mean and variance are both equal to $Mp$. We connect this result with our derivation by noting that the probability $p$ for bin $\zeta$ and simulation $i$ is the *biased* probability $q^b_{i,\zeta} = u_{i,\zeta} p^\circ_\zeta f_i$, and therefore
 
 $$
 \Var(m_{k,\zeta}) = M_i u_{i,\zeta} p^\circ_\zeta f_i.

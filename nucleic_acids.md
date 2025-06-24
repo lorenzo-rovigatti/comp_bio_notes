@@ -294,7 +294,7 @@ We now analyse the main free-energy contributions to the formation of secondary 
 
 ### Nearest-Neighbor Interactions
 
-Double-strand formation is driven by the combined effects of base stacking and hydrogen bonding between adjacent base pairs. In NN models, these are accounted for by summing up the enthalpy and entropy contributions of each dinucleotide base steps. Therefore, for a sequence of length $N$ there are $N - 1$ terms. As an example, consider the two fully-complementary strands
+Double-strand formation is driven by the combined effects of base stacking and hydrogen bonding between adjacent base pairs. In NN models, these are accounted for by summing up the enthalpy and entropy contributions of each dinucleotide base step. Therefore, for a sequence of length $N$ there are $N - 1$ terms. As an example, consider the two fully-complementary strands
 
 ```
 5'- TACCTG -3'
@@ -420,7 +420,7 @@ $$
 K_{AB} = \frac{C_A C_B}{C_{AB}},
 $$
 
-where $C_X$ is the (molar) concentration of $X$ and K_{AB} is the dissociation constant associated to the reaction, which is in turn connected to the free-energy difference between the two states, $\Delta G_{AB}^\circ$, through
+where $C_X$ is the (molar) concentration of $X$ and $K_{AB}$ is the dissociation constant associated to the reaction, which is in turn connected to the free-energy difference between the two states, $\Delta G_{AB}^\circ$, through
 
 $$
 K_{AB} = C^\circ \exp\left( \beta \Delta G_{AB}^\circ \right),

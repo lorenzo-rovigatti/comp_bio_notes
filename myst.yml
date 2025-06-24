@@ -42,7 +42,9 @@ project:
         CG: coarse-grained
         FG: fine-grained
         PMF: potential of mean force
-    numbering: true
+    numbering:
+        title: false
+        headings: true
     settings:
         output_matplotlib_strings: remove
     toc:

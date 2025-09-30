@@ -162,11 +162,11 @@ Monomer position, $\vec R_i$
 Bond vector, $\vec r_i$
 : The vector connecting the $(i - 1)-th$ and $i$-th residues, defined as $\vec r_i = \vec R_{i} - \vec R_{i - 1}$.
 
-Ideal chain
-: A chain in which two residues that are far from each other, *i.e.* residues $i$ and $j$ for which $|i - j| \gg 1$, do not interact.
-
 Chemical distance
 : The number of bonds separating two monomers along the chain, *i.e.* $|i - j|$ for monomers $i$ and $j$.
+
+Ideal chain
+: A chain in which two residues that are far from each other, *i.e.* residues $i$ and $j$ for which $|i - j| \gg 1$, do not interact.
 
 Consider a polymer chain composed by $N = n + 1$ monomers connected by $n$ bonds. Its instantaneous end-to-end vector is
 
@@ -299,7 +299,7 @@ The structure of DNA allows the strands to be easily separated for the purpose o
 
 DNA polymerases attach to each of the strands at the origin of replication, reading each existing strand from the 3' to 5' direction and placing down complementary bases such that the new strand grows in the 5' to 3' direction. Because polymerases build the chains from 5' to 3', one strand (the leading strand) can be copied continuously, while the other (the lagging strand) grows in pieces which are later glued together by another enzyme, DNA ligase. The end result is 2 double-stranded pieces of DNA, where each is composed of one old strand, and one new strand; for this reason, DNA replication is a semiconservative process.
 
-Many organisms have their DNA split into several chromosomes. Each chromosome contains two strands of DNA, which are complementary to each other but are read in opposite directions. Genes can occur on either strand of DNA. The DNA before a gene (in the 5' region) is considered "upstream", whereas the DNA after a gene (in the 3' region) is considered "downstream".
+Many organisms have their DNA split into several chromosomes. Each chromosome contains two strands of DNA, which are complementary to each other but are read in opposite directions. Genes can occur on either strand of DNA. The DNA before a gene (in the 5' region) is considered "upstream", whereas the DNA after a gene (in the 3' region) is considered "downstream". [](#fig:genome_sizes) shows the genome size ranges of various forms of life.
 
 ```{figure} figures/genome_sizes.png
 :name: fig:genome_sizes

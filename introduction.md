@@ -455,8 +455,8 @@ Another important field of application of computational physics is the interpret
 
 Despite the enormous variety of methods and applications, there are some common concepts that are essential for anyone venturing in the subject, regardless of the specific subfield they choose. Some of these are technical, and are listed in the [prerequisite section](#sec:prerequisites). Here, I will highlight two additional skill sets that every aspiring computational physicist should develop:
 
-* **Bridging Theory and Experiment:** Historically known as "computer experiments", computer simulations sit in the middle between theory and experiment. As such, a good computational physicist is able to act as a bridge between these two worlds. A proficient computational physicist can effectively bridge these two realms, provided he develops a familiarity with the specific jargon, techniques, and methodologies of both fields. This dual expertise is a significant advantage. However, it is sometimes hard to find a fit in a dichotomic world, where "theory or experiment" is all there is. Fortunately, that world is dying (but has not died yet).
-* **Algorithmic Problem Solving:** Problem-solving is a critical skill for any physicist, often involving the application of algorithmic reasoning to find solutions. For computational physicists, the ability to think in terms of algorithms is even more crucial. Developing this skill enables them to tackle complex problems systematically and effectively. During the course I will present many algorithms used to tackle some specific (bio)physical problem. Most of the time there will be an accompanying pseudo-code or real code, but in [some cases](#sec:homeworks) you will be asked to do it yourself.
+* **Bridging Theory and Experiment:** Historically known as "computer experiments", computer simulations sit in the middle between theory and experiment. A proficient computational physicist can effectively bridge these two realms, provided he develops a familiarity with the specific jargon, techniques, and methodologies of both fields. This dual expertise is a significant advantage. However, it is sometimes hard to find a fit in a dichotomic world, where "theory or experiment" is all there is. Fortunately, that world is dying (but has not died yet).
+* **Algorithmic Problem Solving:** Problem-solving is a critical skill for any physicist, often involving the application of algorithmic reasoning to find solutions. For computational physicists, the ability to think in terms of algorithms is even more crucial. Developing this skill enables them to tackle complex problems systematically and effectively. During the course I will present many algorithms used to tackle some specific (bio)physical problems. Most of the time there will be an accompanying pseudo-code or real code, but in [some cases](#sec:homeworks) you will be asked to do it yourself.
 
 To get thing started, I will present a programming technique that will be applied later to some biophysical problems. However, before doing that, let's brush up our Python skills with [this notebook](./notebooks/Python_crash_course.ipynb).
 
@@ -482,14 +482,14 @@ There are several variations to this problem. We start with the following: given
 The simplest way of solving the problem is by enumerating all possible ways $N$ can be changed with the coins in $C$, and then picking the one containing the fewest amount of coins. However, this algorithm performs worse and worse as $N$ and $C$ increases. Can we estimate by how much?
 
 :::{important} Algorithm complexity and Big O notation
-Algorithm complexity is a crucial concept in computer science that describes how the runtime (or other important assets such as memory consumption) of an algorithm scales with the size of the input. It provides a high-level understanding of the algorithm's efficiency and performance. The standard way to express time complexity is through the so-called big O notation, which focuses on the worst-case scenario, giving an upper bound on the time an algorithm can take as the input size grows.
+Algorithm complexity is a crucial concept in computer science that describes how the runtime (or other important assets such as memory consumption) of an algorithm scales with the size of the input. It provides a high-level understanding of the algorithm's efficiency and performance. The standard way to express time complexity is through the so-called big O notation, which focuses on the worst-case scenario, giving an upper bound on the time an algorithm takes as the input size grows.
 
 Big O notation abstracts away constants and less significant terms to highlight the primary factor affecting runtime. For instance, an algorithm with a time complexity of $\mathcal{O}(n)$ will have its execution time increase linearly with the input size $n$. In contrast, an algorithm with $\mathcal{O}(n^2)$ time complexity will have its execution time grow quadratically. Other common time complexities include $\mathcal{O}(1)$ for constant time, $\mathcal{O}(\log n)$ for logarithmic time, $\mathcal{O}(n \log n)$ for "linearithmic" time, and $\mathcal{O}(2^n)$ for exponential time.
 
 Algorithmic complexity also applies to memory footprint, known as space complexity, which describes the amount of memory an algorithm requires relative to the input size. Often, there is a tradeoff between time and memory, where optimizing for faster execution might increase memory usage and vice versa. Understanding these tradeoffs helps in selecting the most appropriate algorithm for a given problem, ensuring efficient use of computational resources.
 :::
 
-Using the notation introduced in the box, we can estimate the cost of the "brute-force" algorithm as follows. Given an amount N, a solution can either not contain $c$, or contain it up to $N / c$ times. As a result, we have $(N / c) + 1$ ways of using each coin $c$, and we have $n$ such coins. Disregarding multiplying constants and lower-order terms, the overal complexity is then $\mathcal{O}(N^n)$. It is hard to overstate how bad is an exponential scaling. We have to do better!
+Using the notation introduced in the box, we can estimate the cost of the "brute-force" algorithm as follows. Given an amount $N$ and a coin $c$, a solution can either not contain $c$, or contain it up to $N / c$ times. As a result, we have $(N / c) + 1$ ways of using each coin $c$, and we have $n$ such coins. Disregarding multiplying constants and lower-order terms, the overal complexity is then $\mathcal{O}(N^n)$. It is hard to overstate how bad is such a scaling. We have to do better!
 
 Let's try with a "greedy" algorithm: we find a solution by taking the largest coin $c$ that is smaller than $N$ and applying the same operation to $N - c$, until the remaining amount becomes zero. Applying this algorithm to the example above would immediately yield the correct $S = \{1, 2, 5\}$ solution. The algorithmic complexity is also much better: the worst-case scenario is the one where we use coins of the same size, which would yield $\mathcal{O}(N)$. However, the algorithm requires that at each iteration we find the largest coin that is smaller than the residual amount. This can be done by either looping over $C$ at each iteration, which would make the complexity $\mathcal{O}(Nn)$, or, which is much better, by sorting $C$ beforehand, so that the total algorithmic complexity would be $\mathcal{O}(N) + \mathcal{O}(n \log n)$. This is **much** better than an exponential complexity. Unfortunately, greedy algorithms are known to be heavily attracted to local minima. For instance, if $N = 8$ and $C = \{1, 4, 5\}$, the greedy algorithm would yield a solution with 4 coins, since $8 = 5 + 1 + 1 + 1$. However it is clear that the best solution in this case is $8 = 4 + 4$.
 
@@ -498,9 +498,9 @@ We need an algorithm that is fast but does reliably find the correct solution. I
 $$
 w(x) = 
 \begin{cases}
+0 & \text{if } x = 0, \\
 m & \text{if } x \text{ is changeable}, \\
-\infty & \text{if } x \text{ is not changeable}, \\
-\infty & \text{if } x < 0,
+\infty & \text{if } x < 0 \text{ or } x \text{ is not changeable}
 \end{cases}
 $$
 
@@ -510,18 +510,30 @@ $$
 w(x) = \min_{c \in C} \{ w(x - c) + 1 \}.
 $$ (eq:coin_change_weights)
 
+Eq. [](#eq:coin_change_weights), for which I will provide a proof, shows that the best way to make change for $x$ depends on the best way to make change for smaller amounts.
+
 :::{prf:proof}
-We prove Eq. [](#eq:coin_change_weights) by mathematical induction. For the smallest value of $x$, such that $x \in C$ (*i.e.*, $x$ is the value of a coin in the set $C$), the minimum number of coins required is 1, because $x$ itself is a coin. Thus,
+We prove Eq. [](#eq:coin_change_weights) by mathematical induction, showing that the recurrence holds for all $x \ge 0$.
+
+If $x$ equals the value of some coin $c \in C$, then clearly
 
 $$
-w(x) = 1 = \min_{c \in C} \{ w(x - c) + 1 \}.
+w(x) = 1.
 $$
 
-Assume that the equation holds for all values smaller than $x$. We need to show that it holds for $x$.
+Meanwhile, since $w(x - c) = w(0) = 0$,
 
-1. **Case 1:** If $x$ is not changeable (*i.e.* $x$ cannot be represented by any combination of coins from $C$), then for all $c \in C$, either $x - c$ is not changeable, or $x - c < 0$. In either case both sides of the equation are infinite, and the equality holds trivially.
+$$
+\min_{c \in C} \{ w(x - c) + 1 \} = w(0) + 1 = 1,
+$$
 
-2. **Case 2:** if $x$ can be represented by some combination of coins, consider the optimal way to make change for $x$ using the minimum number of coins. Suppose $c' \in C$ is one of the coins in the optimal change for $x$, and we consider the remaining amount to be changed $x - c'$. By the inductive hypothesis, the minimum number of coins required to change $x - c'$ is $w(x - c')$. Therefore, the total number of coins needed to change $x$ is:
+so the formula holds.
+
+Now we assume that the equation holds for all values smaller than $x$. We need to show that it holds for $x$.
+
+1. **Case 1: $x$ is not changeable**. If $x$ cannot be represented by any combination of coins from $C$, then for all $c \in C$, either $x - c$ is not changeable, or $x - c < 0$. In either case both sides of the equation are infinite, and the equality holds trivially.
+
+2. **Case 2: $x$ is changeable.** Consider the optimal way to make change for $x$ using the minimum number of coins. Suppose $c' \in C$ is one of the coins in the optimal change for $x$, and we consider the remaining amount to be changed $x - c'$. By the inductive hypothesis, the minimum number of coins required to change $x - c'$ is $w(x - c')$. Therefore, the total number of coins needed to change $x$ is:
 
    $$
    w(x) = w(x - c') + 1
@@ -536,7 +548,7 @@ Assume that the equation holds for all values smaller than $x$. We need to show 
 Thus, by induction, the theorem is proved.
 :::
 
-We can now leverage Eq. [](#eq:coin_change_weights) to calculate the minimum number of coins necessary to change any amount $x$ with a time that is linear in $x$ and in the number of coin types, $n$, *i.e.* with an algorithmic (time) complexity $\mathcal{O}(xn)$. First, we apply Eq. [](#eq:coin_change_weights) to progressively build a table containing the $w(y)$ values, with $y \leq x$, starting from $y = 0$:
+We can now leverage Eq. [](#eq:coin_change_weights) to calculate the minimum number of coins necessary to change any amount $N$ with a time that is linear in $N$ and in the number of coin types, $n$, *i.e.* with an algorithmic (time) complexity $\mathcal{O}(Nn)$. First, we apply Eq. [](#eq:coin_change_weights) to progressively build a table containing the $w(x)$ values, with $x \leq N$, starting from $x = 0$:
 
 :::{code} plaintext
 :label: code:coin-fillin
@@ -548,28 +560,28 @@ DEFINE function w(x)
 DEFINE table as an array with N + 1 entries
 
 table[0] = 0
-FOR each value y between 1 and N
-   SET table[y] to the mininum value of {w(y - c) + 1}, where c is any coin in C
+FOR each value x between 1 and N
+   SET table[x] to the mininum value of {w(x - c) + 1}, where c is any coin in C
 :::
 
-Once the table is ready, the answer to our question about the minimum number of coins can be read off its last entry, $w(x)$. However, if we want to know the details of the solution, *e.g.* which coins add up to $x$, we have to trace back Eq. [](#eq:coin_change_weights):
+Once the table is ready, the answer to our question about the minimum number of coins can be read off its last entry, $w(N)$. However, if we want to know the details of the solution, *e.g.* which coins add up to $N$, we have to trace back Eq. [](#eq:coin_change_weights):
 
 :::{code} plaintext
 :label: code:coin-traceback
 :caption: Pseudocode for the trace-back phase.
 
 ASSUME the definitions of the fill-in block
-SET y = N
+SET x = N
 DEFINE S as an empty list
 
 WHILE y is larger than 0
-   FIND a coin c in C for which w(y) = (y - c) + 1
+   FIND a coin c in C for which table[x] = table[x - c] + 1
    ADD c to S
-   SET y to y - c
+   SET x to x - c
 :::
 
 :::{warning}
-In some cases, multiple ways exist to change an amount using the minimum number of coins. The algorithm described above will identify one such solution but can be extended to find all possible solutions. To achieve this, we must keep track of all branching paths that occur whenever more than one coin satisfies the condition $w(y) = (y - c) + 1$.
+In some cases, multiple ways exist to change an amount using the minimum number of coins. The algorithm described above will identify one such solution but can be extended to find all possible solutions. To achieve this, we must keep track of all branching paths that occur whenever more than one coin satisfies the condition $w(x) = (x - c) + 1$.
 :::
 
 :::{hint} A simple example
@@ -583,8 +595,8 @@ Let $C = \{1, 4, 5\}$ and $N = 8$. By applying the fill-in algorithm detailed ab
 
 from which we see that if $N = 8$ the optimal solution has two coins. To find out what are the coins in the optimal solutions, we apply the trace back algorithm, which in this case is made of two steps:
 
-1. We start from $y = 8$, and the equation $w(y) = w(y - c) + 1 = 2$ has a single solution, $c = 4$. We set $y = 8 - c = 4$.
-2. Now $y = 4$, and the equation $w(y) = w(y - c) + 1 = 1$ has, again a single solution, $c = 4$. We see that $y = 4 - c = 0$, which means that we are done.
+1. We start from $x = N = 8$, and the equation $w(x) = w(x - c) + 1 = 2$ has a single solution, $c = 4$. We set $x = 8 - c = 4$.
+2. Now $x = 4$, and the equation $w(x) = w(x - c) + 1 = 1$ has, again a single solution, $c = 4$. We see that $x = 4 - c = 0$, which means that we are done.
 
 Graphically, the steps above can be expressed as follows:
 

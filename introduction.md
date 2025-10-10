@@ -556,8 +556,8 @@ We can now leverage Eq. [](#eq:coin_change_weights) to calculate the minimum num
 
 DEFINE C as the set of possible coins
 DEFINE N as the amount we want to change
-DEFINE function w(x)
 DEFINE table as an array with N + 1 entries
+DEFINE function w(x)
 
 table[0] = 0
 FOR each value x between 1 and N
@@ -574,7 +574,7 @@ ASSUME the definitions of the fill-in block
 SET x = N
 DEFINE S as an empty list
 
-WHILE y is larger than 0
+WHILE x is larger than 0
    FIND a coin c in C for which table[x] = table[x - c] + 1
    ADD c to S
    SET x to x - c

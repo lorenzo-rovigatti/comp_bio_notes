@@ -622,7 +622,7 @@ Figure [](#fig:alpha_helix) shows an optimal $\alpha$-helix made with a [Python 
 
 ## $\beta$-structures
 
-$\beta$-structures (or $\beta$-sheets) comprise the other class of common secondary structures. $\beta$-structures are formed by $\beta$-strands, which are stretchs of polypeptide chain, typically 5-10 amino acids long, in an extended conformation. Unlike the helical structure presented above, $\beta$-strands are not stable *per se*, but they are stabilised by hydrogen bonds formed with other strands. In fact, two or more $\beta$-strands can connect laterally by backbone hydrogen bonds to form a sheet-like array termed $\beta$-sheet. Since the backbone has a directionality ($N \to C$), the lateral connection joins strands that either run in the same direction or not:
+$\beta$-structures (or $\beta$-sheets) comprise the other class of common secondary structures. $\beta$-structures are formed by $\beta$-strands, which are stretches of polypeptide chain, typically 5-10 amino acids long, in an extended conformation. Unlike the helical structure presented above, $\beta$-strands are not stable *per se*, but they are stabilised by hydrogen bonds formed with other strands. In fact, two or more $\beta$-strands can connect laterally by backbone hydrogen bonds to form a sheet-like array termed $\beta$-sheet. Since the backbone has a directionality ($N \to C$), the lateral connection joins strands that either run in the same direction or not:
 
 * In an antiparallel $\beta$-sheet, which is the most common $\beta$ motif in proteins, adjacent strands have alternating N-terminus and C-terminus orientations.
 * In a parallel $\beta$-sheet, the N-termini of adjacent strands are oriented in the same direction.
@@ -666,12 +666,12 @@ Here is a breakdown of the most common irregular secondary structures:
 (sec:hydrophobic_interactions)=
 # Hydrophobic interactions
 
-As we will see in later lectures, the main driver for protein compaction (*folding*) is hydrophobicity. In general, a molecule's solubility in water is a crucial property that can be determined experimentally. By comparing the concentrations of various substances dissolved in water, we can ascertain which molecule is more soluble. This comparison reveals water's affinity for different solutes, essentially indicating which substances are more favorably integrated into the aqueous environment. Comparing the outcome of such experiments on, say, sugar and oil would make it clear that the former is much more "hydrophilic" (water-lover) than the other, which has a strong hydrophobic ("afraid of water") character. Systematic experiments show that uncharged molecules or chemical groups that cannot form hydrogen bonds are hydrophobic and, when put in water, tend to shy away from the water molecules, clustering together. 
+As we will see in later lectures, the main driver for protein compaction (*folding*) is hydrophobicity. In general, a molecule's solubility in water is a crucial property that can be determined experimentally. By comparing the concentrations of various substances dissolved in water, we can ascertain which molecule is more soluble. This comparison reveals water's affinity for different solutes, essentially indicating which substances are more favorably integrated into the aqueous environment. Comparing the outcome of such experiments on, say, sugar and oil would make it clear that the former is much more hydrophilic ("water-lover") than the other, which has a strong hydrophobic ("afraid of water") character. Systematic experiments show that uncharged molecules or chemical groups that cannot form hydrogen bonds are hydrophobic and, when put in water, tend to shy away from the water molecules, clustering together. 
 
 In order to explore this effect, we consider hydrocarbons as model systems, since many non-polar amino acids feature hydrocarbon side chains (see [the classification of amino acids sketched above](#sec:AA_list)), and refer to the free-energy difference of transferring a substance from a nonpolar or slightly polar solvent to water, $\Delta G$. The nonpolar solvent containing the solute molecules, which in the simplest case can be the bulk liquid of the substance of interest, is put in contact with water through a semipermeable membrane that allows the transfer of the solute only. When the equilibrium is reached, the chemical potential of the solute is the same in the bulk and in water, *viz.*
 
 $$
-\log c_w/c_0 + \beta \mu_{{\rm ex},w} = \log c_bc_0 + \beta \mu_{{\rm ex},b},
+\log (c_w / c_0) + \beta \mu_{{\rm ex},w} = \log (c_b / c_0) + \beta \mu_{{\rm ex},b},
 $$
 
 where $\beta = 1 / k_BT$, the $w$ and $b$ subscripts refer to the water and bulk systems, respectively, $c_i$ is the concentration of the substance of interest in the system $i$, $c_0$ is a constant to make the argument of the logarithms dimensionless, and $\mu_{{\rm ex}, i}$ is its excess (with respect to the ideal gas) chemical potential. The difference between the excess chemical potentials of the two systems can be evaluated from the (experimentally measurable) values of $c_w$ and $c_b$ through
@@ -701,6 +701,14 @@ The hydrophobic effect, which is the observation that non-polar substances are i
 ## Structured water
 
 Around hydrophilic regions of the protein, water molecules form hydration shells through hydrogen bonds and electrostatic interactions while, as we have just seen, near hydrophobic regions, water molecules cannot form hydrogen bonds with the protein surface, but they reorient to maximize hydrogen bonding among themselves while minimizing disruption. In both cases there is the appearance of *structured water*, which is an organized arrangement of water molecules in the immediate vicinity of the protein surface. 
+
+```{figure} figures/structured_water.png
+:name: fig:structured_water
+:align: center
+:width: 600
+
+Bidimensional distributions of water molecules as function of their dipole orientation and distance from the surface. Left: liquid-vapor interface; middle: hydrophilic talc (001) surface; right: hydrophobic mica (001) surface. The probability is normalised by the atomic density at the given distance. Red (blue) means higher (lower) probability.. Adapted from [](doi:10.1021/jp9018316).
+```
 
 The hydration layers around the protein have a restricted mobility and orientation that reduce their ability to respond to an applied electric field, in turn affecting the dielectric constant, which takes values that, depending on the distance from and type and geometry of the protein's surface, can be much lower than in the bulk (where $\epsilon_r \approx 80$). The reduced dielectric environment enhances electrostatic interactions between charged groups, possibly influencing protein folding, stability, and interactions with other molecules, such as substrates, inhibitors, or other proteins. 
 

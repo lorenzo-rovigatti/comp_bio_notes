@@ -46,7 +46,7 @@ Let's briefly discuss the main building blocks of a nucleotide.
 
 A pentose is a simple sugar (*i.e.* a monosaccharide) containing five carbon atoms. In nucleic acids, pentose is present in its cyclic form, where the ring contains four carbons and one oxygen. In DNA, one of the hydroxyl ($-OH$) groups is replaced by a hydrogen atom. This is not a small change since, as we already know, a hydroxyl group can be involved in a hydrogen bond.
 
-The three-dimensional conformation of the five-carbon sugar ring in nucleotides is non-planar, and the ring can adopt various forms, with the the C2'-endo and C3'-endo puckers being the most common forms for B-DNA and A-RNA (and A-DNA as well), which are helical structure that will be introduced in a moment. These puckering conformations, where the C2' or C3' atoms, respectively, are above the plane formed by the other four atoms, affect the overall structure and flexibility of DNA and RNA molecules and are one of the main source of conformational flexibility in nucleic acids (@schlick2010molecular).
+The three-dimensional conformation of the five-carbon sugar ring in nucleotides is non-planar, and the ring can adopt various forms, with the the C2'-endo and C3'-endo puckers being the most common forms for B-DNA and A-RNA (and A-DNA as well), which are helical structures that will be introduced in a moment. These puckering conformations, where the C2' or C3' atoms, respectively, are above the plane formed by the other four atoms, affect the overall structure and flexibility of DNA and RNA molecules and are one of the main source of conformational flexibility in nucleic acids (@schlick2010molecular).
 
 ## The phosphate group
 
@@ -99,7 +99,7 @@ Interestingly the spontaneous process through which single strands pair and form
 A base pair step where hydrogen bonds and stacking interactions, the two main mechanisms responsible for hybridisation, are highlighted by arrows.
 ```
 
-In addition to hydrogen bonding, duplexes are stabilised by interactions acting between the aromatic rings of consecutive nitrogenous bases (see [](#fig:HB_stacking)). These so-called base stacking interactions have a hydrophobic nature that is complemented by van der Waals and dipole-dipole termsthat contribute significantly to the stability and structural integrity of the DNA molecule. Rather counterintuitively, there is now ample evidence that base stacking is at least as important for duplex stability as base pairing, if not more (see *e.g.* [](doi:10.1093/nar/gkj454), [](doi:10.1016/j.plrev.2017.11.012), and [](doi:10.1038/s41565-023-01485-1)).
+In addition to hydrogen bonding, duplexes are stabilised by interactions acting between the aromatic rings of consecutive nitrogenous bases (see [](#fig:HB_stacking)). These so-called base stacking interactions have a hydrophobic nature that is complemented by van der Waals and dipole-dipole terms that contribute significantly to the stability and structural integrity of the DNA molecule. Rather counterintuitively, there is now ample evidence that base stacking is at least as important for duplex stability as base pairing, if not more (see *e.g.* [](doi:10.1093/nar/gkj454), [](doi:10.1016/j.plrev.2017.11.012), and [](doi:10.1038/s41565-023-01485-1)).
 
 (box:stacking)=
 :::{hint} Measuring the stacking strength

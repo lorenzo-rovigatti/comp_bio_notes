@@ -740,7 +740,7 @@ Most proteins are generally either densely packed structures or composed of dens
 
 Now I will (very!) briefly discuss how secondary structures pack and layer to form the native structures of proteins. Following @finkelstein2002protein, we classify folded proteins into three macrocategories: fibrous, membrane and globular proteins[^folded_proteins].
 
-[^folded_proteins]: For the moment we leave out proteins that are intrinsically disordered or have intrinsically disordered domanis, see [^intrinsically_disordered].
+[^folded_proteins]: For the moment we leave out proteins that are intrinsically disordered or have intrinsically disordered domains, see [^intrinsically_disordered].
 [^general_Ramachandran]: I remind you that a "general" Ramachandran plot shows the $\phi$ and $\psi$ angles of residues that are not Gly, Leu, Val, Pro, or come before a Pro.
 
 (sec:fibrous_proteins)=
@@ -836,7 +836,7 @@ The formation of helix bundles in membrane proteins is driven by several factors
 
 The presence of protein with helix bundles influence the properties of the membrane itself, since they can affect the fluidity and curvature of the membrane, which in turn impacts the behavior of other membrane-associated molecules and the overall dynamics of the lipid bilayer. The integration of helix bundles into the membrane can create microdomains or rafts that serve as organizing centers for cellular signaling pathways.
 
-Structurally, the tight packing of helices provides stability to the protein, ensuring that it maintains its correct shape and function within the dynamic environment of the cell membrane. Functionally, the arrangement of helices can create specific sites for binding ligands, ions, or other molecules, which is essential for the protein's role in processes such as signal transduction, transport, and enzymatic activity. For example, in G-protein-coupled receptors (GPCRs), which are integral membran proteins, the helical bundle forms a pocket that can bind other molecules, triggering conformational changes that transmit signals across the membrane, initiating a multitude of cellular responses and signaling cascades within the cytoplasm. Thus, it should come as no surprise that this class of proteins is the target of many drugs[^GPCR].
+Structurally, the tight packing of helices provides stability to the protein, ensuring that it maintains its correct shape and function within the dynamic environment of the cell membrane. Functionally, the arrangement of helices can create specific sites for binding ligands, ions, or other molecules, which is essential for the protein's role in processes such as signal transduction, transport, and enzymatic activity. For example, in G-protein-coupled receptors (GPCRs), which are integral membrane proteins, the helical bundle forms a pocket that can bind other molecules, triggering conformational changes that transmit signals across the membrane, initiating a multitude of cellular responses and signaling cascades within the cytoplasm. Thus, it should come as no surprise that this class of proteins is the target of many drugs[^GPCR].
 
 ```{figure} figures/GPCR.png
 :name: fig:GPCR
@@ -848,7 +848,7 @@ A GPCR protein (taken from [here](https://www.rcsb.org/structure/4GBR)) embedded
 
 [](#fig:GPCR) shows the [$\beta$(2) adrenergic receptor](https://www.rcsb.org/structure/4GBR), a GPCR protein, embedded in a lipid membrane sandwiched between two water layers. A GPCR is formed by seven transmembrane $\alpha$-helices connected by alternating intracellular and extracellular loops. The helices are tilted with respect to each other, so that their side chains form the "knobs into holes" packing introduced [before](#sec:alpha-structural_proteins) ([](doi:10.1098/rsta.2012.0369)).
 
-[^GPCR]: "Many druggable targets for treatment of common diseases involve G-protein-coupled receptors (GPCRs) that mediate therapeutic effects of $\approx 34\%$ of the marketed drugs. The sales of GPCR targeting drugs represent a global market share of over 27% [more than 180 billion US dollars]" [](doi:10.1016/j.cell.2017.11.033)).
+[^GPCR]: "Many druggable targets for treatment of common diseases involve G-protein-coupled receptors (GPCRs) that mediate therapeutic effects of $\approx 34\%$ of the marketed drugs. The sales of GPCR targeting drugs represent a global market share of over 27% ("more than 180 billion US dollars" [](doi:10.1016/j.cell.2017.11.033)).
 
 (sec:beta-barrels)=
 ### $\beta$-barrels
@@ -862,7 +862,7 @@ The formation of $\beta$-barrels is driven by the hydrophobic effect, which caus
 :align: center
 :width: 500px
 
-The [crystal structure](https://www.rcsb.org/structure/2x9k) of an E. coli porin seen from the top (a) and from the side (b) ([](doi:10.1016/j.jmb.2010.06.015). Hydrophobic residues are coloured in red, the rest in cyan. In (a), the water is at the top and the cytoplasm is at the bottom.
+The [crystal structure](https://www.rcsb.org/structure/2x9k) of an E. coli porin seen from the top (a) and from the side (b) ([](doi:10.1016/j.jmb.2010.06.015)). Hydrophobic residues are coloured in red, the rest in cyan. In (a), the water is at the top and the cytoplasm is at the bottom.
 ```
 
 [](#fig:porin) shows a E. coli porin, a class of membrane proteins that form large, water-filled channels through the outer membrane of several microorganisms and facilitate the passive diffusion of small molecules, such as ions, nutrients, and metabolic waste products, across the membrane. The figure shows only the protein, with the top view highlighting the large pore in the middle, and the side view demonstrating the regular pattern formed by the anti-parallel $\beta$-strands. In the figure residues are coloured according to their hydrophobic character[^hydrophobic_residues], which determines an alternating pattern that is typical for $\beta$-barrels, where the hydrophobic residues face outward to interact with the lipid bilayer, and the hydrophilic residues face inward to create a water-filled channel.
@@ -885,7 +885,7 @@ The main levels of classification in SCOP are as follows:
 While I will not delve[^delve] too much on the classification, which would be outside of the scope of these lectures, I want to provide some examples of folds (also known as "supersecondary structures"). I will provide one example for each class of proteins, starting with two examples we have already encountered: even though they are not globular (nor water-soluble), they contain some common motifs that are also rather easy to identify:
 
 * [GPCRs](#fig:GPCR) are transmembrane $\alpha$-proteins characterised by an up-and-down bundle of seven transmembrane helices. Helical bundles are very common folds in proteins, and this particular one is [a fold on its own](https://www.ebi.ac.uk/pdbe/scop/term/2000339) according to SCOP.
-* The [E. coli porin](#fig:porin) is a transmembrane $\beta$-protein of the [Porins superfamily](https://www.ebi.ac.uk/pdbe/scop/term/3000224). The main structural motif is a [$\beta$-barrel](#sec:beta-barrels), which on SCOP is [not a proper fold](https://www.ebi.ac.uk/pdbe/scop/term/2000193), since $\beta$-barrels can be very different with each other, and are classified according to two numbers:
+* The [E. coli porin](#fig:porin) is a transmembrane $\beta$-protein of the [Porins superfamily](https://www.ebi.ac.uk/pdbe/scop/term/3000224). The main structural motif is a [$\beta$-barrel](#sec:beta-barrels), which on SCOP is [not a proper fold](https://www.ebi.ac.uk/pdbe/scop/term/2000193), since $\beta$-barrels can be very different from each other, and are classified according to two numbers:
   * the number of $\beta$-strands in the barrel;
   * the ["shear number"](https://en.wikipedia.org/wiki/Beta_barrel#Shear_number), which is a measure of the staggering of nearby strands.
 
@@ -907,10 +907,10 @@ The other two classes, $\alpha / \beta$ and $\alpha + \beta$, comprise proteins 
 * in $\alpha / \beta$ proteins $\alpha$-helices and $\beta$-strands alternate to form layered or barrel structures. [](#fig:alpha_slash_beta) shows a classic $\alpha / \beta$ barrel, which has [its own](https://www.ebi.ac.uk/pdbe/scop/term/2000031) SCOP fold. Note that the $\beta$-sheet is formed by parallel $\beta$-strands.
 * $\alpha + \beta$ proteins contain $\alpha$-helical and $\beta$ regions that are well-separated (*i.e.* non-alternating). The SCOP [lysozyme-like fold](https://www.ebi.ac.uk/pdbe/scop/term/2001149) is a common example, and a protein of this type is shown in [](#fig:alpha_plus_beta).
 
-Folds can be very complex from the topological point of view (especially $\beta$-structures), but a more thorough classification is goes beyond the scope of these lessons.
+Folds can be very complex from the topological point of view (especially $\beta$-structures), but a more thorough classification goes beyond the scope of these lessons.
   
 [^SCOP]: Structural Classification of Proteins database.
-[^delve]: [Apparently](https://www.scientificamerican.com/article/chatbots-have-thoroughly-infiltrated-scientific-publishing/) using "delve" is a big indicator that a piece of text has been written by ChatGPT. Although I have used ChatGPT to polish my writing here and there, I ensure you that this "delve" is my own!
+[^delve]: [Apparently](https://www.scientificamerican.com/article/chatbots-have-thoroughly-infiltrated-scientific-publishing/) using "delve" used to be a big indicator that a piece of text was written by earlier versions of ChatGPT. Although I have used ChatGPT to polish my writing here and there, I ensure you that this "delve" is my own!
 
 (sec:quaternary_structure)=
 # Quaternary structure
@@ -927,4 +927,4 @@ Subunits in a protein's quaternary structure can be identical, known as homomeri
 The [structure](https://www.rcsb.org/structure/1a3n) of human hemoglobin. The four subunits are shown with different colours, while their bound heme groups are depicted with the licorice representation.
 ```
 
-The spatial arrangement of subunits within the quaternary structure is vital for the protein’s functionality, allowing the protein to interact correctly with other molecules and perform its biological activities efficiently. For example, the quaternary structure of hemoglobin, which is shown in [](#fig:hemoglobin) and consists of four subunits in a nearly-tetrahedral arrangement, enables it to bind and release oxygen molecules effectively. Similarly, enzymes that function as multi-subunit complexes often rely on their quaternary structure to bring catalytic sites into proximity, enhancing their catalytic efficiency.
+The spatial arrangement of subunits within the quaternary structure is vital for the protein’s functionality, allowing the protein to interact correctly with other molecules and perform its biological activities efficiently. For example, the quaternary structure of hemoglobin, which is shown in [](#fig:hemoglobin) and consists of four subunits in a nearly-tetrahedral arrangement, enables it to efficiently bind and release oxygen molecules. Similarly, enzymes that function as multi-subunit complexes often rely on their quaternary structure to bring active sites into proximity, enhancing their catalytic efficiency.

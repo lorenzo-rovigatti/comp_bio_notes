@@ -272,7 +272,7 @@ The most used NN models are:
 
 In addition, [here](https://rna.urmc.rochester.edu/NNDB/) is a useful website where several NN models are briefly described, and their parameters can be downloaded.
 
-In general, a NN model is defined by a list of contributions that make it possible to assign a free-energy cost to the secondary structure of a specific strand (or system of strands) in an additive way: the total free-energy cost of the structure is given by a sum of terms that refer to the sequence and type of each local secondary structure. The specific values that enter into the calculations are being constantly improved upon by means of careful experiments on many different sequences (similar in spirit to  those performed to obtain the sequence-dependent stacking strength, see [the box above](#box:stacking)). A recent example is [](doi:10.1093/nar/gkac261)). By contrast, the functional forms and the nature of the different free-energy terms are rather stable and did not change much in the last 20+ years.
+In general, a NN model is defined by a list of contributions that make it possible to assign a free-energy cost to the secondary structure of a specific strand (or system of strands) in an additive way: the total free-energy cost of the structure is given by a sum of terms that refer to the sequence and type of each local secondary structure. The specific values that enter into the calculations are being constantly improved upon by means of careful experiments on many different sequences (similar in spirit to  those performed to obtain the sequence-dependent stacking strength, see [the box above](#box:stacking)). A recent example is [](doi:10.1093/nar/gkac261). By contrast, the functional forms and the nature of the different free-energy terms are rather stable and did not change much in the last 20+ years.
 
 The contributions are given in terms of $\Delta H^\circ$ and $\Delta S^\circ$ or $\Delta G^\circ$ and $\Delta H^\circ$, which are linked by the relation
 
@@ -280,13 +280,7 @@ $$
 \Delta G^\circ = \Delta H^\circ - T \Delta S^\circ.
 $$
 
-where the $^\circ$ superscript signals that these values refer to the free-energy differences estimated at the "standard" strand concentration of 1 molar (*i.e.* one mole per liter), $C^\circ$. If the strand concentration $C$ is different from $C^\circ$[^standard_conc], the final free-energy difference contains the additional entropic term
-
-$$
-\Delta S_C = - R \log C,
-$$
-
-where $R \approx 2$ cal / mol K is the gas constant.
+where the $^\circ$ superscript signals that these values refer to the free-energy differences estimated at the "standard" strand concentration of 1 molar (*i.e.* one mole per liter), $C^\circ$.
 
 We now analyse the main free-energy contributions to the formation of secondary structures used in NN models.
 
@@ -312,13 +306,13 @@ so that the total contributions due to this term are given by
 
 $$
 \begin{aligned}
-\Delta H & = \Delta H_{\rm TA/AT} + \Delta H_{\rm AC/TG} + \Delta H_{\rm CC/GG} + \Delta H_{\rm CT/GA} + \Delta H_{\rm TG/AC}\\
-\Delta S & = \Delta S_{\rm TA/AT} + \Delta S_{\rm AC/TG} + \Delta S_{\rm CC/GG} + \Delta S_{\rm CT/GA} + \Delta S_{\rm TG/AC}
+\Delta H^\circ & = \Delta H_{\rm TA/AT} + \Delta H_{\rm AC/TG} + \Delta H_{\rm CC/GG} + \Delta H_{\rm CT/GA} + \Delta H_{\rm TG/AC}\\
+\Delta S^\circ & = \Delta S_{\rm TA/AT} + \Delta S_{\rm AC/TG} + \Delta S_{\rm CC/GG} + \Delta S_{\rm CT/GA} + \Delta S_{\rm TG/AC}
 \end{aligned}
 $$
 
 :::{warning}
-Remember that DNA and RNA strands have a **polarity**: the contributions due to CT/GA and TC/AC base steps differ! Always arrange the strands so that the top strand is listed in the 5' $\to$ 3' direction and the bottom strand in the 3' $\to$ 5' direction before splitting the sequence.
+Remember that DNA and RNA strands have a **polarity**: the contributions due to CT/GA and TC/AG base steps differ! Always arrange the strands so that the top strand is listed in the 5' $\to$ 3' direction and the bottom strand in the 3' $\to$ 5' direction before splitting the sequence.
 :::
 
 ### Terminal penalty
@@ -343,7 +337,7 @@ Forming hairpins, bulges, external, internal or multibranched loops costs both e
 (sec:mismatches)=
 ### Penalties for Mismatches and Terminal Mismatches
 
-Non-complementary paired bases have a destabilising effect on secondary structure. The specific energetic penalty that applies depend on the sequence of the mismatch, but also whether it occurs at the ends of helices (terminal mismatch), or within the helix (internal mismatches, sometimes referred to as "1x1 internal loops". Both reduce the overall stability of the structure, but to different extents. The following example contains both types of mismatches (look at the first and fifth base pairs):
+Non-complementary paired bases have a destabilising effect on secondary structure. The specific energetic penalty that applies depend on the sequence of the mismatch, but also whether it occurs at the ends of helices (terminal mismatches), or within the helix (internal mismatches, sometimes referred to as "1x1 internal loops". Both reduce the overall stability of the structure, but to different extents. The following example contains both types of mismatches (look at the first and fifth base pairs):
 
 ```
 5'- CTACACTG -3'
@@ -394,7 +388,7 @@ In most NN models, two types of coaxial stacking are handled: when two helices a
 The stability of nucleic acid structures is influenced by the ionic environment, since cations like Na$^+$ and Mg$^{2+}$ shield the negative charges on the phosphate backbone and reduce electrostatic repulsion between strands. Note that, as far as I know, only the SantaLucia NN model for DNA, presented in [](doi:10.1146/annurev.biophys.32.110601.141800), takes into account this contribution through the following entropic term:
 
 $$
-\Delta S_{\rm salt} = 0.368 \frac{N_p}{2} \log C_S,
+\Delta S_{\rm salt} = 0.368 \frac{N_p}{2} \log C_S / C^\circ,
 $$
 
 where $N_p$ is the number of phosphates in the duplex, so that $N_p / 2 = N$ is, under usual conditions, the duplex length, $C_S$ is the molar concentration of monovalent cations[^magnesium], and the resulting contribution is in units of cal / mol K.
@@ -406,13 +400,13 @@ where $N_p$ is the number of phosphates in the duplex, so that $N_p / 2 = N$ is,
 
 ### Duplex formation
 
-One of the most straightforward applications of any NN model is to model the thermodynamics of duplex formation in a system composed of just two (perfectly or partially) complementary strands, A and B. If the sequences are such that the possibility of stable intermediates can be neglected (that is, if the strands spend most of the time either free in solution or bound to each other), hybridisation can be described as a two-state process. The latter, in turn, is formally equivalent to the chemical equilibrium between two reactants and a product, *viz.*
+One of the most straightforward applications of any NN model is to model the thermodynamics of duplex formation in a system composed of just two (perfectly or partially) complementary strands, A and B. If the sequences are such that the possibility of stable intermediates can be neglected (that is, if the strands spend most of the time either free in solution or bound to each other), hybridisation can be described as a two-state process[^two_state]. The latter, in turn, is formally equivalent to the chemical equilibrium between two reactants and a product, *viz.*
 
 $$
 A + B \rightleftharpoons AB.
 $$
 
-The two-state model works particularly well for short strands (*i.e.* oligonucleotides) since, if they do not contain repeating patterns or similar "pathological" sequences, are more unlikely to exhibit metastable intermediates, *i.e.*, states with secondary structures whose stability can almost match that of the product.
+The two-state model works particularly well for short strands (*i.e.* oligonucleotides) since, if they do not contain repeating patterns or similar "pathological" sequences, they are more unlikely to exhibit metastable intermediates, *i.e.*, states with secondary structures whose stability can almost match that of the product.
 
 Under the two-state assumption, equilibrium is described by the law of mass action equation
 
@@ -420,17 +414,34 @@ $$
 K_{AB} = \frac{C_A C_B}{C_{AB}},
 $$
 
-where $C_X$ is the (molar) concentration of $X$ and $K_{AB}$ is the dissociation constant associated to the reaction, which is in turn connected to the free-energy difference between the two states, $\Delta G_{AB}^\circ$, through
+where $C_i$ is the (molar) concentration of $i$ and $K_{AB}$ is the dissociation constant associated to the reaction. This relation can be derived directly from the condition of thermodynamic equilibrium. In an ideal dilute solution, the chemical potentials of the three species satisfy
+
+$$
+\mu_A + \mu_B = \mu_{AB},
+$$
+
+where $\mu_i = \mu_i^\circ + RT \log C_i/C^\circ$ is the chemical potential of species $i$ in an ideal dilute solution, and $\mu_i^\circ$ denotes its standard-state chemical potential, defined as the molar Gibbs free energy of $i$ at $C^\circ = 1$ M concentration. Combining the two expressions above gives
+
+$$
+K_{AB} = \exp\left[ -\frac{\mu_{AB}^\circ - \mu_{A}^\circ - \mu_{B}^\circ}{RT} \right] = \frac{C_AC_B}{C_{AB}}.
+$$
+
+
+Since in units of kcal/mol the difference between the chemical potentials is the free-energy difference between the two states, $\Delta G_{AB}^\circ$, we write
 
 $$
 K_{AB} = C^\circ \exp\left( \beta \Delta G_{AB}^\circ \right),
 $$
 
-hence
+and therefore
 
 $$
 \frac{C_A C_B}{C_{AB}} = C^\circ \exp\left( \beta \Delta G_{AB}^\circ \right).
 $$ (eq:equilibrium)
+
+Hence, the law of mass action emerges as a direct consequence of the equilibrium condition under ideal-solution assumptions, where intermolecular interactions other than duplex formation are negligible and the species are well mixed.
+
+Alternatively, one may view this result from a kinetic standpoint: in a dilute system, the rate of association is proportional to the probability that an $A$ and $B$ molecule encounter each other, $k_{\rm on}C_A C_B$, while dissociation occurs at a rate $k_{\rm off}C_{AB}$. At equilibrium, detailed balance implies $k_{\rm on}C_A C_B = k_{\rm off}C_{AB}$, leading once again to the same mass-action form, with $K_{AB} = k_{\rm on} / k_{\rm off}$.
 
 :::{hint} The dissociation constant
 The dissociation constant, often denoted as $K_d$​, is a measure of the affinity between two molecules in a binding interaction, such as between between DNA strands in a duplex or a protein and its ligand. It is expressed in units of concentration (typically molarity, M), representing the concentration at which half of the strands are bound in duplexes, or half of the binding sites are occupied by the ligand. A lower $K_d$​ value indicates higher affinity, meaning the molecules are more likely to remain bound together at lower concentrations. Conversely, a higher $K_d$ suggests weaker binding, indicating that higher concentrations are needed for significant binding to occur.
@@ -463,13 +474,13 @@ T_m = \frac{\Delta H_{AB}^\circ}{\Delta S_{AB}^\circ + R \log\left( \frac{C_0}{4
 $$ (eq:T_m_equi)
 
 :::{warning} The $C^\circ$ factor
-In most of the cases, the $C^\circ$ factor in Eq. [](#eq:T_m_equi) is omitted, since $C^\circ = 1$ M. However, as a physicist, you should always distrust equations where the arguments of mathematical functions such as $\log$, $\exp$, $\cos$, *etc.* have physical dimensions. As a rule, you can disregard dimension issues only if you understand where they come from.
+In most cases, the $C^\circ$ factor in Eq. [](#eq:T_m_equi) is omitted, since $C^\circ = 1$ M. However, as a physicist, you should always distrust equations where the arguments of mathematical functions such as $\log$, $\exp$, $\cos$, *etc.* have physical dimensions. As a rule, you can disregard dimension issues only if you understand where they come from.
 :::
 
-The denominator of Eq. [](#eq:T_m_equi) can be rewritten as $\Delta S_{AB}^\circ + R \log\left( \frac{C_0}{4 C^\circ} \right) = \Delta S_{AB}^\circ + R \log\left( \frac{C_{0,A}}{2 C^\circ} \right) = \Delta S_{AB} - R \log 2$, where
+The denominator of Eq. [](#eq:T_m_equi) can be rewritten as $\Delta S_{AB}^\circ + R \log\left( \frac{C_0}{4 C^\circ} \right) = \Delta S_{AB}^\circ + R \log\left( \frac{C_{A,0}}{2 C^\circ} \right) = \Delta S_{AB} - R \log 2$, where
 
 $$
-\Delta S_{AB} \equiv \Delta S_{AB}^\circ + R \log \left( \frac{C_{0,A}}{C^\circ} \right)
+\Delta S_{AB} \equiv \Delta S_{AB}^\circ + R \log \left( \frac{C_{A,0}}{C^\circ} \right)
 $$ (eq:renormalised_entropy)
 
 is a renormalised entropy difference that takes into account the concentration at which the reaction takes place. Using Eq. [](#eq:renormalised_entropy) makes it possible to directly derive the free-energy difference $\Delta G_{AB} = \Delta H_{AB}^\circ - T \Delta S_{AB}$ between the $A + B$ and $AB$ states at any strand concentration. In the general case $C_{A,0} \leq C_{B,0}$, the additional entropic factor is $R\log \left( \frac{2C_{B,0} - C_{A,0}}{C^\circ} \right)$.
@@ -483,6 +494,8 @@ Experimental versus predicted melting temperatures of DNA oligonucleotides. (a) 
 ```
 
 [](#fig:SantaLucia) shows a comparison between the experimental and theoretical melting temperatures of hundreds of DNA oligonucleotides predicted with the [SantaLucia model](doi:10.1146/annurev.biophys.32.110601.141800). The average absolute deviation is smaller than $2.3$ K.
+
+[^two_state]: The two-state model can be applied to all those cases where two objects can reversibly bind and unbind (*e.g.* two proteins, or a protein and a small molecule)
 
 (sec:hairpin_formation)=
 ### Hairpin formation
@@ -499,10 +512,10 @@ $$
 \frac{C_c}{C_h} = e^{\beta \Delta G_{ch}^\circ},
 $$
 
-where $C_c$ and $C_h$ are the concentrations of strands in the coil and hairpin conformations, respectively, and $\Delta G_{h}^\circ$ is the free-energy difference between the two states. The condition for the melting temperature is $C_c = C_h$, which yields
+where $C_c$ and $C_h$ are the concentrations of strands in the coil and hairpin conformations, respectively, and $\Delta G_{ch}^\circ$ is the free-energy difference between the two states. The condition for the melting temperature is $C_c = C_h$, which yields
 
 $$
-T_m = \frac{\Delta H^\circ}{\Delta S^\circ}.
+T_m = \frac{\Delta H_{ch}^\circ}{\Delta S_{ch}^\circ}.
 $$
 
 [^hairpin_conc]: If we can neglect the interaction between different strands, *i.e.* if the overall concentration is low enough that we can assume ideal gas behaviour.
@@ -540,7 +553,7 @@ The yield of a 10-bp duplex as predicted by SantaLucia (red line), and two coars
 
 The tertiary structure of nucleic acids is, in general, much simpler than that of proteins. This is due to the more limited variety of building blocks involved (4 *vs* 20), and to the charged (and, in general, hydrophilic) nature of the DNA and RNA backbones, which tend to destabilise the type of "super-secondary structures" that are so common in proteins. Moreover, the lack of tightly-packed structures blurs the difference between secondary and tertiary structures, since most of the times, especially in simple systems, the tertiary structure is straightforwardly implied by the secondary structure.
 
-In general, the most dominant tertiary structure of RNA and DNA is the double helix, and is the main one we will consider going forward. Many different helical structures have been discovered in biological contexts or synthesised artificially under specific conditions. However, here I will present only the three main ("canonical") ones. Note that they I will provide only an average characterisation for each helix, as it is known that their properties can depend (even strongly in some cases) on the local sequence. You can use [this webserver]() (which is presented in [](doi:10.1016/j.jmb.2023.167978)) to visualise the 3D structures of a given sequence, as estimated with a coarse-grained, realistic model.
+In general, the most dominant tertiary structure of RNA and DNA is the double helix, and is the main one we will consider going forward. Many different helical structures have been discovered in biological contexts or synthesised artificially under specific conditions. However, here I will present only the three main ("canonical") ones. Note that they I will provide only an average characterisation for each helix, as it is known that their properties can depend (even strongly in some cases) on the local sequence. You can use [this webserver](https://cgdnaweb.epfl.ch/) (which is presented in [](doi:10.1016/j.jmb.2023.167978)) to visualise the 3D structures of a given sequence, as estimated with a coarse-grained, realistic model.
 
 (sec:canonical_helices)=
 ## Canonical helices

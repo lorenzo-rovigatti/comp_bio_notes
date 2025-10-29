@@ -427,7 +427,7 @@ K_{AB} = \exp\left[ -\frac{\mu_{AB}^\circ - \mu_{A}^\circ - \mu_{B}^\circ}{RT} \
 $$
 
 
-Since in units of kcal/mol the difference between the chemical potentials is the free-energy difference between the two states, $\Delta G_{AB}^\circ$, we write
+Since in units of kcal/mol the difference between the chemical potentials is the free-energy difference between the two states (with the minus sign, given the convention of NN models), $\Delta G_{AB}^\circ$, we write
 
 $$
 K_{AB} = C^\circ \exp\left( \beta \Delta G_{AB}^\circ \right),
@@ -553,7 +553,7 @@ The yield of a 10-bp duplex as predicted by SantaLucia (red line), and two coars
 
 The tertiary structure of nucleic acids is, in general, much simpler than that of proteins. This is due to the more limited variety of building blocks involved (4 *vs* 20), and to the charged (and, in general, hydrophilic) nature of the DNA and RNA backbones, which tend to destabilise the type of "super-secondary structures" that are so common in proteins. Moreover, the lack of tightly-packed structures blurs the difference between secondary and tertiary structures, since most of the times, especially in simple systems, the tertiary structure is straightforwardly implied by the secondary structure.
 
-In general, the most dominant tertiary structure of RNA and DNA is the double helix, and is the main one we will consider going forward. Many different helical structures have been discovered in biological contexts or synthesised artificially under specific conditions. However, here I will present only the three main ("canonical") ones. Note that they I will provide only an average characterisation for each helix, as it is known that their properties can depend (even strongly in some cases) on the local sequence. You can use [this webserver](https://cgdnaweb.epfl.ch/) (which is presented in [](doi:10.1016/j.jmb.2023.167978)) to visualise the 3D structures of a given sequence, as estimated with a coarse-grained, realistic model.
+In general, the most dominant tertiary structure of RNA and DNA is the double helix, and is the main one we will consider going forward. Many different helical structures have been discovered in biological contexts or synthesised artificially under specific conditions. However, here I will present only the three main ("canonical") ones. Note that I will provide only an average characterisation for each helix, as it is known that their properties can depend (even strongly in some cases) on the local sequence. You can use [this webserver](https://cgdnaweb.epfl.ch/) (which is presented in [](doi:10.1016/j.jmb.2023.167978)) to visualise the 3D structures of a given sequence, as estimated with a coarse-grained, realistic model.
 
 (sec:canonical_helices)=
 ## Canonical helices
@@ -587,7 +587,7 @@ The single most important conformation of DNA is B-DNA, which is the famous doub
 An A-DNA double helix composed of 12 base pairs represented as in [](#fig:bdna). The structure has been generated with the [3DNA 2.0 webserver](http://web.x3dna.org).
 ```
 
-DNA turns into its A form when dyhdrated, which can happen as a result of human intervention (*e.g.* when crystalling samples to study with X-rays), but also under natural conditions, when water is scarce or specific proteins bind to the DNA, in place of some of the water molecules[^A-DNA]. A-DNA is a right-handed helix that is more compact than B-DNA: it has about 11 base pairs per turn and a diameter of approximately 2.3 nanometers. A-DNA features deeper major grooves and shallower minor grooves compared to B-DNA. The helical structure is more tightly wound, with the base pairs tilted by abouy $20^\circ$ relative to the helix axis, and the distance between base pairs is shorter. Moreover, the sugars are in the C3'-endo conformation rather than in the C2'-endo conformation like in B-DNA. A-DNA is less prevalent in biological systems but can be found in certain DNA-RNA hybrids. Additionally, double-stranded RNA molecules or regions typically adopt the A-form helical structure.
+DNA turns into its A form when dyhdrated, which can happen as a result of human intervention (*e.g.* when crystallising samples to study with X-rays), but also under natural conditions, when water is scarce or specific proteins bind to the DNA, in place of some of the water molecules[^A-DNA]. A-DNA is a right-handed helix that is more compact than B-DNA: it has about 11 base pairs per turn and a diameter of approximately 2.3 nanometers. A-DNA features deeper major grooves and shallower minor grooves compared to B-DNA. The helical structure is more tightly wound, with the base pairs tilted by abouy $20^\circ$ relative to the helix axis, and the distance between base pairs is shorter. Moreover, the sugars are in the C3'-endo conformation rather than in the C2'-endo conformation like in B-DNA. A-DNA is less prevalent in biological systems but can be found in certain DNA-RNA hybrids. Additionally, double-stranded RNA molecules or regions typically adopt the A-form helical structure.
 
 [](#fig:adna) shows a perfect A-DNA helix made of the same number of base pairs as the one shown in [](#fig:bdna). Compared to B-DNA, it is evident that A-DNA is shorter and thicker, and the base pairs are inclined by $\approx 20^\circ$ with respect to the helical axis.
 
@@ -626,6 +626,14 @@ A comparison between the average properties of the three main helical conformati
 
 Other important tertiary motifs are those that can connect more than two strands together, or two sections of the same strand that are far apart from each other. For instances, in triplexes (*i.e.*  triple-stranded DNA or RNA) a third strand can bind in the major groove of a duplex through Hoogsteen base pairings, or in RNA in the minor groove by leveraging the presence of the additional hydroxyl group in the sugar.
 
-Hoogsteen base pairings can also lead to the formation of quadruplexes, which can occur in a variety of patterns, including intramolecular (within a single strand), intermolecular (between different strands), and hybrid types. A strand (or multiple strands) with a high number of consecutive guanine bases folds back on itself (or aligns with other strands) to bring the G bases into proximity. Four guanine bases form a planar structure known as a G-tetrad through Hoogsteen hydrogen bonding, and multiple G-tetrads stack on top of each other, stabilized by the $\pi-\pi$interactions between the aromatic rings of the guanine bases.
+```{figure} figures/G-quadruplex.svg
+:name: fig:quadruplex
+:align: center
+:width: 600px
+
+Example of a G-quadruplex, showing (left) one layer and (right) the full stacked structure. Credits to [Julian Huppert and Iridos via Wikipedia Commons](https://commons.wikimedia.org/wiki/File:G-quadruplex.svg).
+```
+
+Hoogsteen base pairings can also lead to the formation of quadruplexes, which can occur in a variety of patterns, including intramolecular (within a single strand), intermolecular (between different strands), and hybrid types. A strand (or multiple strands) with a high number of consecutive guanine bases folds back on itself (or aligns with other strands) to bring the G bases into proximity. As sketched in [](#fig:quadruplex) Four guanine bases form a planar structure known as a G-tetrad through Hoogsteen hydrogen bonding, and multiple G-tetrads stack on top of each other, stabilized by the $\pi-\pi$ interactions between the aromatic rings of the guanine bases.
 
 Finally, as mentioned earlier, pseudoknots and coaxial stacking interactions can also seen as mechanisms the can lead to the formation of particular tertiary structures, since they can stabilise multi-strand (or multi-loop) structures.

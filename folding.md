@@ -114,7 +114,7 @@ $$
 where we have defined the cooperativity (or initiation) parameter, $\sigma \equiv \exp(-\beta f_{\rm init})$, and the helix-elongation (or hydrogen-bonding) parameter, $s \equiv \exp(-\beta f_h)$. Note that, since $f_{\rm init}$ is purely entropic, $\beta f_{\rm init} = -S_{\rm init} / k_B$ and therefore $\sigma$ does not depend on temperature.
 
 :::{warning}
-Strictly speaking, it is not correct to add the $n f_h$ term is $n < 4$, since at least one turn ($\approx 4$ amino acids) should be present in order to stabilise an $\alpha$-helix. There are some more complicated models that take this into account (see *e.g.* the [Lifson-Roig model](https://en.wikipedia.org/wiki/Lifson%E2%80%93Roig_model) or the [Generalized Model of Polypeptide Chain](doi:10.1140/epje/i2013-13046-7)), but here we will keep it simple and study the simplest model that exhibits the main features of the transition.
+Strictly speaking, it is not correct to add the $n f_h$ term if $n < 4$, since at least one turn ($\approx 4$ amino acids) should be present in order to stabilise an $\alpha$-helix. There are some more complicated models that take this into account (see *e.g.* the [Lifson-Roig model](https://en.wikipedia.org/wiki/Lifson%E2%80%93Roig_model) or the [Generalized Model of Polypeptide Chain](doi:10.1140/epje/i2013-13046-7)), but here we will keep it simple and study the simplest model that exhibits the main features of the transition.
 :::
 
 Following @finkelstein2016protein, we define two accessory quantities: $C_i$ is the partition function of a chain of size $i$, where the last monomer is in the coil state, and $H_i$ is the partition function of a chain of size $i$, where the last monomer is in the helix state. With this definition, the partition function of the chain is $Q_i = C_i + H_i$. We can explicitly compute the first terms:
@@ -332,16 +332,16 @@ As an example, [](#fig:HP_model_example) shows the single lowest-energy conforma
 In order to be more quantitative, some useful observables can be introduced. In general, the thermodynamic properties of a chain of length $N$ and a given sequence can be computed from the partition function:
 
 $$
-Q = \sum_{i = 1}^{\Omega_N} e^{-E_i}
+Q = \sum_{i = 1}^{\Omega_N} e^{-\beta E_i}
 $$
 
 where $\Omega_N$ is the number of distinct conformations of an $N$-chain, so that the sum runs over all the conformations. If the length of the chains is not too large[^HP_length], it is possible to numerically perform a complete (exhaustive) enumeration of all possible chain conformations, from which any quantity of interest can be computed as an ensemble average, *viz.*
 
 $$
-\langle A \rangle = \frac{1}{Q} \sum_{i}^{\Omega_N} A e^{E_i}.
+\langle A \rangle = \frac{1}{Q} \sum_{i}^{\Omega_N} A e^{- \beta E_i}.
 $$
 
-The partition function can also be written as a sum over conformations of fixed number of HH topological contacts $m$:
+Since $\beta E_i = m\epsilon$, the partition function can also be written as a sum over conformations of fixed number of HH topological contacts $m$:
 
 $$
 Q = \sum_{m = 0}^{m^{\rm max}} g(m) e^{-m \epsilon},
@@ -400,7 +400,7 @@ and its averages over all and native conformations can be computed as
 $$
 \begin{aligned}
 \langle x \rangle & = \frac{1}{Q} \sum_{i = 0}^{\Omega_N} x e^{(m^{\rm max} - m_i) \epsilon}\\
-\langle x \rangle_{ns} & = \frac{1}{g(m^{\rm max})} \sum_{i = 1}^{g(m^{\rm max})} x.
+\langle x \rangle_{ns} & = \frac{1}{Q_{\infty}} \sum_{i = 1}^{g(m^{\rm max})} x.
 \end{aligned}
 $$
 

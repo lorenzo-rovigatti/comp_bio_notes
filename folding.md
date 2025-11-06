@@ -437,7 +437,7 @@ The distribution of the number of sequences having $g(s)$ native conformations f
 :name: fig:HP_model_comparison
 :align: center
 
-(a) Compactness and (b) hydrophobicity as a function of the chain length for two HP lattice models and for real proteins. Dashed lines show the range of values. Adapted from [](doi:10.1002/prot.24067).
+(a) Compactness and (b) hydrophobicity as a function of the chain length for (A) two HP lattice models and (B) real proteins. Dashed lines show the range of values. Adapted from [](doi:10.1002/prot.24067).
 ```
 
 But to what extent lattice and real proteins are similar? I will present some results reported in [](doi:10.1002/prot.24067). Therein, an exhaustive enumeration of all conformations of chains of lengths up to 25 has been carried out with two HP models:
@@ -455,9 +455,9 @@ Now we focus on compact conformations. How many sequences have a given compact c
 
 1. Compact conformations have lower energies compared to non-compact ones.
 2. Hydrophobic residues should have the tendency to be buried in the core ($\epsilon_{PP} > \epsilon_{HP} > \epsilon$).
-3. Different types of monomers should tend to segregate ($2 \epsilon_{HP} > \epsilon_{PP} + \epsilon_{HH}$).
+3. Different types of monomers should tend to segregate ($2 \epsilon_{HP} > \epsilon_{PP} + \epsilon$).
 
-The output of the computation was to enumerate all the native structures of each possible sequence on a 3D 3x3x3 cube and on 2D 4x4, 5x5, 6x5 and 6x6 boxes. The result of this complete enumeration is the list of all possible sequences that can "design" a given structure, or, in other words, that have that structure as their unique native state. The size of this list, $N_s$ is a measure of the designability of a given structure.
+The output of the computation was to enumerate all the native structures of each possible sequence on a 3D 3x3x3 cube and on 2D 4x4, 5x5, 6x5 and 6x6 boxes. The result of this complete enumeration is the list of all possible sequences that can "design" a given structure, or, in other words, that have that structure as their unique native state. The size of this list, $N_s$, is a measure of the designability of a given structure.
 
 ```{figure} figures/HP_model_folding_1.png
 :name: fig:HP_model_folding_1
@@ -466,11 +466,11 @@ The output of the computation was to enumerate all the native structures of each
 (a) The number of structures with the given $N_s$ for the (top) 3x3x3 cube and (bottom) 6x6 square. In the bottom panel, the number of structures goes below $1$ for large $N_s$, which, given its definition, should not happen. Perhaps the authors normalised the data in some way that, as far as I understand, is not specified in the original paper. (b) The most designable (A) 3D and (B) 2D structures. Hydrophobic and polar residues are coloured in black and grey, respectively. (c) The probability of finding a polar residue as a function of the sequence index for the same two structures. Adapted from [](10.1126/science.273.5275.666).
 ```
 
-Compact structures differ markedly in terms of their designability: there are structures that can be designed by a large number of sequences, and there are "poor" structures that can be designed by only a few or even no sequences. In fact, for $\approx 10\%$ of the conformations there is no sequence  that has that structure as its ground state. The majority of the sequences ($\approx 95\%$ out $2^{27}$ total sequences in 3D) have degenerate ground states, *i.e.* more than one compact conformation of lowest energy, which means that in 3D there exist almost 7 million sequences of length 27 that have a unique compact ground state. Moreover, the number of structures with a given $N_s$ value decreases continuously and monotonically as $N_S$ increases. The data for the 3D and largest 2D cases is shown in [](#fig:HP_model_folding_1)(a), where the long tails of the distributions, with some structures being the ground states of thousands of sequences, highlight the presence of "highly-designable" compact conformations.
+Compact structures differ markedly in terms of their designability: there are structures that can be designed by a large number of sequences, and there are "poor" structures that can be designed by only a few or even no sequences. In fact, for $\approx 10\%$ of the conformations there is no sequence  that has that structure as its ground state. The majority of the sequences ($\approx 95\%$ out of the $2^{27}$ total sequences in 3D) have degenerate ground states, *i.e.* more than one compact conformation of lowest energy, which means that in 3D there exist almost 7 million sequences of length 27 that have a unique compact ground state. Moreover, the number of structures with a given $N_s$ value decreases continuously and monotonically as $N_S$ increases. The data for the 3D and largest 2D cases is shown in [](#fig:HP_model_folding_1)(a), where the long tails of the distributions, with some structures being the ground states of thousands of sequences, highlight the presence of "highly-designable" compact conformations.
 
 Structures with large $N_S$ exhibit specific motifs (*i.e.* secondary structures) that small $N_S$ compact structures lack. For instance, the 3D compact structures with the 10 largest $N_S$ values contain parallel running lines packed regularly and eight or nine strands (three amino acids in a row), sensibly more than the average compact structure. [](#fig:HP_model_folding_1)(b) shows the most designable structures in 3D and in 2D, where it is easy to spot the regularity of the "secondary structures" and, for the 3D structure, also the "strands".
 
-With the simple lattice model is also possible to directly assess the effect of mutations, which in real proteins is particularly important in the context of homologous sequences (sequences related by a common ancestor). Indeed, focussing on highly designable structures and referring to the $N_s$ different sequences that fold into them as "homologous", it is possible to observe phenomena that are qualitatively similar to those observed in real proteins. For example, sequences that differ by more than half of their residues can design the same structure (see [](#fig:myoglobin_templates), which will be discussed later, for a real-protein example). Looking at the effect of mutations, the rightmost panel of [](#fig:HP_model_folding_1)(c) shows that some in very designable conformations residues are highly mutable, whereas others are highly conserved, with the conserved sites being those sites with the smallest or largest number of sides exposed to water.
+With the simple lattice model is also possible to directly assess the effect of mutations, which in real proteins is particularly important in the context of homologous sequences (sequences related by a common ancestor). Indeed, focussing on highly designable structures and referring to the $N_s$ different sequences that fold into them as "homologous", it is possible to observe phenomena that are qualitatively similar to those observed in real proteins. For example, sequences that differ by more than half of their residues can design the same structure (see [](#fig:myoglobin_templates), which will be discussed later, for a real-protein example). Looking at the effect of mutations, the rightmost panel of [](#fig:HP_model_folding_1)(c) shows that in very designable conformations some residues are highly mutable, whereas others are highly conserved, with the conserved sites being those sites with the smallest or largest number of sides exposed to water.
 
 ```{figure} figures/HP_model_folding_2.png
 :name: fig:HP_model_folding_2
@@ -507,7 +507,7 @@ Simple models are useful to understand the underlying physics of some particular
 
 Sequence alignment is a fundamental technique in bioinformatics. The primary goal of sequence alignment is to identify regions of similarity that may indicate functional, structural, or evolutionary relationships between the sequences being compared. In the context of proteins, sequence alignment can be useful for reasons that go beyond the 3D structure prediction:
 
-* It helps predict the function of unknown proteins based on their similarity to known proteins.
+* It helps to predict the function of unknown proteins based on their similarity to known proteins.
 * It aids in understanding evolutionary relationships by identifying conserved sequences among different species, allowing the construction of phylogenetic trees.
 * It can identify conserved domains that are crucial for the function of proteins.
 * It helps in identifying potential drug targets by finding unique sequences in pathogens that differ from the host.
@@ -517,7 +517,7 @@ Turning a biological problem into an algorithm that can be solved on a computer 
 
 1. A (point) mutation, or substitution, occurs when some amino acid in a sequence changes to some other amino acid during the course of evolution.
 2. A deletion occurs when an amino acid is deleted from a sequence during the course of evolution.
-3. A insertion occurs when an amino acid is added to a sequence during the course of evolution.
+3. An insertion occurs when an amino acid is added to a sequence during the course of evolution.
 
 There are many possible sequences of events that could change one genome into another, and we wish to establish an optimality criterion that allows us to pick the "best" series of events describing changes between sequences. We choose to invoke Occam's razor and select a maximum parsimony method as our optimality criterion[^parsimony]: we wish to minimize the number of events used to explain the differences between two sequences. In practice, it is found that point mutations are more likely to occur than insertions and deletions, and certain mutations are more likely than others. We now develop an algorithmic framework where these concepts can be incorporated explicitly by introducing parameters that take into account the "biological cost" of each of these changes.
 
@@ -645,13 +645,13 @@ AAGC
 
 ### Local alignment: the Smith-Waterman algorithm
 
-The Needleman-Wunsch algorithm find the best possible alignment across the entire length of two sequences. It tries to align every character from the start to the end of the sequences, which means both sequences are considered in their entirety. This is called "global alignment", and it is most useful when the sequences being compared are of similar length and are expected to be homologous across their entire length.
+The Needleman-Wunsch algorithm finds the best possible alignment across the entire length of two sequences. It tries to align every character from the start to the end of the sequences, which means both sequences are considered in their entirety. This is called "global alignment", and it is most useful when the sequences being compared are of similar length and are expected to be homologous across their entire length.
 
-Local alignment, on the other hand, focuses on finding the best alignment within a subset of the sequences. It identifies regions of similarity between the two sequences and aligns only those regions, ignoring the parts of the sequences that do not match well. Local alignment is particularly useful when comparing sequences that may only share a segment of similarity, such as when comparing domains within proteins, detecting conserved motifs, or identifying homologous regions in sequences that may not be overall similar[^local_alignment_DNA], which is why is very useful for the prediction of the 3D structure of proteins (or protein subdomains).
+Local alignment, on the other hand, focuses on finding the best alignment within a subset of the sequences. It identifies regions of similarity between the two sequences and aligns only those regions, ignoring the parts of the sequences that do not match well. Local alignment is particularly useful when comparing sequences that may only share a segment of similarity, such as when comparing domains within proteins, detecting conserved motifs, or identifying homologous regions in sequences that may not be overall similar[^local_alignment_DNA], which is why it is very useful for the prediction of the 3D structure of proteins (or protein subdomains).
 
 The most used method for local alignment is the Smith-Waterman algorithm, which is a modification of the Needleman-Wunsch algorithm. The key difference between the two lies in how the scoring matrices are constructed and scored. In Needleman-Wunsch, every cell in the matrix is filled to reflect the best global alignment, with the final alignment score found in the bottom-right corner of the matrix. Smith-Waterman, on the other hand, sets any negative scores to zero, which allows the algorithm to "reset" when the alignment quality dips. The highest score in the matrix indicates the end of the best local alignment, which is then traced back to a zero to identify the optimal aligned subsequence. This approach ensures that only the most relevant, highest-scoring local alignments are highlighted. Here is how the Smith-Waterman algorithm looks like in practice:
 
-1. Initialisation: since a local alignment can start anywhere, the first row and column in the matrix are set to zeros, *i.e.* $F_{0,j} = jd$, $F_{i,0} = id$.
+1. Initialisation: since a local alignment can start anywhere, the first row and column in the matrix are set to zeros, *i.e.* $F_{0,j} = 0$, $F_{i,0} = 0$.
 2. Iteration $\forall (i, j)$: this step is modified so that the score is never allowed to become negative but it is reset to zero. This is done by slightly modifying Eq. [](#eq:needleman_wunsch) as follows:
 $$F_{i,j} = \max
 \begin{cases}
@@ -663,7 +663,7 @@ F_{i - 1, j - 1} + s(S_i, T_j).
 3. Trace-back: starts from the position of the maximal number in the table and proceeds until a zero is encountered.
 
 :::{tip} The Needleman-Wunsch algorithm
-For reference, this is summary of the Needleman-Wunsch algorithm:
+For reference, this is a summary of the Needleman-Wunsch algorithm:
 
 1. Initialisation: $F_{0,j} = jd$, $F_{i,0} = id$.
 2. Iteration $\forall (i, j)$: Eq. [](#eq:needleman_wunsch).
@@ -701,12 +701,12 @@ In this setup, each entry in the $\hat I$ table, denoted by $i_{i,j}$, stores th
 $$
 \begin{aligned}
 I_{i,j} &= \max \begin{cases}
-F_{i-1,j} + o\\
-I_{i-1,j} + e
+F_{i,j-1} + o\\
+I_{i,j-1} + e
 \end{cases}\\
 D_{i,j} &= \max \begin{cases}
-F_{i,j-1} + o\\
-D_{i,j-1} + e
+F_{i-1,j} + o\\
+D_{i-1,j} + e
 \end{cases}\\
 F_{i,j} &= \max \begin{cases}
 F_{i-1,j-1} + s(S_i, T_j)\\
@@ -829,7 +829,7 @@ The three most important steps of the BLAST algorithm. (a) Generate the initial 
 The BLAST algorithm can be broken down into the following steps[^BLAST_wiki]
 
 1. **Optional**: *remove low-complexity region or sequence repeats in the query sequence.* Here "Low-complexity region" means a region of a sequence composed of few kinds of elements. These regions might give high scores that confuse the program to find the actual significant sequences in the database, so they should be filtered out. The regions will be marked with an X (protein sequences) or N (nucleic acid sequences) and then be ignored by the BLAST program. To filter out the low-complexity regions, the SEG program is used for protein sequences and the program DUST is used for DNA sequences. On the other hand, the program XNU is used to mask off the tandem repeats in protein sequences.
-2. *Make a $W$-letter word list of the query sequence.* The words of length $W$ ($W$-mers) in the query sequence are listed "sequentially", until the last letter of the query sequence is included. The method is illustrated in TODO. $W$ is usually 3 and 11 for a protein and a DNA sequence, respectively.
+2. *Make a $W$-letter word list of the query sequence.* The words of length $W$ ($W$-mers) in the query sequence are listed "sequentially", until the last letter of the query sequence is included. The method is illustrated in [](#fig:blast)(a). $W$ is usually 3 and 11 for a protein and a DNA sequence, respectively.
 3. *List the possible matching words.* A [substitution matrix](#sec:substitution_matrices) (*e.g.* BLOSUM62) is used to match the words listed in step 2 with all the $20^W$ $W$-mers. For example, the score obtained by comparing PQG with PEG and PQA is respectively 15 and 12 with the BLOSUM62 matrix[^DNA_BLAST_words]. After that, a neighborhood word score threshold $T$ is used to reduce the number of possible matching words. The words whose scores are greater than the threshold *T* will remain in the possible matching words list, while those with lower scores will be discarded. For example, if $T = 13$ PEG is kept, but PQA is abandoned.
 4.  *Organize the remaining high-scoring words into an efficient search tree.* This allows the program to rapidly compare the high-scoring words to the database sequences.
 5.  *Repeat step 3 to 4 for each $W$-mer in the query sequence.*

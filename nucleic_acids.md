@@ -46,7 +46,7 @@ Let's briefly discuss the main building blocks of a nucleotide.
 
 A pentose is a simple sugar (*i.e.* a monosaccharide) containing five carbon atoms. In nucleic acids, pentose is present in its cyclic form, where the ring contains four carbons and one oxygen. In DNA, one of the hydroxyl ($-OH$) groups is replaced by a hydrogen atom. This is not a small change since, as we already know, a hydroxyl group can be involved in a hydrogen bond.
 
-The three-dimensional conformation of the five-carbon sugar ring in nucleotides is non-planar, and the ring can adopt various forms, with the the C2'-endo and C3'-endo puckers being the most common forms for B-DNA and A-RNA (and A-DNA as well), which are helical structures that will be introduced in a moment. These puckering conformations, where the C2' or C3' atoms, respectively, are above the plane formed by the other four atoms, affect the overall structure and flexibility of DNA and RNA molecules and are one of the main source of conformational flexibility in nucleic acids (@schlick2010molecular).
+The three-dimensional conformation of the five-carbon sugar ring in nucleotides is non-planar, and the ring can adopt various forms, with the C2'-endo and C3'-endo puckers being the most common forms for B-DNA and A-RNA (and A-DNA as well), which are helical structures that will be introduced in a moment. These puckering conformations, where the C2' or C3' atoms, respectively, are above the plane formed by the other four atoms, affect the overall structure and flexibility of DNA and RNA molecules and are one of the main source of conformational flexibility in nucleic acids (@schlick2010molecular).
 
 ## The phosphate group
 

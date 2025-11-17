@@ -337,7 +337,7 @@ Forming hairpins, bulges, external, internal or multibranched loops costs both e
 (sec:mismatches)=
 ### Penalties for Mismatches and Terminal Mismatches
 
-Non-complementary paired bases have a destabilising effect on secondary structure. The specific energetic penalty that applies depend on the sequence of the mismatch, but also whether it occurs at the ends of helices (terminal mismatches), or within the helix (internal mismatches, sometimes referred to as "1x1 internal loops". Both reduce the overall stability of the structure, but to different extents. The following example contains both types of mismatches (look at the first and fifth base pairs):
+Non-complementary paired bases have a destabilising effect on secondary structure. The specific energetic penalty that applies depend on the sequence of the mismatch, but also whether it occurs at the ends of helices (terminal mismatches), or within the helix (internal mismatches, sometimes referred to as "1x1 internal loops". Both reduce the overall stability of the structure compared to fully-complementary sequences, but to different extents. The following example contains both types of mismatches (look at the first and fifth base pairs):
 
 ```
 5'- CTACACTG -3'

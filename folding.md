@@ -1280,7 +1280,7 @@ W_{i,j} = \min \begin{cases}
 W_{i + 1, j}\\
 W_{i, j - 1}\\
 V_{i, j}\\
-\min_{i < k < j} \lbrace W_{i, k} + W_{k + 1, j} \rbrace.
+\min_{i \leq k < j} \lbrace W_{i, k} + W_{k + 1, j} \rbrace.
 \end{cases}
 $$ (eq:W_recursion)
 
@@ -1319,14 +1319,13 @@ $$
 F_M(i, j, i_1, j_1, \ldots, i_{k - 1}, j_{k - 1}) \approx a + b k + c k',
 $$
 
-where $k$ is the order of the loop, $k'$ is the number of unpaired bases within the loop (see [](#fig:multiloop)), and $a$, $b$ and $c$ are parameters, to be estimated experimentally. This approach makes use of another auxiliary matrix, $\hat M$, whose generic entry $M_{i,j}$ is the optimal energy of $S_{ij}$, with the constraint that $S_i$ and $S_j$ are part of a multiloop. Since there is no valid "empty" multiloop state, initially all entries are set to zero, *i.e.* $M_{ij} = 0 \; \forall (i,j)$. The recursive relation takes into account the possibilities that $i$ and/or $j$ are unpaired, which contributes $c$, are paired with each other, which contributes $b$, or are part of two multi-loop substructures, and therefore
+where $k$ is the order of the loop, $k'$ is the number of unpaired bases within the loop (see [](#fig:multiloop)), and $a$, $b$ and $c$ are parameters, to be estimated experimentally. This approach makes use of another auxiliary matrix, $\hat M$, whose generic entry $M_{i,j}$ is the optimal energy of $S_{ij}$, with the constraint that $S_i$ and $S_j$ are part of an open multiloop. Since there is no valid "empty" multiloop state, initially all entries are set to zero, *i.e.* $M_{ij} = 0 \; \forall (i,j)$. The recursive relation takes into account the possibilities that $i$ and/or $j$ are unpaired, which contributes $c$, or are paired with each other, which contributes $b$, and therefore
 
 $$
 M_{i,j} = \min \begin{cases}
 M_{i, j - 1} + c\\
 M_{i + 1, j} + c\\
-V_{i, j} + b\\
-\min_{i < k < j} \lbrace M_{i, k} + M_{k + 1, j} \rbrace.
+\min_{i < k < j} \lbrace b + V_{i, k} + M_{k + 1, j} \rbrace \\
 \end{cases}
 $$ (eq:M_recursion)
 
@@ -1337,10 +1336,11 @@ V_{i,j} = \min \begin{cases}
 F_H(i, j) \\
 F_S(i, j) + V_{i + 1, j - 1}\\
 \min_{i < k < l < j} \lbrace F_L(i, j, k, l) + V_{k, l} \rbrace\\
-a + M_{i+1, j-1}.
+a + M_{i+1, j-1},
 \end{cases}
 $$ (eq:V_recursion_M)
 
+where the latter contribution takes into account the presence of a multiloop closed by $i$ and $j$. Note that the same result can be obtained more cleanly by using another auxiliary matrix, which makes integration with additional terms (*e.g. dangling ends) a bit more straightforward.
 The algorithmic complexity of the four cases are $\mathcal{O}(1)$, $\mathcal{O}(1)$, $\mathcal{O}(N^2)$ and $\mathcal{O}(1)$. Since there are $\sim N^2$ entries, the overall algorithmic complexity is $\mathcal{O}(N^4)$, and the required storage space is $\mathcal{O}(N^2)$, since only $N \times N$ matrices are used. The computational efficiency can be improved by limiting the size of a bulge or interior loop to some value (often taken to be $30$), which brings the complexity of the third case of Eq. [](#eq:V_recursion_M) down to $\mathcal{O}(1)$, and the overall algorithmic complexity down to $\mathcal{O}(N^3)$.
 
 A very nice (but not necessarily easy to read) open-source implementation of the Zuker's algorithm can be found [here](https://github.com/Lattice-Automation/seqfold).
@@ -1438,7 +1438,7 @@ An online webserver, which is also a Python library, that has a slightly differe
 
 I want to briefly describe what NUPACK does, and why it is one of the most used software by the DNA/RNA nanotechnology community. At its core, NUPACK integrates statistical thermodynamics and advanced algorithms to model the folding, hybridization, and thermodynamic stability of nucleic acids. The main appeal of NUPACK compared to other packages lies in its ability to model multi-strand nucleic acid systems. In contrast to simpler single-strand predictions, many DNA nanotechnology applications involve multiple strands interacting to form complex assemblies. NUPACK handles these multi-stranded configurations by extending the core ideas found in the classical algorithms we studied, generalizing them to more complicated systems where the combinatorial possibilities of base-pairing grow exponentially not only with the number of nucleotides, but also with the number of strands.
 
-In practical terms, NUPACK enables researchers to predict the secondary structures that DNA or RNA strands will adopt under given conditions. NUPACK's algorithms minimize free energy to predict the most stable structure, but also consider an ensemble of possible structures, going beyond the minimum free energy configuration. Indeed, is uses McCaskill-like algorithms to compute the partition function, providing information about the entire landscape of possible configurations. Going beyond folding, NUPACK can also design sequences for specific structures: In nanotechnology, designing DNA or RNA that reliably folds into a desired structure is essential for creating functional nanodevices or molecular machines. NUPACK optimizes nucleotide sequences to favor specific target structures while minimizing the formation of undesired alternatives, often through iterative sequence design techniques rooted in statistical optimization.
+In practical terms, NUPACK enables researchers to predict the secondary structures that DNA or RNA strands will adopt under given conditions. NUPACK's algorithms minimize free energy to predict the most stable structure, but also consider an ensemble of possible structures, going beyond the minimum free energy configuration. Indeed, it uses McCaskill-like algorithms to compute the partition function, providing information about the entire landscape of possible configurations. Going beyond folding, NUPACK can also design sequences for specific structures: In nanotechnology, designing DNA or RNA that reliably folds into a desired structure is essential for creating functional nanodevices or molecular machines. NUPACK optimizes nucleotide sequences to favor specific target structures while minimizing the formation of undesired alternatives, often through iterative sequence design techniques rooted in statistical optimization.
 
 :::{seealso} Python implementation
 Head over [here](./notebooks/NUPACK.ipynb) for some examples on how to use the NUPACK library.

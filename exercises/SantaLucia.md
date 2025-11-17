@@ -12,7 +12,7 @@ The SantaLucia (SL) model is the most famous (and widely-used) [nearest-neighbou
 
 The following instructions apply to the first code:
 
-1. The code takes as input the two strands that make up the double strand and check that they are the same length and fully complementary. **Nota Bene:** this check is not required if you decide to also include the terms that take care of mismatches.
+1. The code takes as input the two strands that make up the double strand and check that they are the same length and fully complementary. **Nota Bene:** this check is not required if you decide to also include the terms that take care of mismatches. In this case, please also note that the SantaLucia review does not report the $\Delta H$ and/or $\Delta S$ contributions to the total $\Delta G$ of internal mismatches, but only the latter. The former can be found [here for C-T base-steps](doi:10.1093/nar/26.11.2694), and [here for G-A base-steps](doi:10.1021/bi9724873).
 2. You can assume that the total strand concentration is $C^\circ = 1$ M for simplicity.
 
 The following instructions apply to the second code:

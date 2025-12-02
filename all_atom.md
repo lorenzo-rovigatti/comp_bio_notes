@@ -26,7 +26,7 @@ where $\vec p_i$ and $\vec r_i$ are the momentum and coordinates of particle $i$
 Some of the algorithms presented in this section have been implemented in this [Jupyter notebook](./notebooks/MD.ipynb).
 :::
 
-[^scaling]: The complexity ranges from $\mathcal{O}(e^N)$ for brute-force implementations, to $\mathcal{N^3}$ for many DFT codes, but can be linear in some cases (see *e.g.* [](doi:10.1088/0034-4885/75/3/036503)).
+[^scaling]: The complexity ranges from $\mathcal{O}(e^N)$ for brute-force implementations, to $\mathcal{O}(N^3)$ for many DFT codes, but can be linear in some cases (see *e.g.* [](doi:10.1088/0034-4885/75/3/036503)).
 
 # Molecular dynamics
 
@@ -56,7 +56,7 @@ WHILE t is smaller than t_max
 :::
 
 :::{important}
-Nowadays there are sophisticated codes that can be used, in principle, to run MD simulations with no knowledge any of the algorithms employed. This is **very** dangerous, as it is very easy to produce wrongs results that appear correct if one does not know what they are doing. Therefore, I urge you to try to understand how (and why) these algorithms work.
+Nowadays there are sophisticated codes that can be used, in principle, to run MD simulations with no knowledge of any of the algorithms employed. This is **very** dangerous, as it is very easy to produce wrongs results that appear correct if one does not know what they are doing. Therefore, I urge you to try to understand how (and why) these algorithms work.
 :::
 
 ## Initialisation
@@ -65,8 +65,8 @@ Initialising a simulation is a trivial task when simulating simple systems, *e.g
 
 In general, the initial configuration should be such that there is no sensible overlap between the system's constituents (atoms, molecules, particles, *etc.*), in order to avoid large initial forces that could lead to numerical instabilities that could lead to crashes or, which is worse, unphysical behaviour, such as two chains crossing each other. For simple systems this can be done in several ways:
 
-* Particle coordinates are chosen randomly one after the other, ensuring that the distance between the new particle and any other particle is larger than sum threhsold. This works great as long as the density is not too high.
-* Particles are placed on a lattice, making it possible to go to generate highly dense systems.
+* Particle coordinates are chosen randomly one after the other, ensuring that the distance between the new particle and any other particle is larger than a given threhsold. This works great as long as the density is not too high.
+* Particles are placed on a lattice, making it possible to generate highly dense systems.
 
 For more complicated systems, the generation of the initial configuration is often done in steps. In some cases, and I will show some examples, it is also common to run short-ish simulations where the dynamics is constrained (*e.g.* some degrees of freedom such as bond lengths or angles are kept fixed) and the energy is minimised to remove (part of) the initial stress.
 
@@ -117,14 +117,14 @@ $$
 where $\epsilon$ is the potential well depth and $\sigma$ is the atom diameter. The force associated to this potential is then
 
 $$
-\vec{f}(\vec r) = - \vec \nabla V_\text{LJ}.
+\vec{f}(\vec r) = - \vec \nabla V_\text{LJ} = 24 \epsilon \left[ 2 \left( \frac{\sigma}{r} \right)^{12} - \left( \frac{\sigma}{r} \right)^{6} \right] \frac{\vec r}{r^{2}}.
 $$
 
 (sec:cut-off)=
 ### Interaction cut-off
 
 :::{important} The range of the interaction
-A "short-range potential" is a definition that applies to all those potentials that can be truncated at a certain distance $r_c$ (called *cut-off distance*), and whose tail contribution (*i.e.* the contribution for $r > r_c$) is finite. This can happen either because $V(r > r_c) = 0$, or if the potential decays to zero quickly enough. Indeed, the tail correction can be estimated by considering the continuous limit, *viz.*
+A "short-range potential" is a definition that applies to all those potentials that can be truncated at a certain distance $r_c$ (called *cut-off distance*), and whose tail contribution (*i.e.* the contribution for $r > r_c$) is finite. This can happen either because $V(r > r_c) = 0$, or because the potential decays to zero quickly enough. Indeed, the tail correction can be estimated by considering the continuous limit, *viz.*
 
 $$
 U_\text{tail} \approx \frac{N\rho}{2} \int_{r_c}^\infty V(r) d \vec{r},
@@ -219,7 +219,7 @@ The use of periodic boundary conditions gets rid of surface effects altogether, 
    * If one wishes to simulate equilibrium crystals, the shape of the box and the length of its sides should be compatible with the lattice's unit cell.
    * Fluctuations with wavelengths longer than the box size are suppressed. This makes it hard to study critical phenomena, which have diverging correlation lengths.
 3. Angular momentum is not conserved, since the system is **not** rotationally invariant (even if the Hamiltonian is).
-4. When particles cross the box boundary to, for instance, exit the central cell, one of its images will enter it. It is important to keep track of the "original" particle to correctly compute the value of some observables (*e.g.* the mean-squared displacements, see below, or a chain connectivity).
+4. When particles cross the box boundary to, for instance, exit the central cell, one of its images will enter it. It is important to keep track of the "original" particle to correctly compute the value of some observables (*e.g.* the mean-squared displacements, see below, or chain connectivity).
 
 ## Integrating the equations of motion
 
@@ -228,9 +228,9 @@ For the sake of simplicity, I will derive equations for 1D systems, but these re
 :::
 
 Consider a particle moving along the $ x $-axis under the influence of a force $F(t)$. Newton's second law gives $m \frac{d^2 x(t)}{dt^2} = F(t)
-$, so that the acceleration $ a(t) $ is $a(t) = \frac{F(t)}{m}$
+$, so that the acceleration $a(t) = \frac{F(t)}{m}$.
 
-Expanding the position $ x(t) $ around the time $t$ using a Taylor series we obtain
+Expanding the position $ x(t) $ around $t$ using a Taylor series we obtain
 
 $$
 \begin{aligned}
@@ -251,7 +251,7 @@ $$
 x(t + \Delta t) = 2x(t) - x(t - \Delta t) + a(t) \Delta t^2.
 $$
 
-This is the Verlet algorithm, which allows us to calculate the position $x(t + \Delta t)$ at the next time step using the current position $x(t)$, the previous position $ x(t - \Delta t)$, and the current acceleration $a(t)$. Although this basic Verlet method does not explicitly involve velocity, if we consider the expansion up to the second order it can be written as
+This is the Verlet algorithm, which allows us to calculate the position $x(t + \Delta t)$ at the next time step using the current position $x(t)$, the previous position $ x(t - \Delta t)$, and the current acceleration $a(t)$. Although this basic Verlet method does not explicitly involve velocity, if we consider the expansion up to the second order we can explicitly write
 
 $$
 v(t) = \frac{x(t + \Delta t) - x(t - \Delta t)}{2\Delta t} + \mathcal{O}(\Delta t^2).
@@ -265,7 +265,7 @@ $$
 x(t + \Delta t) = x(t) + v(t) \Delta t + \frac{1}{2} a(t) \Delta t^2
 $$ (eq:velocity_verlet_x)
 
-This equation uses the current position $ x(t) $, the current velocity $ v(t) $, and the current acceleration $ a(t) $ to compute the new position $ x(t + \Delta t) $. Next, after updating the position, we need to compute the new acceleration at time $ t + \Delta t $ because the force (and hence the acceleration) may have changed due to the updated position. The new acceleration is given by:
+This equation uses the current position $ x(t) $, the current velocity $ v(t) $, and the current acceleration $ a(t) $ to compute the new position $ x(t + \Delta t) $. Next, after updating the position, we need to compute the new acceleration at time $ t + \Delta t $ because the force (and hence the acceleration) has changed due to the updated position. The new acceleration is given by:
 
 $$
 a(t + \Delta t) = \frac{F(t + \Delta t)}{m}
@@ -308,7 +308,7 @@ The Velocity Verlet algorithm is [*symplectic*](https://en.wikipedia.org/wiki/Sy
 
 Since we are discretising the equations, there are two caveats associated to the energy conservation:
 
-1. If the time step $\Delta t$ is too large, then a deviation (drift) from the "correct" value of the energy will be observed. A good rule of thumb to avoid an energy drift, which would invalidate the simulation, is to calculate the highest vibrational frequency associated to the interaction potential employed, $\omega_c \equiv \sqrt{k_c / m}$, where $k_c$ is the highest curvature of the potential, *i.e.* the largest value of $d^2V(r)/dr^2$, and $m$ is the mass of the particle. Then, a sensible value for the integration time step is an order of magnitude less than the characteristic time associated to $\omega_c$, *i.e.* $\Delta t \approx \frac{1}{10} \frac{2 \pi }{\omega_c}$.
+1. If the time step $\Delta t$ is too large, then a deviation (drift) from the "correct" value of the energy will be observed. A good rule of thumb to avoid an energy drift, which would invalidate the simulation, is to calculate the highest vibrational frequency associated to the interaction potential employed, $\omega_c \equiv \sqrt{k_c / m}$, where $k_c$ is the highest curvature of the potential, *i.e.* the largest value of $d^2V(r)/dr^2$, and $m$ is the mass of the particle. Then, a sensible value for the integration time step is an order of magnitude less than the characteristic time associated to $\omega_c$, *i.e.* $\Delta t \approx \frac{1}{10} \frac{2 \pi }{\omega_c} \approx \frac{1}{omega_c}$.
 2. If the value of $\Delta t$ is appropriate, then the energy will be conserved *on average*, meaning that it will fluctuate around its average value with an amplitude, $\delta U \equiv \sqrt{\langle \Delta U^2 \rangle}$. If the integrator is of the Verlet family (*i.e.* Velocity Verlet), then $\delta U \sim \Delta t^2$. This behaviour can be exploited to ensure that codes and simulations are working correctly, at least from the point of view of the energy conservation. See [](#fig:energy_conservation) for an example.
 
 ```{figure} figures/energy_conservation.png
@@ -645,7 +645,7 @@ $$
 where $\vec F_i$ is the force acting on particle $i$, and the term $\zeta \equiv \dot{s} / s$ is a friction-like coefficient that emerges from the thermostat variable. This friction term adjusts the particle velocities in response to deviations from the target temperature, ensuring that the system remains at the correct thermal equilibrium, and evolves according to:
 
 $$
-\dot{\zeta} = \frac{1}{Q} \left( \sum_{i=1}^{N} \frac{\vec p_i^2}{m_i} - N_f k_B T \right),
+\ddot{\zeta} = \frac{1}{Q} \left( \sum_{i=1}^{N} \frac{\vec p_i^2}{m_i} - N_f k_B T \right),
 $$
 
 where $Q$ is a parameter that controls the strength of the coupling between the system and the thermostat, $\vec p_i = m \vec r_i$ is the momentum conjugate to $\vec r_i$, so that $\sum_{i=1}^{N} \frac{\vec p_i^2}{m_i}$ is the total kinetic energy of the system, and $N_f k_B T$ represents the target thermal energy. If the system's kinetic energy exceeds the desired value, the variable $\zeta$ increases, effectively damping the particle velocities to bring the temperature back in line. Conversely, if the kinetic energy is too low, $\zeta$ decreases, allowing the velocities to rise and the temperature to stabilize at the target value. The "inertia" of this process is controlled by the value of $Q$, which therefore plays the role of a fictitious mass. This deterministic feedback mechanism distinguishes the Nosé-Hoover thermostat from stochastic approaches. By continuously adjusting the velocities of all particles, this method preserves the natural evolution of the system’s dynamics while still achieving temperature control. The benefit of using this extended Lagrangian framework is that it allows for smooth, continuous temperature regulation without disrupting important dynamical properties, such as diffusion coefficients or time-dependent correlations.
@@ -772,7 +772,7 @@ I reiterate that in equilibrium simulations the static properties of a system ar
 
 ## Barostats
 
-Experiments are usually performed at constant pressure (*e.g.* ambient pressure). Moreover, while statistical mechanics results ensure that ensembles are equivalent in equilibrium, there are many situations in which it is more convenient to simulate in a specific ensemble. For instance, equilibrating a crystal structure usually requires that the edge lengths of the box can relax and fluctuate, or the coexisting region between a gas and a liquid is extended in $(T, \rho)$, but it is just a line in the $(T, P)$ projection. In the same as controlling the temperature requires coupling the system to a thermostat, fixing $P$ means coupling the system to a barostat. When simulating at constant pressure it is very common, but by no means the only possibility, to also fix the temperature, thereby simulating in the so-called isothermal-isobaric ensemble.
+Experiments are usually performed at constant pressure (*e.g.* ambient pressure). Moreover, while statistical mechanics results ensure that ensembles are equivalent in equilibrium, there are many situations in which it is more convenient to simulate in a specific ensemble. For instance, equilibrating a crystal structure usually requires that the edge lengths of the box can relax and fluctuate, or the coexisting region between a gas and a liquid is extended in $(T, \rho)$, but it is just a line in the $(T, P)$ projection. Just like controlling the temperature requires coupling the system to a thermostat, fixing $P$ means coupling the system to a barostat. When simulating at constant pressure it is very common, but by no means the only possibility, to also fix the temperature, thereby simulating in the so-called isothermal-isobaric ensemble.
 
 As for thermostats, there exist many barostats, each having its own unique advantages and disadvantages. Here I briefly present three barostats, two based on the extended-Lagrangian formalism and a stochastic one.
 
@@ -784,18 +784,18 @@ $$
 \begin{aligned}
 \dot{\vec r_i} &= \frac{\vec p_i}{m_i} + \frac{p_\epsilon}{W} \vec r_i\\
 \dot{\vec p_i} &= \vec F_i - \left( 1 + \frac{d}{N_f} \right) \frac{p_\epsilon}{W} \vec p_i - \frac{p_\zeta}{Q} \vec p_i\\
-\dot{V} &= \frac{dVp_\epsilon}{W}\\
-\dot{p_\epsilon} &= dV (P(t) - P) + \frac{1}{N} \sum_{i=1}^N \frac{\vec p_i^2}{m_i} - \frac{p_\zeta}{Q}\vec p_\epsilon\\
+\dot{V_b} &= \frac{dV_b p_\epsilon}{W}\\
+\dot{p_\epsilon} &= dV_b (P(t) - P) + \frac{1}{N} \sum_{i=1}^N \frac{\vec p_i^2}{m_i} - \frac{p_\zeta}{Q} p_\epsilon\\
 \dot{\zeta} &= \frac{p_\zeta}{Q}\\
 \dot{p_\zeta} &= \sum_{i=1}^N \frac{\vec p^2_i}{m_i} + \frac{p_\epsilon}{W} - (N_f + 1) k_B T,
 \label{eq:nose-hoover_barostat}
 \end{aligned}
 $$
 
-where $d$ is the space dimensionality, $\epsilon = \log(V / V(0)$, where $V(0)$ is the volume at $t = 0$, $W$ is the inertia parameter associated to $\epsilon$, $p_\epsilon$ is the conjugate momentum of $\epsilon$ (here I'm using the same notation as @frenkel2023understanding), and $P$ and $P(t)$ are the target and instantaneous pressures, respectively. In particular, the instantaneous pressure is
+where $V_b$ is the volume of the simulation box, $d$ is the space dimensionality, $\epsilon = \log(V_b / V_b(0))$, where $V_b(0)$ is the volume at $t = 0$, $W$ is the inertia parameter associated to $\epsilon$, $p_\epsilon$ is the conjugate momentum of $\epsilon$ (here I'm using the same notation as @frenkel2023understanding), and $P$ and $P(t)$ are the target and instantaneous pressures, respectively. In particular, the instantaneous pressure is
 
 $$
-P(t) = \frac{1}{dV} \left[ \sum_{i=1}^N \left( \frac{\vec p_i^2}{m_i} + \vec r_i \cdot \vec F_i \right) - dV \frac{\partial U(V)}{\partial V} \right],
+P(t) = \frac{1}{dV_b} \left[ \sum_{i=1}^N \left( \frac{\vec p_i^2}{m_i} + \vec r_i \cdot \vec F_i \right) - dV_b \frac{\partial U(V_b)}{\partial V_b} \right],
 $$ (eq:pressure_NPT)
 
 which is the virial pressure of a system with a non-constant volume. Note that the second term in [](#eq:pressure_NPT) is non-zero if the energy depends explicitly on volume, which is always the case for interaction potentials that are long-range, or for which long-range corrections due to cut-offs have to be evaluated.
@@ -832,14 +832,14 @@ $$
 L = \sum_{i=1}^N \frac{1}{2} m_i \dot{\vec{s}}_i^T \hat G \dot{\vec{s}}_i - V(\{ \vec r_i \}) + \frac{1}{2} W \text{Tr}(\dot{\hat H}^T \cdot \dot{\hat H}) - P \det(\hat H),
 $$ (eq:H_parrinello_rahman)
 
-where $\det(\hat H) = V$ is the box volume, $P$ is the target pressure, and the parameter $W$ is the strength of the barostat coupling, which can be interpreted as the mass of the fictitious piston exerting the external pressure on the system.
+where $\det(\hat H) = V_b$, $P$ is the target pressure, and the parameter $W$ is the strength of the barostat coupling, which can be interpreted as the mass of the fictitious piston exerting the external pressure on the system.
 
 By deriving Eq. [](#eq:H_parrinello_rahman), the following equations of motion are obtained:
 
 $$
 \begin{aligned}
 m_i \ddot{\vec s}_i &= \hat H^{-1} \vec F_i - m_i \hat G^{-1} \dot{\hat G} \dot{\vec s}_i\\
-W \ddot{\hat H} & = (P(t) - P)V(\hat H^{-1})^T,
+W \ddot{\hat H} & = (P(t) - P)V_b(\hat H^{-1})^T,
 \end{aligned}
 $$
 
@@ -1043,7 +1043,7 @@ It is sometimes necessary to include terms that couple different degrees of free
 
 ### Van der Waals Interactions
 
-Van der Waals interactions are weak forces that arise due to fluctuations in the electron density of atoms or molecules. These interactions include both attractive forces, arising from dipole-dipole interactions and induced dipole-induced dipole interactions (van der Waals dispersion forces, see @israelachvili2011intermolecular for a derivation of these terms), and repulsive forces, resulting from the overlap of electron clouds at close distances. Van der Waals interactions are described by empirical potential energy functions. The most common forms are the Lennard-Jones and Morse potentials, which we have already encountered when discussing [interactions in proteins](#sec:van-der-waals) and [](#sec:bond_stretching), respectively. Here I report their functional forms, both of which account for attractive and repulsive components, for your convenience:
+Van der Waals interactions are weak forces that arise due to fluctuations in the electron density of atoms or molecules. These interactions include both attractive forces, arising from dipole-dipole interactions and induced dipole-induced dipole interactions (van der Waals dispersion forces, see @israelachvili2011intermolecular for a derivation of these terms), and repulsive forces, resulting from the overlap of electron clouds at close distances. Van der Waals interactions are described by empirical potential energy functions. The most common forms are the Lennard-Jones and Morse potentials, which we have already encountered when discussing [interactions in proteins](#sec:van-der-waals) and [bond stretching terms](#sec:bond_stretching), respectively. Here I report their functional forms, both of which account for attractive and repulsive components, for your convenience:
 
 $$
 \begin{aligned}
@@ -1052,7 +1052,7 @@ V_\text{Morse}(r) &= \epsilon [1 - \exp(-a(r - r_0)]^2,
 \end{aligned}
 $$
 
-where $\epsilon$ sets the depth of the attractive well, $\sigma$ is the LJ diameter, $r_0$ is the position of the minimum of the Morse potential, and $a$ is linked to the curvature close to such a minimum.
+where $\epsilon$ sets the depth of the attractive well, $\sigma$ is the LJ diameter, $r_0$ is the position of the minimum of the Morse potential, and $a$ is linked to the curvature close to such a minimum. All those parameters are fixed to values that depend on the types of the interacting atoms.
 
 ### Electrostatic Interactions
 
@@ -1064,11 +1064,11 @@ While sometimes hydrogen bonding interactions are modeled using empirical *ad-ho
 
 ## More on force fields
 
-Modern force fields contain tens, hundreds or even more parameters, depending on what they have been designed to model. The value of every single parameter has been optimised to reproduce some target quantity, either generated with higher-fidelity numerical methods, or measured experimentally, or a mixture of both. However, no force field is perfect, as each FF has its own advantaged and disadvantages.
+Modern force fields contain tens, hundreds or even more parameters, depending on what they have been designed to model. The value of every single parameter has been optimised to reproduce some target quantity, either generated with higher-fidelity numerical methods, or measured experimentally, or a mixture of both. However, no force field is perfect, as each FF has its own advantages and disadvantages.
 
 The force field should be chosen carefully, based on the problem at hand. For proteins and nucleic acids, common FFs are [AMBER](https://ambermd.org/AmberModels.php) and [CHARMM](https://mackerell.umaryland.edu/charmm_ff.shtml), but there are other possibilities. Note that it is often necessary to simulate molecules or functional groups that are not supported by the specific FF we wish to use. In this case, it is possible to use multiple force fields, provided the two FFs are compatible, *i.e.* someone has parametrised the "cross interactions" between the atoms or molecules modelled with distinct force fields. As a golden rule, you should **never** mix parameters from different force fields.
 
-In general, you should always follow the advice and good-practices given in the documentation of the FF(s) you are using, unless you **really** know what you are doing. For instance, the CHARMM force field recommends to use the TIP3P model for water rather than more sophisticated and realistic ones, since it has been parametrised using that particular model. Using another model can, in principle, be made to work, but would also make your results somehow questionable, which is **not** what you want from a scientific point of view.
+In general, you should always follow the advice and good-practices given in the documentation of the FF(s) you are using, unless you **really** know what you are doing. For instance, the CHARMM force field recommends to use the TIP3P model for water rather than more sophisticated and realistic ones, since it has been parametrised using that particular model. Using another model can, in principle, be made to work, but would also make your results somewhat questionable, which is usually not what you if you are doing science.
 
 ## GROMACS
 

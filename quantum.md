@@ -131,14 +131,14 @@ $$
 \hat{H}_\text{nuc} \chi(\{\vec{R}_I\}) = \left( \hat{T}_\text{nuc} + \hat{V}_\text{nuc-nuc} + E_\text{el}(\{\vec{R}_I\}) \right) \chi(\{\vec{R}_I\})
 $$
 
-This equation governs the motion of the nuclei on the potential energy surface created by the electrons. In practice, depending on the temperature and energy scales, this motion can be treated either classically or quantum mechanically.
+This equation governs the motion of the nuclei on the potential energy surface created by the electrons. In practice, depending on the temperature and energy scales, this motion can be treated either classically (leveraging for instance the [the Hellmann-Feynman theorem](#sec:hellman-feynman)) or quantum mechanically.
 
 ```{note} Adiabaticity
 In quantum mechanics, a process is called *adiabatic* if the system remains in the same quantum state (or subspace) throughout the process, provided that the external conditions (like the positions of the nuclei) change sufficiently slowly. Specifically, for the BO approximation, this means that as the nuclei move, the electrons remain in their instantaneous ground state at all times. 
 
 More formally, if the nuclei evolve adiabatically, the system stays in the ground-state wavefunction of the electronic Hamiltonian corresponding to the instantaneous positions of the nuclei: the nuclear motion is slow enough to allow the electrons to adjust without ever being excited to higher electronic states.
 
-The assumption of adiabaticity—and therefore the validity of the BO approximation—can break down in certain situations, leading to non-adiabatic effects. These effects occur when the nuclear motion becomes fast enough that the electrons cannot adjust instantaneously. In such cases, the system may undergo transitions between different electronic states, leading to a mixing of electronic and nuclear dynamics.
+The assumption of adiabaticity, and therefore the validity of the BO approximation, can break down in certain situations, leading to non-adiabatic effects. These effects occur when the nuclear motion becomes fast enough that the electrons cannot adjust instantaneously. In such cases, the system may undergo transitions between different electronic states, leading to a mixing of electronic and nuclear dynamics.
 
 Situations where non-adiabatic effects are significant include:
 
@@ -173,7 +173,7 @@ $$
 n_0(\vec r) = \langle \Psi_0 | \rho(\vec r) | \Psi_0 \rangle = N \int |\Psi_0(\vec r, \vec r_2, \ldots, \vec r_N)|^2 d\vec r_2 \ldots d\vec r_N,
 $$
 
-where $\rho(\vec r) = \sum_i \delta(\vec r - \vec r_i)$ is the particle density operator. By using this definition, we can write the total potential energy as
+where $\rho(\vec r) = \sum_i \delta(\vec r - \vec r_i)$ is the particle density operator. By using this definition, we can write the total external potential energy as
 
 $$
 \begin{aligned}
@@ -189,7 +189,7 @@ For any system of interacting electrons in an external potential $V(\vec{r})$, t
 :::
 
 :::{prf:proof}
-The theorem is proven by contradiction. Assume that two different external potentials, $V_1(\vec{r})$ and $V_2(\vec{r})$, and therefore two different Hamiltonians, $\hat H_1 = \hat F + \hat V_1$ and $\hat H_2 = \hat F + \hat V_2$, lead to the same ground-state electron density $n_0(\vec{r})$. The corresponding ground-state wavefunctions, $\Psi_1$ and $\Psi_2$, as they correspond to different potentials. Their associated energies, which should also be different, are
+The theorem is proven by contradiction. Assume that two different external potentials, $V_1(\vec{r})$ and $V_2(\vec{r})$, and therefore two different Hamiltonians, $\hat H_1 = \hat F + \hat V_1$ and $\hat H_2 = \hat F + \hat V_2$, lead to the same ground-state electron density $n_0(\vec{r})$. The corresponding ground-state wavefunctions are $\Psi_1$ and $\Psi_2$, which by definition correspond to the two different potentials. Their associated energies, which should also be different, are
 
 $$
 \begin{aligned}
@@ -284,7 +284,7 @@ This approach bypasses the need to solve the many-body Schrödinger equation dir
 
 # The Kohn-Sham approximation
 
-The Hohenberg-Kohn theorems laid the foundation for Density Functional Theory (DFT) by demonstrating that all ground-state properties of a many-electron system are determined by the electron density $n(\vec{r})$. However, the exact form of the universal energy functional $E[n]$, which includes the kinetic energy and electron-electron interaction energy, is unknown for interacting electrons. This is the key challenge in practical DFT calculations.
+The Hohenberg-Kohn theorems laid the foundation for Density Functional Theory (DFT) by demonstrating that all ground-state properties of a many-electron system are determined by the electron density $n(\vec{r})$. However, the exact form of the universal energy functional $F[n]$, which includes the kinetic energy and electron-electron interaction energy, is unknown for interacting electrons. This is the key challenge in practical DFT calculations.
 
 The Kohn-Sham (KS) approximation, introduced by [Walter Kohn and Lu Jeu Sham in 1965](doi:10.1103/PhysRev.140.A1133), provides a solution to this problem by mapping the interacting electron system onto an auxiliary system of non-interacting electrons that has the same ground-state electron density. This makes it possible to treat the complex interactions in a computationally efficient way while still capturing the essential physics of the many-body problem.
 
@@ -304,13 +304,13 @@ $$ (eq:kohn-sham_functional)
 
 where $T_s[n]$ is the kinetic energy of the non-interacting electrons, $U_\text{el-el}[n]$ is the Coulomb energy, representing the classical electrostatic interaction between electrons, and $E_{\text{xc}}[n]$ is the exchange-correlation energy, which includes all the many-body effects not captured by the other terms (*e.g* the electron-electron effective repulsion due to the Pauli exclusion principle).
 
-To find the ground-state density, the Kohn-Sham approach involves solving a set of single-particle equations, known as the Kohn-Sham equations. These equations describe the motion of non-interacting electrons in an effective potential $v_{\text{eff}}(\vec{r})$, and can be obtained by using the fact that the functional in Eq. [](#eq:kohn-sham_functional) is minimised by the ground-state electron density. Therefore, $\delta E / \delta n|_{n(\vec r) = n_0(\vec r)} = 0$. If we carry out the functional derivative with the constraint that the Kohn-Sham orbitals are orthonormal, we obtain (see Appendix B of @giustino2014materials for the full derivation)
+To find the ground-state density, the Kohn-Sham approach involves solving a set of single-particle equations, known as the Kohn-Sham equations. These equations describe the motion of non-interacting electrons in an effective potential $v_{\text{eff}}(\vec{r})$, and can be obtained by using the fact that the functional in Eq. [](#eq:kohn-sham_functional) is minimised by the ground-state electron density. Therefore, $\delta E / \delta n|_{n(\vec r) = n_0(\vec r)} = 0$. If we carry out the functional derivative with the constraint that the Kohn-Sham orbitals are orthonormal, we obtain the so-called Kohn-Sham equations (see Appendix B of @giustino2014materials for the full derivation)
 
 $$
 \left( -\frac{\hbar^2}{2m} \nabla^2 + v_{\text{eff}}(\vec{r}) \right) \psi_i(\vec{r}) = \epsilon_i \psi_i(\vec{r}),
 $$ (eq:kohn-sham)
 
-$\epsilon_i$ is the single-particle energy corresponding to $\psi_i$, and the effective potential, which includes the effects of the external potential, the Hartree potential, and the exchange-correlation potential, is given by
+where $\epsilon_i$ is the single-particle energy corresponding to $\psi_i$, and the effective potential, which includes the effects of the external potential, the Hartree potential, and the exchange-correlation potential, is given by
 
 $$
 v_{\text{eff}}(\vec{r}) = V(\vec{r}) + \int \frac{n(\vec{r'})}{|\vec{r} - \vec{r'}|} d\vec{r'} + v_{\text{xc}}(\vec{r})
@@ -360,6 +360,7 @@ The Kohn-Sham approximation is a powerful and practical method for implementing 
 
 Moreover, for some systems (*e.g.*, strongly correlated materials), DFT may fail to provide reliable results. For instance, the most approximate functionals (*e.g.*, LDA and GGA) suffer from self-interaction errors, where an electron incorrectly interacts with itself. This can lead to inaccuracies, particularly in systems with localized states, such as transition metal oxides and open-shell molecules. Moreover, DFT is primarily a ground-state theory, and its application to excited states is limited. [Time-dependent DFT](https://en.wikipedia.org/wiki/Time-dependent_density_functional_theory) extends DFT to excited states, but it also inherits the limitations of the exchange-correlation functionals used.
 
+(sec:hellman-feynman)=
 # The Hellmann-Feynman Theorem
 
 In the sections above I have sketched a way of solving the electronic problem and obtain the ground-state electron density. However, in *ab initio* simulations we have to also evolve the positions of the nuclei. How do we connect $n(r)$ to the forces acting on the nuclear degrees of freedom? The Hellmann-Feynman theorem provides a convenient and efficient way to compute these forces within the framework of quantum mechanics, without requiring the explicit calculation of the derivatives of the wavefunction.
@@ -437,7 +438,7 @@ $$
 \Psi = \sum_{i} c_i f_i,
 $$
 
-where $c_i$ are constants chosen so that the resulting $\Psi$ is a good approximation of the ground state, and it is associated to an energy $E$. Here "good" means that each coefficient $c_i$ obeys the variational principle:
+where $c_i$ are constants chosen so that the resulting $\Psi$ is a good approximation of the ground state, and is associated to an energy $E$. Here "good" means that each coefficient $c_i$ obeys the variational principle:
 
 $$
 0 = \frac{dE}{dc_i} = 2 \left\langle \Psi \middle| H \middle| \frac{d\Psi}{dc_i} \right\rangle = 2 \left\langle \Psi \middle| H \middle| f_i \right\rangle

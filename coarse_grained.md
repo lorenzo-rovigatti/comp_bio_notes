@@ -89,9 +89,9 @@ V_\text{CG}(R) =
 \end{cases}
 $$ (eq:AO)
 
-where $\sigma$ is the diameter of the large particles, $q$ is the size ratio between small and large particles, and $R$ is the distance between the two large particles. Interestingly, it has been demonstrated (see *e.g.* [](doi:10.1016/S0370-1573(00)00141-1) and references therein) that Eq. [](#eq:AO) is exact if $q < q^* = 2\sqrt(3) / 3$, *i.e.* there are no higher-order terms in the PMF, even when the system contains more than two large particles[^AO_exact].
+where $\sigma$ is the diameter of the large particles, $q$ is the size ratio between small and large particles, and $R$ is the distance between the two large particles. Interestingly, it has been demonstrated (see *e.g.* [](doi:10.1016/S0370-1573(00)00141-1) and references therein) that Eq. [](#eq:AO) is exact if $q < q^* = 2\sqrt{3} / 3$, *i.e.* there are no higher-order terms in the PMF, even when the system contains more than two large particles[^AO_exact].
 
-In more general cases, the many-body effective interaction cannot be computed, so that it is common to resort to approximations, which most of the times amount to writing the integral appearing in Eq. [](#eq:CG_H) as a sum of contributions due to two-body, three-body, *etc.*, interactions, and only retaining the first terms (often the first, two-body term only).
+In more general cases, the many-body effective interaction cannot be computed, so that it is common to resort to approximations, which most of the times amount to writing the integral appearing in Eq. [](#eq:CG_H) as a sum of contributions due to two-body, three-body, *etc.*, interactions, and only retaining the first terms (often the two-body term only).
 
 Many computational methods have been developed to estimate the PMF, or a "good-enough" approximation thereof. Here I will quickly present some of the ideas underlying these methods.
 

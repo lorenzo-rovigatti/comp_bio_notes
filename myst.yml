@@ -80,6 +80,7 @@ project:
             - file: notebooks/NUPACK.ipynb
             - file: notebooks/MD.ipynb
             - file: notebooks/oxDNA.ipynb
+            - file: notebooks/enhanced_sampling.ipynb
 site:
     template: book-theme
     options:

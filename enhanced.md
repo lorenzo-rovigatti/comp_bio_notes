@@ -105,11 +105,13 @@ Examples relevant to computational biophysics are processes involving protein fo
 In this context the free-energy barrier[^activation_energy] between $A$ from $B$, $\Delta F_b^{A \to B} = F_{\rm max} - F_A$, is defined as the difference between the free energy of $A$, $F_A$ and that of the transition state, $F_{\rm max}$, which is the highest free-energy point along the reaction pathway connecting $A$ to $B$[^delta_F]. Note that $\Delta F_b^{A \to B}$ controls not only the probability of jumping from $A$ to $B$, but also the rate of the reaction, which is proportional to $e^{-\beta \Delta f_b}$ (see *e.g.* [](https://doi.org/10.1063/1.1749604
 ) and [](https://doi.org/10.1039/TF9353100875)). See [](#fe_barrier) for a graphical definition of these quantities. 
 
-<!--But what is a "reaction pathway"? While a more precise answer will be given in [](#reaction-coordinates), here I just mention that it is possible to construct a *reaction coordinate* that can be used to gauge the progress (extent) of a reaction. Such a quantity, for which I will use the symbol $\xi$, is in general a function of the microscopic degrees of freedom of the system, $\dofs$, and its definition is not unique.-->
-
 It is often the case that what interests us is the *reaction* itself rather than the $A$ and $B$ states, which are often known (and possibly have been characterised) beforehand. In this case, simulations starting from one of the two states, say $A$, would remain in $A$ for sometime, then quickly jump to state $B$, where it would again reside for some time before switching basin once again, and so on. If the free-energy barrier between the two basins is large (compared to $k_B T$), the number of transitions from $A$ to $B$ and back will be very small. Therefore, using unbiased simulations[^unbiased] to sample the transition itself, for instance to evaluate the free-energy landscape as in [](#fe_barrier), requires a large computational effort which is mostly wasted in sampling uninteresting parts of the phase space.
 
 In this part we will understand how the sampling of the transition from $A$ to $B$ can be enhanced by using advanced computational techniques collectively known as [rare event sampling techniques](https://en.wikipedia.org/wiki/Rare_event_sampling), which are methods used also outside the context of molecular models (see [](doi:10.1088/2752-5295/ad8027) for an interesting example on climate-change-related extreme events).
+
+:::{seealso} Rare events with a toy model
+Head over [here](./notebooks/enhanced_sampling.ipynb) for some Python code that can be used to simulate the dynamics of a particle in a double-well potential, which exhibits many of the properties discussed in this part.
+:::
 
 [^activation_energy]: Sometimes also called *activation (free) energy*.
 [^delta_F]: Note that, per this definition, $\Delta F_b^{A \to B} \neq \Delta F_b^{B \to A} = F_{\rm max} - F_B$.

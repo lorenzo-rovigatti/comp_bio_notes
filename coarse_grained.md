@@ -150,7 +150,7 @@ $$
 \end{split}
 $$ (eq:force-matching)
 
-where $V_\text{trial}(\{ \vec R_J \})$ is the PMF we wish to optimise, $V_\text{CG}$ is the target PMF, the average is performed over the FG canonical ensemble, and $\vec f^\text{avg}_I(\{ \vec R_J \}) \equiv \langle \vec f_I(\{r_j\}) \rangle = -\frac{\partial V_\text{CG}}{\partial \vec R_I}$.
+where $V_\text{trial}(\{ \vec R_J \})$ is the PMF we wish to optimise, $V_\text{CG}$ is the target PMF, the average is performed over the FG canonical ensemble, and $\vec f^\text{avg}_I(\{ \vec R_J \}) \equiv \langle \vec f_I(\{r_j\}) \rangle = -\left\langle \frac{\partial V_\text{CG}}{\partial \vec R_I} \right\rangle$.
 
 Traditionally, Eq. [](#eq:force-matching) has been solved by expanding the CG potential in a chosen basis set, $\{ \phi_i(\{ \vec R_J \}) \}$:
 
@@ -158,7 +158,7 @@ $$
 V_\text{trial}(\{ \vec R_J \}) = \sum_i c_i \phi_i(\{ \vec R_J \}),
 $$
 
-where $c_i$ are the coefficients to be determined, so that the minimization of $\chi^2$ with respect to $c_i$ yields a linear system of equations, allowing the determination of the CG potential.
+where $c_i$ are the coefficients to be determined, so that the minimization of $\chi^2$ with respect to the coefficients $c_i$ yields a linear system of equations, allowing the determination of the CG potential.
 
 However, recently, machine-learning approaches have been employed to directly obtain the many-body PMF. The idea, introduced in [](doi:10.1021/acscentsci.8b00913) is to use neural networks (NNs) to represent $V_\text{trial}$, since NNs can approximate any smooth function.
 
@@ -276,7 +276,7 @@ oxDNA and oxRNA can be simulated by using the [standalone code](https://github.c
 Snapshots of configurations of the RNA2 fragment of the CCMV virus, squeezed by a sphere of a radius given by $30$, $20.2$ and $11.8$ nm (from left to right). The color scale is associated with the nucleotide index. Taken from [](doi:10.1002/marc.202400639).
 ```
 
-As a recent example, oxRNA has been used to study the conformational ensemble of a viral RNA comprising almost 3000 nucleotides. Thanks to lengthy simulations, in [](doi:10.1002/marc.202400639) it was possible to test some theoretical predictions, as well as to see the effect of the confinement due to the viral capsid. [](#fig:oxDNA_CCMV] shows some representative simulation snapshots.
+As a recent example, oxRNA has been used to study the conformational ensemble of a viral RNA comprising almost 3000 nucleotides. Thanks to lengthy simulations, in [](doi:10.1002/marc.202400639) it was possible to test some theoretical predictions, as well as to see the effect of the confinement due to the viral capsid. [](#fig:oxDNA_CCMV) shows some representative simulation snapshots.
 
 :::{seealso} Using oxDNA from Jupyter
 oxDNA simulations can be run, analysed and visualised directly from Python, as shown [here](./notebooks/oxDNA.ipynb).

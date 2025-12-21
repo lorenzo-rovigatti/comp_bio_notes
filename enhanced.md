@@ -456,7 +456,7 @@ which suggests that $\Delta T$ has a double role: it decreases the height of the
 In ordinary metadynamics, after an initial (transient) time $t_\text{fill}$, the free-energy minima are filled with the bias potential and the free-energy profile is essentially flat. However, $V_t^\text{bias}$ does not converge to the free energy since the process of Gaussian depositing never stops. However, the profile of the bias potential retains, on average, the same shape. Therefore, the best estimator for the free-energy profile at time $t$ is the *time-average* of $V_t^\text{bias}$ rather than its its instantaneous value[^V_bias_average], *e.g.*:
 
 $$
-F_t(\xi) = - k_B T \log\left( \frac{1}{t - t_\text{fill}} \sum_{t' = t_\text{fill}}^t V_{t'}^\text{bias}(\xi)\right).
+F_t(\xi) = - \frac{1}{t - t_\text{fill}} \sum_{t' = t_\text{fill}}^t V_{t'}^\text{bias}(\xi).
 $$ (eq:ordinary_F)
 
 The error associated to Eq. [](#eq:ordinary_F) can be estimated by using a block analysis. With this technique, the equilibration part of the simulation is discarded, and the rest is split in $N_b$ blocks. The standard error associated to the average bias potentials of the blocks is computed as a function of $N_b$. If $t - t_\text{fill}$ is sufficiently long, the error estimate will be approximately independent of the number of the blocks, and therefore can be used to assess the statistical accuracy of the free energy profile.
@@ -487,6 +487,10 @@ where $i$ is the block index and the variance is computed across all blocks. Thi
 
 [^V_bias_average]: As noted in [](doi:10.1038/s42254-020-0153-0), this is similar to a regular observable in an unbiased simulation, which converges to some specific *average* value after a certain equilibration time, but whose instantaneous value does not have any macroscopic meaning.
 [^metadynamics_reweight]: Here we reweight the histogram, as you would do with ordinary umbrella sampling histograms.
+
+:::{seealso} Python implementation
+I have prepared a [Jupyter notebook](./notebooks/enhanced_sampling.ipynb) that can be used to follow the dynamics of a particle in a double-well potential by performing unbiased, Umbrella Sampling, and ord ordinary metadynamics simulations.
+:::
 
 # Thermodynamic & Hamiltonian integration
 
@@ -612,7 +616,7 @@ Illustration of a thermodynamic cycle for the relative binding free energy, $\De
 
 One common application is shown in [](#fig:alchemical_free_energy). In the figure, the green arrows represent the absolute binding free energy, $\Delta G_\text{bind}$, of each ligand (indicated by the superscript), which involves changing the environment from unbound in the aqueous phase to bound in a complex with the protein target. These quantities are experimentally measurable but are challenging to directly compute, as the change in the environment can be considerably complicated. The red arrows represent alchemical transformations where Ligand 1 is mutated into a similar Ligand 2 in the same environment. These transformations are frequently more amenable to practical computations. The yellow circles in the figures indicate the region of each ligand that undergoes the most significant changes in the alchemical transformation and would likely be modeled using a "softcore potential" during the alchemical transformation.
 
-There are three principal methodologies underpin AFE calculations, each offering distinct approaches to determining free energy differences. Here I want to introduce them very briefly, so that the reader is aware of their existence
+There are three principal methodologies underpin AFE calculations, each offering distinct approaches to determining free energy differences. Here I want to introduce them very briefly, so that the reader is aware of their existence.
 
 ## Hamiltonian integration
 

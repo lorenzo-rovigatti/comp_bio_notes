@@ -507,10 +507,11 @@ Here I will give a brief introduction to numerical techniques that address this 
 Given two distinct states $A$ and $B$ differing for their thermodynamic conditions (temperature, pressure, *etc.*), the thermodynamic integration (TI) method makes it possible to compute their free energy difference, $F_B - F_A$. The idea is to define a reversible path in the space of the thermodynamic variables that connects $A$ and $B$[^reversible], and then run simulations along this path to estimate the derivatives of the free energy that can be integrated to yield the free energy difference, since
 
 $$
+\label{eq:TI}
 F(x_2) - F(x_1) = \int_{x_1}^{x_2} \frac{\partial F}{\partial x} dx,
 $$
 
-where $x$ is the thermodynamic variable that varies along the path.
+where $x$ is the thermodynamic variable that varies along the path. In reality, the integral in Eq. [](#eq:TI) is computed by discretising the $[x_1, x_2]$ interval into the $N$ values $\lbrace x_i \rbrace$, running one or more simulations for each $x_i$, and then applying a method to approximate a definite integral, such as the [trapezoidal rule](https://en.wikipedia.org/wiki/Trapezoidal_rule).
 
 ```{figure} figures/TI.png
 :name: fig:TI

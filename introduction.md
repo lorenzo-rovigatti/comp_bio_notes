@@ -243,15 +243,15 @@ where $\vec R_\text{cm} = \frac{1}{N} \sum_{j = 1}^N \vec R_j$ is the position o
 
 $$
 \begin{aligned}
-\vec R_g^2 & = \frac{1}{N^2} \sum_{i = 1}^N \sum_{j = 1}^N (\vec R_i^2 - \vec R_i \cdot \vec R_j) = \frac{1}{2N}  \sum_{i = 1}^N \sum_{j = 1}^N (\vec R_i - \vec R_j)^2 \\
-& = \frac{1}{N}  \sum_{i = 1}^N \sum_{j > i}^N (\vec R_i - \vec R_j)^2,
+\vec R_g^2 & = \frac{1}{N^2} \sum_{i = 1}^N \sum_{j = 1}^N (\vec R_i^2 - \vec R_i \cdot \vec R_j) = \frac{1}{2N^2}  \sum_{i = 1}^N \sum_{j = 1}^N (\vec R_i - \vec R_j)^2 \\
+& = \frac{1}{N^2}  \sum_{i = 1}^N \sum_{j > i}^N (\vec R_i - \vec R_j)^2,
 \end{aligned}
 $$
 
 where we have first completed the square of the binomial by duplicating the double sum (hence the factor of 2 at the denominator), and then run the inner sum on monomers having index $j > i$, so that each pair of monomers only enters once in the double sum. The associated ensemble average is then
 
 $$
-\langle \vec R_g^2 \rangle = \frac{1}{N} \sum_{i = 1}^N \sum_{j > i}^N \langle (\vec R_i - \vec R_j)^2 \rangle.
+\langle \vec R_g^2 \rangle = \frac{1}{N^2} \sum_{i = 1}^N \sum_{j > i}^N \langle (\vec R_i - \vec R_j)^2 \rangle.
 $$ (eq:rg)
 
 The radius of gyration and end-to-end distance are closely related. For instance, for a freely-jointed chain, it can be demonstrated that 

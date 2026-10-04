@@ -116,6 +116,8 @@ Eukaryotes
 
 ## Macromolecules and polymers
 
+Cells are the units of life, but the processes listed above (energy production, metabolism, reproduction, *etc.*) are actually carried out by the molecules they contain. Among these, the real workhorses of life are a handful of very large molecules: the biological *macromolecules*. Before looking at them in detail, it is useful to introduce them from a more general, physical point of view.
+
 A macromolecule is a molecule composed by a great number of covalently bonded atoms[^macromolecule]. The most common class of macromolecules is that of polymers, which are molecules composed by smaller subunits, the *monomers*, covalently linked together. If the monomers are all of the same type, the resulting molecule is a *homopolymer*, while if they are different, the molecule is a *heteropolymer*. In general, monomers can be connected in different ways, giving raise to unidimensional structures such as chains or rings, or to more complicated topologies such as brushes, stars, networks, *etc.* 
 
 Focussing on chains, the number of repeating units (also known as *residues*) composing a polymer is called *degree of polymerisation* $N$, and for common plastic materials is rather large ($N \sim 10^3 - 10^5$). The simplest polymer is the hydrocarbon polyethylene, $(-CH_2-)_n$, which is used to make cheap bags and bottles and accounts for more than $30\%$ of the plastic produced worldwide (see *e.g.* [](doi:10.1126/sciadv.1700782)). Other very common polymers used to build everyday objects are polypropilene, $-CH_2-CH(CH_3)-$, which is heat- and fatigue-resistant and therefore used to make hinges, piping systems, containers, and polystyrene, $-CH_2-CH(C_6H_5)-$, used to make plastic cutlery, containers or insulating foams. The skeletal formulas of these three polymers are shown in [](#fig:simple-polymers).
@@ -139,6 +141,8 @@ A cartoon of a polymer composed by 9 monomers (the coloured spheres) connected b
 ```
 
 [](#fig:polymer-sequence) shows an imaginary short polymer composed by 9 monomers of different nature (coloured differently). In general, there are many different spatial arrangements that the same (bio)polymer can take in solution. By contrast, its sequence is fixed, being given by the list of covalently-linked monomers. However, as shown in the figure, in absence of any convention, the sequence can be read from either end, giving raise to an ambiguity. As we will see, there exist conventions for proteins and nucleic acids that get rid of this ambiguity.
+
+In this course we will focus on three biopolymers: DNA, RNA (the two nucleic acids), and proteins. After introducing some observables that can be used to characterise any polymer, biological or not, I will present them in this order, which is the order in which genetic information flows within a cell: from DNA, where it is stored, to RNA, which carries it, to proteins, which put it into action.
 
 [^macromolecule]: "great number" is a purposedly vague qualifier: there is no strict definition about the number of atoms required for a molecule to be dubbed a macromolecule.
 
@@ -243,15 +247,15 @@ where $\vec R_\text{cm} = \frac{1}{N} \sum_{j = 1}^N \vec R_j$ is the position o
 
 $$
 \begin{aligned}
-\vec R_g^2 & = \frac{1}{N^2} \sum_{i = 1}^N \sum_{j = 1}^N (\vec R_i^2 - \vec R_i \cdot \vec R_j) = \frac{1}{2N^2}  \sum_{i = 1}^N \sum_{j = 1}^N (\vec R_i - \vec R_j)^2 \\
-& = \frac{1}{N^2}  \sum_{i = 1}^N \sum_{j > i}^N (\vec R_i - \vec R_j)^2,
+\vec R_g^2 & = \frac{1}{N^2} \sum_{i = 1}^N \sum_{j = 1}^N (\vec R_i^2 - \vec R_i \cdot \vec R_j) = \frac{1}{2N}  \sum_{i = 1}^N \sum_{j = 1}^N (\vec R_i - \vec R_j)^2 \\
+& = \frac{1}{N}  \sum_{i = 1}^N \sum_{j > i}^N (\vec R_i - \vec R_j)^2,
 \end{aligned}
 $$
 
 where we have first completed the square of the binomial by duplicating the double sum (hence the factor of 2 at the denominator), and then run the inner sum on monomers having index $j > i$, so that each pair of monomers only enters once in the double sum. The associated ensemble average is then
 
 $$
-\langle \vec R_g^2 \rangle = \frac{1}{N^2} \sum_{i = 1}^N \sum_{j > i}^N \langle (\vec R_i - \vec R_j)^2 \rangle.
+\langle \vec R_g^2 \rangle = \frac{1}{N} \sum_{i = 1}^N \sum_{j > i}^N \langle (\vec R_i - \vec R_j)^2 \rangle.
 $$ (eq:rg)
 
 The radius of gyration and end-to-end distance are closely related. For instance, for a freely-jointed chain, it can be demonstrated that 
@@ -277,6 +281,8 @@ where $\nu = 0.5$ for an ideal chain. Self-avoiding polymers, *i.e.* polymers wh
 [^flory_c_ratio]: It is larger than one since $\cos_{ii} = 1$, and the $i \neq j$ terms are all positive.
 
 ## DNA
+
+Let's go back to the cell. In order to function and, most importantly, to reproduce, every cell needs a set of instructions that specify which molecules should be built, and when. These instructions are stored in DNA which, as shown in [](#fig:cells), is enclosed in the nucleus in eukaryotes, and found in the nucleoid in prokaryotes.
 
 Deoxyribonucleic acid (DNA) is a macromolecule that stores the genetic information of an organism. DNA contains regions called genes, which encode for proteins to be produced. Other regions of the DNA contain regulatory elements, which partially influence the level of expression of each gene. Within the genetic code of DNA lies both the data about the proteins that need to be encoded, and the control circuitry, in the form of regulatory motifs.
 
@@ -315,6 +321,8 @@ Genome size ranges (in base pairs) of various life forms. Credits to [Abizar via
 
 ## Transcription and RNA
 
+Storing information is not enough: in order to be useful, it has to be read and acted upon. The first step of this process is *transcription*, during which the information contained in a gene is copied into a molecule of RNA, a nucleic acid that is chemically very similar to DNA.
+
 ```{figure} figures/transcription.svg
 :name: fig:transcription
 :align: center
@@ -325,7 +333,7 @@ A sketch showing three steps that lead to the synthesis of an mRNA: RNA polymera
 
 When a gene product is to be expressed, the associated DNA is partially unwound to form a "bubble", where the two strands are separated. At this point transcription, which is the process by which RNA is produced using a DNA template, can commence: RNA polymerase is recruited to the transcription start site by regulatory protein complexes, and then reads the DNA from the 3' to 5' direction, placing down complementary bases to form a messenger RNA (mRNA) strand[^mRNA_direction]. RNA uses the same nucleotides as DNA, except Uracil is used instead of Thymine.
 
-mRNA in eukaryotes experience post-translational modifications, or processes that edit the mRNA strand further, starting from the "pre-mRNA" molecule that is complementary to the template DNA strand of a gene. Most notably, a process called splicing removes introns, regions of the gene which don't code for protein, so that only the coding regions, the exons, remain. Different regions of the primary transcript may be spliced out to lead to different protein products (alternative splicing). In this way, an enormous number of different molecules may be generated based on different splicing permutations. In addition to splicing, both ends of the mRNA molecule are processed. The 5' end is capped with a modified guanine nucleotide, while at the 3' end, roughly 250 adenine residues are added to form a poly(A) tail. In most cases, the final molecule will be used by the cell machinery (and, in particular, by ribosomes) to synthesise proteins. As we will see in a moment, the base unit of a protein is an amino acid, and the information about what amino acid to add to the nascent protein is stored in the mRNA as a three-nucleotide sequence, also known as a *codon*.
+mRNA in eukaryotes experience post-transcriptional modifications, or processes that edit the mRNA strand further, starting from the "pre-mRNA" molecule that is complementary to the template DNA strand of a gene. Most notably, a process called splicing removes introns, regions of the gene which don't code for protein, so that only the coding regions, the exons, remain. Different regions of the primary transcript may be spliced out to lead to different protein products (alternative splicing). In this way, an enormous number of different molecules may be generated based on different splicing permutations. In addition to splicing, both ends of the mRNA molecule are processed. The 5' end is capped with a modified guanine nucleotide, while at the 3' end, roughly 250 adenine residues are added to form a poly(A) tail. In most cases, the final molecule will be used by the cell machinery (and, in particular, by ribosomes) to synthesise proteins. As we will see in a moment, the base unit of a protein is an amino acid, and the information about what amino acid to add to the nascent protein is stored in the mRNA as a three-nucleotide sequence, also known as a *codon*.
 
 RNA is not only the intermediary step to code a protein, but RNA molecules also have catalytic and regulatory functions. Though proteins are generally thought to carry out the main cellular functions, it has been shown that RNA molecules can have complex three-dimensional structures and perform diverse functions in the cell. In 1989 the Chemistry Nobel Prize was awarded to Thomas R. Cech and Sidney Altman for their "discovery of catalytic properties of RNA", which greatly contributed to the establishment of the concept of *ribozymes* (**ribo**nucleic acid en**zymes**), which are RNA molecules that have the ability to catalyze specific biochemical reactions.
 
@@ -341,6 +349,8 @@ The discovery of rybozymes contributed to the "RNA world" hypothesis, for which 
 [^mRNA_direction]: Since the template strand is read 3' $\to$ 5', the nascent mRNA is built in the 5' $\to$ 3' direction. 
 
 ## Translation and the genetic code
+
+The last step of the journey brings us to proteins, the macromolecules that carry out most of the work in the cell, and that will be discussed in detail in [](./proteins.md).
 
 Translation is the process by which the information encoded in mRNA is used to synthesize a protein. Unlike transcription, where the nucleotide sequence in DNA is transcribed into a corresponding nucleotide sequence in RNA, translation involves converting this nucleotide sequence into an amino acid sequence, forming the primary structure of the protein. Since there are 20 different amino acids and only 4 nucleotides, the mRNA is read in sets of three nucleotides, known as codons, each of which specifies a particular amino acid.
 

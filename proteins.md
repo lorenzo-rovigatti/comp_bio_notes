@@ -172,8 +172,8 @@ The rotation angle around a bond is called torsional or *dihedral* angle, which,
 
 $$
 \begin{aligned}
-\vec{n}_2 & = \overrightarrow{DC} \times \overrightarrow{CB}\\
-\vec{n}'_2 & = \overrightarrow{BC} \times \overrightarrow{CD} = -\vec{n}_2.
+\vec{n}_2 & = \overrightarrow{BC} \times \overrightarrow{CD}\\
+\vec{n}'_2 & = \overrightarrow{DC} \times \overrightarrow{CB} = -\vec{n}_2.
 \end{aligned}
 $$
 
@@ -584,10 +584,10 @@ The most common secondary structures found in proteins are helices (and $\alpha$
 (sec:protein_helices)=
 ## Helices
 
-A helix of length $n_0$ is a repetitive structure whereby the $C=O$ group of the $i$-th AA in thee chain is hydrogen-bonded to the $H-N$ group of a $(i + k)$-th residue, for $n_0$ consecutive values of $i$. In protein systems, a helix is identified by a name $k_N^{H}$, where:
+A helix of length $n_0$ is a repetitive structure whereby the $C=O$ group of the $i$-th AA in the chain is hydrogen-bonded to the $H-N$ group of a $(i + j)$-th residue, for $n_0$ consecutive values of $i$. In protein systems, a helix is identified by a name $k_N^{H}$, where:
 
 * $k$ is the number of residues per helical turn;
-* $N$ is the number of atoms in the ring closed by a hydrogen bond. For instance, the rings formed in a regular $k = 2$ helix are 7: $O :: H - N - C - C^\alpha - N - C$ (where the latter $C$ belongs to the $i$-th AA).
+* $N$ is the number of atoms in the ring closed by a hydrogen bond. For instance, the rings formed in a helix with $j = 2$ have size 7: $O :: H - N - C - C^\alpha - N - C$ (where the latter $C$ belongs to the $i$-th AA).
 * $H$ is the handedness of the helix: if we look down a helix (*i.e.* if AAs with higher index come towards us) and the $(i + 1)$-th AA is staggered in the counterclockwise direction with respect to the $i$-th the helix is *right-handed* (R), otherwise is left-handed (L).
 
 The helices that appear in proteins are $3_{10}^R$, $3.6_{13}^R$ (also known as $\alpha$-helix) and $4.4_{16}^R$ (also known as $\pi$ helix). Note that they are all right-handed[^R-helix]. The $\pi$-helix is uncommon since its open structure disfavours some stabilising van der Waals interactions, and it is rarely (if ever) present in canonical (*i.e.* regular) form[^pi-helix]. Therefore, we will not consider it any further.

@@ -707,7 +707,7 @@ Around hydrophilic regions of the protein, water molecules form hydration shells
 :align: center
 :width: 600
 
-Bidimensional distributions of water molecules as function of their dipole orientation and distance from the surface. Left: liquid-vapor interface; middle: hydrophilic talc (001) surface; right: hydrophobic mica (001) surface. The probability is normalised by the atomic density at the given distance. Red (blue) means higher (lower) probability.. Adapted from [](doi:10.1021/jp9018316).
+Bidimensional distributions of water molecules as function of their dipole orientation and distance from the surface. Left: liquid-vapor interface; middle: hydrophilic talc (001) surface; right: hydrophobic mica (001) surface. The probability is normalised by the atomic density at the given distance. Red (blue) means higher (lower) probability. Adapted from [](doi:10.1021/jp9018316).
 ```
 
 The hydration layers around the protein have a restricted mobility and orientation that reduce their ability to respond to an applied electric field, in turn affecting the dielectric constant, which takes values that, depending on the distance from and type and geometry of the protein's surface, can be much lower than in the bulk (where $\epsilon_r \approx 80$). The reduced dielectric environment enhances electrostatic interactions between charged groups, possibly influencing protein folding, stability, and interactions with other molecules, such as substrates, inhibitors, or other proteins. 
@@ -728,7 +728,7 @@ Moreover, structured water around proteins exhibits slower dynamics compared to 
 The Ramachandran general plot of the Top8000 PDB data set, with contour lines highlighting the 80th and 95th centile in blue and white, respectively. The yellow circles are the optimal dihedral angles of the regular secondary structures introduced in the previous section, where those of the left-handed $\alpha$-helix are the same as the $\alpha$-helix, taken with the opposite signs.
 ```
 
-The tertiary structure of proteins refers to the overall three-dimensional shape of a single polypeptide chain, resulting from the folding and interactions of its [secondary structural elements]((sec:secondary_structure)). Let's start by considering what is the geometry of the single residues that are part of well-folded proteins[^folded_proteins], which, as discussed [before](#sec:ramachandran), at first order we can assume to be fully described by the $\phi$ and $\psi$ dihedrals. 
+The tertiary structure of proteins refers to the overall three-dimensional shape of a single polypeptide chain, resulting from the folding and interactions of its [secondary structural elements](sec:secondary_structure). Let's start by considering what is the geometry of the single residues that are part of well-folded proteins[^folded_proteins], which, as discussed [before](#sec:ramachandran), at first order we can assume to be fully described by the $\phi$ and $\psi$ dihedrals. 
 
 [](#fig:ramachandran_secondary) shows the general[^general_Ramachandran] Ramachandran plot of 8000 well-characterised proteins, as well as the $(\phi, \psi)$ positions of the optimal secondary structure elements (perfect helices and $\beta$-sheets). It is evident that the majority of residues have dihedrals that are compatible with regular secondary structures. However, the probability distribution is not perfectly peaked at the optimal values (particularly for $\beta$-sheets), and it also exhibits considerable width. One obvious reason for this is that while there is a single "optimal" conformation for a given secondary structure, it is entropically favorable to adopt conformations that are close to this optimal state without incurring significant energetic penalties. 
 
@@ -899,7 +899,7 @@ While I will not delve[^delve] too much on the classification, which would be ou
 (fig:alpha_plus_beta)=
 ![The structure of human lysozyme.](figures/2nwd_lysozyme.png)
 
-Examples of $\alpha / \beta$ and $\alpha + \beta$ proteins. The left panels show the protein with a ribbon-like representation, while the right panels show the accessible surface of the same protein from the same proint of view. The two structures have been taken from [here]((https://www.rcsb.org/structure/1TIM)) and [here](https://www.rcsb.org/structure/2NWD).
+Examples of $\alpha / \beta$ and $\alpha + \beta$ proteins. The left panels show the protein with a ribbon-like representation, while the right panels show the accessible surface of the same protein from the same proint of view. The two structures have been taken from [here](https://www.rcsb.org/structure/1TIM) and [here](https://www.rcsb.org/structure/2NWD).
 ```
 
 The other two classes, $\alpha / \beta$ and $\alpha + \beta$, comprise proteins that contain both $\alpha$-helices and $\beta$-sheets. However, they differ in the order with which the secondary structures are arranged:

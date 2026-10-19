@@ -423,11 +423,11 @@ $$
 where $\mu_i = \mu_i^\circ + RT \log C_i/C^\circ$ is the chemical potential of species $i$ in an ideal dilute solution, and $\mu_i^\circ$ denotes its standard-state chemical potential, defined as the molar Gibbs free energy of $i$ at $C^\circ = 1$ M concentration. Combining the two expressions above gives
 
 $$
-K_{AB} = \exp\left[ -\frac{\mu_{AB}^\circ - \mu_{A}^\circ - \mu_{B}^\circ}{RT} \right] = \frac{C_AC_B}{C_{AB}}.
+\frac{C_AC_B}{C_{AB}} = K_{AB} = C^\circ \exp\left[ \frac{\mu_{AB}^\circ - \mu_{A}^\circ - \mu_{B}^\circ}{RT} \right].
 $$
 
 
-Since in units of kcal/mol the difference between the chemical potentials is the free-energy difference between the two states (with the minus sign, given the convention of NN models), $\Delta G_{AB}^\circ$, we write
+Since in units of kcal/mol the difference between the chemical potentials is the free-energy difference between the two states, $\Delta G_{AB}^\circ$, we write
 
 $$
 K_{AB} = C^\circ \exp\left( \beta \Delta G_{AB}^\circ \right),

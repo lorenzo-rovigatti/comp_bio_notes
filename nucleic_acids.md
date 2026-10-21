@@ -321,7 +321,7 @@ Most NN models requires adding a correction term to the free energy that depends
 
 ### Initiation and Symmetry Terms
 
-The formation of a double helix requires an initial free-energy input to overcome entropy and start the pairing process. The term has to be added once per contiguous double-stranded region or helix.
+The formation of a double strand requires an initial free-energy input to overcome entropy and start the pairing process. The term has to be added only if two separated strands hybridise into a duplex.
 
 In the presence of self-complementary duplexes (*i.e.* if the sequence of the two strands composing a duplex is palindromic), there is an additional purely entropic term that takes into account the fact that a strand can pair with a copy of itself. Here is an example:
 
@@ -615,8 +615,8 @@ A comparison between the average properties of the three main helical conformati
 
 | Form | Handedness | BPs per turn | Diameter ($\angstrom$) | Pitch ($\angstrom$) | BP inclination | Sugar pucker |
 | :--- | :--- | :---: | :---: | :---: | :---: | :--- |
-| B-DNA | Right | 10 | 20 | 34 | 0$^\circ$ | C2'-endo |
-| A-DNA/A-RNA | Right | 11 | 26 | 28 | 20$^\circ$ | C3'-endo |
+| B-DNA | Right | 10.5 | 20 | 34 | 0$^\circ$ | C2'-endo |
+| A-DNA/A-RNA | Right | 11 | 23 | 28 | 20$^\circ$ | C3'-endo |
 | Z-DNA | Left | 12 | 18 | 45 | -7$^\circ$ | alternating[^Z-DNA_pucker] |
 :::
 

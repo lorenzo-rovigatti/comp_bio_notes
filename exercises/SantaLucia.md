@@ -10,6 +10,8 @@ Remember to read the [homeworks](#sec:homeworks) section to understand what you 
 
 The SantaLucia (SL) model is the most famous (and widely-used) [nearest-neighbour model](#sec:NN_models) for DNA. The mandatory part of this assignment is to write two codes, one that computes the melting temperature of a double strand given its sequence, and another that computes the melting temperature of the secondary structure of a single strand.
 
+Use the two codes to study the dependence of the melting temperature on the fraction of $GC$ base pairs in randomly-generated sequences.
+
 The following instructions apply to the first code:
 
 1. The code takes as input the two strands that make up the double strand and check that they are the same length and fully complementary. **Nota Bene:** this check is not required if you decide to also include the terms that take care of mismatches. In this case, please also note that the SantaLucia review does not report the $\Delta H$ and/or $\Delta S$ contributions to the total $\Delta G$ of internal mismatches, but only the latter. The former can be found [here for C-T base-steps](doi:10.1093/nar/26.11.2694), and [here for G-A base-steps](doi:10.1021/bi9724873).

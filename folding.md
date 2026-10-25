@@ -249,7 +249,7 @@ $$ (eq:zimm_bragg_theta)
 For sufficiently long chains, $(\lambda_2 / \lambda_1)^N \ll 1$ and the expression can be greatly simplified:
 
 $$
-\theta_N \approx \frac{\lambda_1 - 1}{\lambda_1 - \lambda_2} \left( 1 - \frac{2}{N} \frac{\lambda_2}{\lambda_1 - \lambda_2} \right) \xrightarrow[N \to \infty]{} \frac{\lambda_1 - 1}{\lambda_1 - \lambda_2} = \frac{1}{2} + \frac{s - 1}{\sqrt{\left(\frac{s-1}{2}\right)^2 + \sigma s}}.
+\theta_N \approx \frac{\lambda_1 - 1}{\lambda_1 - \lambda_2} \left( 1 - \frac{2}{N} \frac{\lambda_2}{\lambda_1 - \lambda_2} \right) \xrightarrow[N \to \infty]{} \frac{\lambda_1 - 1}{\lambda_1 - \lambda_2} = \frac{1}{2} + \frac{s - 1}{2\sqrt{(s-1)^2 + 4\sigma s}}.
 $$
 
 The model as described and solved takes into account the cooperativity of the transition through the parameter $\sigma$. It is instructive to look at the non-cooperative solution, which can be obtained by setting $\sigma = 1$. In this case $\lambda_1 = 1 + s$ and $\lambda_2 = 0$, so that 

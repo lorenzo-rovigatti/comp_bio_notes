@@ -741,7 +741,7 @@ However, we can be more quantitative by taking a probabilistic approach. Here I 
 1. The alignment between the two sequences is due to chance and the sequences are, in fact, unrelated.
 2. The alignment is due to common ancestry and the sequences are actually related.
 
-Under the rather strict assumption ("biologically dubious, but mathematically convenient", as aptly put in [](doi:10.1038/nbt0804-1035)) that pairs of aligned residues are statistically independent of each other, so that the likelihoods associated to the two hypotheses, $P(S, T|R)$ and $P(S, T|U)$, can be expressed as products of probabilities, *viz.*
+Under the rather strict assumption ("biologically dubious, but mathematically convenient", as aptly put in [](doi:10.1038/nbt0804-1035)) that pairs of aligned residues are statistically independent of each other, the likelihoods associated to the two hypotheses, $P(S, T|R)$ and $P(S, T|U)$, can be expressed as products of probabilities, *viz.*
 
 $$
 \begin{aligned}
@@ -1140,9 +1140,9 @@ DEFINE K as the traceback matrix K
 DEFINE P as the list of base pairs
 
 FUNCTION traceback(i, j)
-    k = K(i, j)
     IF i > j
         RETURN
+    k = K(i, j)
     IF k == 0
         traceback(i + 1, j)
     ELSE
@@ -1153,7 +1153,7 @@ FUNCTION traceback(i, j)
 
 The recursion starts from the end, *i.e.* with `i = 0` and `j = N - 1`, and at the end of the procedure the list of base pairs is stored in `P`.
 
-Note that the complexity of the traceback algorithm is $O(N^2)$, since we move through a $N \times N$ matrix and perform a $\mathcal{O}(1)$ operation on each entry we visit.
+Note that the complexity of the traceback algorithm is $O(N)$, since we move through a $N \times N$ matrix but only visit a subset of cells, and perform a $\mathcal{O}(1)$ operation on each entry we visit.
 
 The Nussinov's algorithm is quite simplistic and comes with several limitations. In its naive implementation, the algorithm does not account for some important factors in RNA folding. Most notably, it does not take into account that, as we already know, stacking interactions between neighboring base pairs are crucial for RNA stability, at least as much as hydrogen bonding. To address this and other limitations, it is fundamental to incorporate biophysical factors into the prediction model. One improvement is to assign energies to structural elements rather than to individual base pairs, so that the total energy of the RNA structure becomes the sum of the energies of these substructures.
 
@@ -1201,7 +1201,7 @@ As before, $S_{i,j}$ is the subsequence $[i, j]$. For each $S_{i,j}$ we define
 * $W_{i,j}$ as the minimum free energy of the subsequence;
 * $V_{i,j}$ as the minimum free energy of all structures formed by $S_{i,j}$, in which $S_i$ and $S_j$ are paired with each other; if $S_i$ and $S_j$ cannot pair with each other, $V_{i,j} = \infty$. 
 
-The constraint on the minimum length of hairpin loops can be enforced by setting $V_{i,j} = \infty$ if $j - i \leq 4$, while $\hat{W}$ is initially set to 0. By constrast, if $j - i = d > 4$, $W_{i,j}$ and $V_{i,j}$ can be written in terms of $W_{k,l}$ and $V_{k,l}$ for various pairs $(k, l)$ for which $l - k < d$, *i.e.* in terms of the minimum energies of smaller substructures. The recursive relations for the two matrices, $\hat V$ and $\hat W$, both of size $N \times N$, can be found by considering the possible structures formed by $S_{i,j}$.
+The constraint on the minimum length of hairpin loops can be enforced by setting $V_{i,j} = \infty$ if $j - i \leq 3$, while $\hat{W}$ is initially set to 0. By constrast, if $j - i = d > 3$, $W_{i,j}$ and $V_{i,j}$ can be written in terms of $W_{k,l}$ and $V_{k,l}$ for various pairs $(k, l)$ for which $l - k < d$, *i.e.* in terms of the minimum energies of smaller substructures. The recursive relations for the two matrices, $\hat V$ and $\hat W$, both of size $N \times N$, can be found by considering the possible structures formed by $S_{i,j}$.
 
 ```{figure} figures/zuker_recursive_1.png
 :name: fig:zuker_recursive_1
@@ -1285,25 +1285,25 @@ V_{i, j}\\
 $$ (eq:W_recursion)
 
 :::{note} A simpler (but less obvious) recursive relation for $\hat W$
-If the $W_{i,j}$ entries with $j - i \leq 4$ are initialised to zero rather than $\infty$, Eq. [](#eq:W_recursion) can be rewritten as
+If the $W_{i,j}$ entries with $j - i \leq 3$ are initialised to zero rather than $\infty$, Eq. [](#eq:W_recursion) can be rewritten as
 
 $$
 W_{i,j} = \min \begin{cases}
 W_{i, j - 1}\\
-\min_{i \leq k < j - 4} \lbrace W_{i, k - 1} + V_{k, j} \rbrace.
+\min_{i \leq k < j - 3} \lbrace W_{i, k - 1} + V_{k, j} \rbrace.
 \end{cases}
 $$ (eq:W_recursion_simpler)
 
 This can be proven by rewriting the last case of Eq. [](#eq:W_recursion) so that the first term of the $\min$ argument is $W_{i, k - 1}$ rather than $W_{i, k}$, and the minimisation is carried out over the same values of $k$ of Eq. [](#eq:W_recursion_simpler), yielding
 
 $$
-\min_{i \leq k < j - 4} \lbrace W_{i, k - 1} + W_{k, j} \rbrace.
+\min_{i \leq k < j - 3} \lbrace W_{i, k - 1} + W_{k, j} \rbrace.
 $$
 
 First of all, note that, by construction, $j$ is always paired with $k$, so that $W_{k, j} = V_{k, j}$. Moreover, the new relation contains two additional terms compared to the original one: $W_{i + 1, j}$ and $(W_{i, i - 1} + V_{i, j}) = V_{i, j}$, which are equal to the first and third case of Eq. [](#eq:W_recursion), respectively.
 :::
 
-The recursive relations for $\hat V$ and $\hat W$ can be used in a dynamic programming code to obtain the optimal secondary structure of the full sequence $S$. Since there is the constraint on the minimal loop length, after initialisation we start filling the matrices from the $(N - 5, N - 1)$ entry, and continue from bottom to top and from left to right. As in Nussinov's algorithm, the energy of the optimal structure of the entire sequence will be stored at the end of the fill-in phase in the $W_{N - 1, 0}$ entry, and the optimal secondary structure itself can be retrieved by using traceback matrices.
+The recursive relations for $\hat V$ and $\hat W$ can be used in a dynamic programming code to obtain the optimal secondary structure of the full sequence $S$. Since there is the constraint on the minimal loop length, after initialisation we start filling the matrices from the $(N - 5, N - 1)$ entry, and continue from bottom to top and from left to right. As in Nussinov's algorithm, the energy of the optimal structure of the entire sequence will be stored at the end of the fill-in phase in the $W_{0, N-1}$ entry, and the optimal secondary structure itself can be retrieved by using traceback matrices.
 
 ```{figure} figures/multiloop.png
 :name: fig:multiloop

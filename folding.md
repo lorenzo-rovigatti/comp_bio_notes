@@ -1314,34 +1314,63 @@ An example of a multibranched loop with $k = 4$ and $k' = 4$. Interior edges are
 ```
 
 What is the algorithmic complexity of the method? In the last case of Eq. [](#eq:V_recursion), we minimise on the order of the multiloop, and on all its interior edges. This operation has an exponential complexity, and therefore completely kills the computational efficiency. There exist several approximations that can be leveraged to obtain a polynomial complexity. The most extreme one is given by Eq. [](#eq:V_recursion_simplified), which completely neglects the energetic penalty of the multiloop. A more realistic approximation is the following:
-
+ 
 $$
 F_M(i, j, i_1, j_1, \ldots, i_{k - 1}, j_{k - 1}) \approx a + b k + c k',
 $$
-
-where $k$ is the order of the loop, $k'$ is the number of unpaired bases within the loop (see [](#fig:multiloop)), and $a$, $b$ and $c$ are parameters, to be estimated experimentally. This approach makes use of another auxiliary matrix, $\hat M$, whose generic entry $M_{i,j}$ is the optimal energy of $S_{ij}$, with the constraint that $S_i$ and $S_j$ are part of an open multiloop. Since there is no valid "empty" multiloop state, initially all entries are set to zero, *i.e.* $M_{ij} = 0 \; \forall (i,j)$. The recursive relation takes into account the possibilities that $i$ and/or $j$ are unpaired, which contributes $c$, or are paired with each other, which contributes $b$, and therefore
-
+ 
+where $k$ is the order of the loop (*i.e.* the number of its interior edges, including the closing one), $k'$ is the number of unpaired bases within the loop (see [](#fig:multiloop)), and $a$, $b$ and $c$ are parameters, to be estimated experimentally. Since the cost is linear in $k$ and $k'$, it can be accumulated piece by piece while we move along the loop, in the same spirit as the [affine gap penalty](#sec:affine_gaps) in sequence alignment. To do so we need two auxiliary matrices, both describing a stretch $S_{i,j}$ that lies *inside* a multiloop, *i.e.* between the closing pair and its other branches:
+ 
+* $M^1_{i,j}$ is the optimal energy of $S_{i,j}$ given that it contains **exactly one** branch, which starts at $i$ (*i.e.* $i$ is paired to some $l \leq j$), followed by unpaired nucleotides up to $j$;
+* $M_{i,j}$ is the optimal energy of $S_{i,j}$ given that it contains **at least one** branch, with any number of unpaired nucleotides before, between and after the branches.
+In both cases the energy includes the $b$ contribution of each branch and the $c$ contribution of each unpaired nucleotide. The recursive relation for $\hat M^1$ follows from considering the last nucleotide: either $j$ is unpaired, or it closes the branch that starts at $i$:
+ 
 $$
-M_{i,j} = \min \begin{cases}
-M_{i, j - 1} + c\\
-M_{i + 1, j} + c\\
-\min_{i < k < j} \lbrace b + V_{i, k} + M_{k + 1, j} \rbrace \\
+M^1_{i,j} = \min \begin{cases}
+M^1_{i, j - 1} + c\\
+V_{i,j} + b.
 \end{cases}
+$$ (eq:M1_recursion)
+ 
+For $\hat M$ we look for the nucleotide $k$ at which the **last** branch starts. Everything from $k$ to $j$ is then described by $M^1_{k,j}$, while the part on its left, $S_{i,k-1}$, either contains no branches at all, and therefore costs $c (k - i)$, or contains at least one branch, and therefore costs $M_{i,k-1}$:
+ 
+$$
+M_{i,j} = \min_{i \leq k < j} \left\lbrace \min \left[ c (k - i), M_{i, k - 1} \right] + M^1_{k,j} \right\rbrace.
 $$ (eq:M_recursion)
-
-We can now rewrite the last case of Eq. [](#eq:V_recursion) by making use of the new matrix, obtaining
-
+ 
+Finally, a multiloop closed by $(i, j)$ must contain at least two branches. Splitting again at the start $k$ of the last branch, the left part $S_{i+1,k-1}$ must contain at least one branch, and the right part $S_{k, j-1}$ exactly one, so that the recursive relation for $\hat V$ becomes
+ 
 $$
 V_{i,j} = \min \begin{cases}
 F_H(i, j) \\
 F_S(i, j) + V_{i + 1, j - 1}\\
 \min_{i < k < l < j} \lbrace F_L(i, j, k, l) + V_{k, l} \rbrace\\
-a + M_{i+1, j-1},
+\min_{i + 1 < k < j} \lbrace a + b + M_{i + 1, k - 1} + M^1_{k, j - 1} \rbrace,
 \end{cases}
 $$ (eq:V_recursion_M)
-
-where the latter contribution takes into account the presence of a multiloop closed by $i$ and $j$. Note that the same result can be obtained more cleanly by using another auxiliary matrix, which makes integration with additional terms (*e.g. dangling ends) a bit more straightforward.
-The algorithmic complexity of the four cases are $\mathcal{O}(1)$, $\mathcal{O}(1)$, $\mathcal{O}(N^2)$ and $\mathcal{O}(1)$. Since there are $\sim N^2$ entries, the overall algorithmic complexity is $\mathcal{O}(N^4)$, and the required storage space is $\mathcal{O}(N^2)$, since only $N \times N$ matrices are used. The computational efficiency can be improved by limiting the size of a bulge or interior loop to some value (often taken to be $30$), which brings the complexity of the third case of Eq. [](#eq:V_recursion_M) down to $\mathcal{O}(1)$, and the overall algorithmic complexity down to $\mathcal{O}(N^3)$.
+ 
+where the $b$ in the last case is the contribution of the closing pair $(i, j)$. Since there is no such thing as an "empty" multiloop or a multiloop with a single branch, $M_{i,j}$ and $M^1_{i,j}$ are initialised to $+\infty$: they become finite only once a branch fits in $S_{i,j}$, *i.e.* once $V_{i,j}$ (or $V_{i,l}$ for some $l < j$) is finite. Note that every structure is generated exactly once by these relations: the last branch, its starting point $k$, and the presence or absence of branches to its left are all uniquely defined. This is irrelevant when minimising, but it becomes essential when the same decomposition is used to compute partition functions (see [the McCaskill algorithm](#sec:mccaskill)).
+ 
+:::{warning} Why so many cases?
+It is tempting to use a single auxiliary matrix, for instance
+ 
+$$
+M_{i,j} = \min \begin{cases}
+M_{i, j - 1} + c\\
+M_{i + 1, j} + c\\
+\min_{i < k < j} \lbrace b + V_{i, k} + M_{k + 1, j} \rbrace
+\end{cases}
+$$
+ 
+together with $a + M_{i+1,j-1}$ as the multiloop case of $\hat V$. However, this recursion does not work, regardless of the initialisation:
+ 
+* If $\hat M$ is initialised to zero, then $M_{i,j}$ is finite even if $S_{i,j}$ contains no branches at all. As a result, $a + M_{i+1, j-1}$ can describe a hairpin (no branches) or a bulge/interior loop (one branch) as if it were a multiloop. Whenever $a$ is smaller than the actual hairpin or interior-loop penalties, as is the case with realistic parameters, these fake multiloops are preferred and the predicted MFE is too low. Moreover, $M_{i,i} = 0$ means that the last unpaired nucleotide does not pay its $c$.
+* If $\hat M$ is initialised to $+\infty$, then the recursion never terminates: the third case always requires another (infinite) $M$ on the right of the branch, so that $\hat M$ stays infinite and multiloops are never formed.
+* In both cases a branch can never end at $j$ (since $k < j$), and nothing forces the multiloop to contain at least two branches.
+The two matrices $\hat M$ and $\hat M^1$ solve all these problems. This is the approach used, for instance, in ViennaRNA, and it is also the one introduced by McCaskill to compute partition functions.
+:::
+ 
+The algorithmic complexity of the four cases of Eq. [](#eq:V_recursion_M) is $\mathcal{O}(1)$, $\mathcal{O}(1)$, $\mathcal{O}(N^2)$ and $\mathcal{O}(N)$, while filling $\hat M^1$ and $\hat M$ costs $\mathcal{O}(1)$ and $\mathcal{O}(N)$ per entry, respectively. Since there are $\sim N^2$ entries, the overall algorithmic complexity is $\mathcal{O}(N^4)$, and the required storage space is $\mathcal{O}(N^2)$, since only $N \times N$ matrices are used. The computational efficiency can be improved by limiting the size of a bulge or interior loop to some value (often taken to be $30$), which brings the complexity of the third case of Eq. [](#eq:V_recursion_M) down to $\mathcal{O}(1)$, and the overall algorithmic complexity down to $\mathcal{O}(N^3)$.
 
 A very nice (but not necessarily easy to read) open-source implementation of the Zuker's algorithm can be found [here](https://github.com/Lattice-Automation/seqfold).
 
@@ -1355,13 +1384,13 @@ $$
 p(P) = \frac{e^{-\beta E_P}}{\sum_{P' \in \mathcal{P}} e^{-\beta E_{P'}}} \equiv \frac{e^{-\beta E_P}}{Q},
 $$
 
-where $E_P$ is the energy of secondary structure $P$, and $Q$ is the partition function. We now look for a recursive relation to compute the partition function of a sequence $S$. Given a subsequence $S_{ij}$, $i$ is either unpaired, or it is paired with the $k$-th nucleotide, where $i < k \leq j$. For the first case, the partition function is that of the smaller subsequence $[i + 1, j]$, $Q_{i + 1, j}$. For the latter case, the $(i, k)$ edge splits the subsequence in two independent subproblems, and the overall partition function is given by the product of their partition functions, $Q_{k + 1, j}$ and $Q_{i + 1, k - 1} q_{i, k}$, where $q_{i, k} \equiv e^{-\beta \Delta G_{i, k}}$ is the statistical weight of the base pair formed by $S_k$ and $S_j$. Look at [](#fig:nussinov) and you will realise that it is the same splitting! The total partition function will be a sum over all these cases, *viz*
+where $E_P$ is the energy of secondary structure $P$, and $Q$ is the partition function. We now look for a recursive relation to compute the partition function of a sequence $S$. Given a subsequence $S_{ij}$, $i$ is either unpaired, or it is paired with the $k$-th nucleotide, where $i < k \leq j$. For the first case, the partition function is that of the smaller subsequence $[i + 1, j]$, $Q_{i + 1, j}$. For the latter case, the $(i, k)$ edge splits the subsequence in two independent subproblems, and the overall partition function is given by the product of their partition functions, $Q_{k + 1, j}$ and $Q_{i + 1, k - 1} q_{i, k}$, where $q_{i, k} \equiv e^{-\beta \Delta G_{i, k}}$ is the statistical weight of the base pair formed by $S_i$ and $S_k$. Look at [](#fig:nussinov) and you will realise that it is the same splitting! The total partition function will be a sum over all these cases, *viz*
 
 $$
 Q_{i,j} = Q_{i + 1, j} + \sum_{i < k \leq j} Q_{k + 1, j} Q_{i + 1, k - 1} q_{i, k}.
 $$ (eq:mccaskill)
 
-This relation makes it possible to write down a dynamic programming code that fill the $\hat Q$ matrix with a complexity $\mathcal{O}(N^3)$. As before, the partition function of the sequence is found in the $Q_{0, N-1}$ entry.
+This relation makes it possible to write down a dynamic programming code that fill the $\hat Q$ matrix with a complexity $\mathcal{O}(N^3)$. The matrix should be initialised so that $Q_{i, j} = 1.0$ for $|i - j| < 2$ (*i.e.* there is only one possible state for sequences as short as those one). As before, at the end of the fill-in phase the partition function of the sequence is found in the $Q_{0, N-1}$ entry. 
 
 :::{note} The connection with Nussinov's algorithm
 Here I'm implicitly using a simplified version of the McCaskill algorithm, where the overall energy is only due to base pairing. If you look closely, you will notice that there is a direct connection between Eq. [](#eq:mccaskill) and Eq. [](#eq:nussinov), which is summarised in the following table (adapted from the Appendix C of @finkelstein2016protein):
@@ -1372,7 +1401,7 @@ Here I'm implicitly using a simplified version of the McCaskill algorithm, where
 | Minimisation | Summation |
 | Summation | Multiplication |
 
-Therefore, it is possible to turn any MFE algorithm into an algorithm that can compute partition functions, provided that there is no overlap between the cases appearing in the recursive relations of the former, *i.e.* that some structures are counted more than once. Indeed, ambiguous decompositions (as they are called) are not a problem when carrying out a minimisation, but they are when doing a summation...
+Therefore, it is possible to turn any MFE algorithm into an algorithm that can compute partition functions, provided that there is no overlap between the cases appearing in the recursive relations of the former, *i.e.* that no structure is counted more than once. Indeed, ambiguous decompositions (as they are called) are not a problem when carrying out a minimisation, but they are when doing a summation...
 :::
 
 How can we use the information contained in the partition function to obtain the equilibrium (structural) ensemble of the strand? The most granular information we can compute is the probability that two nucleotides $i$ and $j$ are base paired, $p(i, j)$. However, in order to do so we first have to introduce the auxiliary matrix $\hat Q^{\rm bp}$, whose generic entry $Q^{\rm bp}_{i,j}$ stores the partition function of the subsequence $S_{i,j}$, with the constraint that nucleotides $i$ and $j$ form the $(i, j)$ base pair. Its recursive relation is
@@ -1391,6 +1420,19 @@ Q_{i,j} = Q_{i + 1, j} + \sum_{i < k \leq j} Q_{k + 1, j} Q^{\rm bp}_{i, k}.
 $$
 
 Note that with this formalism it is easier to employ more realistic energy functions by adding contributions (due to interior and multiloops, for instance) to Eq. [](#eq:mccaskill_bp), in analogy with the strategy devised by Zuker. See [here](doi:10.1186/1748-7188-6-3) for additional details.
+
+:::{note} Multiloops in McCaskill's algorithm
+The decomposition of Eqs. [](#eq:M1_recursion), [](#eq:M_recursion) and [](#eq:V_recursion_M) is unambiguous, and can therefore be turned into partition functions with the rules of the table above. Defining $Q^{m1}_{i,j}$ and $Q^m_{i,j}$ as the partition-function counterparts of $M^1_{i,j}$ and $M_{i,j}$, we have
+ 
+$$
+\begin{aligned}
+Q^{m1}_{i,j} &= Q^{m1}_{i,j-1} e^{-\beta c} + Q^{\rm bp}_{i,j} e^{-\beta b}\\
+Q^m_{i,j} &= \sum_{i \leq k < j} \left[ e^{-\beta c (k - i)} + Q^m_{i,k-1} \right] Q^{m1}_{k,j},
+\end{aligned}
+$$
+ 
+and the multiloop contribution to $Q^{\rm bp}_{i,j}$ is $e^{-\beta (a + b)} \sum_{i+1 < k < j} Q^m_{i+1,k-1} Q^{m1}_{k,j-1}$ (to be multiplied by $q_{i,j}$ if, as in the simplified model above, the pair itself carries an energy). All these quantities are initialised to zero, the counterpart of $+\infty$.
+:::
 
 ```{figure} figures/mccaskill_prob.png
 :name: fig:mccaskill_prob

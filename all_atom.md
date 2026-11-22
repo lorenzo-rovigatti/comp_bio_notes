@@ -181,7 +181,7 @@ Add part about smoothing
 
 ### Minimum image convention and periodic boundary conditions
 
-The number of particles in a modern-day simulation ranges from hundreds to millions, thus being very far from the thermodynamic limit. Therefore, it is not surprising that finite-size effects are always present (at least to some extent). In particular, the smaller the system, the larger boundary effects are: since in 3D the volume scales as $N^3$ and the surface as $N^2$, the fraction of particles that are on the surface scales as $N^{-1/3}$, which is a rather slowly decreasing function of $N$. For instance, if $N = 1000$, in a cubic box of volume $V = L^3$ more than half of the particles are on the surface. One would have to simulate $\approx 10^6$ particles to see this fraction decrease below $10\%$!
+The number of particles in a modern-day simulation ranges from hundreds to millions, thus being very far from the thermodynamic limit. Therefore, it is not surprising that finite-size effects are always present (at least to some extent). In particular, the smaller the system, the larger boundary effects are: since in 3D the volume scales as $N^3$ and the surface as $N^2$, the fraction of particles that are on the surface scales as $N^{-1/3}$, which is a rather slowly decreasing function of $N$. For instance, if $N = 1000$, in a cubic box of volume $V = L^3$ about half of the particles are on the surface. One would have to simulate $\approx 10^6$ particles to see this fraction decrease below $10\%$!
 
 Those pesky boundary effects can be decreased by using periodic boundary conditions (PBCs): we get rid of the surface by considering the volume containing the system, which is often but not always a cubic box, one cell of an infinite periodic lattice made of identical cells. Then, each particle $i$ iteracts with any other particle: not only with those in the original cell, but also with their "images", including its own images, contained in all the other cells. For instance, the total energy of a (pairwise interacting) cubic system of side length $L$ simulated with PBCs would be
 
@@ -308,7 +308,7 @@ The Velocity Verlet algorithm is [*symplectic*](https://en.wikipedia.org/wiki/Sy
 
 Since we are discretising the equations, there are two caveats associated to the energy conservation:
 
-1. If the time step $\Delta t$ is too large, then a deviation (drift) from the "correct" value of the energy will be observed. A good rule of thumb to avoid an energy drift, which would invalidate the simulation, is to calculate the highest vibrational frequency associated to the interaction potential employed, $\omega_c \equiv \sqrt{k_c / m}$, where $k_c$ is the highest curvature of the potential, *i.e.* the largest value of $d^2V(r)/dr^2$, and $m$ is the mass of the particle. Then, a sensible value for the integration time step is an order of magnitude less than the characteristic time associated to $\omega_c$, *i.e.* $\Delta t \approx \frac{1}{10} \frac{2 \pi }{\omega_c} \approx \frac{1}{omega_c}$.
+1. If the time step $\Delta t$ is too large, then a deviation (drift) from the "correct" value of the energy will be observed. A good rule of thumb to avoid an energy drift, which would invalidate the simulation, is to calculate the highest vibrational frequency associated to the interaction potential employed, $\omega_c \equiv \sqrt{k_c / m}$, where $k_c$ is the highest curvature of the potential, *i.e.* the largest value of $d^2V(r)/dr^2$, and $m$ is the mass of the particle. Then, a sensible value for the integration time step is an order of magnitude less than the characteristic time associated to $\omega_c$, *i.e.* $\Delta t \approx \frac{1}{10} \frac{2 \pi }{\omega_c} \approx \frac{1}{\omega_c}$.
 2. If the value of $\Delta t$ is appropriate, then the energy will be conserved *on average*, meaning that it will fluctuate around its average value with an amplitude, $\delta U \equiv \sqrt{\langle \Delta U^2 \rangle}$. If the integrator is of the Verlet family (*i.e.* Velocity Verlet), then $\delta U \sim \Delta t^2$. This behaviour can be exploited to ensure that codes and simulations are working correctly, at least from the point of view of the energy conservation. See [](#fig:energy_conservation) for an example.
 
 ```{figure} figures/energy_conservation.png
@@ -540,7 +540,7 @@ The elecrostatic effect due to point charges can be seen as a sum of screend cha
 The contribution to the electrostatic potential at a point $r$ due to a set of screened charges can be easily computed by direct summation, because the
 electrostatic potential due to a screened charge is a rapidly decaying function of $r$. However, we must correct for the fact that we have added a screening charge cloud to every particle. This is shown schematically in [](#fig:ewald). This compensating charge density varies smoothly in space (because the screening charge distribution is a smoothly varying function!). We now wish to compute the electrostatic energy at the site of ion $i$. Of course, we should exclude the electrostatic interaction of the ion with itself. We have three contributions to the electrostatic potential: first of all, the one due to the point charges $\{q_j\}$, secondly, the one due to the Gaussian screening charge clouds with charge $-\{q_j\}$ , and finally the one due to the compensating charge clouds with charge $\{q_j\}$. In order to exclude Coulomb self-interactions, we should not include  these three contributions with $j = i$ to the electrostatic potential at the position of ion $i$. However, it turns out that it is convenient to retain the contribution due to the compensating charge distribution and correct for the resulting spurious interaction afterwards. The reason we retain the compensating charge cloud for ion $i$ is that, if we do so, the compensating charge distribution is not only a smoothly varying function, but it is also periodic. Such a function can be represented by a (rapidly converging) Fourier series, and this turns out to be essential for the numerical implementation. Of course, in the end we should correct for the inclusion of a spurious "self" interaction between the ion and the compensating charge cloud.
 
-Considering screening Gaussians with width $\sqrt{2/\alpha}$, the splitting can be written as follows:
+Considering screening Gaussians with width $(\sqrt{2}\alpha)^{-1}}$, the splitting can be written as follows:
 
 $$
 \frac{1}{r_{ij}} = \frac{\text{erfc}(\alpha r_{ij})}{r_{ij}} + \frac{\text{erf}(\alpha r_{ij})}{r_{ij}},
@@ -557,7 +557,7 @@ $$
 * The real-space contribution to the total energy, $E_{\text{real}}$ is given by:
 
   $$
-  E_{\text{real}} = \sum_{i=1}^N \sum_{j \neq i}^N \frac{q_i q_j \, \text{erfc}(\alpha r_{ij})}{r_{ij}},
+  E_{\text{real}} = \sum_{i=1}^N \sum_{j < i}^N \frac{q_i q_j \, \text{erfc}(\alpha r_{ij})}{r_{ij}},
   $$
 
   where the sum is truncated at the cut-off distance $r_c$.
@@ -580,17 +580,19 @@ Note that there are many subtleties that are linked to the boundary conditions t
 
 For fixed values of $k_c$ and $r_c$, the algorithmic time scales as $\mathcal{O}(N^2)$. However, this behaviour can be improved by realising that there are values of the cut-offs that minimise the error due to the truncations. Using these values, that depend on $N$, the complexity can be brought down to $\mathcal{O}(N^{3/2})$.
 
-A further scaling improvement can be obtained by using the so-called Particle Mesh Ewald method ([](doi:10.1063/1.464397)). In the PME method, the basic idea is to use Poisson's equation to compute the potential. Indeed, Poisson's equation $\nabla^2 V(\vec r) = -\frac{\rho(\vec r)}{\epsilon_0}$ can be easily solved in Fourier space, where it takes the form
+A further scaling improvement can be obtained by using the so-called Particle Mesh Ewald method ([](doi:10.1063/1.464397)). In the PME method, the basic idea is to use Poisson's equation to compute the potential. Indeed, $\nabla^2 V(\vec r) = -\frac{\rho(\vec r)}{\epsilon_0}$[^SI_vs_gaussian] can be easily solved in Fourier space, where it takes the form
 
 $$
 k^2 \tilde \phi(\vec k) = \frac{\tilde \rho(\vec k)}{\epsilon_0},
 $$ (eq:poisson_fourier)
 
+[^SI_vs_gaussian]: This time we use SI rather than Gaussian units.
+
 where $\tilde A(\vec k)$ is the Fourier transform of $A(\vec r)$. Leveraging Eq. [](#eq:poisson_fourier), in the PME method the reciprocal space contribution to electrostatic interactions is computed through the following series of steps that involve transforming particle charges into a charge density on a grid, applying Fourier transforms, and then transforming back to obtain the forces and energies:
 
 1. Assign each particle's charge to a regular 3D grid that spans the simulation box. This is achieved through an interpolation scheme, where each particle's charge is "spread" over multiple neighboring grid points. The most common method is B-spline interpolation (see [](doi:10.1063/1.470117) for details).
 2. Once the charges are mapped onto the grid, the Fourier transform of the grid-based charge density is computed. This is done by using the Fast Fourier Transform (FFT), an efficient algorithm for performing discrete Fourier transforms, with a computational complexity of $\mathcal{O}(N \log N)$.
-3. In Fourier space, the electrostatic potential for each grid point at wave vector is computed by first applying the Ewald screening function (*i.e.* Eq. [](#eq:ewald_reciprocal)) to obtain the charge density, and then solving the Poisson equation.
+3. In Fourier space, the electrostatic potential for each grid point at wave vector is computed by first applying the Ewald screening function (*i.e.* Eq. [](#eq:ewald_reciprocal)) to obtain the charge density, and then solving the Poisson's equation.
 4. Once the reciprocal-space potential has been calculated, an inverse Fourier transform is applied to convert the potential back to real space on the grid, yielding the electrostatic potential on each grid point in the simulation box.
 5. The final step is to interpolate the grid-based potential back to the positions of the actual particles, which allows the forces and energies to be computed for each particle based on the smoothed potential field. This is essentially the reverse of the initial charge assignment process, with each particle's force interpolated from the neighboring grid points.
 
@@ -618,7 +620,7 @@ As soon as a thermostat is coupled to the system, the energy will not be conserv
 (sec:andersen_thermostat)=
 ### Andersen
 
-The Andersen thermostat is a widely used method in molecular dynamics simulations for controlling temperature, introduced by [Hans C. Andersen in 1980](doi:10.1063/1.439486). Its fundamental idea is to maintain a system's temperature by coupling the particles to an external heat bath through random collisions. In this approach, particles in the simulation periodically undergo stochastic collisions with a fictitious heat bath, resulting in velocity reassignment according to a Maxwell-Boltzmann distribution that corresponds to the desired temperature. This random reassignment of velocities, which can be considered as a Monte Carlo move that transports the system from one constant-energy shell to another, mimicking the effect of a thermal reservoir, ensuring that the system reaches and maintains thermal equilibrium.
+The Andersen thermostat is a widely used method in molecular dynamics simulations for controlling temperature, introduced by [Hans C. Andersen in 1980](doi:10.1063/1.439486). Its fundamental idea is to maintain a system's temperature by coupling the particles to an external heat bath through random collisions. In this approach, particles in the simulation periodically undergo stochastic collisions with a fictitious heat bath, resulting in velocity reassignment according to a Maxwell-Boltzmann distribution that corresponds to the desired temperature. This random reassignment of velocities, which can be considered as a Monte Carlo move that transports the system from one constant-energy shell to another, mimicking the effect of a thermal reservoir, ensures that the system reaches and maintains thermal equilibrium. However, since the collisions occur randomly by changing the momenta of single particles, the Andersen thermostat does not conserve the total momentum.
 
 The thermostat has a parameter $\nu$ that is the frequency of stochastic collisions, which represents the strength of the coupling to the heat bath: by adjusting this collision frequency, the user can control how frequently the system interacts with the heat bath, thus influencing the rate at which the system equilibrates. In practice, at each time step each particle has a probability $\nu \Delta t$ of undergoing a collision, *i.e.* of being reassigned a velocity from a Maxwell-Boltzmann distribution corresponding to the target temperature. This scheme reproduced the canonical ensemble, since temperature fluctuations align with those expected from statistical mechanics. 
 

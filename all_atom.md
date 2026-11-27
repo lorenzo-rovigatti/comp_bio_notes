@@ -633,10 +633,10 @@ The Nosé-Hoover thermostat is a more sophisticated method for controlling tempe
 The extended Lagrangian formalism starts by introducing a scaling factor, $s$, that modifies the velocities of particles in the system ([](doi:10.1080/00268978400101201)). The extended Lagrangian for the Nosé-Hoover thermostat is expressed as:
 
 $$
-L = \sum_{i=1}^{N} \frac{m_i}{2} \left( \frac{ \dot{\vec r}_i }{s} \right)^2 - V(\{ \vec{r}_i \}) - N_f k_B T \log s,
+L = \sum_{i=1}^{N} \frac{m_i}{2} s^2 \dot{\vec r}_i^2 + \frac{Q}{2}\dot{s}^2 - V(\{ \vec{r}_i \}) - N_f k_B T \log s,
 $$
 
-where $m_i$ and $\dot{\vec r}_i = \vec v_i$ are the mass and velocity particle $i$, $V(\{r\})$ is the potential energy of the system, and the term $N_f k_B T \ln(s)$, where $N_f$ is the number of degrees of freedom, introduces the necessary coupling between the system and the heat bath. The auxiliary variable $s$ is responsible for controlling the temperature by scaling the velocities of the particles so that the system's kinetic energy corresponds to the target temperature.
+where $m_i$ and $\dot{\vec r}_i = \vec v_i$ are the mass and velocity particle $i$, $V(\{r\})$ is the potential energy of the system, the term $N_f k_B T \ln(s)$, where $N_f$ is the number of degrees of freedom, introduces the necessary coupling between the system and the heat bath and $Q$ is a parameter that controls its strength. The auxiliary variable $s$ is responsible for controlling the temperature by scaling the velocities of the particles so that the system's kinetic energy corresponds to the target temperature.
 
 The dynamics of the system are then derived from this Lagrangian. The equations of motion for the positions and velocities of the particles are modified by the thermostat, resulting in:
 
@@ -647,15 +647,15 @@ $$
 where $\vec F_i$ is the force acting on particle $i$, and the term $\zeta \equiv \dot{s} / s$ is a friction-like coefficient that emerges from the thermostat variable. This friction term adjusts the particle velocities in response to deviations from the target temperature, ensuring that the system remains at the correct thermal equilibrium, and evolves according to:
 
 $$
-\ddot{\zeta} = \frac{1}{Q} \left( \sum_{i=1}^{N} \frac{\vec p_i^2}{m_i} - N_f k_B T \right),
+\dot{\zeta} = \frac{1}{Q} \left( \sum_{i=1}^{N} \frac{\vec p_i^2}{m_i} - N_f k_B T \right),
 $$
 
-where $Q$ is a parameter that controls the strength of the coupling between the system and the thermostat, $\vec p_i = m \vec r_i$ is the momentum conjugate to $\vec r_i$, so that $\sum_{i=1}^{N} \frac{\vec p_i^2}{m_i}$ is the total kinetic energy of the system, and $N_f k_B T$ represents the target thermal energy. If the system's kinetic energy exceeds the desired value, the variable $\zeta$ increases, effectively damping the particle velocities to bring the temperature back in line. Conversely, if the kinetic energy is too low, $\zeta$ decreases, allowing the velocities to rise and the temperature to stabilize at the target value. The "inertia" of this process is controlled by the value of $Q$, which therefore plays the role of a fictitious mass. This deterministic feedback mechanism distinguishes the Nosé-Hoover thermostat from stochastic approaches. By continuously adjusting the velocities of all particles, this method preserves the natural evolution of the system’s dynamics while still achieving temperature control. The benefit of using this extended Lagrangian framework is that it allows for smooth, continuous temperature regulation without disrupting important dynamical properties, such as diffusion coefficients or time-dependent correlations.
+$\vec p_i = m \dot{\vec r}_i$ is the momentum conjugate to $\vec r_i$, so that $\sum_{i=1}^{N} \frac{\vec p_i^2}{m_i}$ is the total kinetic energy of the system, and $N_f k_B T$ represents the target thermal energy. If the system's kinetic energy exceeds the desired value, the variable $\zeta$ increases, effectively damping the particle velocities to bring the temperature back in line. Conversely, if the kinetic energy is too low, $\zeta$ decreases, allowing the velocities to rise and the temperature to stabilize at the target value. The "inertia" of this process is controlled by the value of $Q$, which therefore plays the role of a fictitious mass. This deterministic feedback mechanism distinguishes the Nosé-Hoover thermostat from stochastic approaches. By continuously adjusting the velocities of all particles, this method preserves the natural evolution of the system’s dynamics while still achieving temperature control. The benefit of using this extended Lagrangian framework is that it allows for smooth, continuous temperature regulation without disrupting important dynamical properties, such as diffusion coefficients or time-dependent correlations.
 
 Note that the above equations of motion conserve the following quantity
 
 $$
-U_\text{NH} = \sum_{i=1}^N \frac{\vec p_i^2}{m_i} + V(\{ r \}) + \frac{\zeta^2 Q}{2} + N_f k_B T \log s,
+U_\text{NH} = \sum_{i=1}^N \frac{\vec p_i^2}{2 m_i} + V(\{ r \}) + \frac{\zeta^2 Q}{2} + N_f k_B T \log s,
 $$
 
 which can be used as a check when implementing the thermostat, or when testing the simulation parameters (*e.g.* the time step). [](doi:10.1103/PhysRevA.34.2499) demonstrated that the above equations of motion are unique, in the sense that different equations of the same form (*i.e.* containing an additional friction-like parameter) cannot lead to a canonical distribution. However, the simulation samples from the canonical distribution *only* if there is a single non-zero constant of motion, the energy. If there are more conservation laws, which can happen, for instance, if there are no external forces and the total momentum of the system is different from zero, than the Nosé-Hoover method does not work any more.
@@ -674,7 +674,7 @@ As demonstrated in [](doi:10.1063/1.463940), this issue can be overcome by coupl
 
 $$
 \begin{aligned}
-\ddot{\vec r}_i &= \frac{\vec F_i}{m_i} - \zeta \dot{\vec r}_i\\
+\ddot{\vec r}_i &= \frac{\vec F_i}{m_i} - \zeta_1 \dot{\vec r}_i\\
 \dot \zeta_k & = \frac{p_{\zeta_k}}{Q_k}\\
 \dot p_{\zeta_1} &= \left( \sum_{i=1}^{N} \frac{\vec p_i^2}{m_i} - g k_B T \right) -  \frac{p_{\zeta_2}}{Q_2} p_{\zeta_1}\\
 \dot p_{\zeta_k} &= \left[ \frac{p^2_{\zeta_{k-1}}}{Q_{k-1}} - k_BT \right] - \frac{p_{\zeta_{k+1}}}{Q_{k+1}} p_{\zeta_k}\\
@@ -731,12 +731,12 @@ $$
 dK = (K - K(t)) \frac{dt}{\tau} + 2 \sqrt{\frac{K(t)K}{N_f}} \frac{dW}{\sqrt{\tau}},
 $$ (eq:bussi)
 
-where $N_f$ is the number of degrees of freedom in the system. Since the total momentum is conserved, $N_f = 3N - 1$ in a 3D simulation. With some non-trivial math [](doi:10.1063/1.2408420) demonstrated that Eq. [](#eq:bussi) yields the following scaling factor:
+where $N_f$ is the number of degrees of freedom in the system. Since the total momentum is conserved, $N_f = 3N - 3$ in a 3D simulation. With some non-trivial math [](doi:10.1063/1.2408420) demonstrated that Eq. [](#eq:bussi) yields the following scaling factor:
 
 $$
 \begin{aligned}
 \alpha^2 &= e^{-\Delta t / \tau} + \frac{K}{N_f K(m)} \left( 1 - e^{-\Delta t / \tau} \right) \left( R_1^2 + \sum_{i = 2}^{N_f} R_i^2 \right)\\
-& + 2 R_1 e^{-\Delta t / \tau} \sqrt{\frac{K}{N_f K(m)} \left( 1 - e^{-\Delta t / \tau} \right) },
+& + 2 R_1 e^{-\Delta t / 2\tau} \sqrt{\frac{K}{N_f K(m)} \left( 1 - e^{-\Delta t / \tau} \right) },
 \end{aligned}
 $$
 
@@ -753,7 +753,7 @@ One way of doing this would be to randomly extract a value $\bar K$ from Eq. [](
 As for the Nosé-Hoover thermostat, this thermostat, which is sometimes called the stochastic velocity rescaling thermostat, has an associated conserved quantity that can be used to check the choice of the time step and of the other simulation parameters:
 
 $$
-U_\text{BDP} = \sum_{i=1}^N \frac{\vec p_i^2}{m_i} + V(\{ r \}) - \int_0^t (K - K(t')) \frac{dt'}{\tau} - 2 \int_0^t \sqrt{ \frac{K(t')K}{N_f}} \frac{dW(t')}{\sqrt{\tau}}
+U_\text{BDP} = \sum_{i=1}^N \frac{\vec p_i^2}{2 m_i} + V(\{ r \}) - \int_0^t (K - K(t')) \frac{dt'}{\tau} - 2 \int_0^t \sqrt{ \frac{K(t')K}{N_f}} \frac{dW(t')}{\sqrt{\tau}}
 $$
 
 [^continuous_berendsen]: Square both sides, then multiply everything by $K(t)$ and note that $\alpha^2 K(t) - K(t) = dK$.
@@ -764,8 +764,8 @@ $$
 
 There are many other thermostats, which I will not introduce here because of time constraints. Here I list a few, just for reference:
 
-* Langevin thermostats for systems where the dynamics is overdamped. Examples are particles dispersed in a viscous fluid.
-* Brownian thermostats for systems where inertia is negligible. Examples are concentrated suspensions of colloids or bacteria.
+* Langevin thermostats for systems where particles are subject to friction and noise. Examples are particles dispersed in a viscous fluid.
+* Brownian thermostats for systems where the dynamics is overdamped (*i.e.* inertia is negligible). Examples are concentrated suspensions of colloids or bacteria.
 * Stochastic rotational dynamics to model hydrodynamic interaction. Examples are diluted solutions of colloids or bacteria where long-range hydrodynamic effects are important and of interest (*e.g.* sedimentation or flocking).
 
 :::{important}
@@ -787,14 +787,14 @@ $$
 \dot{\vec r_i} &= \frac{\vec p_i}{m_i} + \frac{p_\epsilon}{W} \vec r_i\\
 \dot{\vec p_i} &= \vec F_i - \left( 1 + \frac{d}{N_f} \right) \frac{p_\epsilon}{W} \vec p_i - \frac{p_\zeta}{Q} \vec p_i\\
 \dot{V_b} &= \frac{dV_b p_\epsilon}{W}\\
-\dot{p_\epsilon} &= dV_b (P(t) - P) + \frac{1}{N} \sum_{i=1}^N \frac{\vec p_i^2}{m_i} - \frac{p_\zeta}{Q} p_\epsilon\\
+\dot{p_\epsilon} &= dV_b (P(t) - P) + \frac{d}{N_f} \sum_{i=1}^N \frac{\vec p_i^2}{m_i} - \frac{p_\zeta}{Q} p_\epsilon\\
 \dot{\zeta} &= \frac{p_\zeta}{Q}\\
-\dot{p_\zeta} &= \sum_{i=1}^N \frac{\vec p^2_i}{m_i} + \frac{p_\epsilon}{W} - (N_f + 1) k_B T,
+\dot{p_\zeta} &= \sum_{i=1}^N \frac{\vec p^2_i}{m_i} + \frac{p_\epsilon^2}{W} - (N_f + 1) k_B T,
 \label{eq:nose-hoover_barostat}
 \end{aligned}
 $$
 
-where $V_b$ is the volume of the simulation box, $d$ is the space dimensionality, $\epsilon = \log(V_b / V_b(0))$, where $V_b(0)$ is the volume at $t = 0$, $W$ is the inertia parameter associated to $\epsilon$, $p_\epsilon$ is the conjugate momentum of $\epsilon$ (here I'm using the same notation as @frenkel2023understanding), and $P$ and $P(t)$ are the target and instantaneous pressures, respectively. In particular, the instantaneous pressure is
+where $V_b$ is the volume of the simulation box, $d$ is the space dimensionality, $\epsilon = (1 / d) \log(V_b / V_b(0))$, where $V_b(0)$ is the volume at $t = 0$, $W$ is the inertia parameter associated to $\epsilon$, $p_\epsilon$ is the conjugate momentum of $\epsilon$ (here I'm using the same notation as @frenkel2023understanding), and $P$ and $P(t)$ are the target and instantaneous pressures, respectively. In particular, the instantaneous pressure is
 
 $$
 P(t) = \frac{1}{dV_b} \left[ \sum_{i=1}^N \left( \frac{\vec p_i^2}{m_i} + \vec r_i \cdot \vec F_i \right) - dV_b \frac{\partial U(V_b)}{\partial V_b} \right],
@@ -841,9 +841,17 @@ By deriving Eq. [](#eq:H_parrinello_rahman), the following equations of motion a
 $$
 \begin{aligned}
 m_i \ddot{\vec s}_i &= \hat H^{-1} \vec F_i - m_i \hat G^{-1} \dot{\hat G} \dot{\vec s}_i\\
-W \ddot{\hat H} & = (P(t) - P)V_b(\hat H^{-1})^T,
+W \ddot{\hat H} &= \left( \hat \Pi(t) - P \hat{\mathbb{1}} \right) V_b \left( \hat H^{-1} \right)^T,
 \end{aligned}
 $$
+
+where $\hat{\mathbb{1}}$ is the identity matrix and $\hat \Pi(t)$ is the instantaneous pressure (stress) tensor,
+
+$$
+V_b \hat \Pi(t) = \sum_{i=1}^N m_i \vec v_i \vec v_i^{\,T} + \sum_{i<j} \vec F_{ij} \vec r_{ij}^{\,T}, \qquad \vec v_i = \hat H \dot{\vec s}_i,
+$$
+
+with $\vec f_{ij}$ the force on $i$ due to $j$. For pair forces directed along $\vec r_{ij}$ the tensor is symmetric, and its trace gives back the instantaneous virial pressure, $\frac{1}{3}\text{Tr}\,\hat\Pi(t) = P(t)$.
 
 ### Stochastic cell rescaling
 

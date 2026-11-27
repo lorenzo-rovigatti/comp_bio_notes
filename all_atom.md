@@ -939,7 +939,7 @@ $$
 E_\text{Morse}(r) \approx DS_m^2(r - r_\text{ref})^2 - DS_m^3(r - r_\text{ref})^3 + \frac{7}{12}DS_m^4(r - r_\text{ref})^4.
 $$ (eq:morse_expansion)
 
-I note in passing that the previous equation implies that the force constant of Eq. [](#eq:harmonic_bond) can be related to the Morse parameters by $k = DS_m^2$.
+I note in passing that the previous equation implies that the force constant of Eq. [](#eq:harmonic_bond) can be related to the Morse parameters by $k = 2 DS_m^2$.
 
 ```{figure} figures/bond_stretching.png
 :name: fig:bond_stretching
@@ -974,7 +974,7 @@ $$
 If the second equation is expanded in series around $\theta_\text{ref}$ and compared to the first equation, it is possible to obtain the following relation, which connects $K_h$ and $K_t$ so that the small-angle fluctuations of the two forms are similar:
 
 $$
-K_t = K_h \sin^2 \theta_\text{ref}.
+K_t = \frac{K_h}{\sin^2 \theta_\text{ref}}.
 $$ (eq:bond_angle_constants)
 
 Since it does not require the computation of inverse trigonometric functions, the trigonometric form is more efficient from the computational point of view. [](#fig:bond_angle) shows the two forms defined in Eq. [](#eq:bond_angle), where the value $K_t$ has been set according to Eq. [](#eq:bond_angle_constants).

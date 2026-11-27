@@ -647,10 +647,10 @@ $$
 where $\vec F_i$ is the force acting on particle $i$, and the term $\zeta \equiv \dot{s} / s$ is a friction-like coefficient that emerges from the thermostat variable. This friction term adjusts the particle velocities in response to deviations from the target temperature, ensuring that the system remains at the correct thermal equilibrium, and evolves according to:
 
 $$
-\dot{\zeta} = \frac{1}{Q} \left( \sum_{i=1}^{N} \frac{\vec p_i^2}{m_i} - N_f k_B T \right),
+\ddot{\zeta} = \frac{1}{Q} \left( \sum_{i=1}^{N} \frac{\vec p_i^2}{m_i} - N_f k_B T \right),
 $$
 
-$\vec p_i = m \dot{\vec r}_i$ is the momentum conjugate to $\vec r_i$, so that $\sum_{i=1}^{N} \frac{\vec p_i^2}{m_i}$ is the total kinetic energy of the system, and $N_f k_B T$ represents the target thermal energy. If the system's kinetic energy exceeds the desired value, the variable $\zeta$ increases, effectively damping the particle velocities to bring the temperature back in line. Conversely, if the kinetic energy is too low, $\zeta$ decreases, allowing the velocities to rise and the temperature to stabilize at the target value. The "inertia" of this process is controlled by the value of $Q$, which therefore plays the role of a fictitious mass. This deterministic feedback mechanism distinguishes the Nosé-Hoover thermostat from stochastic approaches. By continuously adjusting the velocities of all particles, this method preserves the natural evolution of the system’s dynamics while still achieving temperature control. The benefit of using this extended Lagrangian framework is that it allows for smooth, continuous temperature regulation without disrupting important dynamical properties, such as diffusion coefficients or time-dependent correlations.
+$\vec p_i = m \dot{\vec r}_i$ is the momentum conjugate to $\vec r_i$, so that $\sum_{i=1}^{N} \frac{\vec p_i^2}{m_i}$ is twice the total kinetic energy of the system, and $N_f k_B T$ represents the target thermal energy. If the system's kinetic energy exceeds the desired value, the variable $\zeta$ increases, effectively damping the particle velocities to bring the temperature back in line. Conversely, if the kinetic energy is too low, $\zeta$ decreases, allowing the velocities to rise and the temperature to stabilize at the target value. The "inertia" of this process is controlled by the value of $Q$, which therefore plays the role of a fictitious mass. This deterministic feedback mechanism distinguishes the Nosé-Hoover thermostat from stochastic approaches. By continuously adjusting the velocities of all particles, this method preserves the natural evolution of the system’s dynamics while still achieving temperature control. The benefit of using this extended Lagrangian framework is that it allows for smooth, continuous temperature regulation without disrupting important dynamical properties, such as diffusion coefficients or time-dependent correlations.
 
 Note that the above equations of motion conserve the following quantity
 
@@ -676,7 +676,7 @@ $$
 \begin{aligned}
 \ddot{\vec r}_i &= \frac{\vec F_i}{m_i} - \zeta_1 \dot{\vec r}_i\\
 \dot \zeta_k & = \frac{p_{\zeta_k}}{Q_k}\\
-\dot p_{\zeta_1} &= \left( \sum_{i=1}^{N} \frac{\vec p_i^2}{m_i} - g k_B T \right) -  \frac{p_{\zeta_2}}{Q_2} p_{\zeta_1}\\
+\dot p_{\zeta_1} &= \left( \sum_{i=1}^{N} \frac{\vec p_i^2}{m_i} - N_f k_B T \right) -  \frac{p_{\zeta_2}}{Q_2} p_{\zeta_1}\\
 \dot p_{\zeta_k} &= \left[ \frac{p^2_{\zeta_{k-1}}}{Q_{k-1}} - k_BT \right] - \frac{p_{\zeta_{k+1}}}{Q_{k+1}} p_{\zeta_k}\\
 \dot p_{\zeta_M} &= \left[ \frac{p^2_{\zeta_{M-1}}}{Q_{M-1}} - k_BT \right].
 \end{aligned}
